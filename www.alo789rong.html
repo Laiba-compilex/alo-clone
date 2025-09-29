@@ -2314,9 +2314,9 @@
 				</dt>
 			</dl>
 			<ul class="game-icon btn-effect ul-gameList" id="livearenaGameUl"
-				style="display: flex; justify-content: space-between;">
-				<img src="images/live-arena.webp" alt="" style="margin-right: 30px;">
-				<img src="images/wala-img.png" alt="">
+				style="display: flex; justify-content: space-between; align-items: end;">
+				<img src="images/live-arena.webp" alt="" style="margin-right: 30px;" id="sv388-vip" onclick=" handlePlayNow(21);">
+				<img src="images/wala-img.png" alt="" style="height: 250px;" onclick=" handlePlayNow(24);">
 			</ul>
 		</div>
 
@@ -2333,9 +2333,9 @@
 				</dt>
 			</dl>
 			<ul class="game-icon btn-effect ul-gameList" id="sportsGameUl">
-				<img src="images/sport-1.webp" alt="" style="padding-right: 20px;">
-				<img src="images/sport-2.webp" alt="" style="padding-right: 20px;">
-				<img src="images/sport-3.webp" alt="" style="padding-right: 20px;">
+				<img src="images/sport-1.webp" alt="" style="padding-right: 20px;" onclick="handlePlayNow(17);" >
+				<img src="images/sport-2.webp" alt="" style="padding-right: 20px;" onclick="handlePlayNow(17);">
+				<img src="images/sport-3.webp" alt="" style="padding-right: 20px;" onclick="handlePlayNow(17);">
 			</ul>
 		</div>
 
@@ -2550,7 +2550,7 @@
 			<dl id="liveDL">
 				<dt id="liveIcon" class="icon-live ">
 
-					<img src="images/POPULAR-TOPMENU-LIVE.webp" alt="">
+					<img src="images/POPULAR-TOPMENU-LIVE.webp" alt="" >
 
 					Casino
 				</dt>
@@ -2560,14 +2560,15 @@
 				<li id="SEXYBCRT_SexyBaccarat" onclick="GameHallHandler.openLoginPopup(this)" platform="SEXYBCRT"
 					game_code="SEXYBCRT" gametype="live" class="show-play promote">
 					<div class="ul-gameIcon-box" id="gameTagArea">
-						<img id="liImg" class="game-icon" src="images/casino1.webp">
+						<img id="liImg" class="game-icon" src="images/casino1.webp" onclick="handlePlayNow(8);">
 					</div>
 				</li>
 				<li id="SVCASINO_SVCASINO" onclick="GameHallHandler.openLoginPopup(this)" platform="SVCASINO"
 					game_code="SVCASINO" gametype="live" class="show-play">
 					<div class="ul-gameIcon-box" id="gameTagArea">
 						<img id="liImg" class="game-icon"
-							src="https://img.bdimg.xyz/theme/images/gameIcon/SVCASINO/SVCASINO-PC.webp?t=1737453305013">
+							src="https://img.bdimg.xyz/theme/images/gameIcon/SVCASINO/SVCASINO-PC.webp?t=1737453305013"
+							onclick="handlePlayNow(19);">
 					</div>
 				</li>
 				<li id="DG_DG" onclick="GameHallHandler.openLoginPopup(this)" platform="DG" game_code="1"
