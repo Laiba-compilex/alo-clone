@@ -38,7 +38,13 @@ async function APILoginUser() {
     if (res?.status === 200) {
       if (data.message === "LOGIN_SUCCESS") {
         localStorage.setItem("token", data.token);
-        document.getElementById("modal-main").style("display", "none");
+        // document.getElementById("modal-main").style.display = "none";
+        const modalLogin = $j('#modal-loginNew');
+      if (modalLogin.length > 0) {
+        PopupUtil.closeModal('#modal-loginNew');
+      }
+       const user = await APIUser();
+       console.log(user);
         var loginBox = document.getElementById("login-box");
         loginBox.innerHTML = `
     <div class="profile" style="display: block;">
@@ -137,10 +143,10 @@ async function APIUser() {
       },
     });
     if (res.status === 200) {
-      const data = await res.json(); // <-- get the actual JSON object
+      const data = await res.json(); 
       console.log("User data:", data);
       localStorage.setItem("user", JSON.stringify(data));
-      return res.data;
+      return data;
     }
   } catch (e) {
     return e;
