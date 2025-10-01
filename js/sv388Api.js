@@ -147,7 +147,7 @@ async function APIUser() {
       },
     });
     if (res.status === 200) {
-      const data = await res.json(); 
+      const data = await res.json();
       console.log("User data:", data);
 
       // Normalize possible response shapes
@@ -216,8 +216,8 @@ async function getGameCategories() {
 const handlePlayNow = async (passedGameId, elementId) => {
   console.log("handlePlayNow called", { passedGameId, elementId });
 
+  // Initialize loader
   const parentElement = document.getElementById(elementId)?.querySelector('.ul-gameIcon-box');
-  console.log("parentElement", parentElement);
   let loader;
   if (parentElement) {
     parentElement.style.position = "relative";
@@ -234,53 +234,92 @@ const handlePlayNow = async (passedGameId, elementId) => {
     loader.style.alignItems = "center";
     loader.style.zIndex = "10";
     loader.innerHTML = '<div class="spinner"></div>';
+    parentElement.appendChild(loader); // Append loader immediately
   }
 
-  const userBalance = await APIUser();
-  console.log("userBalance", userBalance);
-
-  const points = Math.trunc(parseFloat(userBalance.balance));
-  let gameId = null;
-
-  if (passedGameId !== undefined && passedGameId !== null) {
-    gameId = passedGameId;
-  }
-  const idRaw = localStorage.getItem("id");
-  if (idRaw !== null && idRaw !== undefined && idRaw !== "undefined") {
-    try {
-      gameId = JSON.parse(idRaw);
-    } catch (e) {
-      console.error("Invalid JSON in localStorage 'id':", idRaw);
-      gameId = null;
+  try {
+    // Get isSeamlessEnabled from localStorage user
+    let isSeamlessEnabled = false;
+    const userRaw = localStorage.getItem("user");
+    console.log('user------->', userRaw);
+    if (userRaw && userRaw !== "undefined") {
+      try {
+        const user = JSON.parse(userRaw);
+        isSeamlessEnabled = user?.seamless?.isTransfer || false;
+      } catch (e) {
+        console.error("Invalid JSON in localStorage 'user':", userRaw);
+      }
     }
-  } else if (localStorage.getItem("daga")) {
-    gameId = localStorage.getItem("daga");
-  }
-  const DEFAULT_GAME_ID = 21;
-  if (!gameId) {
-    gameId = localStorage.getItem("daga") || DEFAULT_GAME_ID;
-  }
-  if (!gameId) {
-    alert("Game ID not found.");
-    return;
-  }
+    console.log('isSeamlessEnabled', isSeamlessEnabled);
 
-  const BaseUrl = await fetchBaseURL();
-  console.log("BaseUrl:", BaseUrl);
-  const balance = localStorage.getItem("balance");
-  const bal = Math.trunc(parseFloat(balance));
-  let response;
-  if (bal === 0) {
-    response = await SeamlessWithdrawAPI();
-    console.log("response", response);
-    localStorage.setItem("balance", response?.balance);
-  }
-  if (BaseUrl) {
-    try {
+    // Trigger SeamlessWithdrawAPI early if enabled
+    let seamlessWithdraw = null;
+    if (isSeamlessEnabled) {
+      seamlessWithdraw = await SeamlessWithdrawAPI();
+      console.log("SeamlessWithdraw response", seamlessWithdraw);
+      // Update user in localStorage if response contains user data
+      if (seamlessWithdraw) {
+        const updatedUserData = await APIUser();
+        localStorage.setItem("user", JSON.stringify(updatedUserData));
+        localStorage.setItem("balance", updatedUserData.balance);
+        console.log("Updated user in localStorage after SeamlessWithdraw:", updatedUserData);
+      }
+    }
+
+    // Fetch user balance
+    const userBalance = await APIUser();
+    console.log("userBalance", userBalance);
+    localStorage.setItem("user", JSON.stringify(userBalance));
+    localStorage.setItem("balance", userBalance.balance);
+    console.log("Updated user in localStorage after APIUser:", userBalance);
+
+    // Use seamless balance if available, else user balance
+    const checkPoints = isSeamlessEnabled
+      ? seamlessWithdraw?.balance || userBalance.balance
+      : userBalance.balance;
+    const points = Math.trunc(parseFloat(checkPoints));
+
+    // Determine gameId
+    if (!passedGameId) {
+      alert("Game ID not found.");
+      return;
+    }
+    const gameId = passedGameId;
+
+    // Check if game is daga
+    const isDaga = gameId === 21;
+
+    // Calculate points ratio
+    let pointsRatio;
+    if (isDaga) {
+      // For daga: 30 points = 1 unit
+      pointsRatio = Math.trunc(points / 30) * 30;
+    } else {
+      // For other games: 1:1 ratio
+      pointsRatio = points;
+    }
+
+    // Show modal and exit if insufficient balance for daga
+    if (isDaga && pointsRatio === 0) {
+      showLinksModal();
+      alert("Insufficient balance to play the game.");
+      return;
+    }
+
+    // Fetch base URL (needed for both daga and non-daga)
+    const BaseUrl = await fetchBaseURL();
+    console.log("BaseUrl:", BaseUrl);
+    if (!BaseUrl) {
+      alert("Failed to fetch base URL");
+      return;
+    }
+
+    // Handle daga game
+    if (isDaga) {
       const token = localStorage.getItem("token");
-      const fullUrl = `${BaseUrl}/api/player/game/login`;
+      const dagaUrl = `${BaseUrl}/player/daga/deposit`;
 
-      const res = await fetch(fullUrl, {
+      const res = await fetch(dagaUrl, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -288,49 +327,80 @@ const handlePlayNow = async (passedGameId, elementId) => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          game_id: gameId,
-          amount: response?.balance ? response?.balance : balance,
+          amount: pointsRatio,
         }),
       });
-      const userData = await APIUser();
-      console.log("userData", userData);
-      localStorage.setItem("balance", userData.balance);
+
       const data = await res.json();
+      console.log("APIDagaDeposit response", data);
 
       if (res.status === 200 || res.status === 201) {
-        // Remove loader if exists
-        if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
-        if (localStorage.getItem("daga")) {
-          console.log("yes daga:", data);
-          showLinksModal();
-        }
-        if (data.link) {
-          window.open(data.link, "_blank");
-        } else if (data.game_url) {
-          window.open(data.game_url, "_blank");
+        if (data.status === true) {
+          // Update user in localStorage
+          const updatedUserData = await APIUser();
+          localStorage.setItem("user", JSON.stringify(updatedUserData));
+          localStorage.setItem("balance", updatedUserData.balance);
+          console.log("Updated user in localStorage after APIDagaDeposit:", updatedUserData);
+          showLinksModal(); // Show modal for daga
+          alert("Deposit successful"); // Replace with toast.success if available
         } else {
-          alert("Game URL not found in response");
+          console.warn("APIDagaDeposit failed:", data);
+          alert(`Deposit failed: ${data.message || "Unknown error"}`); // Replace with toast.error if available
         }
-        APIUser();
       } else {
-        // Show loader if not success
-        if (parentElement && loader && !parentElement.contains(loader)) {
-          parentElement.appendChild(loader);
-        }
-        console.error("API returned error status:", res.status, data);
-        alert(`Error: ${data.message || "Failed to login to game"}`);
+        console.error("Daga deposit API error:", res.status, data);
+        alert(`Deposit error: ${data.message || "Failed to process deposit"}`);
       }
-    } catch (e) {
-      // Show loader on error
-      if (parentElement && loader && !parentElement.contains(loader)) {
-        parentElement.appendChild(loader);
+      return; // Exit after handling daga
+    }
+
+    // Handle non-daga games
+    // Call game login API
+    const token = localStorage.getItem("token");
+    const fullUrl = `${BaseUrl}/api/player/game/login`;
+    const res = await fetch(fullUrl, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        game_id: gameId,
+        amount: checkPoints,
+      }),
+    });
+    const data = await res.json();
+    console.log("Game login response", data);
+
+    // Update user in localStorage
+    const userData = await APIUser();
+    localStorage.setItem("user", JSON.stringify(userData));
+    localStorage.setItem("balance", userData.balance);
+    console.log("Updated user in localStorage after game login:", userData);
+
+    if (res.status === 200 || res.status === 201) {
+      if (data.link || data.game_url) {
+        // window.open(data.link || data.game_url, "_blank");
+         window.location.href = data.link || data.game_url;
+      } else {
+        alert("Game URL not found in response");
       }
-      console.error("Game login error:", e);
-      alert("Failed to connect to game");
-      return null;
+    } else {
+      console.error("API returned error status:", res.status, data);
+      alert(`Error: ${data.message || "Failed to login to game"}`);
+    }
+  } catch (e) {
+    console.error("Game login error:", e);
+    alert(`Failed to connect to game: ${e.message}`);
+  } finally {
+    // Remove loader
+    if (loader && loader.parentNode) {
+      loader.parentNode.removeChild(loader);
     }
   }
 };
+
 async function SeamlessWithdrawAPI() {
   const BaseUrl = await fetchBaseURL();
 
@@ -450,7 +520,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       loginBox.style.background = "none";
       loginBox.innerHTML = `
 
-			<div id="balanceWrapper" class="balance-group">
+			<div id="balanceWrapper" class="balance-group" onclick=" balanceRefetch()">
 				
 				<a class="currency-selector" id="currencyViewer">
 					<img class="flag" src="https://img.bdimg.xyz/theme/images/src-common/FLAG-img/flag-vn-o.webp">
@@ -458,9 +528,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 				</a>
 				
 
-				<div class="user-balance is-reserve-check">
+				<div class="user-balance is-reserve-check" style="cursor:pointer !important; ">
 					
-					<span class="txt" id="balance" onclick=" balanceRefetch()">${data.balance}</span>
+					<span class="txt" id="balance">${data.balance}</span>
 					
 				</div>
 
