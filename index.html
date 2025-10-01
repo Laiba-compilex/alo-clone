@@ -2,6 +2,10 @@
 <html>
 
 <head>
+	<style>
+		/* Keep login box hidden by default to avoid flash; JS will show it when needed */
+		.page-login-box { display: none !important; }
+	</style>
 	<script>
 
 		if (self != top) {
@@ -871,7 +875,7 @@
 				<img class="box" src="images/SIGNUP-SIGNUP-default.webp" alt="">
 			</div>
 			<div class="btn">
-				<a class="btn-bonus" href="www.alo789rong.html">
+				<a class="btn-bonus" href="index.html">
 					<div class="txt-freebonus">Free Bonus</div>
 					<div class="date" id="dateStickerWrapper"></div>
 				</a>
@@ -1440,7 +1444,7 @@
 			<img class="bonus-win-gold" src="images/RAFFLE-bonus-win-gold.webp">
 		</a>
 
-		<a id="raffleMultiRefreshBtnTemplate" class="btn-refresh" href="www.alo789rong.html">
+		<a id="raffleMultiRefreshBtnTemplate" class="btn-refresh" href="index.html">
 		</a>
 
 		<div id="raffleBonusTemplate" class="raffle-bonus">
@@ -1722,7 +1726,8 @@
 
 	<div id="pageTop" class="header-navigation">
 		<div id="userInfo">
-			<div class="page-login-box" id="login-box" style="display: flex;">
+			<!-- Start hidden to avoid flash; will be shown by inline script only if no token is present -->
+			<div class="page-login-box" id="login-box" style="display: none;">
 				<a class="btn-primary" href="javascript:void(0);"
 					onclick="GameHallHandler.openLoginPopup(this)">Login</a>
 
@@ -1734,6 +1739,22 @@
 				</a>
 
 			</div>
+
+			<script>
+			// Run immediately to prevent flash: show login box only when no token
+			(function(){
+				try {
+					var lb = document.getElementById('login-box');
+					if (!lb) return;
+					if (!localStorage.getItem('token')) {
+						// show with !important so head CSS doesn't override
+						lb.style.setProperty('display','flex','important');
+					} else {
+						lb.style.setProperty('display','none','important');
+					}
+				} catch (e) { /* ignore */ }
+			})();
+			</script>
 		</div>
 		<div class="navigation-btn">
 			<div id="language" class="btn btn-language" onclick="GameHallHandler.openMenu()">
@@ -1744,14 +1765,14 @@
 				<ul id="selectLang" class="lang-dropdown">
 
 					<li>
-						<a lang="vn" onclick="GameHallHandler.changeLang('vn');" href="www.alo789rong.html">
+						<a lang="vn" onclick="GameHallHandler.changeLang('vn');" href="index.html">
 							<img class="img-flag" src="images/FLAG-img-flag-vn.webp" alt="">
 							<span>VN</span>
 						</a>
 					</li>
 
 					<li>
-						<a lang="en" onclick="GameHallHandler.changeLang('en');" href="www.alo789rong.html">
+						<a lang="en" onclick="GameHallHandler.changeLang('en');" href="index.html">
 							<img class="img-flag" src="images/FLAG-img-flag-gb.webp" alt="">
 							<span>EN</span>
 						</a>
@@ -1769,6 +1790,7 @@
 				<i class="icon-hamburger" href="javascript:void(0);">
 					<span id="menu_dot" class="dot" style="display: none;"></span>
 				</i>
+				
 			</div>
 		</div>
 		<li class="marquee" style="display: none">
@@ -1889,52 +1911,52 @@
 			style="cursor: grab; transition-duration: 800ms; transform: translate3d(-4306.96px, 0px, 0px);">
 			<div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next" data-swiper-slide-index="5"
 				role="group" aria-label="6 / 8" style="width: 654.261px; margin-right: 24px;"><a
-					href="https://kmaialo789.com/vip/" target="_blank"><img src="images/slider-img-3.jfif" alt=""></a>
+					href="#" target="_blank"><img src="images/slider-img-3.jfif" alt=""></a>
 			</div>
 			<div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="6" role="group" aria-label="7 / 8"
-				style="width: 654.261px; margin-right: 24px;"><a href="https://kmaialo789.com/" target="_blank"><img
+				style="width: 654.261px; margin-right: 24px;"><a href="#" target="_blank"><img
 						src="images/slider-img-4.jfif" alt=""></a></div>
 			<div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="7" role="group" aria-label="8 / 8"
 				style="width: 654.261px; margin-right: 24px;"><a
-					href="https://kmaialo789.com/2025/09/23/trung-thu-doan-vien-quay-la-co-qua-voi-alo789/"
+					href="#"
 					target="_blank"><img src="images/slider-img-5.jfif" alt=""></a></div>
 			<div class="swiper-slide" data-swiper-slide-index="0" role="group" aria-label="1 / 8"
-				style="width: 654.261px; margin-right: 24px;"><a href="javascript:void(0)"><img
+				style="width: 654.261px; margin-right: 24px;"><a href="#"><img
 						src="images/Banner-9442VNSI.webp"></a></div>
 			<div class="swiper-slide" data-swiper-slide-index="1" role="group" aria-label="2 / 8"
-				style="width: 654.261px; margin-right: 24px;"><a href="javascript:void(0)"><img
+				style="width: 654.261px; margin-right: 24px;"><a href="#"><img
 						src="images/Banner-9448JILIVNDSI.webp"></a>
 			</div>
 			<div class="swiper-slide" data-swiper-slide-index="2" role="group" aria-label="3 / 8"
-				style="width: 654.261px; margin-right: 24px;"><a href="javascript:void(0)"><img
+				style="width: 654.261px; margin-right: 24px;"><a href="#"><img
 						src="images/Banner-9448JDBVNDSI.webp"></a></div>
 			<div class="swiper-slide swiper-slide-prev" data-swiper-slide-index="3" role="group" aria-label="4 / 8"
 				style="width: 654.261px; margin-right: 24px;"><a
-					href="https://kmaialo789.com/2024/08/10/thang-8-nay-moi-ban-moi-nhan-hoa-hong-tan-035/"
+					href="#"
 					target="_blank"><img src="images/slider-img-1.jfif" alt=""></a></div>
 			<div class="swiper-slide swiper-slide-active" data-swiper-slide-index="4" role="group" aria-label="5 / 8"
 				style="width: 654.261px; margin-right: 24px;"><a
-					href="https://kmaialo789.com/2025/07/17/moi-nhan-thuong-tai-trang-nap-rut/" target="_blank"><img
+					href="#" target="_blank"><img
 						src="images/slider-img-2.jfif" alt=""></a></div>
 			<div class="swiper-slide swiper-slide-next" data-swiper-slide-index="5" role="group" aria-label="6 / 8"
-				style="width: 654.261px; margin-right: 24px;"><a href="https://kmaialo789.com/vip/" target="_blank"><img
+				style="width: 654.261px; margin-right: 24px;"><a href="#" target="_blank"><img
 						src="images/slider-img-3.jfif" alt=""></a></div>
 			<div class="swiper-slide" data-swiper-slide-index="6" role="group" aria-label="7 / 8"
-				style="width: 654.261px; margin-right: 24px;"><a href="https://kmaialo789.com/" target="_blank"><img
+				style="width: 654.261px; margin-right: 24px;"><a href="#" target="_blank"><img
 						src="images/slider-img-4.jfif" alt=""></a></div>
 			<div class="swiper-slide" data-swiper-slide-index="7" role="group" aria-label="8 / 8"
 				style="width: 654.261px; margin-right: 24px;"><a
-					href="https://kmaialo789.com/2025/09/23/trung-thu-doan-vien-quay-la-co-qua-voi-alo789/"
+					href="#"
 					target="_blank"><img src="images/slider-img-5.jfif" alt=""></a></div>
 			<div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="0" role="group" aria-label="1 / 8"
-				style="width: 654.261px; margin-right: 24px;"><a href="javascript:void(0)"><img
+				style="width: 654.261px; margin-right: 24px;"><a href="#"><img
 						src="images/Banner-9442VNSI.webp"></a></div>
 			<div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="1" role="group" aria-label="2 / 8"
-				style="width: 654.261px; margin-right: 24px;"><a href="javascript:void(0)"><img
+				style="width: 654.261px; margin-right: 24px;"><a href="#"><img
 						src="images/Banner-9448JILIVNDSI.webp"></a>
 			</div>
 			<div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="2" role="group" aria-label="3 / 8"
-				style="width: 654.261px; margin-right: 24px;"><a href="javascript:void(0)"><img
+				style="width: 654.261px; margin-right: 24px;"><a href="#"><img
 						src="images/Banner-9448JDBVNDSI.webp"></a></div>
 		</div>
 		<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
@@ -1943,16 +1965,6 @@
 	<!-- Game Hall Banner end-->
 	<!-- GameList start -->
 	<section id="gameHallSection" class="game-wrap">
-
-
-
-
-
-
-
-
-
-
 
 		<script type="text/javascript" src="js/gameHall-raceWinEntranceHandler.js"></script>
 		<script type="text/javascript">
@@ -2131,79 +2143,54 @@
 
 
 
-				<div id="DICETab" class="item" onclick="GameHallHandler.openLoginPopup(this)">
-					<a class="tab-btn DICE" href="www.alo789rong.html">
+				<div id="DICETab" class="item" >
+					<a class="tab-btn DICE" href="#">
 						<img src="images/POPULAR-DICE.webp" alt="">
 						<p>Dice Game</p>
 					</a>
 				</div>
 
-				<div id="FIRSTPERSONTab" class="item" onclick="GameHallHandler.openLoginPopup(this)">
-					<a class="tab-btn FIRSTPERSON" href="www.alo789rong.html">
+				<div id="FIRSTPERSONTab" class="item" >
+					<a class="tab-btn FIRSTPERSON" href="#">
 						<img src="images/POPULAR-FIRSTPERSON.webp" alt="">
 						<p>First Person</p>
 					</a>
 				</div>
 
-				<div id="BINGOGAMETab" class="item" onclick="GameHallHandler.openLoginPopup(this)">
-					<a class="tab-btn BINGOGAME" href="www.alo789rong.html">
+				<div id="BINGOGAMETab" class="item" >
+					<a class="tab-btn BINGOGAME" href="#">
 						<img src="images/POPULAR-BINGOGAME.webp" alt="">
 						<p>Bingo Game</p>
 					</a>
 				</div>
 
-				<div id="MUSTHITBYTab" class="item" onclick="GameHallHandler.openLoginPopup(this)">
-					<a class="tab-btn MUSTHITBY" href="www.alo789rong.html">
+				<div id="MUSTHITBYTab" class="item" >
+					<a class="tab-btn MUSTHITBY" href="#">
 						<img src="images/POPULAR-MUSTHITBY.webp" alt="">
 						<p>Must Hit By</p>
 					</a>
 				</div>
 
-				<div id="MINETab" class="item" onclick="GameHallHandler.openLoginPopup(this)">
-					<a class="tab-btn MINE" href="www.alo789rong.html">
+				<div id="MINETab" class="item" >
+					<a class="tab-btn MINE" href="#">
 						<img src="images/POPULAR-MINE.webp" alt="">
 						<p>Mine Game</p>
 					</a>
 				</div>
 
-				<div id="CRASHTab" class="item" onclick="GameHallHandler.openLoginPopup(this)">
-					<a class="tab-btn CRASH" href="www.alo789rong.html">
+				<div id="CRASHTab" class="item" >
+					<a class="tab-btn CRASH" href="#">
 						<img src="images/POPULAR-CRASH.webp" alt="">
 						<p>Crash Game</p>
 					</a>
 				</div>
 
-				<div id="SCRATCHCARDTab" class="item" onclick="GameHallHandler.openLoginPopup(this)">
-					<a class="tab-btn SCRATCHCARD" href="www.alo789rong.html">
+				<div id="SCRATCHCARDTab" class="item" >
+					<a class="tab-btn SCRATCHCARD" href="#">
 						<img src="images/POPULAR-SCRATCHCARD.webp" alt="">
 						<p>Scratchcard Game</p>
 					</a>
 				</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 				<script type="text/javascript" src="js/gameHall-rankRecordEntranceHandler.js"></script>
 				<script type="text/javascript">
@@ -8534,7 +8521,7 @@
 				<div class="license"><img src="images/LICENSE-POLICY-img-GC.webp" alt=""></div>
 				<div class="license"><img src="images/LICENSE-POLICY-img-EGAMBLING.webp" alt=""></div>
 			</div>
-			<div class="about-brand"><span class="txt">TIN T&#7912;C ALO789<a href="https://t.me/ALO789TINTUC"
+			<div class="about-brand"><span class="txt">TIN T&#7912;C ALO789<a href="https://t.me/csgasv388"
 						class="ALOBETTINTUC"><img src="images/ALO789-footer-ALOBETTINTUC.webp" alt=""></a></span></div>
 			<div class="txt-copyright"> &copy; ALO789 All rights Reserved <br> All content, image, and logo are
 				respected property of ALO789 and protected by copyright law. </div>
@@ -8544,10 +8531,10 @@
 						src="images/browser-safari.png"> Safari</span>
 			</div>
 			<div class="policy-area-menu"> <a class="txt-link" onclick="GameHallUtils.openFooterIframe('RGP')"
-					href="www.alo789rong.html">Responsible Gaming Policy</a> <a class="txt-link"
-					onclick="GameHallUtils.openFooterIframe('21PLUS')" href="www.alo789rong.html">21+ Responsible
+					href="index.html">Responsible Gaming Policy</a> <a class="txt-link"
+					onclick="GameHallUtils.openFooterIframe('21PLUS')" href="index.html">21+ Responsible
 					Gaming</a><a class="txt-link" onclick="GameHallUtils.openFooterIframe('FAQ')"
-					href="www.alo789rong.html">FAQs</a></div>
+					href="index.html">FAQs</a></div>
 		</div>
 	</footer>
 
@@ -8706,7 +8693,7 @@
 				<div class="tit">Boost your Speed for a Safer Surf !</div>
 				<a class="downloadAPP"
 					onclick="GameHallUtils.openDownloadAppModal('modal-APP', '/page/login/downloadVpn1111.jsp')"
-					href="www.alo789rong.html">
+					href="index.html">
 					<img src="images/VPN1111-app-VPN1111.webp" alt="">
 					<span class="txt">Download APP</span>
 				</a>

@@ -4,9 +4,7 @@ async function fetchBaseURL() {
       "https://cdntracker0019.com?site_code=gavn138"
     );
     const data = await response.json();
-    console.log("Response:", data);
     if (response.ok && data.url) {
-      console.log("Base URL:", data.url);
       return data.url;
       //   return'https://bo-demo.gagavn138.com';
     } else {
@@ -49,7 +47,6 @@ async function APILoginUser() {
           PopupUtil.closeModal("#modal-loginNew");
         }
         const user = await APIUser();
-        console.log(user);
         var loginBox = document.getElementById("login-box");
         loginBox.innerHTML = `
           <div class="profile" style="display: block;">
@@ -148,8 +145,6 @@ async function APIUser() {
     });
     if (res.status === 200) {
       const data = await res.json();
-      console.log("User data:", data);
-
       // Normalize possible response shapes
       let payload = data;
       if (data && data.data) payload = data.data;
@@ -194,10 +189,8 @@ async function getGameCategories() {
         accept: "application/json",
       },
     });
-    console.log("Response status:", response);
     // if (response.ok) {
     const data = await response.json();
-    console.log("Game categories fetched successfully:", data);
     return data;
     // }
     if (response.status === 500) {
@@ -214,8 +207,6 @@ async function getGameCategories() {
 
 
 const handlePlayNow = async (passedGameId, elementId) => {
-  console.log("handlePlayNow called", { passedGameId, elementId });
-
   // Initialize loader
   const parentElement = document.getElementById(elementId)?.querySelector('.ul-gameIcon-box');
   let loader;
@@ -241,7 +232,6 @@ const handlePlayNow = async (passedGameId, elementId) => {
     // Get isSeamlessEnabled from localStorage user
     let isSeamlessEnabled = false;
     const userRaw = localStorage.getItem("user");
-    console.log('user------->', userRaw);
     if (userRaw && userRaw !== "undefined") {
       try {
         const user = JSON.parse(userRaw);
@@ -250,28 +240,23 @@ const handlePlayNow = async (passedGameId, elementId) => {
         console.error("Invalid JSON in localStorage 'user':", userRaw);
       }
     }
-    console.log('isSeamlessEnabled', isSeamlessEnabled);
 
     // Trigger SeamlessWithdrawAPI early if enabled
     let seamlessWithdraw = null;
     if (isSeamlessEnabled) {
       seamlessWithdraw = await SeamlessWithdrawAPI();
-      console.log("SeamlessWithdraw response", seamlessWithdraw);
       // Update user in localStorage if response contains user data
       if (seamlessWithdraw) {
         const updatedUserData = await APIUser();
         localStorage.setItem("user", JSON.stringify(updatedUserData));
         localStorage.setItem("balance", updatedUserData.balance);
-        console.log("Updated user in localStorage after SeamlessWithdraw:", updatedUserData);
       }
     }
 
     // Fetch user balance
     const userBalance = await APIUser();
-    console.log("userBalance", userBalance);
     localStorage.setItem("user", JSON.stringify(userBalance));
     localStorage.setItem("balance", userBalance.balance);
-    console.log("Updated user in localStorage after APIUser:", userBalance);
 
     // Use seamless balance if available, else user balance
     const checkPoints = isSeamlessEnabled
@@ -308,7 +293,6 @@ const handlePlayNow = async (passedGameId, elementId) => {
 
     // Fetch base URL (needed for both daga and non-daga)
     const BaseUrl = await fetchBaseURL();
-    console.log("BaseUrl:", BaseUrl);
     if (!BaseUrl) {
       alert("Failed to fetch base URL");
       return;
@@ -332,7 +316,6 @@ const handlePlayNow = async (passedGameId, elementId) => {
       });
 
       const data = await res.json();
-      console.log("APIDagaDeposit response", data);
 
       if (res.status === 200 || res.status === 201) {
         if (data.status === true) {
@@ -340,7 +323,6 @@ const handlePlayNow = async (passedGameId, elementId) => {
           const updatedUserData = await APIUser();
           localStorage.setItem("user", JSON.stringify(updatedUserData));
           localStorage.setItem("balance", updatedUserData.balance);
-          console.log("Updated user in localStorage after APIDagaDeposit:", updatedUserData);
           showLinksModal(); // Show modal for daga
           alert("Deposit successful"); // Replace with toast.success if available
         } else {
@@ -371,13 +353,11 @@ const handlePlayNow = async (passedGameId, elementId) => {
       }),
     });
     const data = await res.json();
-    console.log("Game login response", data);
 
     // Update user in localStorage
     const userData = await APIUser();
     localStorage.setItem("user", JSON.stringify(userData));
     localStorage.setItem("balance", userData.balance);
-    console.log("Updated user in localStorage after game login:", userData);
 
     if (res.status === 200 || res.status === 201) {
       if (data.link || data.game_url) {
@@ -403,8 +383,6 @@ const handlePlayNow = async (passedGameId, elementId) => {
 
 async function SeamlessWithdrawAPI() {
   const BaseUrl = await fetchBaseURL();
-
-  console.log("amount");
   try {
     const res = await fetch(`${BaseUrl}/api/player/points/withdraw/seamless`, {
       method: "POST",
@@ -454,7 +432,6 @@ async function SeamlessWithdrawAPI() {
 }
 // Remove this line:
 // var balanceRefetch = ""
-console.log("balanceRefetch function loaded");
 
 async function balanceRefetch() {
   try {
@@ -469,7 +446,6 @@ async function balanceRefetch() {
       if (balanceSpan) {
         balanceSpan.textContent = userData.balance;
       }
-      console.log("Fetched balance:", userData.balance);
       return userData.balance;
     } else {
       console.warn("Could not fetch user balance");
@@ -482,9 +458,7 @@ async function balanceRefetch() {
 }
 document.addEventListener("DOMContentLoaded", async () => {
   const balance = localStorage.getItem("balance");
-  console.log("balance", balance);
   APIUser().then((data) => {
-    console.log("APIUser data:", data);
     if (localStorage.getItem("token")) {
       const loginBox = document.getElementById("userInfo");
       loginBox.style.display = "flex";
