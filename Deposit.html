@@ -96,20 +96,12 @@
     <link rel="modulepreload" crossorigin="" href="/assets/vue3-marquee-1_5_8-ce15b3e1.js">
     <link rel="stylesheet" href="/assets/index-1_5_8-95c410b4.css">
     <link rel="stylesheet" href="./css/styles.css">
-        <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/primeicons/3.0.0/primeicons.css"
-      integrity="sha512-Rxb6R6A7p1fiHvhjB7B417xsqg/D7eummpTlNpIVo2qgLbHNlMwdi1Ig180Ddp0ssWSJI/8Z8AHcWWlqw+cS9A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/primeicons/3.0.0/primeicons.css"
+        integrity="sha512-Rxb6R6A7p1fiHvhjB7B417xsqg/D7eummpTlNpIVo2qgLbHNlMwdi1Ig180Ddp0ssWSJI/8Z8AHcWWlqw+cS9A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script async="" type="text/javascript" src="https://cdn.livechatinc.com/tracking.js"></script>
     <style type="text/css">
         .p-dialog-mask {
@@ -2777,7 +2769,8 @@
                                     <div class="flex align-items-center justify-content-start w-4">
                                         <div class="block">
                                             <div><a href="https://www.alo789ho.com/"><img alt="logo"
-                                                        src="images/logo.jfif" class="logo mr-2" width="150px"></a></div>
+                                                        src="images/logo.jfif" class="logo mr-2" width="150px"></a>
+                                            </div>
                                             <div data-v-9454bda9="">
                                                 <div class="relative" data-v-9454bda9="">
                                                     <div class="flex align-content-center align-items-center align-self-center"
@@ -2825,9 +2818,9 @@
                                                     href="/account"><span class="lbl-text mr-1">Tên:</span>
                                                     <div
                                                         class="lbl-text flex align-self-center align-items-center txt-orange">
-                                                        <span class="mr-1">NAEM</span><img
-                                                            src="/vip_level/icon_dong.png" alt="vip" class="vip-icon"
-                                                            width="30" title="VIP Đồng"></div>
+                                                        <span class="mr-1">NAEM</span><img src="images/icon_dong.png"
+                                                            alt="vip" class="vip-icon" width="30" title="VIP Đồng">
+                                                    </div>
                                                 </a><span class="lbl-text inline-block mx-2"><svg width="2" height="10"
                                                         viewBox="0 0 2 10" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -2841,8 +2834,9 @@
                                                         style="font-size: 0.8rem;"></i></span></div>
                                             <div class="flex align-items-center justify-content-end mt-1"><span
                                                     class="lbl-text inline-block mr-1">ID:</span>
-                                                <div class="inline-block txt-orange relative"><span>alo788a14ao</span>
-                                                    <div id="copied_tip" class="tip rounded-2 hidden"> Đã sao chép
+                                                <div class="inline-block txt-orange relative"><span id="userId"></span>
+                                                    <div id="copied_tip" class="tip rounded-2 hidden"
+                                                        onclick="copyId()"> Đã sao chép
                                                     </div>
                                                 </div><span
                                                     class="inline-flex align-items-center justify-content-center icon-bg ml-1 cursor-pointer"><svg
@@ -2860,7 +2854,8 @@
                                                 <div
                                                     class="lbl-text flex align-self-center align-items-center txt-orange">
                                                     <span class="mr-1">NAEM</span><img src="/vip_level/icon_dong.png"
-                                                        alt="vip" class="vip-icon" width="30"></div>
+                                                        alt="vip" class="vip-icon" width="30">
+                                                </div>
                                             </a>
                                             <div class="flex align-items-center justify-content-end"><span
                                                     class="lbl-text inline-block mr-1">Số dư:</span><span
@@ -2942,7 +2937,7 @@
                                     </div><!---->
                                 </div>
                             </div>
-                            <div class="marquee-text">
+                            <div class="marquee-text" >
                                 <div class="vue3-marquee horizontal"
                                     style="--duration: 90s; --delay: 2s; --direction: normal; --pauseOnHover: running; --pauseOnClick: running; --pauseAnimation: running; --loops: infinite; --gradient-color: rgba(255, 255, 255, 1), rgba(255, 255, 255, 0); --gradient-length: 200px; --min-width: 100%; --min-height: auto; --orientation: scrollX;">
                                     <div class="transparent-overlay" aria-hidden="true"></div><!---->
@@ -3086,7 +3081,7 @@
                                                             src="images/menu_icon_bonus.png" width="30"
                                                             style="opacity: 0.85;"><img
                                                             class="fadein animation-duration-1000 animation-iteration-infinite"
-                                                            src="images/menu_icon_bonus.png" width="30"
+                                                            src="images/menu_icon_bonus_active.png" width="30"
                                                             style="display: none;"></span><span
                                                         class="block w-full lbl-tab text-xs">Thưởng</span></span></button>
                                         </li>
@@ -3264,31 +3259,28 @@
                                                                         style="display: none;">
                                                                     <div class="method-text">Ngân hàng</div>
                                                                 </div>
-                                                                <div
+                                                                <!-- <div
                                                                     class="tab-item border-round btn-method text-center cursor-pointer flex flex-column align-items-center justify-content-center mx-2 my-1 md:m-1 px-1 py-1">
                                                                     <img alt="Cổng thanh toán"
                                                                         src="/assets/gateway_active-1_5_8-9a7c8814.svg"
                                                                         style="display: none;"><img
-                                                                        alt="Cổng thanh toán"
-                                                                        src="images/gateway.svg">
+                                                                        alt="Cổng thanh toán" src="images/gateway.svg">
                                                                     <div class="method-text">Cổng thanh toán</div>
                                                                 </div>
                                                                 <div
                                                                     class="tab-item border-round btn-method text-center cursor-pointer flex flex-column align-items-center justify-content-center mx-2 my-1 md:m-1 px-1 py-1">
-                                                                    <img alt="Ví điện tử"
-                                                                        src="images/wallet.svg"
+                                                                    <img alt="Ví điện tử" src="images/wallet.svg"
                                                                         style="display: none;"><img alt="Ví điện tử"
                                                                         src="images/wallet.svg">
                                                                     <div class="method-text">Ví điện tử</div>
-                                                                </div><!---->
+                                                                </div>
                                                                 <div
                                                                     class="tab-item border-round btn-method text-center cursor-pointer flex flex-column align-items-center justify-content-center mx-2 my-1 md:m-1 px-1 py-1">
-                                                                    <img alt="Mã khuyến mãi"
-                                                                        src="images/gift.png"
+                                                                    <img alt="Mã khuyến mãi" src="images/gift.png"
                                                                         style="display: none;"><img alt="Mã khuyến mãi"
                                                                         src="images/gift.png">
                                                                     <div class="method-text">Mã khuyến mãi</div>
-                                                                </div><!---->
+                                                                </div> -->
                                                             </div>
                                                         </div>
                                                     </section>
@@ -3314,6 +3306,70 @@
                                                             </div><!----><!----><!---->
                                                         </div>
                                                     </div>
+<div class="field grid mb-3 md:mb-3">
+    <label for="ddlBank1" class="col-12 mb-2 md:col-3 md:mb-0">Bank List</label>
+    <div class="col-12 md:col-9">
+        <div class="dropdown-container1">
+            <div id="ddlBank1" class="dropdown-trigger" onclick="toggleBankDropdown()">
+                <span class="dropdown-label">
+                    <div class="white-space-normal">
+                        <div>Hoàn trả lên đến 1.5% <i style="color: #FA8E13;">(Game nào cũng có cỏ/ com)</i></div>
+                    </div>
+                </span>
+                <div class="dropdown-icon1">
+                    <span class="pi pi-chevron-down"></span>
+                </div>
+            </div>
+
+            <!-- Dropdown Menu -->
+            <div id="bankDropdownMenu" class="dropdown-menu1">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="selectedBankId" name="bankId" value="">
+                                                    <!-- <div data-v-82ba7396="">
+                                                        <section class="field grid mb-2 md:mb-2" data-v-5143adec=""
+                                                            data-v-82ba7396=""><label
+                                                                class="col-12 mb-2 md:col-3 md:mb-0"
+                                                                data-v-5143adec="">Danh sách cổng</label>
+                                                            <div class="col-12 md:col-9 dv-scroll-panel mobile-scroll-rtl"
+                                                                data-v-5143adec="">
+                                                                <div class="p-scrollpanel p-component custombar"
+                                                                    data-v-5143adec=""
+                                                                    style="width: 100%; height: 90px;">
+                                                                    <div class="p-scrollpanel-wrapper">
+                                                                        <div class="p-scrollpanel-content">
+                                                                            <div class="flex flex-wrap"
+                                                                                data-v-5143adec="">
+                                                                                <div class="flex align-items-center justify-content-center m-2 px-1 py-1 border-round payment-gateway-item cursor-pointer text-sm selected"
+                                                                                    data-v-5143adec=""
+                                                                                    style="min-width: 125px; min-height: 10px;">
+                                                                                    Đà Nẵng (dy)</div>
+                                                                                <div class="flex align-items-center justify-content-center m-2 px-1 py-1 border-round payment-gateway-item cursor-pointer text-sm"
+                                                                                    data-v-5143adec=""
+                                                                                    style="min-width: 125px; min-height: 10px;">
+                                                                                    Thanh Hóa (s)</div>
+                                                                                <div class="flex align-items-center justify-content-center m-2 px-1 py-1 border-round payment-gateway-item cursor-pointer text-sm"
+                                                                                    data-v-5143adec=""
+                                                                                    style="min-width: 125px; min-height: 10px;">
+                                                                                    Bắc Ninh (sg)</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="p-scrollpanel-bar p-scrollpanel-bar-x p-scrollpanel-hidden"
+                                                                        tabindex="0" role="scrollbar"
+                                                                        aria-orientation="horizontal" aria-valuenow="0">
+                                                                    </div>
+                                                                    <div class="p-scrollpanel-bar p-scrollpanel-bar-y p-scrollpanel-hidden"
+                                                                        tabindex="0" role="scrollbar"
+                                                                        aria-orientation="vertical" aria-valuenow="0">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </section>
+                                                    </div> -->
                                                     <div class="field grid" data-v-82ba7396=""><label
                                                             for="inp_vnd_amount1" class="col-12 mb-2 md:col-3 md:mb-0"
                                                             data-v-82ba7396="">Số tiền muốn nạp</label>
@@ -3324,7 +3380,8 @@
                                                                     width="20" alt="vé quay" data-v-82ba7396="">Nạp
                                                                 1,000K nhận vé quay là trúng </div>
                                                             <div class="mb-2" data-v-82ba7396=""><span
-                                                                    class="uppercase vn-text" data-v-82ba7396="">một
+                                                                    class="uppercase vn-text" id="numberName"
+                                                                    data-v-82ba7396="">một
                                                                     triệu đồng</span></div>
                                                             <div class="p-inputgroup" data-v-82ba7396=""><span
                                                                     class="p-inputnumber p-component p-inputwrapper p-inputwrapper-filled"
@@ -3341,38 +3398,38 @@
                                                                     data-v-82ba7396="">
                                                                     <div class="col-4 md:col-2 mb-2 md:mb-0"><button
                                                                             class="p-button p-component p-button-sm p-button-outlined p-button-help py-1 px-2 w-full"
-                                                                            type="button"
-                                                                            aria-label="500K"><!----><!----><span
+                                                                            type="button" aria-label="500K"
+                                                                            onclick="setAmount(500)"><!----><!----><span
                                                                                 class="p-button-label">500K</span><!----></button>
                                                                     </div>
                                                                     <div class="col-4 md:col-2 mb-2 md:mb-0"><button
                                                                             class="p-button p-component p-button-sm p-button-outlined p-button-help py-1 px-2 w-full"
-                                                                            type="button"
-                                                                            aria-label="1,000K"><!----><!----><span
+                                                                            type="button" aria-label="1,000K"
+                                                                            onclick="setAmount(1000)"><!----><!----><span
                                                                                 class="p-button-label">1,000K</span><!----></button>
                                                                     </div>
                                                                     <div class="col-4 md:col-2 mb-2 md:mb-0"><button
                                                                             class="p-button p-component p-button-sm p-button-outlined p-button-help py-1 px-2 w-full"
-                                                                            type="button"
-                                                                            aria-label="2,000K"><!----><!----><span
+                                                                            type="button" aria-label="2,000K"
+                                                                            onclick="setAmount(2000)"><!----><!----><span
                                                                                 class="p-button-label">2,000K</span><!----></button>
                                                                     </div>
                                                                     <div class="col-4 md:col-2 mb-2 md:mb-0"><button
                                                                             class="p-button p-component p-button-sm p-button-outlined p-button-help py-1 px-2 w-full"
-                                                                            type="button"
-                                                                            aria-label="5,000K"><!----><!----><span
+                                                                            type="button" aria-label="5,000K"
+                                                                            onclick="setAmount(5000)"><!----><!----><span
                                                                                 class="p-button-label">5,000K</span><!----></button>
                                                                     </div>
                                                                     <div class="col-4 md:col-2 mb-2 md:mb-0"><button
                                                                             class="p-button p-component p-button-sm p-button-outlined p-button-help py-1 px-2 w-full"
-                                                                            type="button"
-                                                                            aria-label="10,000K"><!----><!----><span
+                                                                            type="button" aria-label="10,000K"
+                                                                            onclick="setAmount(10000)"><!----><!----><span
                                                                                 class="p-button-label">10,000K</span><!----></button>
                                                                     </div>
                                                                     <div class="col-4 md:col-2 mb-2 md:mb-0"><button
                                                                             class="p-button p-component p-button-sm p-button-outlined p-button-help py-1 px-2 w-full"
-                                                                            type="button"
-                                                                            aria-label="20,000K"><!----><!----><span
+                                                                            type="button" aria-label="20,000K"
+                                                                            onclick="setAmount(20000)"><!----><!----><span
                                                                                 class="p-button-label">20,000K</span><!----></button>
                                                                     </div>
                                                                 </div>
@@ -3387,26 +3444,47 @@
                                                                 </svg> Tối thiểu 100,000 đ - Tối đa 100,000,000 đ </div>
                                                         </div>
                                                     </div><!---->
-                                                    <div class="field grid mb-3 md:mb-3" data-v-82ba7396=""><label
-                                                            for="ddlPromotion" class="col-12 mb-2 md:col-3 md:mb-0"
-                                                            data-v-82ba7396="">Chọn loại khuyến mãi</label>
-                                                        <div class="col-12 md:col-9" data-v-82ba7396="">
-                                                            <div id="pv_id_5"
-                                                                class="p-dropdown p-component p-inputwrapper p-inputwrapper-filled w-full"
-                                                                data-v-82ba7396=""><span id="ddlPromotion"
-                                                                    class="p-dropdown-label p-inputtext" tabindex="0"
-                                                                    role="combobox" aria-label="[object Object]"
-                                                                    aria-haspopup="listbox" aria-expanded="false"
-                                                                    aria-controls="pv_id_5_list" aria-disabled="false">
-                                                                    <div class="white-space-normal" data-v-82ba7396="">
-                                                                        <div data-v-82ba7396="">Hoàn trả lên đến 1.5% <i
+                                                    <div class="field grid mb-3 md:mb-3">
+                                                        <label for="ddlPromotion"
+                                                            class="col-12 mb-2 md:col-3 md:mb-0">Chọn loại khuyến
+                                                            mãi</label>
+                                                        <div class="col-12 md:col-9">
+                                                            <div class="dropdown-container">
+                                                                <div id="ddlPromotion" class="dropdown-trigger"
+                                                                    onclick="togglePromotionDropdown()">
+                                                                    <span class="dropdown-label">
+                                                                        <div class="white-space-normal">
+                                                                            <div>Hoàn trả lên đến 1.5% <i
+                                                                                    style="color: #FA8E13;">(Game nào
+                                                                                    cũng có cỏ/ com)</i></div>
+                                                                        </div>
+                                                                    </span>
+                                                                    <div class="dropdown-icon">
+                                                                        <span class="pi pi-chevron-down"></span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- Dropdown Menu -->
+                                                                <div id="dropdownMenu" class="dropdown-menu">
+                                                                    <div class="dropdown-item selected"
+                                                                        onclick="selectOption(this, 'Hoàn trả lên đến 1.5%', '(Game nào cũng có cỏ/ com)', '#FA8E13')">
+                                                                        <div>Hoàn trả lên đến 1.5% <i
                                                                                 style="color: #FA8E13;">(Game nào cũng
                                                                                 có cỏ/ com)</i></div>
                                                                     </div>
-                                                                </span><!---->
-                                                                <div class="p-dropdown-trigger"><span
-                                                                        class="p-dropdown-trigger-icon pi pi-chevron-down"
-                                                                        aria-hidden="true"></span></div>
+                                                                    <div class="dropdown-item"
+                                                                        onclick="selectOption(this, 'Khuyến mãi thưởng nạp 100%', 'Cược thả ga trên tất cả các sản phẩm', '#FF4444')">
+                                                                        <div>Khuyến mãi thưởng nạp 100% <i
+                                                                                style="color: #FF4444;">Cược thả ga trên
+                                                                                tất cả các sản phẩm</i></div>
+                                                                    </div>
+                                                                    <div class="dropdown-item"
+                                                                        onclick="selectOption(this, 'Khuyến mãi thưởng nạp 15%', '(Có thể nhận lại hằng tuần)', '#FF4444')">
+                                                                        <div>Khuyến mãi thưởng nạp 15% <i
+                                                                                style="color: #FF4444;">(Có thể nhận lại
+                                                                                hằng tuần)</i></div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -3445,16 +3523,16 @@
                         </div>
                         <div id="second-menu" class="float-menu-app flex flex-column" data-v-41949c69=""><span
                                 class="btn flex align-self-center iconTelegramDownload cursor-pointer"
-                                data-v-41949c69=""><img alt="Tải Telegram" src="/assets/telegram-1_5_8-4f868916.png"
+                                data-v-41949c69=""><img alt="Tải Telegram" src="images/telegram-1.png"
                                     data-v-41949c69=""></span><span
                                 class="btn flex align-self-center iconAppDownload cursor-pointer"
                                 data-v-41949c69=""><img alt="Tải ứng dụng Alo789 dành cho điện thoại"
-                                    src="/assets/app_789-1_5_8-943e38f3.png" data-v-41949c69=""></span><span
+                                    src="images/app_789-1.png" data-v-41949c69=""></span><span
                                 class="btn flex align-self-center iconAddShortcut cursor-pointer"
-                                data-v-41949c69=""><img alt="Tạo shortcut Alo789"
-                                    src="/assets/add_shortcut-1_5_8-1710b691.png" data-v-41949c69=""></span><span
+                                data-v-41949c69=""><img alt="Tạo shortcut Alo789" src="images/add_shortcut-1.png"
+                                    data-v-41949c69=""></span><span
                                 class="btn flex align-self-center iconPromotion1111 cursor-pointer"
-                                data-v-41949c69=""><img alt="Khuyến mãi 1.1.1.1" src="/icon-1111.png"
+                                data-v-41949c69=""><img alt="Khuyến mãi 1.1.1.1" src="images/icon-1111.png"
                                     data-v-41949c69=""></span></div><!---->
                     </section>
                 </div>
@@ -3476,7 +3554,7 @@
                     <section>
                         <div id="floating-snap-btnLuckyWheel-wrapper" style="top: 390px; left: unset; right: -30px;">
                             <span class="badge badge-light blink badge-lucky-wheel" data-v-39bbf0b9="">0</span>
-                            <div class="fab-btn"><img src="/lucky_wheel.gif" alt="Vòng quay may mắn"></div>
+                            <div class="fab-btn"><img src="images/lucky_wheel.gif" alt="Vòng quay may mắn"></div>
                         </div>
                     </section><!---->
                 </div>
@@ -3484,7 +3562,7 @@
         </div>
     </div>
 
-
+    <script src="./js/deposit.js"></script>
     <script type="text/javascript">
         var userId = 'alo788a14ao'
         var accountName = 'INVALID NAEM'
@@ -3558,8 +3636,8 @@
         }
 
         if (chatProvider === 'tawk.to') {
-     
-        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+
+            var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
             var customerName = ''
             if (window.hasUserInfo) {
                 customerName = `[Alo789]-${accountName}(${accountPhone},${userId})`
