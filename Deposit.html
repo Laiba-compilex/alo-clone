@@ -3307,13 +3307,13 @@
                                                         </div>
                                                     </div>
 <div class="field grid mb-3 md:mb-3">
-    <label for="ddlBank1" class="col-12 mb-2 md:col-3 md:mb-0">Bank List</label>
+    <label for="ddlBank1" class="col-12 mb-2 md:col-3 md:mb-0">Danh sách ngân hàng</label>
     <div class="col-12 md:col-9">
         <div class="dropdown-container1">
             <div id="ddlBank1" class="dropdown-trigger" onclick="toggleBankDropdown()">
                 <span class="dropdown-label">
                     <div class="white-space-normal">
-                        <div>Hoàn trả lên đến 1.5% <i style="color: #FA8E13;">(Game nào cũng có cỏ/ com)</i></div>
+                        <div><i style="color: #FA8E13;">Chọn ngân hàng</i></div>
                     </div>
                 </span>
                 <div class="dropdown-icon1">
@@ -3323,12 +3323,40 @@
 
             <!-- Dropdown Menu -->
             <div id="bankDropdownMenu" class="dropdown-menu1">
-                
+                <div>No Banks yet</div>
             </div>
         </div>
     </div>
 </div>
 <input type="hidden" id="selectedBankId" name="bankId" value="">
+<!-- payment method dropdown  -->
+
+<div class="field grid mb-3 md:mb-3">
+    <label for="ddlpayment" class="col-12 mb-2 md:col-3 md:mb-0">Danh sách thanh toán</label>
+    <div class="col-12 md:col-9">
+        <div class="dropdown-container2">
+            <div id="ddlpayment" class="dropdown-trigger2" onclick="togglePaymentDropdown()">
+                <span>
+                    <div class="white-space-normal">
+                        <div><i>Chọn phương thức thanh toán</i></div>
+                    </div>
+                </span>
+                <div class="dropdown-icon2">
+                    <span class="pi pi-chevron-down">▼</span>
+                </div>
+            </div>
+
+            <!-- Dropdown Menu -->
+            <div id="paymentDropdownMenu" class="dropdown-menu2">
+                <div class="dropdown-item2" id="kpay" onclick="selectPaymentMethod(this, 'KPAY', '29')">KPAY</div>
+                <div class="dropdown-item2" id="vnpay" onclick="selectPaymentMethod(this, 'VNPAY', '23')">VN PAY</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional: Hidden input to store selected payment method -->
+<input type="hidden" id="selectedPaymentMethod" name="paymentMethod" value="">
                                                     <!-- <div data-v-82ba7396="">
                                                         <section class="field grid mb-2 md:mb-2" data-v-5143adec=""
                                                             data-v-82ba7396=""><label

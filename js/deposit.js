@@ -80,7 +80,7 @@ async function copyId() {
 function setAmount(value) {
     const input = document.getElementById('inp_vnd_amount1');
     const numberName = document.getElementById('numberName');
-    
+
     // Vietnamese number names mapping
     const vietnameseNames = {
         500: 'năm trăm nghìn đồng',
@@ -147,10 +147,10 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function() {
             // Get the label text (e.g., "500K", "1,000K")
             const label = this.querySelector('.p-button-label').textContent;
-            
+
             // Remove 'K' and commas, convert to number
             const value = parseFloat(label.replace(/[K,]/g, ''));
-            
+            localStorage.setItem('amount',value);            
             // Set the value in input
             const input = document.getElementById('inp_vnd_amount1');
             const numberName = document.getElementById('numberName');
@@ -251,20 +251,62 @@ async function depositAllowed() {
       },
   });
 }
+//payment dropdown
+function togglePaymentDropdown() {
+    const trigger = document.getElementById("ddlpayment");
+    const menu = document.getElementById('paymentDropdownMenu');
+    
+    trigger.classList.toggle('active');
+    menu.classList.toggle('show');
+}
 
+function selectPaymentMethod(element, paymentName, paymentId) {
+    // Update the trigger text
+    const trigger = document.getElementById('ddlpayment');
+    const label = trigger.querySelector('.white-space-normal div');
+    label.innerHTML = paymentName;
+    
+    // Remove selected class from all items
+    const items = document.querySelectorAll('#paymentDropdownMenu .dropdown-item2');
+    items.forEach(item => item.classList.remove('selected'));
+    
+    // Add selected class to clicked item
+    element.classList.add('selected');
+    
+    // Store selected payment method
+    document.getElementById('selectedPaymentMethod').value = paymentId;
+    console.log('Selected Payment Method:', paymentName, 'ID:', paymentId);
+    localStorage.setItem('selectedPaymentMethod', paymentId);
+    localStorage.setItem('selectedPaymentName', paymentName);
+    // Close dropdown
+    togglePaymentDropdown();
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+    const dropdown = document.querySelector('.dropdown-container2');
+    const trigger = document.getElementById('ddlpayment');
+    const menu = document.getElementById('paymentDropdownMenu');
+    
+    if (dropdown && !dropdown.contains(event.target)) {
+        trigger.classList.remove('active');
+        menu.classList.remove('show');
+    }
+});
 
 // deposit api 
-async function APIMakeDepositRequest (amount, bank_id, payment_method, payment_method_code, category_id,
-  category_code) {
+async function APIMakeDepositRequest (amount, bank_id, payment_method, payment_method_code) {
   const BaseUrl = await fetchBaseURL();
+
+//   if(!amount || !bank_id || !payment_method || !payment_method_code) return alert('Please fill all the fields')
   var formData = new FormData();
   formData.append("transaction_amount", amount * 1000);
   formData.append("bank_id", Number(bank_id) || null);
   formData.append("payment_method", Number(payment_method) || null);
   formData.append("payment_method_code", payment_method_code || null);
-  formData.append("category_id", Number(category_id) || null);
-  formData.append("category_code", category_code || null);
-  const token = localStorage.getItem('auth_token');
+  formData.append("category_id", 9);
+  formData.append("category_code", 'BANK_TRANSFER');
+  const token = localStorage.getItem('token');
 
   try {
     const res = await fetch(`${BaseUrl}"/api/account/deposit"`, formData, {
@@ -276,7 +318,7 @@ async function APIMakeDepositRequest (amount, bank_id, payment_method, payment_m
       }
     });
     if (res.status === 200) {
-      toast.success("Your amount has been deposited sccessfully!")
+      alert("Your amount has been deposited sccessfully!")
       return res?.data?.data;
     }
   } catch (e) {
@@ -377,6 +419,7 @@ function selectBankOption(element, bankName, bankCode, bankId) {
   element.classList.add('selected');
   
   // Store selected bank data (optional)
+  localStorage.setItem('selectedBankName', bankId);
   console.log('Selected Bank:', { bankName, bankCode, bankId });
   
   // You can store it in a hidden input or variable for form submission
