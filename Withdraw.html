@@ -40,6 +40,7 @@
     ></script>
 
     <link rel="stylesheet" href="/css/withdraw.css" />
+    <link rel="stylesheet" href="modal.css" />
     <script>
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
@@ -3997,31 +3998,39 @@
                           Rút tiền
                         </div>
                         <div class="mb-3">
-                          <div class="withdraw-tab">
-                            <section class="field grid">
-                              <label class="col-12 mb-2 md:col-3 md:mb-0"
-                                >Phương thức rút tiền</label
-                              >
-                              <div class="col-12 md:col-9">
-                                <div
-                                  class="block overflow-auto w-full white-space-nowrap hideScrollHorizontal"
-                                >
-                                  <div
-                                    class="flex pt-2 pb-2 md:pb-0 method overflow-x"
-                                  ></div>
-                                </div>
-                              </div>
-                            </section>
-                          </div>
                           <div class="dv-tab">
                             <div class="mt-3">
-                              <div>
+                              <div style="display: flex">
+                                <label class="col-12 mb-2 md:col-3 md:mb-0"
+                                  >Phương thức rút tiền</label
+                                >
                                 <section id="bankTransferPanel">
                                   <div class="text-center p-3">
                                     <p>Đang tải danh sách ngân hàng...</p>
                                   </div>
                                 </section>
                               </div>
+                              <div style="display: flex">
+                                <label class="col-12 mb-2 md:col-3 md:mb-0"
+                                  >Tài khoản ngân hàng liên kết</label
+                                >
+                                <button
+                                  style="
+                                    color: #ff8d39;
+                                    background-color: transparent;
+                                    border: none;
+                                    font-family: -apple-system,
+                                      BlinkMacSystemFont, Segoe UI, Roboto,
+                                      Helvetica, Arial, sans-serif;
+                                    font-size: 1rem;
+                                    font-weight: 400;
+                                  "
+                                  onclick="openModal()"
+                                >
+                                  + Thêm mới
+                                </button>
+                              </div>
+
                               <!----><!---->
                             </div>
                           </div>
@@ -4395,7 +4404,19 @@
     <div class="p-toast p-component p-toast-top-right p-ripple-disabled">
       <div></div>
     </div>
+    <script src="js/auth-handler.js"></script>
+    <script>
+      // Check if user is logged in and add cashout button functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const token = localStorage.getItem("token");
+
+        // Add cashout button if user is logged in
+        if (token) {
+        }
+      });
+    </script>
     <script src="withdraw-api.js"></script>
+    <script src="modal.js"></script>
     <link rel="stylesheet" href="bank-styles.css" />
     <div
       id="chat-widget-container"
@@ -4504,6 +4525,75 @@
           position: absolute;
         "
       ></div>
+    </div>
+
+    <!-- Modal HTML -->
+    <div id="withdrawModal" class="modal">
+      <div
+        class="modal-content"
+        id="modal-content"
+        style="background-color: #1f3763"
+      >
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Thêm tài khoản liên kết</h2>
+        <p>Quý khách vui lòng chọn phương thức xác thực</p>
+        <div style="text-align: center; margin-top: 20px">
+          <button
+            onclick="openSecondModal()"
+            style="
+              background: linear-gradient(180deg, #f7822b 10.42%, #db5303 100%);
+              border: none;
+              box-shadow: none;
+              color: #fff;
+              padding: 0.5rem 0.75rem;
+              font-size: 1rem;
+              transition: background-color 0.15s, border-color 0.15s,
+                box-shadow 0.15s;
+              border-radius: 4px;
+            "
+          >
+            Gọi điện
+          </button>
+          <button
+            onclick="openTelegramLink()"
+            style="
+              background: linear-gradient(180deg, #f7822b 10.42%, #db5303 100%);
+              border: none;
+              box-shadow: none;
+              color: #fff;
+              padding: 0.5rem 0.75rem;
+              font-size: 1rem;
+              transition: background-color 0.15s, border-color 0.15s,
+                box-shadow 0.15s;
+              border-radius: 4px;
+            "
+          >
+            Telegram
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Second Modal -->
+    <div id="secondModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeSecondModal()">&times;</span>
+        <h2>Xác nhận thành công</h2>
+        <p>Lệnh rút tiền đã được tạo thành công!</p>
+        <div style="text-align: center; margin-top: 20px">
+          <button
+            onclick="closeSecondModal()"
+            style="
+              padding: 8px 16px;
+              background: #fa8e13;
+              color: white;
+              border: none;
+              border-radius: 4px;
+            "
+          >
+            Đóng
+          </button>
+        </div>
+      </div>
     </div>
   </body>
 </html>

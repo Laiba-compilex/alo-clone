@@ -8729,7 +8729,7 @@
 		</button>
 
 
-		<button class="btn btn-deposit" onclick="GameHallHandler.openLoginPopup(this)">
+		<button class="btn btn-deposit" onclick="if (localStorage.getItem('token')) { window.location.href = '/withdraw.html'; } else { GameHallHandler.openLoginPopup(this); }">
 			<i class="icon icon-deposit"></i>
 			<span>CASH IN</span>
 		</button>
