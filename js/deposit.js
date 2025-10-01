@@ -129,8 +129,11 @@ function addAmount(value) {
     }
 }
 
+let _paymentCategoriesCache = null;
+let _aggregatedBanks = null; // array of {id, bank_name, bank_image, methods: [...]}
+
 document.addEventListener('DOMContentLoaded', function() {
-    APIGetCompanyBanks();
+  APIGetPaymentCategoryDetails();
     const vietnameseNames = {
         500: 'năm trăm nghìn đồng',
         1000: 'một triệu đồng',
@@ -150,7 +153,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Remove 'K' and commas, convert to number
             const value = parseFloat(label.replace(/[K,]/g, ''));
-            localStorage.setItem('amount',value);            
             // Set the value in input
             const input = document.getElementById('inp_vnd_amount1');
             const numberName = document.getElementById('numberName');
@@ -173,6 +175,131 @@ function toggleBankDropdown() {
     
     trigger1.classList.toggle('active');
     menu.classList.toggle('show');
+}
+
+// New: fetch payment categories which include payment methods and their banks
+async function APIGetPaymentCategoryDetails() {
+  const BaseUrl = await fetchBaseURL();
+  try {
+    const res = await fetch(`${BaseUrl}/api/bank/get_payment_category_details`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        accept: 'application/json'
+      }
+    });
+    const data = await res.json();
+    // cache
+    _paymentCategoriesCache = data || [];
+    // build aggregated bank list
+    _aggregatedBanks = buildBankListFromCategories(_paymentCategoriesCache);
+    // render banks dropdown
+    if (_aggregatedBanks && _aggregatedBanks.length) {
+      renderBanksList(_aggregatedBanks);
+      // pre-select first bank if none selected
+      const first = _aggregatedBanks[0];
+      const selectedBankInput = document.getElementById('selectedBankId');
+      if (first && selectedBankInput && !selectedBankInput.value) {
+        selectedBankInput.value = first.id;
+        // render payment methods for this bank
+        renderPaymentMethodsForBank(first.id);
+      }
+    }
+    return _paymentCategoriesCache;
+  } catch (e) {
+    console.error('Failed to load payment categories', e);
+    return null;
+  }
+}
+
+function buildBankListFromCategories(categories) {
+  const map = new Map();
+  (categories || []).forEach(cat => {
+    (cat.payment_methods || []).forEach(method => {
+      (method.payment_method_banks || []).forEach(bank => {
+        const bid = bank.id;
+        if (!map.has(bid)) {
+          map.set(bid, {
+            id: bid,
+            bank_name: bank.bank_name,
+            bank_image: bank.bank_image,
+            methods: []
+          });
+        }
+        // push method info (include code and id)
+        map.get(bid).methods.push({
+          id: method.id,
+          name: method.payment_method_name,
+          code: method.payment_method_code,
+          image: method.payment_method_image,
+          min: method.min_deposit_amount,
+          max: method.max_deposit_amount,
+          category: {
+            id: cat.id,
+            name: cat.name,
+            code: cat.category_code
+          }
+        });
+      });
+    });
+  });
+  return Array.from(map.values());
+}
+
+function renderPaymentMethodsForBank(bankId) {
+  const paymentMenu = document.getElementById('paymentDropdownMenu');
+  if (!paymentMenu) return;
+  paymentMenu.innerHTML = '';
+  const bank = (_aggregatedBanks || []).find(b => String(b.id) === String(bankId));
+  if (!bank) {
+    paymentMenu.innerHTML = '<div>No payment methods for selected bank</div>';
+    return;
+  }
+  bank.methods.forEach((m, idx) => {
+    const div = document.createElement('div');
+    div.className = 'dropdown-item2' + (idx === 0 ? ' selected' : '');
+    div.textContent = m.name;
+    // attach metadata for category and code
+    div.dataset.code = m.code || '';
+    div.dataset.categoryId = m.category?.id || '';
+    div.dataset.categoryCode = m.category?.code || '';
+    div.onclick = function() { selectPaymentMethod(this, m.name, m.id, m.code, m.category?.id, m.category?.code); };
+    paymentMenu.appendChild(div);
+  });
+  // set hidden value to first method by default
+  if (bank.methods.length > 0) {
+    const first = bank.methods[0];
+    const hidden = document.getElementById('selectedPaymentMethod');
+    if (hidden) hidden.value = first.id;
+    let hiddenCode = document.getElementById('selectedPaymentCode');
+    if (!hiddenCode) {
+      hiddenCode = document.createElement('input');
+      hiddenCode.type = 'hidden';
+      hiddenCode.id = 'selectedPaymentCode';
+      hiddenCode.name = 'selectedPaymentCode';
+      document.querySelector('form.deposit-form')?.appendChild(hiddenCode);
+    }
+    hiddenCode.value = first.code;
+    // also set hidden category id/code for this payment method
+    let hiddenCatId = document.getElementById('selectedPaymentCategoryId');
+    if (!hiddenCatId) {
+      hiddenCatId = document.createElement('input');
+      hiddenCatId.type = 'hidden';
+      hiddenCatId.id = 'selectedPaymentCategoryId';
+      hiddenCatId.name = 'selectedPaymentCategoryId';
+      document.querySelector('form.deposit-form')?.appendChild(hiddenCatId);
+    }
+    let hiddenCatCode = document.getElementById('selectedPaymentCategoryCode');
+    if (!hiddenCatCode) {
+      hiddenCatCode = document.createElement('input');
+      hiddenCatCode.type = 'hidden';
+      hiddenCatCode.id = 'selectedPaymentCategoryCode';
+      hiddenCatCode.name = 'selectedPaymentCategoryCode';
+      document.querySelector('form.deposit-form')?.appendChild(hiddenCatCode);
+    }
+    hiddenCatId.value = first.category?.id || '';
+    hiddenCatCode.value = first.category?.code || '';
+  }
 }
 
 function selectOption(element, mainText, subText, color) {
@@ -243,12 +370,12 @@ document.addEventListener('click', function(event) {
 //allow deposit api
 async function depositAllowed() {
   const BaseUrl = await fetchBaseURL();
-  return await fetch(`${BaseUrl}('/api/player/check/allow/deposit'`, {
-   method: "GET",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        accept: "application/json",
-      },
+  return await fetch(`${BaseUrl}/api/player/check/allow/deposit`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      accept: "application/json",
+    },
   });
 }
 //payment dropdown
@@ -273,13 +400,54 @@ function selectPaymentMethod(element, paymentName, paymentId) {
     // Add selected class to clicked item
     element.classList.add('selected');
     
-    // Store selected payment method
-    document.getElementById('selectedPaymentMethod').value = paymentId;
-    console.log('Selected Payment Method:', paymentName, 'ID:', paymentId);
-    localStorage.setItem('selectedPaymentMethod', paymentId);
-    localStorage.setItem('selectedPaymentName', paymentName);
-    // Close dropdown
-    togglePaymentDropdown();
+  // Store selected payment method into hidden input (do NOT use localStorage)
+  const hidden = document.getElementById('selectedPaymentMethod');
+  if (hidden) hidden.value = paymentId;
+  // store payment code as hidden input
+  let hiddenCode = document.getElementById('selectedPaymentCode');
+  if (!hiddenCode) {
+    hiddenCode = document.createElement('input');
+    hiddenCode.type = 'hidden';
+    hiddenCode.id = 'selectedPaymentCode';
+    hiddenCode.name = 'selectedPaymentCode';
+    document.querySelector('form.deposit-form')?.appendChild(hiddenCode);
+  }
+  // if fourth arg passed (code), set it
+  if (arguments.length >= 4 && arguments[3]) {
+    hiddenCode.value = arguments[3];
+  }
+  // set category id/code if provided
+  let hiddenCatId = document.getElementById('selectedPaymentCategoryId');
+  if (!hiddenCatId) {
+    hiddenCatId = document.createElement('input');
+    hiddenCatId.type = 'hidden';
+    hiddenCatId.id = 'selectedPaymentCategoryId';
+    hiddenCatId.name = 'selectedPaymentCategoryId';
+    document.querySelector('form.deposit-form')?.appendChild(hiddenCatId);
+  }
+  let hiddenCatCode = document.getElementById('selectedPaymentCategoryCode');
+  if (!hiddenCatCode) {
+    hiddenCatCode = document.createElement('input');
+    hiddenCatCode.type = 'hidden';
+    hiddenCatCode.id = 'selectedPaymentCategoryCode';
+    hiddenCatCode.name = 'selectedPaymentCategoryCode';
+    document.querySelector('form.deposit-form')?.appendChild(hiddenCatCode);
+  }
+  if (arguments.length >= 6 && arguments[4] !== undefined) hiddenCatId.value = arguments[4] || '';
+  if (arguments.length >= 6 && arguments[5] !== undefined) hiddenCatCode.value = arguments[5] || '';
+  // also keep the payment name in a hidden field for possible use
+  let hiddenName = document.getElementById('selectedPaymentName');
+  if (!hiddenName) {
+    hiddenName = document.createElement('input');
+    hiddenName.type = 'hidden';
+    hiddenName.id = 'selectedPaymentName';
+    hiddenName.name = 'selectedPaymentName';
+    document.querySelector('form.deposit-form')?.appendChild(hiddenName);
+  }
+  hiddenName.value = paymentName;
+  console.log('Selected Payment Method:', paymentName, 'ID:', paymentId);
+  // Close dropdown
+  togglePaymentDropdown();
 }
 
 // Close dropdown when clicking outside
@@ -304,40 +472,48 @@ async function APIMakeDepositRequest (amount, bank_id, payment_method, payment_m
   formData.append("bank_id", Number(bank_id) || null);
   formData.append("payment_method", Number(payment_method) || null);
   formData.append("payment_method_code", payment_method_code || null);
-  formData.append("category_id", 9);
-  formData.append("category_code", 'BANK_TRANSFER');
+  // determine category id/code from hidden inputs (set when payment method selected)
+  const selectedCatId = document.getElementById('selectedPaymentCategoryId')?.value || null;
+  const selectedCatCode = document.getElementById('selectedPaymentCategoryCode')?.value || null;
+  if (selectedCatId) formData.append('category_id', Number(selectedCatId));
+  if (selectedCatCode) formData.append('category_code', selectedCatCode);
   const token = localStorage.getItem('token');
 
   try {
-    const res = await fetch(`${BaseUrl}"/api/account/deposit"`, formData, {
-     method: "POST",
+    const res = await fetch(`${BaseUrl}/api/account/deposit`, {
+      method: 'POST',
       headers: {
-        'Content-Type': 'multipart/form-data',
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        accept: "application/json",
-      }
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        accept: 'application/json'
+      },
+      body: formData
     });
-    if (res.status === 200) {
-      alert("Your amount has been deposited sccessfully!")
-      return res?.data?.data;
+    const json = await res.json().catch(() => null);
+    if (res.ok) {
+      // success
+      return json?.data || json;
+    }
+    // handle known server error codes in response body
+    const code = json?.message || json?.error || null;
+    switch (code) {
+      case 'YOU_HAVE_PENDING_TRANSACTION':
+        return 'YOU_HAVE_PENDING_TRANSACTION';
+      case 'FAILD_TO_GET_QR':
+        return 'FAILD_TO_GET_QR';
+      case 'NETWORK_ERROR':
+        return 'NETWORK_ERROR';
+      case 'WRONG_PAYMENT_METHOD':
+        return 'WRONG_PAYMENT_METHOD';
+      case 'BANK_NOT_SUPPORTED':
+        return 'BANK_NOT_SUPPORTED';
+      default:
+        console.error('Deposit failed', res.status, json);
+        return null;
     }
   } catch (e) {
-    if (e.response.data.message === "YOU_HAVE_PENDING_TRANSACTION") {
-      return "YOU_HAVE_PENDING_TRANSACTION";
-    } else if (e.response.data.message === 'FAILD_TO_GET_QR') {
-      return "FAILD_TO_GET_QR"
-    } else if (e.response.data.message === 'NETWORK_ERROR') {
-      return "NETWORK_ERROR"
-    } else if (e.response.data.message === 'WRONG_PAYMENT_METHOD') {
-      return "WRONG_PAYMENT_METHOD"
-    } else if (e.response.data.message === 'BANK_NOT_SUPPORTED') {
-      return "BANK_NOT_SUPPORTED"
-    } else {
-      console.log(e)
-      return null
-    }
+    console.error('Deposit request error', e);
+    return null;
   }
-  return null;
 }
 
 
@@ -418,8 +594,9 @@ function selectBankOption(element, bankName, bankCode, bankId) {
   // Add selected class to clicked item
   element.classList.add('selected');
   
-  // Store selected bank data (optional)
-  localStorage.setItem('selectedBankName', bankId);
+  // Store selected bank id into hidden input (do NOT use localStorage)
+  const selectedBankInput = document.getElementById('selectedBankId');
+  if (selectedBankInput) selectedBankInput.value = bankId;
   console.log('Selected Bank:', { bankName, bankCode, bankId });
   
   // You can store it in a hidden input or variable for form submission
@@ -427,4 +604,102 @@ function selectBankOption(element, bankName, bankCode, bankId) {
   
   // Close dropdown
   toggleBankDropdown();
+  // render payment methods for this bank
+  try { renderPaymentMethodsForBank(bankId); } catch (e) { /* ignore */ }
+}
+
+// Wire up create-deposit button to use DOM values (no localStorage)
+document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.getElementById('btnCreateDeposit');
+  if (!btn) return;
+  btn.addEventListener('click', async function (ev) {
+    ev.preventDefault();
+    const amountRaw = document.getElementById('inp_vnd_amount1')?.value;
+    const amount = parseFloat(amountRaw) || 0;
+    const bankId = document.getElementById('selectedBankId')?.value || null;
+    const paymentMethod = document.getElementById('selectedPaymentMethod')?.value || null;
+    const paymentCode = document.getElementById('selectedPaymentCode')?.value || null;
+
+    if (!amount || !bankId || !paymentMethod || !paymentCode) {
+      alert('Please select bank, payment method and enter an amount');
+      return;
+    }
+
+    btn.disabled = true;
+    const result = await APIMakeDepositRequest(amount, bankId, paymentMethod, paymentCode);
+    btn.disabled = false;
+
+    if (!result) {
+      alert('Deposit failed. Check console for details.');
+      return;
+    }
+    if (result === 'YOU_HAVE_PENDING_TRANSACTION') {
+      alert('You have a pending transaction.');
+      return;
+    }
+    if (result === 'FAILD_TO_GET_QR') {
+      alert('Failed to get QR.');
+      return;
+    }
+    // success path: server returns data object
+    console.log('Deposit response', result);
+    // if backend instructs redirect to payment_url, show iframe
+    const data = result?.data || result;
+    if (data && data.is_redirect && data.payment_url) {
+      showPaymentIframe(data.payment_url);
+      return;
+    }
+    alert('Deposit created successfully');
+  });
+});
+
+// Show payment iframe and hide deposit form
+function showPaymentIframe(url) {
+  const form = document.querySelector('form.deposit-form');
+  if (!form) return;
+  // hide the form
+  form.style.display = 'none';
+
+  // create container if not exists
+  let container = document.getElementById('paymentIframeContainer');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'paymentIframeContainer';
+    container.style.padding = '12px';
+    container.style.background = '#fff';
+    container.style.border = '1px solid #e5e7eb';
+    container.style.borderRadius = '6px';
+    // back button
+    const back = document.createElement('button');
+    back.type = 'button';
+    back.textContent = 'Back to form';
+    back.className = 'p-button p-component';
+    back.style.marginBottom = '8px';
+    back.onclick = hidePaymentIframe;
+    container.appendChild(back);
+
+    const iframe = document.createElement('iframe');
+    iframe.id = 'paymentIframe';
+    iframe.src = url;
+    iframe.style.width = '100%';
+    iframe.style.height = '720px';
+    iframe.style.border = 'none';
+    container.appendChild(iframe);
+
+    form.parentNode.insertBefore(container, form.nextSibling);
+  } else {
+    // replace iframe src
+    const iframe = document.getElementById('paymentIframe');
+    if (iframe) iframe.src = url;
+    container.style.display = '';
+  }
+}
+
+// Hide iframe and show deposit form
+function hidePaymentIframe() {
+  const form = document.querySelector('form.deposit-form');
+  if (!form) return;
+  const container = document.getElementById('paymentIframeContainer');
+  if (container) container.style.display = 'none';
+  form.style.display = '';
 }
