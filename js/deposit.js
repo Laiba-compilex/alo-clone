@@ -1,7 +1,7 @@
 async function fetchBaseURL() {
   try {
     const response = await fetch(
-      "https://cdntracker0019.com?site_code=gavn138"
+      "https://cdntracker0019.com?site_code=staging"
     );
     const data = await response.json();
     console.log("Response:", data);
@@ -645,7 +645,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Deposit response', result);
     // if backend instructs redirect to payment_url, show iframe
     const data = result?.data || result;
-    if (data && data.is_redirect && data.payment_url) {
+    if (data && data.is_redirect && data.payment_url ) {
       showPaymentIframe(data.payment_url);
       return;
     }
