@@ -7,9 +7,8 @@ async function fetchBaseURL() {
     console.log("Response:", data);
     if (response.ok && data.url) {
       console.log("Base URL:", data.url);
-      // return data.url;
-      return'https://bo-demo.gagavn138.com';
-
+      return data.url;
+      //   return'https://bo-demo.gagavn138.com';
     } else {
       throw new Error("Invalid response for base URL");
     }
@@ -21,6 +20,10 @@ async function fetchBaseURL() {
 async function APILoginUser() {
   const phone = document.getElementById("account").value;
   const password = document.getElementById("password").value;
+  if (!phone || !password) {
+    console.error("Phone and password are required")
+    return;
+  }
   try {
     const BaseUrl = await fetchBaseURL();
 
@@ -41,12 +44,12 @@ async function APILoginUser() {
       if (data.message === "LOGIN_SUCCESS") {
         localStorage.setItem("token", data.token);
         // document.getElementById("modal-main").style.display = "none";
-        const modalLogin = $j('#modal-loginNew');
-      if (modalLogin.length > 0) {
-        PopupUtil.closeModal('#modal-loginNew');
-      }
-       const user = await APIUser();
-       console.log(user);
+        const modalLogin = $j("#modal-loginNew");
+        if (modalLogin.length > 0) {
+          PopupUtil.closeModal("#modal-loginNew");
+        }
+        const user = await APIUser();
+        console.log(user);
         var loginBox = document.getElementById("login-box");
         loginBox.innerHTML = `
           <div class="profile" style="display: block;">
@@ -96,6 +99,7 @@ async function handleSignUp() {
   // Validate inputs
   if (!phone || !password) {
     alert("Please enter both phone number and password");
+    console.error("Phone and password are required")
     return null;
   }
 
@@ -115,7 +119,6 @@ async function handleSignUp() {
 
     // Fix: Parse the JSON response first
     const data = await res.json();
-    alert("Response: " + showErrors(JSON.stringify(data)));
 
     // Fix: Check the parsed data, not res.data
     if (data && data.status === true) {
@@ -130,7 +133,6 @@ async function handleSignUp() {
     }
   } catch (e) {
     console.error("Registration error:", e);
-    alert("Error: " + e.message);
     return { error: e.message };
   }
 }
@@ -145,7 +147,7 @@ async function APIUser() {
       },
     });
     if (res.status === 200) {
-      const data = await res.json(); // parsed JSON from API
+      const data = await res.json(); 
       console.log("User data:", data);
 
       // Normalize possible response shapes
@@ -157,11 +159,12 @@ async function APIUser() {
 
       // try common balance paths
       const balance =
-        (payload.balance ?? user.balance ?? user.wallet_balance ?? null);
+        payload.balance ?? user.balance ?? user.wallet_balance ?? null;
 
       // store normalized user and balance
       try {
         localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("balance", String(balance));
         if (balance !== null && balance !== undefined) {
           localStorage.setItem("balance", String(balance));
         }
@@ -170,7 +173,6 @@ async function APIUser() {
       }
 
       return user;
-
     }
   } catch (e) {
     return e;
@@ -210,85 +212,264 @@ async function getGameCategories() {
   return null;
 }
 
-const handlePlayNow = async (passedGameId) => {
-  console.log("handlePlayNow called", { passedGameId });
-  // const pointsRaw = document.getElementById("points")?.value;
-  const userBlance = await APIUser()
-  console.log('userBlance',userBlance);
-  
-    const points = Math.trunc(parseFloat(userBlance.balance));
-  
-  let id = null;
-  // allow caller to pass a hardcoded id (e.g. onclick="handlePlayNow(21)")
+
+const handlePlayNow = async (passedGameId, elementId) => {
+  console.log("handlePlayNow called", { passedGameId, elementId });
+
+  const parentElement = document.getElementById(elementId)?.querySelector('.ul-gameIcon-box');
+  console.log("parentElement", parentElement);
+  let loader;
+  if (parentElement) {
+    parentElement.style.position = "relative";
+    loader = document.createElement("div");
+    loader.classList.add("loader");
+    loader.style.position = "absolute";
+    loader.style.top = "0";
+    loader.style.left = "0";
+    loader.style.width = "100%";
+    loader.style.height = "100%";
+    loader.style.backgroundColor = "rgba(255, 255, 255, 0.7)";
+    loader.style.display = "flex";
+    loader.style.justifyContent = "center";
+    loader.style.alignItems = "center";
+    loader.style.zIndex = "10";
+    loader.innerHTML = '<div class="spinner"></div>';
+  }
+
+  const userBalance = await APIUser();
+  console.log("userBalance", userBalance);
+
+  const points = Math.trunc(parseFloat(userBalance.balance));
+  let gameId = null;
+
   if (passedGameId !== undefined && passedGameId !== null) {
-    id = passedGameId;
+    gameId = passedGameId;
   }
   const idRaw = localStorage.getItem("id");
   if (idRaw !== null && idRaw !== undefined && idRaw !== "undefined") {
     try {
-      id = JSON.parse(idRaw);
+      gameId = JSON.parse(idRaw);
     } catch (e) {
       console.error("Invalid JSON in localStorage 'id':", idRaw);
-      id = null;
+      gameId = null;
     }
   } else if (localStorage.getItem("daga")) {
-    id = localStorage.getItem("daga");
+    gameId = localStorage.getItem("daga");
   }
-  // fallback to daga or a default hardcoded game id
-  const DEFAULT_GAME_ID = 21; // change this as needed
-  if (!id) {
-    id = localStorage.getItem("daga") || DEFAULT_GAME_ID;
+  const DEFAULT_GAME_ID = 21;
+  if (!gameId) {
+    gameId = localStorage.getItem("daga") || DEFAULT_GAME_ID;
   }
-  if (!id) {
+  if (!gameId) {
     alert("Game ID not found.");
     return;
   }
-  if (!points) {
-    alert("Please fill in both fields");
-    // return;
-  } else {
-    const BaseUrl = await fetchBaseURL();
-    if (BaseUrl) {
-      try {
-        const token = localStorage.getItem("token");
-        const res = await fetch(`${BaseUrl}/api/player/game/login`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ game_id: id, amount:points }),
-        });
-        // const data = await res.json();
-        if (res.status === 200 || res.status === 201) {
-          if (localStorage.getItem("daga")) {
-            console.log("yes daga:", res);
-            showLinksModal();
-          }
-          closePointsModal();
+
+  const BaseUrl = await fetchBaseURL();
+  console.log("BaseUrl:", BaseUrl);
+  const balance = localStorage.getItem("balance");
+  const bal = Math.trunc(parseFloat(balance));
+  let response;
+  if (bal === 0) {
+    response = await SeamlessWithdrawAPI();
+    console.log("response", response);
+    localStorage.setItem("balance", response?.balance);
+  }
+  if (BaseUrl) {
+    try {
+      const token = localStorage.getItem("token");
+      const fullUrl = `${BaseUrl}/api/player/game/login`;
+
+      const res = await fetch(fullUrl, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          game_id: gameId,
+          amount: response?.balance ? response?.balance : balance,
+        }),
+      });
+      const userData = await APIUser();
+      console.log("userData", userData);
+      localStorage.setItem("balance", userData.balance);
+      const data = await res.json();
+
+      if (res.status === 200 || res.status === 201) {
+        // Remove loader if exists
+        if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
+        if (localStorage.getItem("daga")) {
+          console.log("yes daga:", data);
+          showLinksModal();
         }
-      } catch (e) {
-        console.log("Game login error:", e);
-        points.value = null;
-        closePointsModal();
-        return null;
+        if (data.link) {
+          window.open(data.link, "_blank");
+        } else if (data.game_url) {
+          window.open(data.game_url, "_blank");
+        } else {
+          alert("Game URL not found in response");
+        }
+        APIUser();
+      } else {
+        // Show loader if not success
+        if (parentElement && loader && !parentElement.contains(loader)) {
+          parentElement.appendChild(loader);
+        }
+        console.error("API returned error status:", res.status, data);
+        alert(`Error: ${data.message || "Failed to login to game"}`);
       }
+    } catch (e) {
+      // Show loader on error
+      if (parentElement && loader && !parentElement.contains(loader)) {
+        parentElement.appendChild(loader);
+      }
+      console.error("Game login error:", e);
+      alert("Failed to connect to game");
+      return null;
     }
   }
 };
+async function SeamlessWithdrawAPI() {
+  const BaseUrl = await fetchBaseURL();
 
+  console.log("amount");
+  try {
+    const res = await fetch(`${BaseUrl}/api/player/points/withdraw/seamless`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        accept: "application/json",
+      },
+    });
+
+    const data = await res.json();
+    if (data) {
+      return data;
+    }
+  } catch (e) {
+    // eslint-disable-next-line
+    if (e.response.data.message == "INSUFFICIENT_BALANCE") {
+      return "INSUFFICIENT_BALANCE";
+      // eslint-disable-next-line
+    } else if (e.response.data.message == "BALANCE_NETWORK_ERROR") {
+      return "BALANCE_NETWORK_ERROR";
+      // eslint-disable-next-line
+    } else if (e.response.data.message == "REGISTRATION_NETWORK_ERROR") {
+      return "REGISTRATION_NETWORK_ERROR";
+      // eslint-disable-next-line
+    } else if (e.response.data.message == "LOGIN_NETWORK_ERROR") {
+      return "LOGIN_NETWORK_ERROR";
+      // eslint-disable-next-line
+    } else if (e.response.data.message == "PENDING_TRANSACTION") {
+      return e.response.data;
+      // eslint-disable-next-line
+    } else if (e.response.data.message == "PLEASE_DEPOSIT") {
+      return "PLEASE_DEPOSIT";
+      // eslint-disable-next-line
+    } else if (e.response.data.message == "PENDING_DEPOSIT") {
+      return e.response.data;
+      // eslint-disable-next-line
+    } else if (e.response.data.message == "DEPOSIT_NETWORK_ERROR") {
+      return "DEPOSIT_NETWORK_ERROR";
+    } else {
+      return null;
+    }
+    // else if (e.response.data.message == 'ADMIN_FORBIDDEN') {
+    //   return 'adminForbidden'
+    // }
+  }
+  return null;
+}
+// Remove this line:
+// var balanceRefetch = ""
+console.log("balanceRefetch function loaded");
+
+async function balanceRefetch() {
+  try {
+    // Optionally call SeamlessWithdrawAPI if you want to trigger a withdraw before fetching balance
+    await SeamlessWithdrawAPI();
+
+    const userData = await APIUser();
+    if (userData && userData.balance !== undefined) {
+
+      localStorage.setItem("balance", String(userData.balance));
+      const balanceSpan = document.getElementById("balance");
+      if (balanceSpan) {
+        balanceSpan.textContent = userData.balance;
+      }
+      console.log("Fetched balance:", userData.balance);
+      return userData.balance;
+    } else {
+      console.warn("Could not fetch user balance");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error in balanceRefetch:", error);
+    throw error;
+  }
+}
 document.addEventListener("DOMContentLoaded", async () => {
-  APIUser()
-  const categories = await getGameCategories();
-  //   .then((data) => {
-  //     if (localStorage.getItem("token")) {
-  //       const loginBox = document.getElementById("login-box");
-  //       loginBox.innerHTML = `
-  //           <div class="profile" style="display: block;">
-  //             <span>UserName: ${data.username}</span><br>
-  //             <span>UserId: ${data.id}</span>
-  //           </div>
-  //         `;
-  //     }
-  //   });
+  const balance = localStorage.getItem("balance");
+  console.log("balance", balance);
+  APIUser().then((data) => {
+    console.log("APIUser data:", data);
+    if (localStorage.getItem("token")) {
+      const loginBox = document.getElementById("userInfo");
+      loginBox.style.display = "flex";
+      loginBox.style.gap = "10px";
+      loginBox.innerHTML = `
+
+		<div id="userInfo" class="user-info-group">
+			<span class="txt">${data.user_name}</span>
+          <span class="txt user-ID">
+            <a href="javascript:void(0);" class="btn-xs"
+              onclick="
+                const userId = '${data.user_id}';
+                const tempInput = document.createElement('input'); 
+                tempInput.value = userId; 
+                document.body.appendChild(tempInput); 
+                tempInput.select(); 
+                tempInput.setSelectionRange(0, 99999); 
+                document.execCommand('copy'); 
+                document.body.removeChild(tempInput); 
+                alert('Copied ID: ' + userId);
+              ">
+              ${data.user_id}
+              <i class='icon-copy'></i>
+            </a>
+          </span>
+		</div>
+		<div id="navigationBtn" class="navigation-btn"></div>
+				
+          `;
+    }
+    if (localStorage.getItem("token")) {
+      const loginBox = document.getElementById("navigationBtn");
+      loginBox.style.background = "none";
+      loginBox.innerHTML = `
+
+			<div id="balanceWrapper" class="balance-group">
+				
+				<a class="currency-selector" id="currencyViewer">
+					<img class="flag" src="https://img.bdimg.xyz/theme/images/src-common/FLAG-img/flag-vn-o.webp">
+					<span class="txt">VND</span>
+				</a>
+				
+
+				<div class="user-balance is-reserve-check">
+					
+					<span class="txt" id="balance" onclick=" balanceRefetch()">${data.balance}</span>
+					
+				</div>
+
+			</div>
+
+		</div>
+		</div>
+				
+          `;
+    }
+  });
 });
