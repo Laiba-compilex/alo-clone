@@ -1,7 +1,7 @@
 async function fetchBaseURL() {
   try {
     const response = await fetch(
-      "https://cdntracker0019.com?site_code=staging"
+      "https://cdntracker0019.com?site_code=gavn138"
     );
     const data = await response.json();
     console.log("Response:", data);
@@ -13,8 +13,70 @@ async function fetchBaseURL() {
     }
   } catch (error) {
     console.error("Error fetching base URL:", error);
-    return "https://staging-gasv.iegaming.io/api"; // Use the correct staging URL
+    return "https://bo.gagavn138.com/api"; // Use the correct staging URL
   }
+}
+
+// Fetch user banks
+async function fetchUserBanks() {
+  const API_BASE_URL = await fetchBaseURL();
+  const token = localStorage.getItem("token");
+  
+  try {
+    const response = await fetch(`${API_BASE_URL}/player/active/banks`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json'
+      }
+    });
+    
+    if (response.ok) {
+      const result = await response.json();
+      return result.status ? result.response : [];
+    }
+  } catch (error) {
+    console.error('Error fetching banks:', error);
+  }
+  return [];
+}
+
+// Display banks in UI
+async function displayBanks() {
+  const banks = await fetchUserBanks();
+  const bankPanel = document.getElementById('bankTransferPanel');
+  
+  if (banks.length === 0) {
+    bankPanel.innerHTML = '<div class="text-center p-3"><p>Đang tải...</p></div>';
+    return;
+  }
+  
+  let bankHTML = '<div class="bank-list">';
+  banks.forEach((bank, index) => {
+    bankHTML += `
+      <div class="bank-item p-3 mb-2 border cursor-pointer ${index === 0 ? 'selected' : ''}" data-bank-id="${bank.id}" data-account="${bank.account_number}">
+        <div class="flex justify-content-between align-items-center">
+          <div>
+            <strong>${bank.bank_name}</strong><br>
+            <span class="text-sm text-gray-600">${bank.account_number}</span><br>
+            <span class="text-sm text-gray-600">${bank.User_name}</span>
+          </div>
+          <div class="radio-indicator ${index === 0 ? 'selected' : ''}"></div>
+        </div>
+      </div>`;
+  });
+  bankHTML += '</div>';
+  
+  bankPanel.innerHTML = bankHTML;
+  
+  // Add click handlers
+  document.querySelectorAll('.bank-item').forEach(item => {
+    item.addEventListener('click', function() {
+      document.querySelectorAll('.bank-item').forEach(i => i.classList.remove('selected'));
+      document.querySelectorAll('.radio-indicator').forEach(i => i.classList.remove('selected'));
+      this.classList.add('selected');
+      this.querySelector('.radio-indicator').classList.add('selected');
+    });
+  });
 }
 
 async function submitWithdraw() {
@@ -22,25 +84,27 @@ async function submitWithdraw() {
   const amountInput = document.getElementById("inp_vnd_amount");
   const amount = parseInt(amountInput.value) * 1000; // Convert to VND
 
-  if (!amount || amount < 200000 || amount > 100000000) {
-    alert("Vui lòng nhập số tiền hợp lệ (200,000 - 100,000,000 VND)");
+  if (!amount || amount < 0 || amount > 100000000) {
+    alert("Vui lòng nhập số tiền hợp lệ (0 - 100,000,000 VND)");
     return;
   }
 
-  // Hardcoded values matching successful payload
+  // Get selected bank data
+  const selectedBank = document.querySelector('.bank-item.selected');
+  if (!selectedBank) {
+    alert('Vui lòng chọn tài khoản ngân hàng');
+    return;
+  }
+  
   const withdrawData = {
-    bank_id: 5034, // Use the successful bank_id
+    bank_id: parseInt(selectedBank.dataset.bankId),
     transaction_amount: amount,
-    bank_account_number: "23423423", // Use the successful account number
+    bank_account_number: selectedBank.dataset.account,
   };
 
   try {
-    // Check multiple possible token keys
-    let token =
-      localStorage.getItem("auth_token") ||
-      localStorage.getItem("token") ||
-      localStorage.getItem("access_token") ||
-      localStorage.getItem("authToken");
+    // Use token as primary token
+    const token = localStorage.getItem("token");
 
     console.log("Available localStorage keys:", Object.keys(localStorage));
 
@@ -53,6 +117,8 @@ async function submitWithdraw() {
     formData.append("bank_id", withdrawData.bank_id);
     formData.append("transaction_amount", withdrawData.transaction_amount);
     formData.append("bank_account_number", withdrawData.bank_account_number);
+    // Add reject_previous parameter (matching sv388-player implementation)
+    formData.append("reject_previous", false);
 
     // Show loading state
     const submitBtn = document.getElementById("btnCreateWithdraw");
@@ -69,7 +135,6 @@ async function submitWithdraw() {
       headers: {
         Authorization: `Bearer ${token}`,
         Accept: "application/json",
-        "X-Requested-With": "XMLHttpRequest",
       },
       body: formData,
     });
@@ -141,7 +206,8 @@ function handleWithdrawError(errorCode) {
     YOU_HAVE_PENDING_TRANSACTION: "Bạn có giao dịch đang chờ xử lý",
   };
 
-  const message = errorMessages[errorCode] || errorCode || "Có lỗi xảy ra khi rút tiền";
+  const message =
+    errorMessages[errorCode] || errorCode || "Có lỗi xảy ra khi rút tiền";
   alert(message);
 }
 
@@ -184,6 +250,9 @@ function convertNumberToVietnamese(number) {
 document.addEventListener("DOMContentLoaded", function () {
   const amountInput = document.getElementById("inp_vnd_amount");
   const form = document.querySelector("form");
+
+  // Load banks on page load
+  displayBanks();
 
   if (amountInput) {
     amountInput.addEventListener("input", updateAmountDisplay);
