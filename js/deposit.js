@@ -1,20 +1,57 @@
+// Authentication wrapper for fetch
+async function fetchWithAuth(url, options = {}) {
+  const token = localStorage.getItem("token");
+
+  const defaultHeaders = {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  };
+
+  if (token) {
+    defaultHeaders["Authorization"] = `Bearer ${token}`;
+  }
+
+  const config = {
+    ...options,
+    headers: {
+      ...defaultHeaders,
+      ...options.headers,
+    },
+  };
+
+  try {
+    const response = await fetch(url, config);
+
+    if (response.status === 401) {
+      localStorage.removeItem("token");
+      window.location.href = "index.html";
+      return null;
+    }
+
+    return response;
+  } catch (error) {
+    console.error("Fetch error:", error);
+    return null;
+  }
+}
+
 async function fetchBaseURL() {
   try {
     const response = await fetch(
-      "https://cdntracker0019.com?site_code=staging"
+      "https://cdntracker0019.com?site_code=staging",
+      { mode: "cors" }
     );
     const data = await response.json();
     console.log("Response:", data);
     if (response.ok && data.url) {
       console.log("Base URL:", data.url);
       return data.url;
-      //   return'https://bo-demo.gagavn138.com';
     } else {
       throw new Error("Invalid response for base URL");
     }
   } catch (error) {
     console.error("Error fetching base URL:", error);
-    throw error;
+    return "https://bo.gagavn138.com";
   }
 }
 
@@ -182,7 +219,7 @@ function toggleBankDropdown() {
 async function APIGetPaymentCategoryDetails() {
   const BaseUrl = await fetchBaseURL();
   try {
-    const res = await fetch(
+    const res = await fetchWithAuth(
       `${BaseUrl}/api/bank/get_payment_category_details`,
       {
         method: "GET",
@@ -192,6 +229,7 @@ async function APIGetPaymentCategoryDetails() {
         },
       }
     );
+    if (!res) return null;
     const data = await res.json();
     // cache
     _paymentCategoriesCache = data || [];
@@ -218,7 +256,8 @@ async function APIGetPaymentCategoryDetails() {
 
 function buildBankListFromCategories(categories) {
   const map = new Map();
-  (categories || []).forEach((cat) => {
+  const categoriesArray = Array.isArray(categories) ? categories : [];
+  categoriesArray.forEach((cat) => {
     (cat.payment_methods || []).forEach((method) => {
       (method.payment_method_banks || []).forEach((bank) => {
         const bid = bank.id;
@@ -390,7 +429,7 @@ document.addEventListener("click", function (event) {
 //allow deposit api
 async function depositAllowed() {
   const BaseUrl = await fetchBaseURL();
-  return await fetch(`${BaseUrl}/api/player/check/allow/deposit`, {
+  return await fetchWithAuth(`${BaseUrl}/api/player/check/allow/deposit`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -495,30 +534,32 @@ async function APIMakeDepositRequest(
 ) {
   const BaseUrl = await fetchBaseURL();
 
-  //   if(!amount || !bank_id || !payment_method || !payment_method_code) return alert('Please fill all the fields')
-  var formData = new FormData();
-  formData.append("transaction_amount", amount * 1000);
-  formData.append("bank_id", Number(bank_id) || null);
-  formData.append("payment_method", Number(payment_method) || null);
-  formData.append("payment_method_code", payment_method_code || null);
-  // determine category id/code from hidden inputs (set when payment method selected)
-  const selectedCatId =
-    document.getElementById("selectedPaymentCategoryId")?.value || null;
-  const selectedCatCode =
-    document.getElementById("selectedPaymentCategoryCode")?.value || null;
-  if (selectedCatId) formData.append("category_id", Number(selectedCatId));
-  if (selectedCatCode) formData.append("category_code", selectedCatCode);
+  const payload = {
+    transaction_amount: amount * 1000,
+    bank_id: Number(bank_id),
+    payment_method: Number(payment_method),
+    payment_method_code: payment_method_code
+  };
+
+  const selectedCatId = document.getElementById("selectedPaymentCategoryId")?.value;
+  const selectedCatCode = document.getElementById("selectedPaymentCategoryCode")?.value;
+
+  if (selectedCatId) payload.category_id = Number(selectedCatId);
+  if (selectedCatCode) payload.category_code = selectedCatCode;
+
   const token = localStorage.getItem("token");
 
   try {
-    const res = await fetch(`${BaseUrl}/api/account/deposit`, {
+    const res = await fetchWithAuth(`${BaseUrl}/api/account/deposit`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
         accept: "application/json",
       },
-      body: formData,
+      body: JSON.stringify(payload),
     });
+    if (!res) return null;
     const json = await res.json().catch(() => null);
     if (res.ok) {
       // success
@@ -551,7 +592,7 @@ async function APIGetCompanyBanks() {
   const BaseUrl = await fetchBaseURL();
 
   try {
-    const res = await fetch(`${BaseUrl}/api/bank/all`, {
+    const res = await fetchWithAuth(`${BaseUrl}/api/bank/all`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -559,6 +600,7 @@ async function APIGetCompanyBanks() {
         accept: "application/json",
       },
     });
+    if (!res) return null;
     const data = await res.json();
     console.log("banks list", data);
     if (data && data.length) {
@@ -570,6 +612,8 @@ async function APIGetCompanyBanks() {
   }
   return null;
 }
+
+APIGetCompanyBanks();
 
 function renderBanksList(banks) {
   const dropdownMenu = document.getElementById("bankDropdownMenu");

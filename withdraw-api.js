@@ -1,6 +1,6 @@
 async function fetchBaseURL() {
   try {
-    const response = await fetch(
+    const response = await fetchWithAuth(
       "https://cdntracker0019.com?site_code=staging"
     );
     const data = await response.json();
@@ -23,12 +23,16 @@ async function fetchUserBanks() {
   const token = localStorage.getItem("token");
 
   try {
-    const response = await fetch(`${API_BASE_URL}/api/player/active/banks`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/json",
-      },
-    });
+    const response = await fetchWithAuth(
+      `${API_BASE_URL}/player/active/banks`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+      }
+    );
+    if (!response) return [];
 
     if (response.ok) {
       const result = await response.json();
@@ -93,8 +97,8 @@ async function submitWithdraw() {
   const amountInput = document.getElementById("inp_vnd_amount");
   const amount = parseInt(amountInput.value) * 1000; // Convert to VND
 
-  if (!amount || amount < 200000 || amount > 100000000) {
-    alert("Vui lòng nhập số tiền hợp lệ (200,000 - 100,000,000 VND)");
+  if (!amount || amount < 10000 || amount > 100000000) {
+    alert("Vui lòng nhập số tiền hợp lệ (10,000 - 100,000,000 VND)");
     return;
   }
 
@@ -139,7 +143,7 @@ async function submitWithdraw() {
     console.log("Token:", token ? "Present" : "Missing");
     console.log("Payload:", Object.fromEntries(formData));
 
-    const response = await fetch(`${API_BASE_URL}/account/withdraw`, {
+    const response = await fetchWithAuth(`${API_BASE_URL}/account/withdraw`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -147,6 +151,7 @@ async function submitWithdraw() {
       },
       body: formData,
     });
+    if (!response) return;
 
     console.log("Response status:", response.status);
     console.log(
