@@ -1,8 +1,18 @@
 import { toast } from "react-toastify";
 import getAxiosInstance from "./BaseUrl";
 
+// Setup axios interceptor for 401 handling
+let axiosInterceptorSetup = false;
+
 export const APIWithdrawRequest = async (amount, bank_account_id) => {
   const BaseUrl = await getAxiosInstance();
+
+  // Setup axios interceptor if not already done
+  if (!axiosInterceptorSetup && window.setupAxiosInterceptor) {
+    window.setupAxiosInterceptor(BaseUrl);
+    axiosInterceptorSetup = true;
+  }
+
   var formData = new FormData();
   formData.append("transaction_amount", amount * 1000);
   formData.append("bank_id", Number(bank_account_id) || null);
@@ -20,6 +30,10 @@ export const APIWithdrawRequest = async (amount, bank_account_id) => {
       return res?.data?.data;
     }
   } catch (e) {
+    if (e.response && e.response.status === 401) {
+      if (window.handle401Error) window.handle401Error();
+      return null;
+    }
     if (e.response.data.message === "INSUFFICIENT_BALANCE") {
       return "INSUFFICIENT_BALANCE";
     } else if (e.response.data.message === "DAILY_LIMIT_EXCEEDED") {
@@ -39,6 +53,12 @@ export const APIWithdrawRequest = async (amount, bank_account_id) => {
 export const withdrawAllowed = async () => {
   const BaseUrl = await getAxiosInstance();
 
+  // Setup axios interceptor if not already done
+  if (!axiosInterceptorSetup && window.setupAxiosInterceptor) {
+    window.setupAxiosInterceptor(BaseUrl);
+    axiosInterceptorSetup = true;
+  }
+
   return BaseUrl.get("player/check/allow/withdraw", {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
@@ -48,6 +68,12 @@ export const withdrawAllowed = async () => {
 
 export const getBankAccountsApi = async () => {
   const BaseUrl = await getAxiosInstance();
+
+  // Setup axios interceptor if not already done
+  if (!axiosInterceptorSetup && window.setupAxiosInterceptor) {
+    window.setupAxiosInterceptor(BaseUrl);
+    axiosInterceptorSetup = true;
+  }
 
   try {
     const res = await BaseUrl.get(`/account/bank_accounts`, {
@@ -59,6 +85,10 @@ export const getBankAccountsApi = async () => {
       return res.data;
     }
   } catch (e) {
+    if (e.response && e.response.status === 401) {
+      if (window.handle401Error) window.handle401Error();
+      return false;
+    }
     console.log(e);
   }
   return false;
@@ -66,6 +96,12 @@ export const getBankAccountsApi = async () => {
 
 export const singleTransactionStatusCheck = async (id) => {
   const BaseUrl = await getAxiosInstance();
+
+  // Setup axios interceptor if not already done
+  if (!axiosInterceptorSetup && window.setupAxiosInterceptor) {
+    window.setupAxiosInterceptor(BaseUrl);
+    axiosInterceptorSetup = true;
+  }
 
   try {
     const res = await BaseUrl.get(`/account/transaction/status/check/${id}`, {
@@ -77,6 +113,10 @@ export const singleTransactionStatusCheck = async (id) => {
       return res.data;
     }
   } catch (e) {
+    if (e.response && e.response.status === 401) {
+      if (window.handle401Error) window.handle401Error();
+      return false;
+    }
     console.log(e);
   }
   return false;

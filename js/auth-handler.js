@@ -17,15 +17,14 @@
       console.error('Logout API error:', error);
     }
     
-    // Clear localStorage
-    localStorage.removeItem("token");
-    localStorage.removeItem("userId");
-    localStorage.removeItem("initialDeposit");
+    // Clear all localStorage
+    localStorage.clear();
     
     // Clear cookies
     document.cookie.split(';').forEach((cookie) => {
       const eqPos = cookie.indexOf('=');
-      const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      const name = eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim();
+      document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=${window.location.hostname}`;
       document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
     });
     
@@ -33,13 +32,25 @@
     sessionStorage.clear();
     
     // Redirect to login
-    window.location.href = "/";
+    window.location.replace('./index.html');
   }
 
   // Global 401 handler
   function handle401Response() {
+    // Clear all storage immediately
+    localStorage.clear();
+    sessionStorage.clear();
+    
+    // Clear cookies
+    document.cookie.split(';').forEach((cookie) => {
+      const eqPos = cookie.indexOf('=');
+      const name = eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim();
+      document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=${window.location.hostname}`;
+      document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+    });
+    
     alert("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.");
-    logout();
+    window.location.replace('./index.html');
   }
 
   // Override fetch to handle 401 globally
@@ -48,6 +59,7 @@
     const response = await originalFetch(...args);
     if (response.status === 401) {
       handle401Response();
+      return null;
     }
     return response;
   };

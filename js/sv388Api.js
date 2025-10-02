@@ -1,6 +1,6 @@
 async function fetchBaseURL() {
   try {
-    const response = await fetch(
+    const response = await fetchWithAuth(
       "https://cdntracker0019.com?site_code=staging"
     );
     const data = await response.json();
@@ -19,14 +19,14 @@ async function APILoginUser() {
   const phone = document.getElementById("account").value;
   const password = document.getElementById("password").value;
   if (!phone || !password) {
-    console.error("Phone and password are required")
+    console.error("Phone and password are required");
     return;
   }
   try {
     const BaseUrl = await fetchBaseURL();
 
     // Fix: Use regular fetch() with the BaseUrl string
-    const res = await fetch(`${BaseUrl}/api/login_user`, {
+    const res = await fetchWithAuth(`${BaseUrl}/api/login_user`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -36,6 +36,7 @@ async function APILoginUser() {
         password,
       }),
     });
+    if (!res) return { error: "Authentication failed" };
 
     const data = await res.json();
     if (res?.status === 200) {
@@ -47,6 +48,7 @@ async function APILoginUser() {
           PopupUtil.closeModal("#modal-loginNew");
         }
         const user = await APIUser();
+        console.log("Logged in user:", user);
         var loginBox = document.getElementById("login-box");
         loginBox.innerHTML = `
           <div class="profile" style="display: block;">
@@ -96,13 +98,13 @@ async function handleSignUp() {
   // Validate inputs
   if (!phone || !password) {
     alert("Please enter both phone number and password");
-    console.error("Phone and password are required")
+    console.error("Phone and password are required");
     return null;
   }
 
   try {
     const BaseUrl = await fetchBaseURL();
-    const res = await fetch(`${BaseUrl}/api/register_user`, {
+    const res = await fetchWithAuth(`${BaseUrl}/api/register_user`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -113,6 +115,7 @@ async function handleSignUp() {
         // agent_id: agentId
       }),
     });
+    if (!res) return { error: "Authentication failed" };
 
     // Fix: Parse the JSON response first
     const data = await res.json();
@@ -137,12 +140,20 @@ async function handleSignUp() {
 async function APIUser() {
   const BaseUrl = await fetchBaseURL();
   try {
-    const res = await fetch(`${BaseUrl}/api/user`, {
+    const res = await fetchWithAuth(`${BaseUrl}/api/user`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
+    if (!res) return null;
+
+    if (res.status === 302) {
+      localStorage.clear();
+      window.location.href = "index.html";
+      return null;
+    }
+
     if (res.status === 200) {
       const data = await res.json();
       // Normalize possible response shapes
@@ -182,13 +193,17 @@ async function getGameCategories() {
   }
 
   try {
-    const response = await fetch(`${BaseUrl}/api/player/game_categories`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        accept: "application/json",
-      },
-    });
+    const response = await fetchWithAuth(
+      `${BaseUrl}/api/player/game_categories`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          accept: "application/json",
+        },
+      }
+    );
+    if (!response) return null;
     // if (response.ok) {
     const data = await response.json();
     return data;
@@ -205,10 +220,11 @@ async function getGameCategories() {
   return null;
 }
 
-
 const handlePlayNow = async (passedGameId, elementId) => {
   // Initialize loader
-  const parentElement = document.getElementById(elementId)?.querySelector('.ul-gameIcon-box');
+  const parentElement = document
+    .getElementById(elementId)
+    ?.querySelector(".ul-gameIcon-box");
   let loader;
   if (parentElement) {
     parentElement.style.position = "relative";
@@ -303,7 +319,7 @@ const handlePlayNow = async (passedGameId, elementId) => {
       const token = localStorage.getItem("token");
       const dagaUrl = `${BaseUrl}/player/daga/deposit`;
 
-      const res = await fetch(dagaUrl, {
+      const res = await fetchWithAuth(dagaUrl, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -314,6 +330,7 @@ const handlePlayNow = async (passedGameId, elementId) => {
           amount: pointsRatio,
         }),
       });
+      if (!res) return;
 
       const data = await res.json();
 
@@ -340,7 +357,7 @@ const handlePlayNow = async (passedGameId, elementId) => {
     // Call game login API
     const token = localStorage.getItem("token");
     const fullUrl = `${BaseUrl}/api/player/game/login`;
-    const res = await fetch(fullUrl, {
+    const res = await fetchWithAuth(fullUrl, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -352,6 +369,7 @@ const handlePlayNow = async (passedGameId, elementId) => {
         amount: checkPoints,
       }),
     });
+    if (!res) return;
     const data = await res.json();
 
     // Update user in localStorage
@@ -362,7 +380,7 @@ const handlePlayNow = async (passedGameId, elementId) => {
     if (res.status === 200 || res.status === 201) {
       if (data.link || data.game_url) {
         // window.open(data.link || data.game_url, "_blank");
-         window.location.href = data.link || data.game_url;
+        window.location.href = data.link || data.game_url;
       } else {
         alert("Game URL not found in response");
       }
@@ -384,13 +402,17 @@ const handlePlayNow = async (passedGameId, elementId) => {
 async function SeamlessWithdrawAPI() {
   const BaseUrl = await fetchBaseURL();
   try {
-    const res = await fetch(`${BaseUrl}/api/player/points/withdraw/seamless`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        accept: "application/json",
-      },
-    });
+    const res = await fetchWithAuth(
+      `${BaseUrl}/api/player/points/withdraw/seamless`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          accept: "application/json",
+        },
+      }
+    );
+    if (!res) return null;
 
     const data = await res.json();
     if (data) {
@@ -440,7 +462,6 @@ async function balanceRefetch() {
 
     const userData = await APIUser();
     if (userData && userData.balance !== undefined) {
-
       localStorage.setItem("balance", String(userData.balance));
       const balanceSpan = document.getElementById("balance");
       if (balanceSpan) {
