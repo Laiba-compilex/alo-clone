@@ -1,7 +1,7 @@
 async function fetchBaseURL() {
   try {
     const response = await fetch(
-      "https://cdntracker0019.com?site_code=gavn138"
+      "https://cdntracker0019.com?site_code=staging"
     );
     const data = await response.json();
     if (response.ok && data.url) {

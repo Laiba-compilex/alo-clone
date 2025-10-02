@@ -8729,11 +8729,13 @@
 		</button>
 
 
-		<button class="btn btn-deposit" onclick="if (localStorage.getItem('token')) { window.location.href = '/withdraw.html'; } else { GameHallHandler.openLoginPopup(this); }">
+		<button class="btn btn-deposit" onclick="localStorage.getItem('token') ? window.location.href = '/Deposit.html' : GameHallHandler.openLoginPopup(this)"
+>
 			<i class="icon icon-deposit"></i>
 			<span>CASH IN</span>
 		</button>
-		<button class="btn btn-withdraw" onclick="GameHallHandler.openLoginPopup(this)">
+		<button class="btn btn-withdraw" onclick="localStorage.getItem('token') ? window.location.href = '/Withdraw.html' : GameHallHandler.openLoginPopup(this)"
+>
 			<i class="icon icon-receive"></i>
 			<span>CASH OUT</span>
 		</button>
