@@ -6,7 +6,7 @@ export const APIWithdrawRequest = async (amount, bank_account_id) => {
   var formData = new FormData();
   formData.append("transaction_amount", amount * 1000);
   formData.append("bank_id", Number(bank_account_id) || null);
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("auth_token");
 
   try {
     const res = await BaseUrl.post("/account/withdraw", formData, {
@@ -41,7 +41,7 @@ export const withdrawAllowed = async () => {
 
   return BaseUrl.get("player/check/allow/withdraw", {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
     },
   });
 };
@@ -52,7 +52,7 @@ export const getBankAccountsApi = async () => {
   try {
     const res = await BaseUrl.get(`/account/bank_accounts`, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
       },
     });
     if (res?.status === 200 && res?.data) {
@@ -70,7 +70,7 @@ export const singleTransactionStatusCheck = async (id) => {
   try {
     const res = await BaseUrl.get(`/account/transaction/status/check/${id}`, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
       },
     });
     if (res.status === 200 && res.data) {
