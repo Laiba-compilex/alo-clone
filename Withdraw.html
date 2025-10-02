@@ -3537,45 +3537,38 @@
                           </div>
                         </div>
                         <!---->
-                      </li>
-                      <!---->
-                    </ul>
+                    </li>
                     <!---->
-                  </div>
+                  </ul>
+                  <!---->
                 </div>
               </div>
-              <div class="col-12 md:col-12 lg:col-9">
-                <!---->
-                <div>
-                  <div class="p-card p-component">
-                    <!---->
-                    <div class="p-card-body">
-                      <!----><!---->
-                      <div class="p-card-content">
-                        <div
-                          class="hidden md:block page-heading pb-3 mb-3 capitalize"
-                        >
-                          Rút tiền
-                        </div>
-                        <div class="mb-3">
-                          <div class="dv-tab">
-                            <div class="mt-3">
-                              <div style="display: flex">
-                                <label class="col-12 mb-2 md:col-3 md:mb-0"
-                                  >Phương thức rút tiền</label
-                                >
-                                <section id="bankTransferPanel">
-                                  <div class="text-center p-3">
-                                    <p>Đang tải danh sách ngân hàng...</p>
-                                  </div>
-                                </section>
-                              </div>
-                              <div style="display: flex">
-                                <label class="col-12 mb-2 md:col-3 md:mb-0"
-                                  >Tài khoản ngân hàng liên kết</label
-                                >
-                                <button
-                                  style="
+            </div>
+            <div class="col-12 md:col-12 lg:col-9">
+              <!---->
+              <div>
+                <div class="p-card p-component">
+                  <!---->
+                  <div class="p-card-body">
+                    <!----><!---->
+                    <div class="p-card-content">
+                      <div class="hidden md:block page-heading pb-3 mb-3 capitalize">
+                        Rút tiền
+                      </div>
+                      <div class="mb-3">
+                        <div class="dv-tab">
+                          <div class="mt-3">
+                            <div style="display: flex">
+                              <label class="col-12 mb-2 md:col-3 md:mb-0">Phương thức rút tiền</label>
+                              <section id="bankTransferPanel">
+                                <div class="text-center p-3">
+                                  <p>Đang tải danh sách ngân hàng...</p>
+                                </div>
+                              </section>
+                            </div>
+                            <div style="display: flex">
+                              <label class="col-12 mb-2 md:col-3 md:mb-0">Tài khoản ngân hàng liên kết</label>
+                              <button style="
                                     color: #ff8d39;
                                     background-color: transparent;
                                     border: none;
@@ -3593,100 +3586,57 @@
                               </div>
 
                               <!----><!---->
+
                             </div>
+
+                            <!----><!---->
                           </div>
                         </div>
-                        <div>
-                          <form novalidate="">
-                            <div class="field grid">
-                              <label
-                                for="inp_vnd_amount"
-                                class="col-12 mb-2 md:col-3 md:mb-0"
-                                >Số tiền muốn rút</label
-                              >
-                              <div class="col-12 md:col-9">
-                                <div class="p-inputgroup">
-                                  <span
-                                    class="p-inputnumber p-component p-inputwrapper p-inputwrapper-filled"
-                                    ><input
-                                      class="p-inputtext p-component p-inputnumber-input"
-                                      id="inp_vnd_amount"
-                                      role="spinbutton"
-                                      aria-valuemax="100000"
-                                      aria-valuenow="200"
-                                      placeholder="Nhập số tiền"
-                                      inputmode="numeric"
-                                    /><!----><!----><!----></span
-                                  ><span class="p-inputgroup-addon"
-                                    >,000 (VND)</span
-                                  >
-                                </div>
-                                <!---->
-                                <div class="mt-1">
-                                  <span class="uppercase vn-text"
-                                    >hai trăm nghìn đồng</span
-                                  >
-                                </div>
-                                <div class="notice-money mt-1">
-                                  <svg
-                                    width="14"
-                                    height="14"
-                                    viewBox="0 0 16 16"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                  >
-                                    <path
-                                      fill-rule="evenodd"
-                                      clip-rule="evenodd"
-                                      d="M6.92982 1.92694C7.72734 1.78631 8.54474 1.80415 9.33536 1.97943C10.126 2.1547 10.8743 2.48399 11.5377 2.94848C12.2011 3.41297 12.7665 4.00358 13.2016 4.68657C13.6367 5.36956 13.933 6.13157 14.0736 6.92909C14.2143 7.7266 14.1964 8.54401 14.0211 9.33463C13.8459 10.1253 13.5166 10.8736 13.0521 11.537C12.5876 12.2003 11.997 12.7657 11.314 13.2008C10.631 13.6359 9.869 13.9323 9.07148 14.0729C8.27397 14.2135 7.45656 14.1957 6.66594 14.0204C5.87532 13.8451 5.12696 13.5159 4.4636 13.0514C3.80023 12.5869 3.23485 11.9963 2.79974 11.3133C2.36462 10.6303 2.06829 9.86827 1.92767 9.07075C1.78705 8.27324 1.80488 7.45583 1.98016 6.66521C2.15544 5.87459 2.48472 5.12623 2.94921 4.46287C3.41371 3.7995 4.00431 3.23412 4.6873 2.79901C5.3703 2.36389 6.13231 2.06756 6.92982 1.92694ZM9.5518 1.00313C8.63297 0.799431 7.68301 0.778703 6.75617 0.94213C5.82933 1.10556 4.94375 1.44994 4.15 1.95561C3.35625 2.46129 2.66988 3.11835 2.13006 3.88929C1.59025 4.66023 1.20756 5.52994 1.00386 6.44877C0.800163 7.3676 0.779435 8.31756 0.942862 9.2444C1.10629 10.1712 1.45067 11.0568 1.95635 11.8506C2.46202 12.6443 3.11908 13.3307 3.89002 13.8705C4.66096 14.4103 5.53067 14.793 6.4495 14.9967C7.36833 15.2004 8.31829 15.2211 9.24513 15.0577C10.172 14.8943 11.0576 14.5499 11.8513 14.0442C12.645 13.5386 13.3314 12.8815 13.8712 12.1105C14.4111 11.3396 14.7937 10.4699 14.9974 9.55107C15.2011 8.63224 15.2219 7.68228 15.0584 6.75544C14.895 5.8286 14.5506 4.94302 14.045 4.14927C13.5393 3.35552 12.8822 2.66914 12.1113 2.12933C11.3403 1.58951 10.4706 1.20683 9.5518 1.00313ZM9.00013 7.00005L9.00013 8.00005V12V13H7.00013V12L7.00013 8.00005V7.00005H9.00013ZM7.00013 4.66685V5.66685H9.00013V4.66685V4.00018V3.00018H7.00013V4.00018V4.66685Z"
-                                      fill="#FFE600"
-                                    ></path>
-                                  </svg>
-                                  Tối thiểu 200,000 đ - Tối đa 100,000,000 đ
-                                </div>
-                              </div>
-                            </div>
-                            <div class="field grid">
-                              <label
-                                class="col-12 mb-2 md:col-3 md:mb-0"
-                              ></label>
-                              <div class="col-12 md:col-9">
-                                <div class="d-btn-primary">
-                                  <button
-                                    class="p-button p-component w-full md:w-6"
-                                    type="button"
-                                    aria-label="Tạo lệnh rút tiền"
-                                    id="btnCreateWithdraw"
-                                    onclick="submitWithdraw()"
-                                  >
-                                    <span class="p-button-label"
-                                      >Tạo lệnh rút tiền</span
-                                    >
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="mb-8 md:mb-0 md:hidden">&nbsp;</div>
-                            <div class="mb-3 md:mb-0 md:hidden">&nbsp;</div>
-                          </form>
-                        </div>
                       </div>
-                      <!---->
+                      <div>
+                        <form novalidate="">
+                          <div class="field grid">
+                            <label for="inp_vnd_amount" class="col-12 mb-2 md:col-3 md:mb-0">Số tiền muốn rút</label>
+                            <div class="col-12 md:col-9">
+                              <div class="p-inputgroup">
+                                <span class="p-inputnumber p-component p-inputwrapper p-inputwrapper-filled"><input
+                                    class="p-inputtext p-component p-inputnumber-input" id="inp_vnd_amount"
+                                    role="spinbutton" aria-valuemax="100000" aria-valuenow="200"
+                                    placeholder="Nhập số tiền" inputmode="numeric" /><!----><!----><!----></span><span
+                                  class="p-inputgroup-addon">,000 (VND)</span>
+                              </div>
+                              <!---->
+                              <div class="mt-1">
+                                <span class="uppercase vn-text">hai trăm nghìn đồng</span>
+                              </div>
+                              <div class="notice-money mt-1">
+                                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"
+                                  xmlns="http://www.w3.org/2000/svg">
+                                  <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M6.92982 1.92694C7.72734 1.78631 8.54474 1.80415 9.33536 1.97943C10.126 2.1547 10.8743 2.48399 11.5377 2.94848C12.2011 3.41297 12.7665 4.00358 13.2016 4.68657C13.6367 5.36956 13.933 6.13157 14.0736 6.92909C14.2143 7.7266 14.1964 8.54401 14.0211 9.33463C13.8459 10.1253 13.5166 10.8736 13.0521 11.537C12.5876 12.2003 11.997 12.7657 11.314 13.2008C10.631 13.6359 9.869 13.9323 9.07148 14.0729C8.27397 14.2135 7.45656 14.1957 6.66594 14.0204C5.87532 13.8451 5.12696 13.5159 4.4636 13.0514C3.80023 12.5869 3.23485 11.9963 2.79974 11.3133C2.36462 10.6303 2.06829 9.86827 1.92767 9.07075C1.78705 8.27324 1.80488 7.45583 1.98016 6.66521C2.15544 5.87459 2.48472 5.12623 2.94921 4.46287C3.41371 3.7995 4.00431 3.23412 4.6873 2.79901C5.3703 2.36389 6.13231 2.06756 6.92982 1.92694ZM9.5518 1.00313C8.63297 0.799431 7.68301 0.778703 6.75617 0.94213C5.82933 1.10556 4.94375 1.44994 4.15 1.95561C3.35625 2.46129 2.66988 3.11835 2.13006 3.88929C1.59025 4.66023 1.20756 5.52994 1.00386 6.44877C0.800163 7.3676 0.779435 8.31756 0.942862 9.2444C1.10629 10.1712 1.45067 11.0568 1.95635 11.8506C2.46202 12.6443 3.11908 13.3307 3.89002 13.8705C4.66096 14.4103 5.53067 14.793 6.4495 14.9967C7.36833 15.2004 8.31829 15.2211 9.24513 15.0577C10.172 14.8943 11.0576 14.5499 11.8513 14.0442C12.645 13.5386 13.3314 12.8815 13.8712 12.1105C14.4111 11.3396 14.7937 10.4699 14.9974 9.55107C15.2011 8.63224 15.2219 7.68228 15.0584 6.75544C14.895 5.8286 14.5506 4.94302 14.045 4.14927C13.5393 3.35552 12.8822 2.66914 12.1113 2.12933C11.3403 1.58951 10.4706 1.20683 9.5518 1.00313ZM9.00013 7.00005L9.00013 8.00005V12V13H7.00013V12L7.00013 8.00005V7.00005H9.00013ZM7.00013 4.66685V5.66685H9.00013V4.66685V4.00018V3.00018H7.00013V4.00018V4.66685Z"
+                                    fill="#FFE600"></path>
+                                </svg>
+                                Tối thiểu 200,000 đ - Tối đa 100,000,000 đ
+                              </div>
+                            </div>
+                          </div>
+                          <div class="field grid">
+                            <label class="col-12 mb-2 md:col-3 md:mb-0"></label>
+                            <div class="col-12 md:col-9">
+                              <div class="d-btn-primary">
+                                <button class="p-button p-component w-full md:w-6" type="button"
+                                  aria-label="Tạo lệnh rút tiền" id="btnCreateWithdraw" onclick="submitWithdraw()">
+                                  <span class="p-button-label">Tạo lệnh rút tiền</span>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="mb-8 md:mb-0 md:hidden">&nbsp;</div>
+                          <div class="mb-3 md:mb-0 md:hidden">&nbsp;</div>
+                        </form>
+                      </div>
                     </div>
-                  </div>
-                  <!----><!---->
-                  <div
-                    class="loading-container"
-                    data-v-9d5f1ee6=""
-                    style="display: none"
-                  >
-                    <div class="centered" data-v-9d5f1ee6="">
-                      <i
-                        class="pi pi-spin pi-spinner"
-                        data-v-9d5f1ee6=""
-                        style="font-size: 2rem"
-                      ></i>
-                    </div>
+                    <!---->
                   </div>
                 </div>
               </div>
@@ -3744,11 +3694,16 @@
                 </div>
               </div>
             </div>
-          </div>
-          <!---->
-          <div>
-            <!---->
-            <div><!----></div>
+            <div id="second-menu" class="float-menu-app flex flex-column" data-v-41949c69=""><span
+                class="btn flex align-self-center iconTelegramDownload cursor-pointer" data-v-41949c69=""><img
+                  alt="Tải Telegram" src="images/telegram-1.png" data-v-41949c69=""></span><span
+                class="btn flex align-self-center iconAppDownload cursor-pointer" data-v-41949c69=""><img
+                  alt="Tải ứng dụng Alo789 dành cho điện thoại" src="images/app_789-1.png"
+                  data-v-41949c69=""></span><span class="btn flex align-self-center iconAddShortcut cursor-pointer"
+                data-v-41949c69=""><img alt="Tạo shortcut Alo789" src="images/add_shortcut-1.png"
+                  data-v-41949c69=""></span><span class="btn flex align-self-center iconPromotion1111 cursor-pointer"
+                data-v-41949c69=""><img alt="Khuyến mãi 1.1.1.1" src="images/icon-1111.png" data-v-41949c69=""></span>
+            </div>
             <!---->
             <section>
               <div id="floating-snap-btnLuckyWheel-wrapper">
@@ -3761,12 +3716,27 @@
                   <img src="/images/lucky_wheel.gif" alt="Vòng quay may mắn" />
                 </div>
               </div>
-            </section>
-            <!---->
+            </div>
           </div>
+        </div>
+        <!---->
+        <div>
+          <!---->
+          <div><!----></div>
+          <!---->
+          <section>
+            <div id="floating-snap-btnLuckyWheel-wrapper">
+              <span class="badge badge-light blink badge-lucky-wheel" data-v-39bbf0b9="">0</span>
+              <div class="fab-btn">
+                <img src="/lucky_wheel.gif" alt="Vòng quay may mắn" />
+              </div>
+            </div>
+          </section>
+          <!---->
         </div>
       </div>
     </div>
+  </div>
 
   <script type="text/javascript">
     var userId = _userId || "alo788a14ao";
