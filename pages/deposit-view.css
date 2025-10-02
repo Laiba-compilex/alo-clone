@@ -1,0 +1,325 @@
+.confirm-block .p-checkbox .p-checkbox-box,.confirm-block .p-checkbox .p-checkbox-box:hover,.confirm-block .p-checkbox .p-checkbox-box.p-highlight:hover {
+    background: transparent!important;
+    border-color: var(--orange-400)!important
+}
+
+.confirm-block .p-checkbox .p-checkbox-box.p-highlight,.confirm-block .p-checkbox .p-checkbox-icon {
+    color: var(--orange-400)!important;
+    border-color: var(--orange-400)!important
+}
+
+.confirm-block .p-checkbox .p-checkbox-box.p-focus {
+    box-shadow: none!important;
+    border-color: var(--orange-400)!important
+}
+
+.confirm-block .label-checkbox-disabled {
+    color: #fd974199!important;
+    cursor: not-allowed
+}
+
+.deposit-bank-cknh .bank-container[data-v-63ff5dfb] {
+    max-height: 70px;
+    width: 330px;
+    background-color: #2b4980;
+    border-radius: 4px
+}
+
+.deposit-bank-cknh .bank-container .bank-item-image[data-v-63ff5dfb] {
+    width: 86px;
+    height: 68px;
+    position: relative;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 0 .5rem
+}
+
+.deposit-bank-cknh .bank-container .bank-item-image img[data-v-63ff5dfb] {
+    max-width: 70px
+}
+
+.deposit-bank-cknh .bank-container .bank-item-text[data-v-63ff5dfb] {
+    padding: 0 .5rem
+}
+
+.deposit-bank-cknh .separate[data-v-63ff5dfb] {
+    margin: 8px 0
+}
+
+.deposit-bank-cknh .bank-info .bank-image.btn.disabled[data-v-63ff5dfb],.deposit-bank-cknh .bank-info .bank-image.btn[data-v-63ff5dfb]:disabled {
+    opacity: 1
+}
+
+.deposit-bank-cknh .bank-info .bank-image img[data-v-63ff5dfb] {
+    max-width: 64px
+}
+
+.deposit-bank-cknh .bank-info .bank-image .bank-detail[data-v-63ff5dfb] {
+    max-width: calc(100% - 64px)
+}
+
+.deposit-bank-cknh .bank-info .bank-image .bank-detail .caption[data-v-63ff5dfb] {
+    font-size: 12px
+}
+
+.deposit-bank-cknh .bank-container[data-v-450dd524] {
+    max-height: 70px;
+    width: 330px;
+    background-color: #2b4980;
+    border-radius: 4px
+}
+
+.deposit-bank-cknh .bank-container .bank-item-image[data-v-450dd524] {
+    width: 86px;
+    height: 68px;
+    position: relative;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 0 .5rem
+}
+
+.deposit-bank-cknh .bank-container .bank-item-image img[data-v-450dd524] {
+    max-width: 70px
+}
+
+.deposit-bank-cknh .bank-container .bank-item-text[data-v-450dd524] {
+    padding: 0 .5rem
+}
+
+.deposit-bank-cknh .separate[data-v-450dd524] {
+    margin: 8px 0
+}
+
+.deposit-bank-cknh .bank-info .bank-image.btn.disabled[data-v-450dd524],.deposit-bank-cknh .bank-info .bank-image.btn[data-v-450dd524]:disabled {
+    opacity: 1
+}
+
+.deposit-bank-cknh .bank-info .bank-image img[data-v-450dd524] {
+    max-width: 64px
+}
+
+.deposit-bank-cknh .bank-info .bank-image .bank-detail[data-v-450dd524] {
+    max-width: calc(100% - 64px)
+}
+
+.deposit-bank-cknh .bank-info .bank-image .bank-detail .caption[data-v-450dd524] {
+    font-size: 12px
+}
+
+.deposit-bank-cknh .bank-container[data-v-4fe1c2c0] {
+    max-height: 70px;
+    width: 330px;
+    background-color: #2b4980;
+    border-radius: 4px
+}
+
+.deposit-bank-cknh .bank-container .bank-item-image[data-v-4fe1c2c0] {
+    width: 86px;
+    height: 68px;
+    position: relative;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 0 .5rem
+}
+
+.deposit-bank-cknh .bank-container .bank-item-image img[data-v-4fe1c2c0] {
+    max-width: 70px
+}
+
+.deposit-bank-cknh .bank-container .bank-item-text[data-v-4fe1c2c0] {
+    padding: 0 .5rem
+}
+
+.deposit-bank-cknh .separate[data-v-4fe1c2c0] {
+    margin: 8px 0
+}
+
+.deposit-bank-cknh .bank-info .bank-image.btn.disabled[data-v-4fe1c2c0],.deposit-bank-cknh .bank-info .bank-image.btn[data-v-4fe1c2c0]:disabled {
+    opacity: 1
+}
+
+.deposit-bank-cknh .bank-info .bank-image img[data-v-4fe1c2c0] {
+    max-width: 64px
+}
+
+.deposit-bank-cknh .bank-info .bank-image .bank-detail[data-v-4fe1c2c0] {
+    max-width: calc(100% - 64px)
+}
+
+.deposit-bank-cknh .bank-info .bank-image .bank-detail .caption[data-v-4fe1c2c0] {
+    font-size: 12px
+}
+
+.deposit-bank-cknh .bank-container[data-v-d353f585] {
+    max-height: 70px;
+    width: 330px;
+    background-color: #2b4980;
+    border-radius: 4px
+}
+
+.deposit-bank-cknh .bank-container .bank-item-image[data-v-d353f585] {
+    width: 86px;
+    height: 68px;
+    position: relative;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 0 .5rem
+}
+
+.deposit-bank-cknh .bank-container .bank-item-image img[data-v-d353f585] {
+    max-width: 70px
+}
+
+.deposit-bank-cknh .bank-container .bank-item-text[data-v-d353f585] {
+    padding: 0 .5rem
+}
+
+.deposit-bank-cknh .separate[data-v-d353f585] {
+    margin: 8px 0
+}
+
+.deposit-bank-cknh .bank-info .bank-image.btn.disabled[data-v-d353f585],.deposit-bank-cknh .bank-info .bank-image.btn[data-v-d353f585]:disabled {
+    opacity: 1
+}
+
+.deposit-bank-cknh .bank-info .bank-image img[data-v-d353f585] {
+    max-width: 64px
+}
+
+.deposit-bank-cknh .bank-info .bank-image .bank-detail[data-v-d353f585] {
+    max-width: calc(100% - 64px)
+}
+
+.deposit-bank-cknh .bank-info .bank-image .bank-detail .caption[data-v-d353f585] {
+    font-size: 12px
+}
+
+[data-v-6d037a87] .p-scrollpanel.custombar1 .p-scrollpanel-wrapper {
+    border-right: 9px solid var(--surface-ground)
+}
+
+[data-v-6d037a87] .p-scrollpanel.custombar1 .p-scrollpanel-bar {
+    background-color: var(--primary-color);
+    opacity: 1;
+    transition: background-color .2s
+}
+
+[data-v-6d037a87] .p-scrollpanel.custombar1 .p-scrollpanel-bar:hover {
+    background-color: #007ad9
+}
+
+.dv-scroll-panel[data-v-5143adec] .p-scrollpanel.custombar .p-scrollpanel-wrapper {
+    border-right: none
+}
+
+.dv-scroll-panel[data-v-5143adec] .p-scrollpanel.custombar .p-scrollpanel-bar {
+    background-color: var(--primary-color);
+    opacity: 1;
+    transition: background-color .2s
+}
+
+.dv-scroll-panel[data-v-5143adec] .p-scrollpanel.custombar .p-scrollpanel-bar:hover {
+    background-color: #007ad9
+}
+
+@media (max-width: 768px) {
+    .dv-scroll-panel.mobile-scroll-rtl[data-v-5143adec] .p-scrollpanel.custombar .p-scrollpanel-wrapper {
+        border-right:none;
+        border-left: 9px solid transparent;
+        float: right
+    }
+
+    .dv-scroll-panel.mobile-scroll-rtl[data-v-5143adec] .p-scrollpanel.custombar .p-scrollpanel-content {
+        padding: 0 0 18px 18px;
+        width: 100%
+    }
+
+    .dv-scroll-panel.mobile-scroll-rtl[data-v-5143adec] .p-scrollpanel.custombar .p-scrollpanel-bar-y {
+        right: 0!important;
+        left: 0
+    }
+
+    .dv-scroll-panel.mobile-scroll-rtl[data-v-5143adec] .p-scrollpanel.custombar .p-scrollpanel-bar {
+        background-color: var(--primary-color);
+        opacity: 1;
+        transition: background-color .2s
+    }
+
+    .dv-scroll-panel.mobile-scroll-rtl[data-v-5143adec] .p-scrollpanel.custombar .p-scrollpanel-bar:hover {
+        background-color: #007ad9
+    }
+}
+
+.payment-gateway-item[data-v-5143adec] {
+    border: 1px solid rgba(141,208,255,.5)
+}
+
+.payment-gateway-item.selected[data-v-5143adec],.payment-gateway-item[data-v-5143adec]:hover {
+    background-color: #8dd0ff;
+    color: #000
+}
+
+.dialog-warning-amount-deposit-exceed .money {
+    color: #ffe600
+}
+
+.deposit-form .blink[data-v-82ba7396] {
+    animation: blink-82ba7396 1s linear infinite;
+    -webkit-animation: blink-82ba7396 1s linear infinite
+}
+
+@keyframes blink-82ba7396 {
+    0% {
+        opacity: 0
+    }
+
+    50% {
+        opacity: .5
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+.btc-form-deposit .blink[data-v-f9ea0312] {
+    animation: blink-f9ea0312 1s linear infinite;
+    -webkit-animation: blink-f9ea0312 1s linear infinite
+}
+
+@keyframes blink-f9ea0312 {
+    0% {
+        opacity: 0
+    }
+
+    50% {
+        opacity: .5
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+.btc-form-deposit .text-fee[data-v-f9ea0312] {
+    color: #ff8d39b3;
+    display: none!important
+}
+
+.btc-form-deposit .text-fee.selected[data-v-f9ea0312] {
+    color: #ff8d39
+}
+
+[data-v-f9ea0312] .p-scrollpanel.custombar1 .p-scrollpanel-wrapper {
+    border-right: 9px solid var(--surface-ground)
+}
+
+[data-v-f9ea0312] .p-scrollpanel.custombar1 .p-scrollpanel-bar {
+    background-color: var(--primary-color);
+    opacity: 1;
+    transition: background-color .2s
+}
+
+[data-v-f9ea0312] .p-scrollpanel.custombar1 .p-scrollpanel-bar:hover {
+    background-color: #007ad9
+}
