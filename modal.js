@@ -63,3 +63,28 @@ function closeSecondModal() {
     modal.style.display = "none";
   }
 }
+
+// Handle bank account form submission
+document.addEventListener('DOMContentLoaded', function() {
+  const bankAccountForm = document.getElementById('bankAccountForm');
+  if (bankAccountForm) {
+    bankAccountForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form values
+      const bankName = document.getElementById('bankName').value;
+      const accountNumber = document.getElementById('accountNumber').value;
+      const accountHolder = document.getElementById('accountHolder').value;
+      
+      // Here you would typically send the data to your server
+      console.log('New bank account:', { bankName, accountNumber, accountHolder });
+      
+      // Close the first modal and show confirmation
+      closeModal();
+      openSecondModal();
+      
+      // Reset the form
+      bankAccountForm.reset();
+    });
+  }
+});

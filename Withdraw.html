@@ -39,9 +39,11 @@
       async=""
       src="https://www.googletagmanager.com/gtm.js?id=GTM-NXNQQKC"
     ></script>
+    <script src="./js/deposit.js"></script>
 
     <link rel="stylesheet" href="/css/withdraw.css" />
     <link rel="stylesheet" href="modal.css" />
+    <script src="./modal.js"></script>
     <script>
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
@@ -57,12 +59,23 @@
     <!-- End Google Tag Manager -->
     <!-- Init script -->
     <script>
-      var _userId = "alo788a14ao";
+      var _userId = "";
       var _accountName = "INVALID NAEM";
       var _accountPhone = "093****567";
       var _hasUserInfo = "true";
       var _isMaintenance = "";
       var _isLoginLog = "false";
+      var _balance = "0";
+      
+      // Load user data dynamically from localStorage
+      if(localStorage.getItem('token')){
+        const user = localStorage.getItem('user');
+        if(user) {
+          const userObj = JSON.parse(user);
+          _userId = userObj.user_id || "";
+          _balance = userObj.balance || "0";
+        }
+      }
 
     window.hashTawkTo =
       "d350fb75e1e235472c7c3420abc505a2b472e126a9ec398c544e0b41e843faad";
@@ -2882,20 +2895,20 @@
                               d="M2 1C2 1.55228 1.55228 2 1 2C0.447715 2 0 1.55228 0 1C0 0.447715 0.447715 0 1 0C1.55228 0 2 0.447715 2 1ZM2 5C2 5.55228 1.55228 6 1 6C0.447715 6 0 5.55228 0 5C0 4.44772 0.447715 4 1 4C1.55228 4 2 4.44772 2 5ZM1 10C1.55228 10 2 9.55228 2 9C2 8.44771 1.55228 8 1 8C0.447715 8 0 8.44771 0 9C0 9.55228 0.447715 10 1 10Z"
                               fill="#304F87"></path>
                           </svg></span><span class="lbl-text inline-block mr-1">Số dư:</span><span
-                          class="txt-orange"></span><span
+                          class="txt-orange">0</span><span
                           class="inline-flex align-items-center justify-content-center icon-wallet ml-1"><i
                             class="pi pi-refresh cursor-pointer txt-orange" style="font-size: 0.8rem"></i></span>
                       </div>
                       <div class="flex align-items-center justify-content-end mt-1">
                         <span class="lbl-text inline-block mr-1">ID:</span>
                         <div class="inline-block txt-orange relative">
-                          <span id="userId"></span>
+                          <span id="userId">alo788a14ao</span>
                           <div id="copied_tip" class="tip rounded-2 hidden">
                             Đã sao chép
                           </div>
                         </div>
                         <span
-                          class="inline-flex align-items-center justify-content-center icon-bg ml-1 cursor-pointer"><svg
+                          class="inline-flex align-items-center justify-content-center icon-bg ml-1 cursor-pointer" onclick="copyUserId()"><svg
                             width="13" height="13" viewBox="0 0 11 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
                               d="M9.79772 -0.000595093H4.19737C3.96304 0.0603292 3.7334 0.130627 3.53892 0.285281C3.1968 0.557097 3.00466 0.910927 3.00231 1.34443C2.99763 3.44866 2.99763 5.55289 3.00231 7.65712C3.00466 8.3765 3.6139 8.99277 4.33328 8.99512C6.10945 9.00215 7.88563 9.00215 9.66181 8.99512C10.3765 8.99277 10.9717 8.39993 10.9928 7.68524C11.0013 7.3922 10.9999 7.1004 10.9985 6.80804C10.998 6.6983 10.9975 6.58847 10.9975 6.47847C10.9975 5.9154 10.9977 5.35207 10.998 4.78865C10.9985 3.66155 10.999 2.5341 10.9975 1.40769C10.9975 0.786735 10.6389 0.271221 10.0766 0.0767319C10.0148 0.0545656 9.952 0.0388182 9.88883 0.022984C9.85851 0.0153841 9.82812 0.00776418 9.79772 -0.000595093ZM0.542461 11.712C0.734607 11.8667 0.964245 11.9393 1.19857 11.9979C3.40122 11.9979 5.60387 11.9979 7.80652 12.005L7.80653 12.0049C7.82761 11.9956 7.8487 11.9862 7.86978 11.9815C8.43919 11.855 8.82348 11.5176 8.95236 10.9458C8.99337 10.7621 8.99419 10.5692 8.99501 10.3768C8.99536 10.2943 8.99571 10.2119 8.99923 10.1304C9.00234 10.0479 9.00132 9.96545 9.00028 9.88162C8.99976 9.83919 8.99923 9.79641 8.99923 9.7531H8.84457C7.37536 9.7531 5.90849 9.7531 4.43927 9.75075C4.29165 9.75075 4.14168 9.74372 3.9964 9.7156C2.95835 9.51643 2.25069 8.65646 2.25069 7.59965V2.65541V2.50544C2.16036 2.50544 2.07082 2.50505 1.98188 2.50467C1.76163 2.50372 1.54512 2.50278 1.32979 2.50779C0.598699 2.52653 0.00351487 3.12875 0.00351487 3.85984C-0.00117162 6.11872 -0.00117162 8.37995 0.00351487 10.6412C0.00585811 11.0794 0.195661 11.4355 0.542461 11.712Z"
@@ -2925,7 +2938,7 @@
                           </div>
                         </div>
                         <span
-                          class="inline-flex align-items-center justify-content-center icon-bg ml-1 cursor-pointer"><svg
+                          class="inline-flex align-items-center justify-content-center icon-bg ml-1 cursor-pointer" onclick="copyUserId()"><svg
                             width="13" height="13" viewBox="0 0 11 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
                               d="M9.79772 -0.000595093H4.19737C3.96304 0.0603292 3.7334 0.130627 3.53892 0.285281C3.1968 0.557097 3.00466 0.910927 3.00231 1.34443C2.99763 3.44866 2.99763 5.55289 3.00231 7.65712C3.00466 8.3765 3.6139 8.99277 4.33328 8.99512C6.10945 9.00215 7.88563 9.00215 9.66181 8.99512C10.3765 8.99277 10.9717 8.39993 10.9928 7.68524C11.0013 7.3922 10.9999 7.1004 10.9985 6.80804C10.998 6.6983 10.9975 6.58847 10.9975 6.47847C10.9975 5.9154 10.9977 5.35207 10.998 4.78865C10.9985 3.66155 10.999 2.5341 10.9975 1.40769C10.9975 0.786735 10.6389 0.271221 10.0766 0.0767319C10.0148 0.0545656 9.952 0.0388182 9.88883 0.022984C9.85851 0.0153841 9.82812 0.00776418 9.79772 -0.000595093ZM0.542461 11.712C0.734607 11.8667 0.964245 11.9393 1.19857 11.9979C3.40122 11.9979 5.60387 11.9979 7.80652 12.005L7.80653 12.0049C7.82761 11.9956 7.8487 11.9862 7.86978 11.9815C8.43919 11.855 8.82348 11.5176 8.95236 10.9458C8.99337 10.7621 8.99419 10.5692 8.99501 10.3768C8.99536 10.2943 8.99571 10.2119 8.99923 10.1304C9.00234 10.0479 9.00132 9.96545 9.00028 9.88162C8.99976 9.83919 8.99923 9.79641 8.99923 9.7531H8.84457C7.37536 9.7531 5.90849 9.7531 4.43927 9.75075C4.29165 9.75075 4.14168 9.74372 3.9964 9.7156C2.95835 9.51643 2.25069 8.65646 2.25069 7.59965V2.65541V2.50544C2.16036 2.50544 2.07082 2.50505 1.98188 2.50467C1.76163 2.50372 1.54512 2.50278 1.32979 2.50779C0.598699 2.52653 0.00351487 3.12875 0.00351487 3.85984C-0.00117162 6.11872 -0.00117162 8.37995 0.00351487 10.6412C0.00585811 11.0794 0.195661 11.4355 0.542461 11.712Z"
@@ -3289,18 +3302,38 @@
                       <div class="p-menuitem-content">
                         <div class="p-menuitem-content">
                           <a href="/Deposit.html" class="p-menuitem-link"><span
-                              class="p-menuitem-icon menu-icon flex align-content-center"><svg width="24" height="24"
-                                viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="">
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M20 2C20 1.44772 19.5523 1 19 1C18.4477 1 18 1.44772 18 2V4H16C15.4477 4 15 4.44772 15 5C15 5.55228 15.4477 6 16 6H18V8C18 8.55228 18.4477 9 19 9C19.5523 9 20 8.55228 20 8V6H22C22.5523 6 23 5.55228 23 5C23 4.44772 22.5523 4 22 4H20L20 2ZM12 3L11.9268 3C10.1034 2.99997 8.63364 2.99995 7.47768 3.15536C6.27754 3.31672 5.26704 3.66191 4.46448 4.46447C3.66192 5.26702 3.31673 6.27752 3.15538 7.47766C2.99996 8.63362 2.99999 10.1034 3.00001 11.9268L3.00001 12V18L3.00001 18.0544C2.99992 18.4785 2.99984 18.8906 3.04554 19.2305C3.09706 19.6137 3.22259 20.051 3.5858 20.4142C3.94902 20.7774 4.38629 20.903 4.76949 20.9545C5.10941 21.0002 5.52155 21.0001 5.94562 21L6.00001 21H12H12.0732C13.8966 21 15.3664 21 16.5223 20.8446C17.7225 20.6833 18.733 20.3381 19.5355 19.5355C20.3381 18.733 20.6833 17.7225 20.8447 16.5223C21.0001 15.3664 21 13.8966 21 12.0732V12.0731V12H19C19 13.9139 18.9979 15.2487 18.8625 16.2558C18.7309 17.2342 18.4904 17.7523 18.1213 18.1213C17.7523 18.4903 17.2342 18.7309 16.2559 18.8625C15.2487 18.9979 13.9139 19 12 19H6.00001C5.50034 19 5.22618 18.9979 5.03599 18.9723L5.02871 18.9713L5.02771 18.964C5.00214 18.7738 5.00001 18.4997 5.00001 18V12C5.00001 10.0861 5.00214 8.75129 5.13754 7.74416C5.26908 6.76579 5.50968 6.2477 5.87869 5.87868C6.24771 5.50966 6.76581 5.26907 7.74417 5.13753C8.75131 5.00212 10.0861 5 12 5V3ZM9.00001 9C8.44773 9 8.00001 9.44771 8.00001 10C8.00001 10.5523 8.44773 11 9.00001 11H15C15.5523 11 16 10.5523 16 10C16 9.44771 15.5523 9 15 9H9.00001ZM8.00001 14C8.00001 13.4477 8.44773 13 9.00001 13H12C12.5523 13 13 13.4477 13 14C13 14.5523 12.5523 15 12 15H9.00001C8.44773 15 8.00001 14.5523 8.00001 14Z"
-                                  fill="#CCD2E3"></path>
-                              </svg><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" style="display: none">
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M20 2C20 1.44772 19.5523 1 19 1C18.4477 1 18 1.44772 18 2V4H16C15.4477 4 15 4.44772 15 5C15 5.55228 15.4477 6 16 6H18V8C18 8.55228 18.4477 9 19 9C19.5523 9 20 8.55228 20 8V6H22C22.5523 6 23 5.55228 23 5C23 4.44772 22.5523 4 22 4H20L20 2ZM12 3L11.9268 3C10.1034 2.99997 8.63364 2.99995 7.47768 3.15536C6.27754 3.31672 5.26704 3.66191 4.46448 4.46447C3.66192 5.26702 3.31673 6.27752 3.15538 7.47766C2.99996 8.63362 2.99999 10.1034 3.00001 11.9268L3.00001 12V18L3.00001 18.0544C2.99992 18.4785 2.99984 18.8906 3.04554 19.2305C3.09706 19.6137 3.22259 20.051 3.5858 20.4142C3.94902 20.7774 4.38629 20.903 4.76949 20.9545C5.10941 21.0002 5.52155 21.0001 5.94562 21L6.00001 21H12H12.0732C13.8966 21 15.3664 21 16.5223 20.8446C17.7225 20.6833 18.733 20.3381 19.5355 19.5355C20.3381 18.733 20.6833 17.7225 20.8447 16.5223C21.0001 15.3664 21 13.8966 21 12.0732V12.0731V12H19C19 13.9139 18.9979 15.2487 18.8625 16.2558C18.7309 17.2342 18.4904 17.7523 18.1213 18.1213C17.7523 18.4903 17.2342 18.7309 16.2559 18.8625C15.2487 18.9979 13.9139 19 12 19H6.00001C5.50034 19 5.22618 18.9979 5.03599 18.9723L5.02871 18.9713L5.02771 18.964C5.00214 18.7738 5.00001 18.4997 5.00001 18V12C5.00001 10.0861 5.00214 8.75129 5.13754 7.74416C5.26908 6.76579 5.50968 6.2477 5.87869 5.87868C6.24771 5.50966 6.76581 5.26907 7.74417 5.13753C8.75131 5.00212 10.0861 5 12 5V3ZM9.00001 9C8.44773 9 8.00001 9.44771 8.00001 10C8.00001 10.5523 8.44773 11 9.00001 11H15C15.5523 11 16 10.5523 16 10C16 9.44771 15.5523 9 15 9H9.00001ZM8.00001 14C8.00001 13.4477 8.44773 13 9.00001 13H12C12.5523 13 13 13.4477 13 14C13 14.5523 12.5523 15 12 15H9.00001C8.44773 15 8.00001 14.5523 8.00001 14Z"
-                                  fill="#FA8E13"></path>
-                              </svg></span><span class="p-menuitem-text">Nạp tiền</span><span
-                              class="p-submenu-icon pi pi-angle-right"></span></a>
+                              class="p-menuitem-icon menu-icon flex align-content-center"><svg
+                                  width="24"
+                                  height="24"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  style="display: none"
+                                >
+                                  <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M20 2C20 1.44772 19.5523 1 19 1C18.4477 1 18 1.44772 18 2V4H16C15.4477 4 15 4.44772 15 5C15 5.55228 15.4477 6 16 6H18V8C18 8.55228 18.4477 9 19 9C19.5523 9 20 8.55228 20 8V6H22C22.5523 6 23 5.55228 23 5C23 4.44772 22.5523 4 22 4H20L20 2ZM12 3L11.9268 3C10.1034 2.99997 8.63364 2.99995 7.47768 3.15536C6.27754 3.31672 5.26704 3.66191 4.46448 4.46447C3.66192 5.26702 3.31673 6.27752 3.15538 7.47766C2.99996 8.63362 2.99999 10.1034 3.00001 11.9268L3.00001 12V18L3.00001 18.0544C2.99992 18.4785 2.99984 18.8906 3.04554 19.2305C3.09706 19.6137 3.22259 20.051 3.5858 20.4142C3.94902 20.7774 4.38629 20.903 4.76949 20.9545C5.10941 21.0002 5.52155 21.0001 5.94562 21L6.00001 21H12H12.0732C13.8966 21 15.3664 21 16.5223 20.8446C17.7225 20.6833 18.733 20.3381 19.5355 19.5355C20.3381 18.733 20.6833 17.7225 20.8447 16.5223C21.0001 15.3664 21 13.8966 21 12.0732V12.0731V12H19C19 13.9139 18.9979 15.2487 18.8625 16.2558C18.7309 17.2342 18.4904 17.7523 18.1213 18.1213C17.7523 18.4903 17.2342 18.7309 16.2559 18.8625C15.2487 18.9979 13.9139 19 12 19H6.00001C5.50034 19 5.22618 18.9979 5.03599 18.9723L5.02871 18.9713L5.02771 18.964C5.00214 18.7738 5.00001 18.4997 5.00001 18V12C5.00001 10.0861 5.00214 8.75129 5.13754 7.74416C5.26908 6.76579 5.50968 6.2477 5.87869 5.87868C6.24771 5.50966 6.76581 5.26907 7.74417 5.13753C8.75131 5.00212 10.0861 5 12 5V3ZM9.00001 9C8.44773 9 8.00001 9.44771 8.00001 10C8.00001 10.5523 8.44773 11 9.00001 11H15C15.5523 11 16 10.5523 16 10C16 9.44771 15.5523 9 15 9H9.00001ZM8.00001 14C8.00001 13.4477 8.44773 13 9.00001 13H12C12.5523 13 13 13.4477 13 14C13 14.5523 12.5523 15 12 15H9.00001C8.44773 15 8.00001 14.5523 8.00001 14Z"
+                                    fill="#CCD2E3"
+                                  ></path></svg
+                                ><svg
+                                  width="24"
+                                  height="24"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M20 2C20 1.44772 19.5523 1 19 1C18.4477 1 18 1.44772 18 2V4H16C15.4477 4 15 4.44772 15 5C15 5.55228 15.4477 6 16 6H18V8C18 8.55228 18.4477 9 19 9C19.5523 9 20 8.55228 20 8V6H22C22.5523 6 23 5.55228 23 5C23 4.44772 22.5523 4 22 4H20L20 2ZM12 3L11.9268 3C10.1034 2.99997 8.63364 2.99995 7.47768 3.15536C6.27754 3.31672 5.26704 3.66191 4.46448 4.46447C3.66192 5.26702 3.31673 6.27752 3.15538 7.47766C2.99996 8.63362 2.99999 10.1034 3.00001 11.9268L3.00001 12V18L3.00001 18.0544C2.99992 18.4785 2.99984 18.8906 3.04554 19.2305C3.09706 19.6137 3.22259 20.051 3.5858 20.4142C3.94902 20.7774 4.38629 20.903 4.76949 20.9545C5.10941 21.0002 5.52155 21.0001 5.94562 21L6.00001 21H12H12.0732C13.8966 21 15.3664 21 16.5223 20.8446C17.7225 20.6833 18.733 20.3381 19.5355 19.5355C20.3381 18.733 20.6833 17.7225 20.8447 16.5223C21.0001 15.3664 21 13.8966 21 12.0732V12.0731V12H19C19 13.9139 18.9979 15.2487 18.8625 16.2558C18.7309 17.2342 18.4904 17.7523 18.1213 18.1213C17.7523 18.4903 17.2342 18.7309 16.2559 18.8625C15.2487 18.9979 13.9139 19 12 19H6.00001C5.50034 19 5.22618 18.9979 5.03599 18.9723L5.02871 18.9713L5.02771 18.964C5.00214 18.7738 5.00001 18.4997 5.00001 18V12C5.00001 10.0861 5.00214 8.75129 5.13754 7.74416C5.26908 6.76579 5.50968 6.2477 5.87869 5.87868C6.24771 5.50966 6.76581 5.26907 7.74417 5.13753C8.75131 5.00212 10.0861 5 12 5V3ZM9.00001 9C8.44773 9 8.00001 9.44771 8.00001 10C8.00001 10.5523 8.44773 11 9.00001 11H15C15.5523 11 16 10.5523 16 10C16 9.44771 15.5523 9 15 9H9.00001ZM8.00001 14C8.00001 13.4477 8.44773 13 9.00001 13H12C12.5523 13 13 13.4477 13 14C13 14.5523 12.5523 15 12 15H9.00001C8.44773 15 8.00001 14.5523 8.00001 14Z"
+                                    fill="#FA8E13"
+                                  ></path></svg
+                                ><!----><!----><!----><!----></span
+                              ><span class="p-menuitem-text">Nạp tiền</span
+                              ><span
+                                class="p-submenu-icon pi pi-angle-right"
+                              ></span></a>
                         </div>
                       </div>
 
@@ -3311,33 +3344,72 @@
                       <div class="p-menuitem-content">
                         <div class="p-menuitem-content">
                           <a href="/Withdraw.html" class="p-menuitem-link active-link active-link-exact"><span
-                              class="p-menuitem-icon menu-icon flex align-content-center"><svg width="24" height="24"
-                                viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                                style="display: none">
-                                <path
-                                  d="M12 4V4C8.22876 4 6.34315 4 5.17157 5.17157C4 6.34315 4 8.22876 4 12V18C4 18.9428 4 19.4142 4.29289 19.7071C4.58579 20 5.05719 20 6 20H12C15.7712 20 17.6569 20 18.8284 18.8284C20 17.6569 20 15.7712 20 12V12"
-                                  stroke="#CCD2E3" stroke-width="2"></path>
-                                <path d="M9 10L15 10" stroke="#CCD2E3" stroke-width="2" stroke-linecap="round"
-                                  stroke-linejoin="round"></path>
-                                <path d="M9 14H12" stroke="#CCD2E3" stroke-width="2" stroke-linecap="round"
-                                  stroke-linejoin="round"></path>
-                                <path
-                                  d="M18 8L17.4528 8.51296L18 9.09659L18.5472 8.51296L18 8ZM18.75 2C18.75 1.58579 18.4142 1.25 18 1.25C17.5858 1.25 17.25 1.58579 17.25 2L18.75 2ZM14.4528 5.31296L17.4528 8.51296L18.5472 7.48704L15.5472 4.28704L14.4528 5.31296ZM18.5472 8.51296L21.5472 5.31296L20.4528 4.28704L17.4528 7.48704L18.5472 8.51296ZM18.75 8L18.75 2L17.25 2L17.25 8L18.75 8Z"
-                                  fill="#CCD2E3"></path>
-                              </svg><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" style="">
-                                <path
-                                  d="M12 4V4C8.22876 4 6.34315 4 5.17157 5.17157C4 6.34315 4 8.22876 4 12V18C4 18.9428 4 19.4142 4.29289 19.7071C4.58579 20 5.05719 20 6 20H12C15.7712 20 17.6569 20 18.8284 18.8284C20 17.6569 20 15.7712 20 12V12"
-                                  stroke="#FA8E13" stroke-width="2"></path>
-                                <path d="M9 10L15 10" stroke="#FA8E13" stroke-width="2" stroke-linecap="round"
-                                  stroke-linejoin="round"></path>
-                                <path d="M9 14H12" stroke="#FA8E13" stroke-width="2" stroke-linecap="round"
-                                  stroke-linejoin="round"></path>
-                                <path
-                                  d="M18 8L17.4528 8.51296L18 9.09659L18.5472 8.51296L18 8ZM18.75 2C18.75 1.58579 18.4142 1.25 18 1.25C17.5858 1.25 17.25 1.58579 17.25 2L18.75 2ZM14.4528 5.31296L17.4528 8.51296L18.5472 7.48704L15.5472 4.28704L14.4528 5.31296ZM18.5472 8.51296L21.5472 5.31296L20.4528 4.28704L17.4528 7.48704L18.5472 8.51296ZM18.75 8L18.75 2L17.25 2L17.25 8L18.75 8Z"
-                                  fill="#FA8E13"></path>
-                              </svg></span><span class="p-menuitem-text">Rút tiền</span><span
-                              class="p-submenu-icon pi pi-angle-right"></span></a>
+                              class="p-menuitem-icon menu-icon flex align-content-center"><svg
+                                  width="24"
+                                  height="24"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M12 4V4C8.22876 4 6.34315 4 5.17157 5.17157C4 6.34315 4 8.22876 4 12V18C4 18.9428 4 19.4142 4.29289 19.7071C4.58579 20 5.05719 20 6 20H12C15.7712 20 17.6569 20 18.8284 18.8284C20 17.6569 20 15.7712 20 12V12"
+                                    stroke="#CCD2E3"
+                                    stroke-width="2"
+                                  ></path>
+                                  <path
+                                    d="M9 10L15 10"
+                                    stroke="#CCD2E3"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                  ></path>
+                                  <path
+                                    d="M9 14H12"
+                                    stroke="#CCD2E3"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                  ></path>
+                                  <path
+                                    d="M18 8L17.4528 8.51296L18 9.09659L18.5472 8.51296L18 8ZM18.75 2C18.75 1.58579 18.4142 1.25 18 1.25C17.5858 1.25 17.25 1.58579 17.25 2L18.75 2ZM14.4528 5.31296L17.4528 8.51296L18.5472 7.48704L15.5472 4.28704L14.4528 5.31296ZM18.5472 8.51296L21.5472 5.31296L20.4528 4.28704L17.4528 7.48704L18.5472 8.51296ZM18.75 8L18.75 2L17.25 2L17.25 8L18.75 8Z"
+                                    fill="#CCD2E3"
+                                  ></path></svg
+                                ><svg
+                                  width="24"
+                                  height="24"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  style="display: none"
+                                >
+                                  <path
+                                    d="M12 4V4C8.22876 4 6.34315 4 5.17157 5.17157C4 6.34315 4 8.22876 4 12V18C4 18.9428 4 19.4142 4.29289 19.7071C4.58579 20 5.05719 20 6 20H12C15.7712 20 17.6569 20 18.8284 18.8284C20 17.6569 20 15.7712 20 12V12"
+                                    stroke="#FA8E13"
+                                    stroke-width="2"
+                                  ></path>
+                                  <path
+                                    d="M9 10L15 10"
+                                    stroke="#FA8E13"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                  ></path>
+                                  <path
+                                    d="M9 14H12"
+                                    stroke="#FA8E13"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                  ></path>
+                                  <path
+                                    d="M18 8L17.4528 8.51296L18 9.09659L18.5472 8.51296L18 8ZM18.75 2C18.75 1.58579 18.4142 1.25 18 1.25C17.5858 1.25 17.25 1.58579 17.25 2L18.75 2ZM14.4528 5.31296L17.4528 8.51296L18.5472 7.48704L15.5472 4.28704L14.4528 5.31296ZM18.5472 8.51296L21.5472 5.31296L20.4528 4.28704L17.4528 7.48704L18.5472 8.51296ZM18.75 8L18.75 2L17.25 2L17.25 8L18.75 8Z"
+                                    fill="#FA8E13"
+                                  ></path></svg
+                                ><!----><!----><!----></span
+                              ><span class="p-menuitem-text">Rút tiền</span
+                              ><span
+                                class="p-submenu-icon pi pi-angle-right"
+                              ></span></a>
                         </div>
                       </div>
 
@@ -3512,6 +3584,7 @@
                                       Helvetica, Arial, sans-serif;
                                     font-size: 1rem;
                                     font-weight: 400;
+                                    cursor: pointer;
                                   "
                                   onclick="openModal()"
                                 >
@@ -3696,10 +3769,43 @@
     </div>
 
   <script type="text/javascript">
-    var userId = "alo788a14ao";
+    var userId = _userId || "alo788a14ao";
     var accountName = "INVALID NAEM";
     var accountPhone = "093****567";
     var levelVip = Number("0") || 0;
+    var balance = _balance || "0";
+
+    // Populate userId and balance elements
+    document.addEventListener('DOMContentLoaded', function() {
+      var userIdElements = document.querySelectorAll('#userId');
+      userIdElements.forEach(function(element) {
+        element.textContent = userId;
+      });
+      
+      // Update balance displays
+      var balanceElements = document.querySelectorAll('.txt-orange');
+      balanceElements.forEach(function(element) {
+        if(element.textContent.trim() === '0') {
+          element.textContent = balance;
+        }
+      });
+    });
+
+    // Copy user ID to clipboard function
+    function copyUserId() {
+      navigator.clipboard.writeText(userId).then(function() {
+        // Show tooltip
+        var tooltip = document.getElementById('copied_tip');
+        if (tooltip) {
+          tooltip.classList.remove('hidden');
+          setTimeout(function() {
+            tooltip.classList.add('hidden');
+          }, 2000);
+        }
+      }).catch(function(err) {
+        console.error('Failed to copy: ', err);
+      });
+    }
 
     var chatProvider = "livechat";
     window.chatProvider = chatProvider;
@@ -3883,7 +3989,25 @@
     <div></div>
   </div>
   <script src="withdraw-api.js"></script>
+  <script src="add-bank-api.js"></script>
+  <script src="modal-manager.js"></script>
+  <script src="test-add-bank.js"></script>
   <link rel="stylesheet" href="bank-styles.css" />
+  <link rel="stylesheet" href="bank-modal.css" />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/primeicons/3.0.0/primeicons.css"
+      integrity="sha512-Rxb6R6A7p1fiHvhjB7B417xsqg/D7eummpTlNpIVo2qgLbHNlMwdi1Ig180Ddp0ssWSJI/8Z8AHcWWlqw+cS9A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   <div id="chat-widget-container" style="
         opacity: 1;
         visibility: visible;
@@ -3966,6 +4090,52 @@
           padding: 0px;
           position: absolute;
         "></div>
+  </div>
+
+  <!-- Modal for adding new bank account -->
+  <div id="withdrawModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Thêm tài khoản ngân hàng mới</h2>
+      <form id="bankAccountForm">
+        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+          <label for="bankName" style="width: 140px; margin-right: 12px; margin-bottom: 0;">Tên ngân hàng:</label>
+          <input type="text" id="bankName" name="bankName" placeholder="VD: VIETCOMBANK, TECHCOMBANK..." style="flex: 1; padding: 8px; background-color: #2b4980; color: white; caret-color: white; border: 1px solid #4a5568; border-radius: 4px;" required>
+        </div>
+        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+          <label for="accountNumber" style="width: 140px; margin-right: 12px; margin-bottom: 0;">Số tài khoản:</label>
+          <input type="text" id="accountNumber" name="accountNumber" placeholder="Nhập 6-19 chữ số" maxlength="19" style="flex: 1; padding: 8px; background-color: #2b4980; color: white; caret-color: white; border: 1px solid #4a5568; border-radius: 4px;" required>
+        </div>
+        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+          <label for="accountHolder" style="width: 140px; margin-right: 12px; margin-bottom: 0;">Tên chủ tài khoản:</label>
+          <input type="text" id="accountHolder" name="accountHolder" placeholder="Tên đầy đủ theo CMND/CCCD" style="flex: 1; padding: 8px; background-color: #2b4980; color: white; caret-color: white; border: 1px solid #4a5568; border-radius: 4px;" required>
+        </div>
+        <div style="margin-bottom: 15px; padding: 10px; background-color: #1a365d; border-radius: 4px; border-left: 4px solid #f7822b;">
+          <small style="color: #e2e8f0; line-height: 1.4;">
+            <strong>Lưu ý:</strong><br>
+            • Tên ngân hàng phải chính xác (VD: VIETCOMBANK, ACB, TECHCOMBANK)<br>
+            • Số tài khoản từ 6-19 chữ số, không có ký tự đặc biệt<br>
+            • Tên chủ tài khoản phải trùng với tên đăng ký tài khoản
+          </small>
+        </div>
+        <div style="text-align: center;">
+          <button type="button" onclick="closeModal()" style="margin: 0; justify-content: center; margin-right: 10px; display: inline-flex; cursor: pointer; user-select: none; align-items: center; vertical-align: bottom; text-align: center; overflow: hidden; position: relative; padding: .5rem .75rem; font-size: 1rem; transition: background-color .15s, border-color .15s, box-shadow .15s; border-radius: 4px; background: transparent; border: none; box-shadow: 0 0 3px #f7822b; color: #f7822b;">Hủy</button>
+          <button type="submit" id="submitBankBtn" onclick="submitBankAccount()" style="margin: 0; display: inline-flex; cursor: pointer; user-select: none; align-items: center; vertical-align: bottom; text-align: center; overflow: hidden; position: relative; padding: .5rem .75rem; font-size: 1rem; transition: background-color .15s, border-color .15s, box-shadow .15s; border-radius: 4px; background: linear-gradient(180deg, #f7822b 10.42%, #db5303 100%); border: none; box-shadow: none; color: #fff;">Liên kết tài khoản</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Second Modal for confirmation -->
+  <div id="secondModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeSecondModal()">&times;</span>
+      <h2>Xác nhận thông tin</h2>
+      <p>Tài khoản ngân hàng đã được thêm thành công!</p>
+      <div style="text-align: center;">
+        <button onclick="closeSecondModal()" style="padding: 8px 16px; background-color: #ff8d39; color: white; border: none; border-radius: 4px; cursor: pointer;">Đóng</button>
+      </div>
+    </div>
   </div>
 </body>
 

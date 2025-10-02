@@ -23,7 +23,7 @@ async function fetchUserBanks() {
   const token = localStorage.getItem("token");
 
   try {
-    const response = await fetch(`${API_BASE_URL}/player/active/banks`, {
+    const response = await fetch(`${API_BASE_URL}/api/player/active/banks`, {
       headers: {
         Authorization: `Bearer ${token}`,
         Accept: "application/json",
@@ -253,6 +253,11 @@ function convertNumberToVietnamese(number) {
   if (number === 1000000) return "một triệu đồng";
 
   return number.toLocaleString("vi-VN") + " đồng";
+}
+
+// Refresh bank list after adding new bank
+async function refreshBankList() {
+  await displayBanks();
 }
 
 // Add event listeners
