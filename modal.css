@@ -2,33 +2,226 @@
 .modal {
   display: none;
   position: fixed;
-  z-index: 1000;
+  z-index: 10000;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.3s ease-out;
 }
 
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 500px;
+  background: #1f3763;
+  margin: 8% auto;
+  padding: 0;
+  border: none;
+  width: 90%;
+  max-width: 480px;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 8px 25px rgba(0, 0, 0, 0.1);
+  animation: slideIn 0.3s ease-out;
+  overflow: hidden;
+}
+
+.modal-content h2 {
+  background: #1f3763;
+  color: #fff;
+  padding: 1rem;
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.25rem;
+  border-bottom: 1px solid rgba(255, 141, 57, 0.2);
+}
+
+.modal-content form {
+  padding: 24px;
+}
+
+.modal-content label {
+  display: block;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e9ecef;
   border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.modal-content input:focus {
+  outline: none;
+  border-color: #ff8d39;
+  box-shadow: 0 0 0 3px rgba(255, 141, 57, 0.1);
+}
+
+.modal-content input:hover {
+  border-color: #dee2e6;
+}
+
+.modal-content button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 80px;
+}
+
+.modal-content button[type="submit"] {
+  background: linear-gradient(135deg, #ff8d39 0%, #ff6b1a 100%);
+  color: white;
+}
+
+.modal-content button[type="submit"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 141, 57, 0.3);
+}
+
+.modal-content button[type="button"] {
+  background-color: #6c757d;
+  color: white;
+  margin-right: 12px;
+}
+
+.modal-content button[type="button"]:hover {
+  background-color: #5a6268;
+  transform: translateY(-1px);
 }
 
 .close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 24px;
   font-weight: bold;
   cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
 }
 
-.close:hover,
-.close:focus {
-  color: black;
+.close:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Form field container */
+.modal-content form > div {
+  margin-bottom: 20px;
+}
+
+.modal-content form > div:last-child {
+  margin-bottom: 0;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e9ecef;
+  text-align: right;
+}
+
+/* Success modal specific styles */
+#secondModal .modal-content {
+  text-align: center;
+}
+
+#secondModal .modal-content h2 {
+  background: #1f3763;
+  color: #fff;
+  padding: 1rem;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+#secondModal .modal-content p {
+  color: #fff;
+}
+
+#secondModal .modal-content p {
+  padding: 24px;
+  margin: 0;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+#secondModal .modal-content button {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  margin: 0 24px 24px;
+}
+
+#secondModal .modal-content button:hover {
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .modal-content {
+    margin: 5% auto;
+    width: 95%;
+    max-width: none;
+  }
+  
+  .modal-content h2 {
+    padding: 16px 20px;
+    font-size: 16px;
+  }
+  
+  .modal-content form {
+    padding: 20px;
+  }
+  
+  .modal-content button {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content form > div:last-child {
+    text-align: center;
+  }
+  
+  .modal-content button {
+    width: 100%;
+    margin: 0 0 8px 0;
+  }
+  
+  .modal-content button[type="button"] {
+    margin-right: 0;
+  }
 }
