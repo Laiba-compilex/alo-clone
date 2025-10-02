@@ -1,7 +1,7 @@
 async function fetchBaseURL() {
   try {
     const response = await fetchWithAuth(
-      "https://cdntracker0019.com?site_code=staging"
+      "https://cdntracker0019.com?site_code=gavn138"
     );
     const data = await response.json();
     if (response.ok && data.url) {
