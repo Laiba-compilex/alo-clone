@@ -11,7 +11,7 @@ class APIStatusChecker {
       },
       {
         name: "CDN Tracker (Staging)",
-        url: "https://cdntracker0019.com?site_code=staging",
+        url: "https://cdntracker0019.com?site_code=gavn138",
         type: "base_url",
         critical: false,
       },

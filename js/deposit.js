@@ -38,7 +38,7 @@ async function fetchWithAuth(url, options = {}) {
 async function fetchBaseURL() {
   try {
     const response = await fetch(
-      "https://cdntracker0019.com?site_code=staging",
+      "https://cdntracker0019.com?site_code=gavn138",
       { mode: "cors" }
     );
     const data = await response.json();
@@ -538,11 +538,15 @@ async function APIMakeDepositRequest(
     transaction_amount: amount * 1000,
     bank_id: Number(bank_id),
     payment_method: Number(payment_method),
-    payment_method_code: payment_method_code
+    payment_method_code: payment_method_code,
   };
 
-  const selectedCatId = document.getElementById("selectedPaymentCategoryId")?.value;
-  const selectedCatCode = document.getElementById("selectedPaymentCategoryCode")?.value;
+  const selectedCatId = document.getElementById(
+    "selectedPaymentCategoryId"
+  )?.value;
+  const selectedCatCode = document.getElementById(
+    "selectedPaymentCategoryCode"
+  )?.value;
 
   if (selectedCatId) payload.category_id = Number(selectedCatId);
   if (selectedCatCode) payload.category_code = selectedCatCode;

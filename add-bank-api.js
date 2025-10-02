@@ -19,7 +19,7 @@ async function addBankAccount(bankName, accountNumber, accountHolder) {
   try {
     const baseURL = window.fetchBaseURL
       ? await window.fetchBaseURL()
-      : await fetchWithAuth("https://cdntracker0019.com?site_code=staging")
+      : await fetchWithAuth("https://cdntracker0019.com?site_code=gavn138")
           .then((res) => res.json())
           .then((data) => data.url)
           .catch(() => "https://bo.gagavn138.com");
@@ -106,7 +106,7 @@ async function addBankAccount(bankName, accountNumber, accountHolder) {
 async function getAvailableBanks() {
   const API_BASE_URL = window.fetchBaseURL
     ? await window.fetchBaseURL()
-    : await fetchWithAuth("https://cdntracker0019.com?site_code=staging")
+    : await fetchWithAuth("https://cdntracker0019.com?site_code=gavn138")
         .then((res) => res.json())
         .then((data) => data.url)
         .catch(() => "https://bo.gagavn138.com");

@@ -1,7 +1,7 @@
 async function fetchBaseURL() {
   try {
     const response = await fetchWithAuth(
-      "https://cdntracker0019.com?site_code=staging"
+      "https://cdntracker0019.com?site_code=gavn138"
     );
     const data = await response.json();
     console.log("Response:", data);
@@ -175,7 +175,7 @@ async function submitWithdraw() {
       const result = await response.json();
       if (result.status) {
         alert("Yêu cầu rút tiền đã được tạo thành công!");
-        window.location.href = "/transactions";
+        window.location.href = "/index.html";
       } else {
         handleWithdrawError(result.message || "Có lỗi xảy ra");
       }
