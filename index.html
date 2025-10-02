@@ -5,6 +5,59 @@
 	<style>
 		/* Keep login box hidden by default to avoid flash; JS will show it when needed */
 		.page-login-box { display: none !important; }
+		
+		/* Dropdown Menu Styles */
+		.dropdown {
+			position: relative;
+		}
+		
+		.dropdown-menu {
+			display: none;
+			position: absolute;
+			top: 100%;
+			right: 0;
+			background: rgba(45, 55, 72, 0.95);
+			backdrop-filter: blur(10px);
+			border-radius: 0;
+			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+			min-width: 220px;
+			z-index: 1000;
+			margin-top: 8px;
+		}
+		
+		.dropdown-menu.show {
+			display: block;
+		}
+		
+		.dropdown-item {
+			display: flex;
+			align-items: center;
+			padding: 15px 20px;
+			color: #ffffff;
+			cursor: pointer;
+			transition: background 0.2s ease;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+			position: relative;
+		}
+		
+		.dropdown-item:last-child {
+			border-bottom: none;
+		}
+		
+		.dropdown-item:hover {
+			background: rgba(255, 255, 255, 0.1);
+		}
+		
+		.dropdown-item i {
+			margin-right: 12px;
+			font-size: 16px;
+			width: 20px;
+		}
+		
+		.dropdown-item span {
+			font-size: 14px;
+			font-weight: 400;
+		}
 	</style>
 	<script>
 
@@ -186,18 +239,19 @@
 	<script type="text/javascript" src="js/common-InboxUtil.js"></script>
 	<script type="text/javascript" src="js/player-raceHandler.js"></script>
 	<script type="text/javascript" src="js/player-loginPageHandler.js"></script>
+<script>
+		PageConfig = {};
 
-	<script type="text/javascript">
+</script>
+	<!-- <script type="text/javascript">
 		PageConfig = {};
 		PageConfig.gameHallType = 'NEW_GAMEHALL';
-		/*game img*/
 		PageConfig.specialImgPlatforms = '[Ljava.lang.String;@37992fd7'.split(',');
 		PageConfig.imgPrefix = '-ALO789';
 		PageConfig.imgSuffix = '';
 		PageConfig.imgStyleSuffix = '';
 		PageConfig.entryGameTypeArray = ['LIVEARENA', 'LIVE', 'SPORTS', 'LOTTERY'];
 		PageConfig.specialImgGames = 'JILI,143#JILI,47#JILI,77#YB,3008'.split('#');
-		/*game img*/
 		PageConfig.getJackpotGames = '/service/jackpots/getJackpotGames';
 		PageConfig.getJackpotsUrl = '/service/jackpots/getJackpotDetail';
 		PageConfig.getJackpotsWinnerUrl = '/service/jackpots/getJackpotWinner';
@@ -568,7 +622,7 @@
 
 		PageConfig.casinoTableDisplayInOrder.push("SPECIAL");
 
-	</script>
+	</script> -->
 
 	<script type="text/javascript" src="js/3rdparty-decimal.min.js"></script>
 
@@ -579,7 +633,7 @@
 	<script type="text/javascript" src="js/player-bonusEvent.js"></script>
 	<script type="text/javascript" src="js/player-bonusEventPresentHandler.js"></script>
 	<script type="text/javascript" src="js/template-bonusTemplates.js"></script>
-	<script language="javascript" type="text/javascript">
+	<!-- <script language="javascript" type="text/javascript">
 
 		PageConfig.queryBonusEvent = '/service/player/bonusEvent/getBonusEvent';
 		PageConfig.takeBonusTicket = '/service/player/bonusEvent/takeBonusTicket';
@@ -624,7 +678,7 @@
 
 		PageConfig.showEntryGameType.push('LOTTERY');
 
-	</script>
+	</script> -->
 
 	<div class="modal-box modal-REBATE hide" id="Rebate-POP">
 		<div class="modal-mask"></div>
@@ -1697,6 +1751,22 @@
 		function stopYoutube() {
 			$j('#ytplayer')[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
 		}
+		
+		// Dropdown menu functionality
+		function toggleDropdown() {
+			const dropdown = document.getElementById('dropdownMenu');
+			dropdown.classList.toggle('show');
+		}
+		
+		// Close dropdown when clicking outside
+		window.onclick = function(event) {
+			if (!event.target.matches('.btn-menu') && !event.target.matches('.icon-hamburger')) {
+				const dropdown = document.getElementById('dropdownMenu');
+				if (dropdown && dropdown.classList.contains('show')) {
+					dropdown.classList.remove('show');
+				}
+			}
+		}
 	</script>
 
 
@@ -1790,11 +1860,36 @@
 				</a>
 				<span id="inboxUnreadCount" class="dot" style="display: none;"></span>
 			</div>
-			<div class="btn btn-menu" onclick="GameHallHandler.openLoginPopup(this)">
+			<div class="btn btn-menu dropdown" onclick="toggleDropdown()">
 				<i class="icon-hamburger" href="javascript:void(0);">
 					<span id="menu_dot" class="dot" style="display: none;"></span>
 				</i>
-				
+				<div id="dropdownMenu" class="dropdown-menu">
+					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
+						<i class="icon-user"></i>
+						<span>My Info</span>
+					</div>
+					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
+						<i class="icon-game"></i>
+						<span>Game Partner</span>
+					</div>
+					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
+						<i class="icon-phone"></i>
+						<span>Contact Us</span>
+					</div>
+					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
+						<i class="icon-download"></i>
+						<span>Download APP</span>
+					</div>
+					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
+						<i class="icon-search"></i>
+						<span>Search</span>
+					</div>
+					<div class="dropdown-item logout" onclick="localStorage.removeItem('token'); location.reload();">
+						<i class="icon-logout"></i>
+						<span>LOGOUT</span>
+					</div>
+				</div>
 			</div>
 		</div>
 		<li class="marquee" style="display: none">
@@ -2308,8 +2403,8 @@
 			<ul class="game-icon btn-effect ul-gameList" id="livearenaGameUl"
 				style="display: flex; justify-content: space-between; align-items: end;">
 				<img src="images/live-arena.webp" alt="" style="margin-right: 30px;" id="sv388-vip"
-					onclick=" handlePlayNow(21);">
-				<img src="images/wala-img.png" alt="" style="height: 250px;" onclick=" handlePlayNow(24);">
+					onclick="localStorage.getItem('token') ? handlePlayNow(21) : GameHallHandler.openLoginPopup(this)">
+				<img src="images/wala-img.png" alt="" style="height: 250px;" onclick="localStorage.getItem('token') ? handlePlayNow(24) : GameHallHandler.openLoginPopup(this)">
 			</ul>
 		</div>
 
@@ -2326,9 +2421,9 @@
 				</dt>
 			</dl>
 			<ul class="game-icon btn-effect ul-gameList" id="sportsGameUl">
-				<img src="images/sport-1.webp" alt="" style="padding-right: 20px;" onclick="handlePlayNow(17);">
-				<img src="images/sport-2.webp" alt="" style="padding-right: 20px;" onclick="handlePlayNow(17);">
-				<img src="images/sport-3.webp" alt="" style="padding-right: 20px;" onclick="handlePlayNow(17);">
+				<img src="images/sport-1.webp" alt="" style="padding-right: 20px;" onclick="localStorage.getItem('token') ? handlePlayNow(17) : GameHallHandler.openLoginPopup(this)">
+				<img src="images/sport-2.webp" alt="" style="padding-right: 20px;" onclick="localStorage.getItem('token') ? handlePlayNow(17) : GameHallHandler.openLoginPopup(this)">
+				<img src="images/sport-3.webp" alt="" style="padding-right: 20px;" onclick="localStorage.getItem('token') ? handlePlayNow(17) : GameHallHandler.openLoginPopup(this)">
 			</ul>
 		</div>
 
