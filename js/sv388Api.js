@@ -18,6 +18,7 @@ async function fetchBaseURL() {
 async function APILoginUser() {
   const phone = document.getElementById("account").value;
   const password = document.getElementById("password").value;
+  const logoutbutton = document.getElementById("logout-menuitem");
   if (!phone || !password) {
     console.error("Phone and password are required");
     return;
@@ -42,6 +43,8 @@ async function APILoginUser() {
     if (res?.status === 200) {
       if (data.message === "LOGIN_SUCCESS") {
         localStorage.setItem("token", data.token);
+        logoutbutton.style.display = "block";
+        window.location.reload();
         // document.getElementById("modal-main").style.display = "none";
         const modalLogin = $j("#modal-loginNew");
         if (modalLogin.length > 0) {
