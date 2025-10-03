@@ -66,6 +66,8 @@
 		}
 	</script>
 
+	<!-- Include GameHallHandler -->
+	<script src="js/GameHallHandler.js"></script>
 </head>
 
 <body>
@@ -1833,21 +1835,13 @@
 		<div class="navigation-btn">
 			<div id="language" class="btn btn-language" onclick="GameHallHandler.openMenu()">
 				<a href="javascript:void(0)">
-					<img class="img-flag" src="images/FLAG-img-flag-gb.webp" alt="">
+					<img class="img-flag" src="images/FLAG-img-flag-gb.webp" alt="FLAG-img-flag-gb.webp" style="width: 40px; height: unset; object-fit: contain;">
 					<span>EN</span>
 				</a>
 				<ul id="selectLang" class="lang-dropdown">
-
-					<li>
-						<a lang="vn" onclick="GameHallHandler.changeLang('vn');" href="index.html">
-							<img class="img-flag" src="images/FLAG-img-flag-vn.webp" alt="">
-							<span>VN</span>
-						</a>
-					</li>
-
 					<li>
 						<a lang="en" onclick="GameHallHandler.changeLang('en');" href="index.html">
-							<img class="img-flag" src="images/FLAG-img-flag-gb.webp" alt="">
+							<img class="img-flag" src="images/FLAG-img-flag-gb.webp" alt="FLAG-img-flag-gb.webp" style="width: 40px; height: unset; object-fit: contain;">
 							<span>EN</span>
 						</a>
 					</li>
@@ -1885,12 +1879,15 @@
 						<i class="icon-search"></i>
 						<span>Search</span>
 					</div>
-					<div class="dropdown-item logout" onclick="localStorage.removeItem('token'); location.reload();">
+					<div class="dropdown-item logout" id="logout-menuitem" onclick="localStorage.removeItem('token'); location.reload();">
 						<i class="icon-logout"></i>
 						<span>LOGOUT</span>
 					</div>
 				</div>
 			</div>
+			<script>
+				document.getElementById("logout-menuitem").style.display = localStorage.getItem('token') ? 'flex' : 'none';
+			</script>
 		</div>
 		<li class="marquee" style="display: none">
 			<ul>
@@ -8818,16 +8815,6 @@
 
 
 	<div id="banking-btn" class="page-fix-bt">
-
-
-
-
-		<button class="btn btn-reward" onclick="GameHallHandler.openLoginPopup(this)">
-			<img src="images/REWARD-medal-POPULAR.webp" alt="Reward">
-			<span>Reward</span>
-		</button>
-
-
 		<button class="btn btn-deposit" onclick="localStorage.getItem('token') ? window.location.href = '/Deposit.html' : GameHallHandler.openLoginPopup(this)"
 >
 			<i class="icon icon-deposit"></i>
