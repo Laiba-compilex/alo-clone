@@ -3186,6 +3186,49 @@
                 <div class="p-tabmenu p-component">
                   <ul class="p-tabmenu-nav p-reset" role="menubar">
                     <li class="p-tabmenuitem" role="presentation">
+                      
+                      <button
+                          class="p-button p-component p-button-sm p-button-secondary p-button-outlined p-button-normal"
+                          type="button"
+                          onclick="window.location.href='/deposit.html'"
+                        >
+                          <span class="block w-full"
+                            ><span class="block w-full"
+                              ><!----><svg
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M12 4V4C8.22876 4 6.34315 4 5.17157 5.17157C4 6.34315 4 8.22876 4 12V18C4 18.9428 4 19.4142 4.29289 19.7071C4.58579 20 5.05719 20 6 20H12C15.7712 20 17.6569 20 18.8284 18.8284C20 17.6569 20 15.7712 20 12V12"
+                                  stroke="#CCD2E3"
+                                  stroke-width="2"
+                                ></path>
+                                <path
+                                  d="M9 10L15 10"
+                                  stroke="#CCD2E3"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                                <path
+                                  d="M9 14H12"
+                                  stroke="#CCD2E3"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                ></path>
+                                <path
+                                  d="M18 8L17.4528 8.51296L18 9.09659L18.5472 8.51296L18 8ZM18.75 2C18.75 1.58579 18.4142 1.25 18 1.25C17.5858 1.25 17.25 1.58579 17.25 2L18.75 2ZM14.4528 5.31296L17.4528 8.51296L18.5472 7.48704L15.5472 4.28704L14.4528 5.31296ZM18.5472 8.51296L21.5472 5.31296L20.4528 4.28704L17.4528 7.48704L18.5472 8.51296ZM18.75 8L18.75 2L17.25 2L17.25 8L18.75 8Z"
+                                  fill="#CCD2E3"
+                                ></path></svg></span
+                            ><span class="block w-full lbl-tab text-xs"
+                              >Nạp tiền</span
+                            ></span
+                          >
+                        </button>
                     </li>
                     <li class="p-tabmenuitem p-highlight" role="presentation">
                       <button class="p-button p-component p-button-sm p-button-primary" type="button">
@@ -3551,7 +3594,7 @@
                       <div class="mb-3">
                         <div class="dv-tab">
                           <div class="mt-3">
-                            <div style="display: flex">
+                            <div class="flex-column flex-md-row" style="display: flex">
                               <label class="col-12 mb-2 md:col-3 md:mb-0">Phương thức rút tiền</label>
                               <section id="bankTransferPanel">
                                 <div class="text-center p-3">
@@ -3559,7 +3602,7 @@
                                 </div>
                               </section>
                             </div>
-                            <div style="display: flex">
+                            <div class="flex-column flex-md-row" style="display: flex">
                               <label class="col-12 mb-2 md:col-3 md:mb-0">Tài khoản ngân hàng liên kết</label>
                               <button style="
                                     color: #ff8d39;
