@@ -320,7 +320,7 @@ const handlePlayNow = async (passedGameId, elementId) => {
     // Handle daga game
     if (isDaga) {
       const token = localStorage.getItem("token");
-      const dagaUrl = `${BaseUrl}/api/player/daga/deposit`;
+      const dagaUrl = `${BaseUrl}/api/player/daga/deposit`; // Updated URL
 
       const res = await fetchWithAuth(dagaUrl, {
         method: "POST",
