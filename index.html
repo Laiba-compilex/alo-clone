@@ -1895,13 +1895,15 @@
 		</li>
 	</div>
 
-	<div class="d-block d-md-none py-3 px-3" id="mobileTopBar">
-		<div id="userInfo" class="d-flex align-items-center justify-content-between">
+	<div class="d-block d-md-none py-3 px-3 header-navigation h-auto" id="mobileTopBar">
+		<div class="d-flex justify-content-between align-items-center">
+
+		<div id="userInfo1" class="d-flex align-items-center justify-content-between">
 			<!-- Start hidden to avoid flash; will be shown by inline script only if no token is present -->
 			<div class="page-login-box d-flex align-items-center justify-content-start gap-1 d-md-none login-box-mobile" style="
 			display: none;
 			">
-				<a class="btn-primary " href="javascript:void(0);"
+				<a class="btn-primary d-flex align-items-center" href="javascript:void(0);"
 					onclick="GameHallHandler.openLoginPopup(this)" 
 					style="
 					color: #fff;
@@ -1939,7 +1941,7 @@
     --bs-btn-disabled-border-color: #0d6efd;
 					">Login</a>
 
-				<a class="btn-secondary" href="signUp.html" 
+				<a class="btn-secondary d-flex align-items-center" href="signUp.html" 
 				style="
 				color: #fff;
     text-decoration: none;
@@ -1980,7 +1982,11 @@
 				">Sign Up
 				</a>
 			</div>
-			<div class="d-flex align-items-center justify-content-end gap-1">
+			
+
+			
+		</div>
+		<div class="d-flex align-items-center justify-content-end gap-1">
 				<div onclick="window.location.href = 'deposit.html'" class="wallet-icon" style="cursor: pointer;"></div>
 				<div class="btn btn-menu dropdown" onclick="toggleDropdown1()">
 				<i class="icon-hamburger" style="color: white;" href="javascript:void(0);">
@@ -2034,9 +2040,8 @@
 					}
 				</style>
 			</div>
-
-			
 		</div>
+
 		<div class="d-flex align-items-center justify-content-between flex-row gap-2" style="margin-top: 10px;">
 			<div class="d-flex gap-1 align-items-center
 			." >
@@ -2781,9 +2786,9 @@
 			</dl>
 			<ul class="game-icon btn-effect ul-gameList flex-column flex-md-row gap-1 g-md-0 align-items-center align-items-md-end justify-content-md-between justify-content-start" id="livearenaGameUl"
 				style="display: flex;">
-				<img src="images/live-arena.webp" alt="" style=" width: 100%;" id="sv388-vip" class="banner-1 me-1 me-md-4"
+				<img src="images/live-arena.webp" alt="" style=" width: 100%; cursor: pointer;" id="sv388-vip" class="banner-1 me-1 me-md-4"
 					onclick="localStorage.getItem('token') ? handlePlayNow(21) : GameHallHandler.openLoginPopup(this)">
-				<img class="banner-2" src="images/wala-img.png" alt="" style="height: 100%; width: 100%;" onclick="localStorage.getItem('token') ? handlePlayNow(24) : GameHallHandler.openLoginPopup(this)">
+				<img class="banner-2" src="images/wala-img.png" alt="" style="height: 100%; width: 100%;  cursor: pointer;" onclick="localStorage.getItem('token') ? handlePlayNow(24) : GameHallHandler.openLoginPopup(this)">
 			</ul>
 		</div>
 
@@ -2811,7 +2816,7 @@
 					max-width: 100%;
 				}
 				 .swiper-slide {
-					aspect-ratio: 1/1 !important;
+					aspect-ratio: 1/0 !important;
 					max-width: 100%;
 				}
 				.swiper-wrapper {

@@ -481,20 +481,27 @@ async function balanceRefetch() {
   }
 }
 document.addEventListener("DOMContentLoaded", async () => {
-  const balance = localStorage.getItem("balance");
   APIUser().then((data) => {
     if (localStorage.getItem("token")) {
       const loginBox = document.getElementById("userInfo");
+      const loginBox1 = document.getElementById("userInfo1");
+      loginBox1.classList.remove("justify-content-between");
+
       loginBox.style.display = "flex";
       loginBox.style.gap = "10px";
+      loginBox1.style.display = "flex";
+      loginBox1.style.gap = "10px";
+      const fallback = JSON.parse(localStorage.getItem("user"));
+      const fallbackName = fallback?.name;
+      const fallbackId = fallback?.user_id;
       loginBox.innerHTML = `
 
 		<div id="userInfo" class="user-info-group">
-			<span class="txt">${data.user_name}</span>
+			<span class="txt">${data?.user_name || fallbackName}</span>
           <span class="txt user-ID">
             <a href="javascript:void(0);" class="btn-xs"
               onclick="
-                const userId = '${data.user_id}';
+                const userId = '${data?.user_id || fallbackId}';
                 const tempInput = document.createElement('input'); 
                 tempInput.value = userId; 
                 document.body.appendChild(tempInput); 
@@ -504,7 +511,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 document.body.removeChild(tempInput); 
                 alert('Copied ID: ' + userId);
               ">
-              ${data.user_id}
+              ${data?.user_id || fallbackId}
               <i class='icon-copy'></i>
             </a>
           </span>
@@ -512,10 +519,38 @@ document.addEventListener("DOMContentLoaded", async () => {
 		<div id="navigationBtn" class="navigation-btn"></div>
 				
           `;
+      loginBox1.innerHTML = `
+
+		<div id="userInfo" class="user-info-group">
+			<span class="txt">${data?.user_name || fallbackName}</span>
+          <span class="txt user-ID">
+            <a href="javascript:void(0);" class="btn-xs"
+              onclick="
+                const userId = '${data?.user_id || fallbackId}';
+                const tempInput = document.createElement('input'); 
+                tempInput.value = userId; 
+                document.body.appendChild(tempInput); 
+                tempInput.select(); 
+                tempInput.setSelectionRange(0, 99999); 
+                document.execCommand('copy'); 
+                document.body.removeChild(tempInput); 
+                alert('Copied ID: ' + userId);
+              ">
+              ${data?.user_id || fallbackId}
+              <i class='icon-copy'></i>
+            </a>
+          </span>
+		</div>
+		<div id="navigationBtn1" class="navigation-btn justify-content-start"  style="width: fit-content"></div>
+				
+          `;
     }
     if (localStorage.getItem("token")) {
       const loginBox = document.getElementById("navigationBtn");
+      const loginBox1 = document.getElementById("navigationBtn1");
       loginBox.style.background = "none";
+      const fallback = JSON.parse(localStorage.getItem("user"));
+      const fallbackBalance = fallback?.balance;
       loginBox.innerHTML = `
 
 			<div id="balanceWrapper" class="balance-group" onclick=" balanceRefetch()">
@@ -528,7 +563,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 				<div class="user-balance is-reserve-check" style="cursor:pointer !important; ">
 					
-					<span class="txt" id="balance">${data.balance}</span>
+					<span class="txt" id="balance">${data?.balance || fallbackBalance}</span>
 					
 				</div>
 
@@ -538,6 +573,27 @@ document.addEventListener("DOMContentLoaded", async () => {
 		</div>
 				
           `;
+      loginBox1.innerHTML = `
+
+      	<div id="balanceWrapper" class="balance-group" onclick=" balanceRefetch()">
+
+      		<a class="currency-selector" id="currencyViewer">
+      			<img class="flag" src="https://img.bdimg.xyz/theme/images/src-common/FLAG-img/flag-vn-o.webp">
+      			<span class="txt">VND</span>
+      		</a>
+
+      		<div class="user-balance is-reserve-check" style="cursor:pointer !important; ">
+
+      			<span class="txt" id="balance">${data?.balance || fallbackBalance}</span>
+
+      		</div>
+
+      	</div>
+
+      </div>
+      </div>
+
+            `;
     }
   });
 });
