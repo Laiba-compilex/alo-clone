@@ -107,6 +107,9 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
 		integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="stylesheet" href="css/3rdparty-swiper-bundle.min.css">
+<script type="text/javaScript" src="js/3rdparty-swiper-bundle.min.js"></script>
+
 	<!-- Google Tag Manager -->
 	<script>(function (w, d, s, l, i) {
 			w[l] = w[l] || []; w[l].push({
@@ -2383,10 +2386,9 @@
 
 
 
-	<div id="swiperBanner" class="swiper swiper-banner swiper-initialized swiper-horizontal swiper-pointer-events"
+	<div id="swiperBanner" class="swiper swiper-banner"
 		style="margin-bottom: 30px;">
-		<div class="swiper-wrapper" id="swiper-wrapper-af06b210d492ec726" aria-live="off"
-			style="cursor: grab; transition-duration: 800ms; transform: translate3d(-4306.96px, 0px, 0px);">
+		<div class="swiper-wrapper" id="swiper-wrapper-af06b210d492ec726" aria-live="off">
 			<div class="swiper-slide swiper-slide-duplicate me-0 me-md-4 swiper-slide-duplicate-next" data-swiper-slide-index="5"
 				role="group" aria-label="6 / 8" style="width: 654.261px; margin-right: 24px;"><a
 					href="#" target="_blank"><img src="images/slider-img-3.jfif" alt=""></a>
@@ -2437,6 +2439,7 @@
 				style="width: 654.261px; margin-right: 24px;"><a href="#"><img
 						src="images/Banner-9448JDBVNDSI.webp"></a></div>
 		</div>
+		<div class="swiper-pagination"></div>
 		<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
 	</div>
 
@@ -2447,6 +2450,53 @@
 			}
 		}
 	</style>
+
+	<script>
+		// Destroy and reinitialize Swiper
+		document.addEventListener('DOMContentLoaded', function() {
+			setTimeout(function() {
+				const swiperElement = document.querySelector('#swiperBanner');
+				if (swiperElement) {
+					// Destroy existing swiper if it exists
+					if (swiperElement.swiper) {
+						swiperElement.swiper.destroy(true, true);
+					}
+					// Remove all swiper classes
+					swiperElement.className = 'swiper swiper-banner';
+					// Reset wrapper transform
+					const wrapper = swiperElement.querySelector('.swiper-wrapper');
+					if (wrapper) {
+						wrapper.style.transform = '';
+						wrapper.style.transitionDuration = '';
+					}
+					// Reinitialize
+					new Swiper('#swiperBanner', {
+						slidesPerView: 1,
+						spaceBetween: 10,
+						effect: 'slide',
+						speed: 800,
+						autoplay: {
+							delay: 3000,
+							disableOnInteraction: false
+						},
+						loop: true,
+						breakpoints: {
+							720: {
+								slidesPerView: 2.3,
+								spaceBetween: 24,
+								centeredSlides: true
+							},
+							1560: {
+								slidesPerView: 3.2,
+								spaceBetween: 24,
+								centeredSlides: true
+							}
+						}
+					});
+				}
+			}, 500);
+		});
+	</script>
 
 	<!-- Game Hall Banner end-->
 	<!-- GameList start -->
