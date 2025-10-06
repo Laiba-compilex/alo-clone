@@ -50,6 +50,11 @@
         overflow: hidden;
         position: relative;
       }
+      @media (max-width: 991px) {
+        body {
+          min-width: unset !important;
+        }
+      }
     </style>
   </head>
 
@@ -105,7 +110,7 @@
         <div id="main-wrapper" class="relative bg-[#FFFFFFD9]">
           <div id="content-wrap">
             <div class="grid mx-auto container-max-width">
-              <section class="col-lg-4 mx-auto px-5" style="">
+              <section class="col-lg-5 mx-auto px-md-5 px-1" style="">
                 <div class="flex justify-content-center">
                   <div
                     class="flex align-items-center justify-content-center w-12 md:w-4 mb-2"
