@@ -1,69 +1,101 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rút Tiền - ALO789</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="bank-styles.css">
-    <link rel="stylesheet" href="withdraw.css">
-</head>
-<body>
+    <link rel="shortcut icon" href="./favicons/ALO789.ico" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="bank-styles.css" />
+    <link rel="stylesheet" href="withdraw.css" />
+  </head>
+  <body>
     <div class="container">
-        <div class="main-header mb-2">
-            <div class="flex justify-content-between flex-wrap">
-                <div class="flex align-items-center justify-content-start w-4">
-                    <div class="block">
-                        <div><a href="https://www.alo789ho.com/"><img alt="logo" src="images/logo.jfif" class="logo mr-2" width="150px"></a></div>
-                    </div>
-                </div>
-                <div class="flex align-items-center justify-content-end w-8">
-                    <div class="menu-pc info">
-                        <div class="flex align-items-center justify-content-end">
-                            <a class="flex align-items-center cursor-pointer no-underline" href="/account">
-                                <span class="lbl-text mr-1">Tên:</span>
-                                <div class="lbl-text flex align-self-center align-items-center txt-orange">
-                                    <span class="mr-1" id="accountName">Loading...</span>
-                                    <img src="images/icon_dong.png" alt="vip" class="vip-icon" width="30" title="VIP Đồng">
-                                </div>
-                            </a>
-                            <span class="lbl-text inline-block mx-2">|</span>
-                            <span class="lbl-text inline-block mr-1">Số dư:</span>
-                            <span class="txt-orange" id="balance">0</span>
-                            <span class="inline-flex align-items-center justify-content-center icon-wallet ml-1">
-                                <i class="pi pi-refresh cursor-pointer txt-orange" style="font-size: 0.8rem;"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
+      <div class="main-header mb-2">
+        <div class="flex justify-content-between flex-wrap">
+          <div class="flex align-items-center justify-content-start w-4">
+            <div class="block">
+              <div>
+                <a href="https://www.alo789ho.com/"
+                  ><img
+                    alt="logo"
+                    src="images/logo.jfif"
+                    class="logo mr-2"
+                    width="150px"
+                /></a>
+              </div>
             </div>
+          </div>
+          <div class="flex align-items-center justify-content-end w-8">
+            <div class="menu-pc info">
+              <div class="flex align-items-center justify-content-end">
+                <a
+                  class="flex align-items-center cursor-pointer no-underline"
+                  href="/account"
+                >
+                  <span class="lbl-text mr-1">Tên:</span>
+                  <div
+                    class="lbl-text flex align-self-center align-items-center txt-orange"
+                  >
+                    <span class="mr-1" id="accountName">Loading...</span>
+                    <img
+                      src="images/icon_dong.png"
+                      alt="vip"
+                      class="vip-icon"
+                      width="30"
+                      title="VIP Đồng"
+                    />
+                  </div>
+                </a>
+                <span class="lbl-text inline-block mx-2">|</span>
+                <span class="lbl-text inline-block mr-1">Số dư:</span>
+                <span class="txt-orange" id="balance">0</span>
+                <span
+                  class="inline-flex align-items-center justify-content-center icon-wallet ml-1"
+                >
+                  <i
+                    class="pi pi-refresh cursor-pointer txt-orange"
+                    style="font-size: 0.8rem"
+                  ></i>
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <div class="withdraw-container">
-            <h2>Rút Tiền</h2>
-            
-            <form id="withdrawForm">
-                <div class="form-group">
-                    <label for="inp_vnd_amount">Số tiền muốn rút (nghìn VND)</label>
-                    <input type="number" id="inp_vnd_amount" placeholder="Nhập số tiền" min="0" max="100000">
-                    <div class="vn-text"></div>
-                </div>
+      <div class="withdraw-container">
+        <h2>Rút Tiền</h2>
 
-                <div class="form-group">
-                    <label>Chọn tài khoản ngân hàng</label>
-                    <div id="bankTransferPanel">
-                        <div class="text-center p-3"><p>Đang tải...</p></div>
-                    </div>
-                </div>
+        <form id="withdrawForm">
+          <div class="form-group">
+            <label for="inp_vnd_amount">Số tiền muốn rút (nghìn VND)</label>
+            <input
+              type="number"
+              id="inp_vnd_amount"
+              placeholder="Nhập số tiền"
+              min="0"
+              max="100000"
+            />
+            <div class="vn-text"></div>
+          </div>
 
-                <button type="submit" id="btnCreateWithdraw" class="btn-submit">
-                    <span class="p-button-label">Tạo lệnh rút tiền</span>
-                </button>
-            </form>
-        </div>
+          <div class="form-group">
+            <label>Chọn tài khoản ngân hàng</label>
+            <div id="bankTransferPanel">
+              <div class="text-center p-3"><p>Đang tải...</p></div>
+            </div>
+          </div>
+
+          <button type="submit" id="btnCreateWithdraw" class="btn-submit">
+            <span class="p-button-label">Tạo lệnh rút tiền</span>
+          </button>
+        </form>
+      </div>
     </div>
 
     <script src="js/auth-handler.js"></script>
     <script src="withdraw-api.js"></script>
-</body>
+  </body>
 </html>
