@@ -1,58 +1,101 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rút Tiền - ALO789</title>
-    <link rel="stylesheet" href="withdraw.css">
-</head>
-<body>
-    <div class="withdraw-container">
-        <div class="withdraw-header">
-            <h1>Rút Tiền - ALO789</h1>
-            <p>Chọn tài khoản ngân hàng và nhập số tiền muốn rút</p>
+    <link rel="shortcut icon" href="./favicons/ALO789.ico" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="bank-styles.css" />
+    <link rel="stylesheet" href="withdraw.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="main-header mb-2">
+        <div class="flex justify-content-between flex-wrap">
+          <div class="flex align-items-center justify-content-start w-4">
+            <div class="block">
+              <div>
+                <a href="https://www.alo789ho.com/"
+                  ><img
+                    alt="logo"
+                    src="images/logo.jfif"
+                    class="logo mr-2"
+                    width="150px"
+                /></a>
+              </div>
+            </div>
+          </div>
+          <div class="flex align-items-center justify-content-end w-8">
+            <div class="menu-pc info">
+              <div class="flex align-items-center justify-content-end">
+                <a
+                  class="flex align-items-center cursor-pointer no-underline"
+                  href="/account"
+                >
+                  <span class="lbl-text mr-1">Tên:</span>
+                  <div
+                    class="lbl-text flex align-self-center align-items-center txt-orange"
+                  >
+                    <span class="mr-1" id="accountName">Loading...</span>
+                    <img
+                      src="images/icon_dong.png"
+                      alt="vip"
+                      class="vip-icon"
+                      width="30"
+                      title="VIP Đồng"
+                    />
+                  </div>
+                </a>
+                <span class="lbl-text inline-block mx-2">|</span>
+                <span class="lbl-text inline-block mr-1">Số dư:</span>
+                <span class="txt-orange" id="balance">0</span>
+                <span
+                  class="inline-flex align-items-center justify-content-center icon-wallet ml-1"
+                >
+                  <i
+                    class="pi pi-refresh cursor-pointer txt-orange"
+                    style="font-size: 0.8rem"
+                  ></i>
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <div id="error-message" class="error-message"></div>
-        <div id="success-message" class="success-message"></div>
+      <div class="withdraw-container">
+        <h2>Rút Tiền</h2>
 
-        <form id="withdraw-form">
-            <div class="form-group">
-                <label for="withdraw-amount">Số tiền rút (VND):</label>
-                <input type="number" id="withdraw-amount" class="form-input" 
-                       placeholder="Nhập số tiền (tối thiểu 100,000 VND)" min="100000">
-                <div id="amount-error" class="error-message"></div>
-                <div class="notice-money">
-                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M6.92982 1.92694C7.72734 1.78631 8.54474 1.80415 9.33536 1.97943C10.126 2.1547 10.8743 2.48399 11.5377 2.94848C12.2011 3.41297 12.7665 4.00358 13.2016 4.68657C13.6367 5.36956 13.933 6.13157 14.0736 6.92909C14.2143 7.7266 14.1964 8.54401 14.0211 9.33463C13.8459 10.1253 13.5166 10.8736 13.0521 11.537C12.5876 12.2003 11.997 12.7657 11.314 13.2008C10.631 13.6359 9.869 13.9323 9.07148 14.0729C8.27397 14.2135 7.45656 14.1957 6.66594 14.0204C5.87532 13.8451 5.12696 13.5159 4.4636 13.0514C3.80023 12.5869 3.23485 11.9963 2.79974 11.3133C2.36462 10.6303 2.06829 9.86827 1.92767 9.07075C1.78705 8.27324 1.80488 7.45583 1.98016 6.66521C2.15544 5.87459 2.48472 5.12623 2.94921 4.46287C3.41371 3.7995 4.00431 3.23412 4.6873 2.79901C5.3703 2.36389 6.13231 2.06756 6.92982 1.92694ZM9.5518 1.00313C8.63297 0.799431 7.68301 0.778703 6.75617 0.94213C5.82933 1.10556 4.94375 1.44994 4.15 1.95561C3.35625 2.46129 2.66988 3.11835 2.13006 3.88929C1.59025 4.66023 1.20756 5.52994 1.00386 6.44877C0.800163 7.3676 0.779435 8.31756 0.942862 9.2444C1.10629 10.1712 1.45067 11.0568 1.95635 11.8506C2.46202 12.6443 3.11908 13.3307 3.89002 13.8705C4.66096 14.4103 5.53067 14.793 6.4495 14.9967C7.36833 15.2004 8.31829 15.2211 9.24513 15.0577C10.172 14.8943 11.0576 14.5499 11.8513 14.0442C12.645 13.5386 13.3314 12.8815 13.8712 12.1105C14.4111 11.3396 14.7937 10.4699 14.9974 9.55107C15.2011 8.63224 15.2219 7.68228 15.0584 6.75544C14.895 5.8286 14.5506 4.94302 14.045 4.14927C13.5393 3.35552 12.8822 2.66914 12.1113 2.12933C11.3403 1.58951 10.4706 1.20683 9.5518 1.00313ZM9.00013 7.00005L9.00013 8.00005V12V13H7.00013V12L7.00013 8.00005V7.00005H9.00013ZM7.00013 4.66685V5.66685H9.00013V4.66685V4.00018V3.00018H7.00013V4.00018V4.66685Z" fill="#FFE600"></path>
-                    </svg>
-                    Tối thiểu 100,000 đ - Thời gian xử lý 1-3 ngày làm việc
-                </div>
+        <form id="withdrawForm">
+          <div class="form-group">
+            <label for="inp_vnd_amount">Số tiền muốn rút (nghìn VND)</label>
+            <input
+              type="number"
+              id="inp_vnd_amount"
+              placeholder="Nhập số tiền"
+              min="0"
+              max="100000"
+            />
+            <div class="vn-text"></div>
+          </div>
+
+          <div class="form-group">
+            <label>Chọn tài khoản ngân hàng</label>
+            <div id="bankTransferPanel">
+              <div class="text-center p-3"><p>Đang tải...</p></div>
             </div>
+          </div>
 
-            <div class="form-group">
-                <label>Chọn tài khoản ngân hàng:</label>
-                <div id="bank-accounts-container" class="bank-accounts-grid">
-                    <!-- Bank accounts will be loaded here -->
-                </div>
-            </div>
-
-            <button type="button" id="withdraw-btn" class="withdraw-btn">
-                Rút Tiền
-            </button>
+          <button type="submit" id="btnCreateWithdraw" class="btn-submit">
+            <span class="p-button-label">Tạo lệnh rút tiền</span>
+          </button>
         </form>
+      </div>
     </div>
 
-    <!-- Transaction Modal -->
-    <div id="transaction-modal" class="transaction-modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="document.getElementById('transaction-modal').style.display='none'">&times;</span>
-            <div id="transaction-details">
-                <!-- Transaction details will be shown here -->
-            </div>
-        </div>
-    </div>
-
-    <script type="module" src="withdraw.js"></script>
-</body>
+    <script src="js/auth-handler.js"></script>
+    <script src="withdraw-api.js"></script>
+  </body>
 </html>

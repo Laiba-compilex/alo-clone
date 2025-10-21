@@ -5,6 +5,59 @@
 	<style>
 		/* Keep login box hidden by default to avoid flash; JS will show it when needed */
 		.page-login-box { display: none !important; }
+		
+		/* Dropdown Menu Styles */
+		.dropdown {
+			position: relative;
+		}
+		
+		.dropdown-menu {
+			display: none;
+			position: absolute;
+			top: 100%;
+			right: 0;
+			background: rgba(45, 55, 72, 0.95);
+			backdrop-filter: blur(10px);
+			border-radius: 0;
+			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+			min-width: 220px;
+			z-index: 1000;
+			margin-top: 8px;
+		}
+		
+		.dropdown-menu.show {
+			display: block;
+		}
+		
+		.dropdown-item {
+			display: flex;
+			align-items: center;
+			padding: 15px 20px;
+			color: #ffffff;
+			cursor: pointer;
+			transition: background 0.2s ease;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+			position: relative;
+		}
+		
+		.dropdown-item:last-child {
+			border-bottom: none;
+		}
+		
+		.dropdown-item:hover {
+			background: rgba(255, 255, 255, 0.1);
+		}
+		
+		.dropdown-item i {
+			margin-right: 12px;
+			font-size: 16px;
+			width: 20px;
+		}
+		
+		.dropdown-item span {
+			font-size: 14px;
+			font-weight: 400;
+		}
 	</style>
 	<script>
 
@@ -13,6 +66,8 @@
 		}
 	</script>
 
+	<!-- Include GameHallHandler -->
+	<script src="js/GameHallHandler.js"></script>
 </head>
 
 <body>
@@ -39,7 +94,11 @@
 	<meta property="og:site_name" content="Alo789">
 	<meta property="og:image" content="https://img.mpsimg.com/theme/media/meta/ALO789.jpg">
 	<meta name="robots" content="index, follow">
-	<link rel="shortcut icon" href="favicons/favicon-ALO789.ico">
+	<!-- Favicon for different browsers and devices -->
+	<link rel="icon" type="image/x-icon" href="/favicons/ALO789.png?v=1">
+	<link rel="shortcut icon" type="image/x-icon" href="/favicons/ALO789.png?v=1">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicons/ALO789.png?v=1">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicons/ALO789.png?v=1">
 	<meta name="google-site-verification" content="ria-JQl0epMKeelR8dnrFNO_-zcMqBSTmTD9TCOtbrQ">
 	<meta property="og:url" content="https://www.alo789rong.com/">
 	<link rel="canonical" href="https://www.alo789rong.com/">
@@ -48,6 +107,9 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
 		integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="stylesheet" href="css/3rdparty-swiper-bundle.min.css">
+<script type="text/javaScript" src="js/3rdparty-swiper-bundle.min.js"></script>
+
 	<!-- Google Tag Manager -->
 	<script>(function (w, d, s, l, i) {
 			w[l] = w[l] || []; w[l].push({
@@ -79,8 +141,7 @@
 	<noscript><img height="1" width="1" style="display:none" src="images/tr"></noscript>
 	<!-- End Meta Pixel Code -->
 
-	<link rel="SHORTCUT ICON" type="image/x-icon"
-		href="/service/image/brand/favoriteIcon?name=ALO789&amp;v=1758780557517">
+
 
 	<!-- Sets whether a web application runs in full-screen mode. -->
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -157,6 +218,10 @@
 	<link rel="stylesheet" type="text/css" media="all" href="css/src-gamehall-ALO789-popular-pc.css">
 
 	<link rel="stylesheet" href="css/3rdparty-swiper-bundle.min.css">
+	<script type="text/javascript" src="config.js"></script>
+	<script type="text/javascript" src="js/auth-handler.js"></script>
+	<script type="text/javascript" src="api-status-checker.js"></script>
+	<script type="text/javascript" src="api-quick-fixes.js"></script>
 	<script type="text/javascript" src="js/3rdparty-jquery-3.7.1.min.js"></script>
 	<script type="text/javascript" src="js/common-JSUtil.js"></script>
 	<script type="text/javascript" src="js/common-KeyEventUtils.js"></script>
@@ -182,18 +247,21 @@
 	<script type="text/javascript" src="js/common-InboxUtil.js"></script>
 	<script type="text/javascript" src="js/player-raceHandler.js"></script>
 	<script type="text/javascript" src="js/player-loginPageHandler.js"></script>
+<script>
+		PageConfig = {};
+		PageConfig.isMobile = false;
+		PageConfig.logoImageUrl = '/service/image/cache?type=LOGO&lang=en&isMobile=0&isAgent=0&brand=ALO789&v=1738820193796';
 
-	<script type="text/javascript">
+</script>
+	<!-- <script type="text/javascript">
 		PageConfig = {};
 		PageConfig.gameHallType = 'NEW_GAMEHALL';
-		/*game img*/
 		PageConfig.specialImgPlatforms = '[Ljava.lang.String;@37992fd7'.split(',');
 		PageConfig.imgPrefix = '-ALO789';
 		PageConfig.imgSuffix = '';
 		PageConfig.imgStyleSuffix = '';
 		PageConfig.entryGameTypeArray = ['LIVEARENA', 'LIVE', 'SPORTS', 'LOTTERY'];
 		PageConfig.specialImgGames = 'JILI,143#JILI,47#JILI,77#YB,3008'.split('#');
-		/*game img*/
 		PageConfig.getJackpotGames = '/service/jackpots/getJackpotGames';
 		PageConfig.getJackpotsUrl = '/service/jackpots/getJackpotDetail';
 		PageConfig.getJackpotsWinnerUrl = '/service/jackpots/getJackpotWinner';
@@ -212,7 +280,6 @@
 		PageConfig.currentPage = '/page/player/gameHall.jsp';
 		PageConfig.indexURL = '/index.jsp';
 		PageConfig.platform = 'SV388';
-		PageConfig.isMobile = false;
 
 		PageConfig.isShowJackpot = true;
 		PageConfig.jackpotPlatform = 'JILI,FACHAI,JDB';
@@ -564,7 +631,7 @@
 
 		PageConfig.casinoTableDisplayInOrder.push("SPECIAL");
 
-	</script>
+	</script> -->
 
 	<script type="text/javascript" src="js/3rdparty-decimal.min.js"></script>
 
@@ -575,7 +642,7 @@
 	<script type="text/javascript" src="js/player-bonusEvent.js"></script>
 	<script type="text/javascript" src="js/player-bonusEventPresentHandler.js"></script>
 	<script type="text/javascript" src="js/template-bonusTemplates.js"></script>
-	<script language="javascript" type="text/javascript">
+	<!-- <script language="javascript" type="text/javascript">
 
 		PageConfig.queryBonusEvent = '/service/player/bonusEvent/getBonusEvent';
 		PageConfig.takeBonusTicket = '/service/player/bonusEvent/takeBonusTicket';
@@ -620,7 +687,7 @@
 
 		PageConfig.showEntryGameType.push('LOTTERY');
 
-	</script>
+	</script> -->
 
 	<div class="modal-box modal-REBATE hide" id="Rebate-POP">
 		<div class="modal-mask"></div>
@@ -1693,6 +1760,26 @@
 		function stopYoutube() {
 			$j('#ytplayer')[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
 		}
+		
+		// Dropdown menu functionality
+		function toggleDropdown() {
+			const dropdown = document.getElementById('dropdownMenu');
+			dropdown.classList.toggle('show');
+		}
+		function toggleDropdown1() {
+			const dropdown = document.getElementById('dropdownMenu1');
+			dropdown.classList.toggle('show');
+		}
+		
+		// Close dropdown when clicking outside
+		window.onclick = function(event) {
+			if (!event.target.matches('.btn-menu') && !event.target.matches('.icon-hamburger')) {
+				const dropdown = document.getElementById('dropdownMenu');
+				if (dropdown && dropdown.classList.contains('show')) {
+					dropdown.classList.remove('show');
+				}
+			}
+		}
 	</script>
 
 
@@ -1724,11 +1811,11 @@
 		</a>
 	</div>
 
-	<div id="pageTop" class="header-navigation">
+	<div id="pageTop" class="header-navigation d-none d-md-flex">
 		<div id="userInfo">
 			<!-- Start hidden to avoid flash; will be shown by inline script only if no token is present -->
 			<div class="page-login-box" id="login-box" style="display: none;">
-				<a class="btn-primary" href="javascript:void(0);"
+				<a class="btn-primary " href="javascript:void(0);"
 					onclick="GameHallHandler.openLoginPopup(this)">Login</a>
 
 				<a class="btn-secondary" href="signUp.html">Sign
@@ -1740,40 +1827,18 @@
 
 			</div>
 
-			<script>
-			// Run immediately to prevent flash: show login box only when no token
-			(function(){
-				try {
-					var lb = document.getElementById('login-box');
-					if (!lb) return;
-					if (!localStorage.getItem('token')) {
-						// show with !important so head CSS doesn't override
-						lb.style.setProperty('display','flex','important');
-					} else {
-						lb.style.setProperty('display','none','important');
-					}
-				} catch (e) { /* ignore */ }
-			})();
-			</script>
+			
 		</div>
 		<div class="navigation-btn">
 			<div id="language" class="btn btn-language" onclick="GameHallHandler.openMenu()">
 				<a href="javascript:void(0)">
-					<img class="img-flag" src="images/FLAG-img-flag-gb.webp" alt="">
+					<img class="img-flag" src="images/FLAG-img-flag-gb.webp" alt="FLAG-img-flag-gb.webp" style="width: 40px; height: unset; object-fit: contain;">
 					<span>EN</span>
 				</a>
 				<ul id="selectLang" class="lang-dropdown">
-
-					<li>
-						<a lang="vn" onclick="GameHallHandler.changeLang('vn');" href="index.html">
-							<img class="img-flag" src="images/FLAG-img-flag-vn.webp" alt="">
-							<span>VN</span>
-						</a>
-					</li>
-
 					<li>
 						<a lang="en" onclick="GameHallHandler.changeLang('en');" href="index.html">
-							<img class="img-flag" src="images/FLAG-img-flag-gb.webp" alt="">
+							<img class="img-flag" src="images/FLAG-img-flag-gb.webp" alt="FLAG-img-flag-gb.webp" style="width: 40px; height: unset; object-fit: contain;">
 							<span>EN</span>
 						</a>
 					</li>
@@ -1786,12 +1851,40 @@
 				</a>
 				<span id="inboxUnreadCount" class="dot" style="display: none;"></span>
 			</div>
-			<div class="btn btn-menu" onclick="GameHallHandler.openLoginPopup(this)">
-				<i class="icon-hamburger" href="javascript:void(0);">
+			<div class="btn btn-menu dropdown" onclick="toggleDropdown()">
+				<i class="icon-hamburger" style="color: white;" href="javascript:void(0);">
 					<span id="menu_dot" class="dot" style="display: none;"></span>
 				</i>
-				
+				<div id="dropdownMenu" class="dropdown-menu">
+					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
+						<i class="icon-user"></i>
+						<span>My Info</span>
+					</div>
+					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
+						<i class="icon-game"></i>
+						<span>Game Partner</span>
+					</div>
+					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
+						<i class="icon-phone"></i>
+						<span>Contact Us</span>
+					</div>
+					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
+						<i class="icon-download"></i>
+						<span>Download APP</span>
+					</div>
+					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
+						<i class="icon-search"></i>
+						<span>Search</span>
+					</div>
+					<div class="dropdown-item logout" id="logout-menuitem" onclick="localStorage.removeItem('token'); location.reload();">
+						<i class="icon-logout"></i>
+						<span>LOGOUT</span>
+					</div>
+				</div>
 			</div>
+			<script>
+				document.getElementById("logout-menuitem").style.display = localStorage.getItem('token') ? 'flex' : 'none';
+			</script>
 		</div>
 		<li class="marquee" style="display: none">
 			<ul>
@@ -1805,97 +1898,485 @@
 		</li>
 	</div>
 
+	<div class="d-block d-md-none py-3 px-3 header-navigation h-auto" id="mobileTopBar">
+		<div class="d-flex justify-content-between align-items-center">
+
+		<div id="userInfo1" class="d-flex align-items-center justify-content-between">
+			<!-- Start hidden to avoid flash; will be shown by inline script only if no token is present -->
+			<div class="page-login-box d-flex align-items-center justify-content-start gap-1 d-md-none login-box-mobile" style="
+			display: none;
+			">
+				<a class="btn-primary d-flex align-items-center" href="javascript:void(0);"
+					onclick="GameHallHandler.openLoginPopup(this)" 
+					style="
+					color: #fff;
+    text-decoration: none;
+    max-height: 40px;
+	border: 2px solid #ecc86e;
+    background: linear-gradient(0deg, #e9c973, #bfa85d);
+    box-shadow: #ffeb3b 0px 0px 10px;
+    box-shadow: none;
+	border-radius: 100px;
+    vertical-align: top;
+    text-decoration: none;
+    height: 30px;
+    margin: 0;
+    min-width: 80px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 27px;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+	    --bs-btn-color: #fff;
+    --bs-btn-bg: #0d6efd;
+    --bs-btn-border-color: #0d6efd;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #0b5ed7;
+    --bs-btn-hover-border-color: #0a58ca;
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #0a58ca;
+    --bs-btn-active-border-color: #0a53be;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #0d6efd;
+    --bs-btn-disabled-border-color: #0d6efd;
+					">Login</a>
+
+				<a class="btn-secondary d-flex align-items-center" href="signUp.html" 
+				style="
+				color: #fff;
+    text-decoration: none;
+    max-height: 40px;
+	position: relative;
+    border: none;
+    outline: none;
+    text-decoration: none;
+	    border: 2px solid #b99346;
+    background: linear-gradient(0deg, #b99346, #947538);
+    box-shadow: none;
+    border-radius: 100px;
+    vertical-align: top;
+    text-decoration: none;
+    height: 30px;
+    margin: 0;
+    min-width: 80px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 27px;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+	--bs-btn-color: #fff;
+    --bs-btn-bg: #6c757d;
+    --bs-btn-border-color: #6c757d;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #5c636a;
+    --bs-btn-hover-border-color: #565e64;
+    --bs-btn-focus-shadow-rgb: 130, 138, 145;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #565e64;
+    --bs-btn-active-border-color: #51585e;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #6c757d;
+    --bs-btn-disabled-border-color: #6c757d;
+				">Sign Up
+				</a>
+			</div>
+			
+
+			
+		</div>
+		<div class="d-flex align-items-center justify-content-end gap-1">
+				<div onclick="window.location.href = 'deposit.html'" class="wallet-icon" style="cursor: pointer;"></div>
+				<div class="btn btn-menu dropdown" onclick="toggleDropdown1()">
+				<i class="icon-hamburger" style="color: white;" href="javascript:void(0);">
+					<span id="menu_dot" class="dot" style="display: none;"></span>
+				</i>
+				<div id="dropdownMenu1" class="dropdown-menu">
+					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
+						<i class="icon-user"></i>
+						<span>My Info</span>
+					</div>
+					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
+						<i class="icon-game"></i>
+						<span>Game Partner</span>
+					</div>
+					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
+						<i class="icon-phone"></i>
+						<span>Contact Us</span>
+					</div>
+					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
+						<i class="icon-download"></i>
+						<span>Download APP</span>
+					</div>
+					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
+						<i class="icon-search"></i>
+						<span>Search</span>
+					</div>
+					<div class="dropdown-item logout" id="logout-menuitem1" onclick="localStorage.removeItem('token'); location.reload();">
+						<i class="icon-logout"></i>
+						<span>LOGOUT</span>
+					</div>
+				</div>
+			</div>
+
+			<script>
+				document.getElementById("logout-menuitem1").style.display = localStorage.getItem('token') ? 'flex' : 'none';
+			</script>
+
+
+				<style>
+					.wallet-icon {
+						font-family: 'icomoon' !important;
+						&::before {
+							content: "\e9b7";
+						}
+					}
+					.menu-hamburger-icon {
+						font-family: 'icomoon' !important;
+						&::before {
+							content: "\e923";
+						}	
+					}
+				</style>
+			</div>
+		</div>
+
+		<div class="d-flex align-items-center justify-content-between flex-row gap-2" style="margin-top: 10px;">
+			<div class="d-flex gap-1 align-items-center
+			." >
+				
+				<button style="
+				    transform: translateY(6px);
+    min-width: 50px;
+    padding: 2px;
+    border-radius: 5px;
+    font-size: 10px;
+    line-height: 1;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #FFF;
+					" class="btn btn-deposit d-flex justify-content-center align-items-center flex-column" onclick="localStorage.getItem('token') ? window.location.href = '/Deposit.html' : GameHallHandler.openLoginPopup(this)"
+	>
+				<i class="icon icon-deposit" style="font-size: 26px;"></i>
+				<span>CASH IN</span>
+			</button>
+			<button style="
+				    transform: translateY(6px);
+    min-width: 50px;
+    padding: 2px;
+    border-radius: 5px;
+    font-size: 10px;
+    line-height: 1;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #FFF;
+					" class="btn btn-deposit d-flex justify-content-center align-items-center flex-column" onclick="localStorage.getItem('token') ? window.location.href = '/Withdraw.html' : GameHallHandler.openLoginPopup(this)"
+	>
+				<i class="icon icon-receive" style="font-size: 26px;"></i>
+				<span>CASH OUT</span>
+			</button>
+			</div>
+			<div>
+				<img src="https://www.alo789ho.com/service/image/cache?type=LOGO&lang=en&isMobile=0&isAgent=0&brand=ALO789&v=1738820193796" alt="" style="
+				width: auto;
+    height: auto;
+    max-height: 45px;
+    max-width: 40vw;
+					">
+			</div>
+			<div class="d-block">
+
+			</div>
+		</div>
+	</div>
+
+	<script>
+			// Run immediately to prevent flash: show login box only when no token
+			(function(){
+				try {
+					var lb = document.getElementById('login-box');
+					if (!lb) return;
+					if (!localStorage.getItem('token')) {
+						// show with !important so head CSS doesn't override
+						lb.style.setProperty('display','flex','important');
+					} else {
+						lb.style.setProperty('display','none','important');
+					}
+				} catch (e) { /* ignore */ }
+			})();
+			(function(){
+				try {
+					var lb = document.getElementById('login-box-mobile');
+					if (!lb) return;
+					if (!localStorage.getItem('token')) {
+						// show with !important so head CSS doesn't override
+						lb.style.setProperty('display','flex','important');
+					} else {
+						lb.style.setProperty('display','none','important');
+					}
+				} catch (e) { /* ignore */ }
+			})();
+			</script>
+
+
 
 	<!-- Game Type Select start-->
 	<nav id="gameMenuTabGroup">
-		<div class="logo" onclick="location.reload()">
+		<div class="logo d-none d-md-block" onclick="location.reload()">
 			<img src="images/logo.jfif" alt="logo">
 		</div>
 		<ul id="gameMenuTabWrapper">
-			<li id="homeTab" class="backHome select">
+			<li id="homeTab menu-item" class="backHome select">
 				<a class="icon-home" href="javascript:void(0)" onclick="GameHallHandler.switchGamePage('home')">
 					<img class="HOME tab" src="images/POPULAR-HOME.webp">
-					Home
+					<span class="d-none d-md-block">Home</span>
 				</a>
 			</li>
 
-			<li id="livearenaTab">
+			<li id="livearenaTab menu-item">
 
 				<a class="icon-livearena only-cockfight" href="javascript:void(0)"
 					onclick="GameHallHandler.switchGamePage('livearena')">
 
 					<img alt="" class="LIVEARENA tab" src="images/POPULAR-COCKFIGHT.webp">
-					Live Arena
+					<span class="d-none d-md-block">Live Arena</span>
 				</a>
 			</li>
 
-			<li id="sportsTab">
+			<li id="sportsTab menu-item">
 
 				<a class="icon-sports " href="javascript:void(0)" onclick="GameHallHandler.switchGamePage('sports')">
 
 					<img alt="" class="SPORTS tab" src="images/POPULAR-SPORTS.webp">
-					Sports
+					<span class="d-none d-md-block">Sports</span>
 				</a>
 			</li>
 
-			<li id="slotTab">
+			<li id="slotTab menu-item">
 
 				<a class="icon-slot" href="javascript:void(0)" onclick="GameHallHandler.openGamePage('POCKET','slot')">
 
 					<img alt="" class="SLOT tab" src="images/POPULAR-SLOT.webp">
-					Slots
+					<span class="d-none d-md-block">Slots</span>
 				</a>
 			</li>
 
-			<li id="rngtableTab">
+			<li id="rngtableTab menu-item">
 
 				<a class="icon-rngtable" href="javascript:void(0)"
 					onclick="GameHallHandler.openGamePage('KINGMIDAS','rngtable')">
 
 					<img alt="" class="RNGTABLE tab" src="images/POPULAR-RNGTABLE.webp">
-					Table
+					<span class="d-none d-md-block">Table</span>
 				</a>
 			</li>
 
-			<li id="liveTab">
+			<li id="liveTab menu-item">
 
 				<a class="icon-live " href="javascript:void(0)" onclick="GameHallHandler.switchGamePage('live')">
 
 					<img alt="" class="LIVE tab" src="images/POPULAR-LIVE.webp">
-					Casino
+					<span class="d-none d-md-block">Casino</span>
 				</a>
 			</li>
 
-			<li id="arcadeTab">
+			<li id="arcadeTab menu-item">
 
 				<a class="icon-arcade" href="javascript:void(0)"
 					onclick="GameHallHandler.openGamePage('JILI','arcade')">
 
 					<img alt="" class="ARCADE tab" src="images/POPULAR-ARCADE.webp">
-					Arcade
+					<span class="d-none d-md-block">Arcade</span>
 				</a>
 			</li>
 
-			<li id="fhTab">
+			<li id="fhTab menu-item">
 
 				<a class="icon-fh" href="javascript:void(0)" onclick="GameHallHandler.openGamePage('JILI','fh')">
 
 					<img alt="" class="FH tab" src="images/POPULAR-FH.webp">
-					Fishing
+					<span class="d-none d-md-block">Fishing</span>
 				</a>
 			</li>
 
 
-			<li id="searchTab" onclick="GameHallHandler.openLoginPopup(this)">
+			<li id="searchTab menu-item" onclick="GameHallHandler.openLoginPopup(this)">
 				<a class="icon-SAERCH" href="javascript:void(0);">
 					<img src="images/POPULAR-SEARCH.webp">
-					Search
+					<span class="d-none d-md-block">Search</span>
 				</a>
 			</li>
 
 
 		</ul>
 	</nav>
+
+	<style>
+		@media (max-width: 767px) {
+			.icon-home {
+			}
+			#gameMenuTabGroup {
+				height: unset !important;
+			}
+			nav > ul > li {
+				border: none !important;
+			}
+			nav > ul > li > a {
+				min-width: unset !important;
+			}
+			.game-icon {
+				aspect-ratio: 1/1 !important;
+				max-width: 100%;
+				width: 99% !important;
+			}
+			.new-game {
+				.ul-gameList {
+					display: grid !important;
+					grid-template-columns: 33% 33% 33% !important;
+					overflow-x: auto;
+					li {
+						overflow: unset !important;
+					}
+				}
+
+			}
+			.show-play {
+				.ul-gameIcon-box {
+					aspect-ratio: 1/1 !important;
+					max-width: 100%;
+					width: 99% !important;
+				}
+			}
+			.slot-game {
+				    background: #441619 url("https://www.alo789ho.com/theme/images/src-gamehall/layout/section-SLOT.webp") center top no-repeat !important;
+    background-size: cover;
+	padding: 25px 3% 5px 3%;
+	#slotDL {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.ul-gameList {
+		display: grid !important;
+		grid-template-columns: 33% 33% 33% !important;
+					overflow-x: auto;
+					li {
+						overflow: unset !important;
+					}
+				}
+	}
+	.local-game {
+		background: transparent !important;
+    background-size: cover;
+	padding: 25px 3% 5px 3%;
+	#localDL {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.ul-gameList {
+		display: grid !important;
+		grid-template-columns: 33% 33% 33% !important;
+					overflow-x: auto;
+					li {
+						overflow: unset !important;
+					}
+				}
+	}
+	.rngtable-game {
+		background: #441619 url("https://www.alo789ho.com/theme/images/src-gamehall/layout/section-RNGTABLE.webp") center top no-repeat !important;
+    background-size: cover;
+	padding: 25px 3% 5px 3%;
+	#rngtableDL {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.ul-gameList {
+		display: grid !important;
+		grid-template-columns: 33% 33% 33% !important;
+					overflow-x: auto;
+					li {
+						overflow: unset !important;
+					}
+				}
+	}
+	.arcade-game {
+		background: #441619 url("https://www.alo789ho.com/theme/images/src-gamehall/layout/section-ARCADE.webp") center top no-repeat !important;
+    background-size: cover;
+	padding: 25px 3% 5px 3%;
+	#arcadeDL {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.ul-gameList {
+		display: grid !important;
+		grid-template-columns: 33% 33% 33% !important;
+					overflow-x: auto;
+					li {
+						overflow: unset !important;
+					}
+				}
+	}
+	.MEGAJACKPOT {
+		display: none !important;
+	}
+	.fh-game {
+		background: #441619 url("https://www.alo789ho.com/theme/images/src-gamehall/layout/section-FH.webp") center top no-repeat !important;
+    background-size: cover;
+	padding: 25px 3% 5px 3%;
+	#fhDL {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.ul-gameList {
+		display: grid !important;
+		grid-template-columns: 33% 33% 33% !important;
+					overflow-x: auto;
+					li {
+						overflow: unset !important;
+					}
+				}
+	}
+			.div-tb {
+				margin: 0px !important;
+			}
+			body {
+				min-width: unset !important;
+				width: 100vw;
+			}
+		}
+	</style>
+
+	<script>
+  // Function to handle the menu item class removal
+  function updateMenuItems() {
+    if (window.matchMedia("(max-width: 767px)").matches) {
+      const menuItems = document.querySelectorAll('#gameMenuTabWrapper li');
+      menuItems.forEach(item => {
+        item.classList.remove('active');
+        item.classList.remove('select');
+      });
+    }
+  }
+
+  // Run initially
+  updateMenuItems();
+
+  // Add event listener for window resize to recheck the screen size
+  window.addEventListener('resize', updateMenuItems);
+</script>
+
 	<!-- Game Type Select end-->
 	<!-- Game Hall Banner start-->
 
@@ -1905,66 +2386,121 @@
 
 
 
-	<div id="swiperBanner" class="swiper swiper-banner swiper-initialized swiper-horizontal swiper-pointer-events"
+	<div id="swiperBanner" class="swiper swiper-banner"
 		style="margin-bottom: 30px;">
-		<div class="swiper-wrapper" id="swiper-wrapper-af06b210d492ec726" aria-live="off"
-			style="cursor: grab; transition-duration: 800ms; transform: translate3d(-4306.96px, 0px, 0px);">
-			<div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next" data-swiper-slide-index="5"
+		<div class="swiper-wrapper" id="swiper-wrapper-af06b210d492ec726" aria-live="off">
+			<div class="swiper-slide swiper-slide-duplicate me-0 me-md-4 swiper-slide-duplicate-next" data-swiper-slide-index="5"
 				role="group" aria-label="6 / 8" style="width: 654.261px; margin-right: 24px;"><a
 					href="#" target="_blank"><img src="images/slider-img-3.jfif" alt=""></a>
 			</div>
-			<div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="6" role="group" aria-label="7 / 8"
+			<div class="swiper-slide swiper-slide-duplicate me-0 me-md-4" data-swiper-slide-index="6" role="group" aria-label="7 / 8"
 				style="width: 654.261px; margin-right: 24px;"><a href="#" target="_blank"><img
 						src="images/slider-img-4.jfif" alt=""></a></div>
-			<div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="7" role="group" aria-label="8 / 8"
+			<div class="swiper-slide swiper-slide-duplicate me-0 me-md-4" data-swiper-slide-index="7" role="group" aria-label="8 / 8"
 				style="width: 654.261px; margin-right: 24px;"><a
 					href="#"
 					target="_blank"><img src="images/slider-img-5.jfif" alt=""></a></div>
-			<div class="swiper-slide" data-swiper-slide-index="0" role="group" aria-label="1 / 8"
+			<div class="swiper-slide me-0 me-md-4" data-swiper-slide-index="0" role="group" aria-label="1 / 8"
 				style="width: 654.261px; margin-right: 24px;"><a href="#"><img
 						src="images/Banner-9442VNSI.webp"></a></div>
-			<div class="swiper-slide" data-swiper-slide-index="1" role="group" aria-label="2 / 8"
+			<div class="swiper-slide me-0 me-md-4" data-swiper-slide-index="1" role="group" aria-label="2 / 8"
 				style="width: 654.261px; margin-right: 24px;"><a href="#"><img
 						src="images/Banner-9448JILIVNDSI.webp"></a>
 			</div>
-			<div class="swiper-slide" data-swiper-slide-index="2" role="group" aria-label="3 / 8"
+			<div class="swiper-slide me-0 me-md-4" data-swiper-slide-index="2" role="group" aria-label="3 / 8"
 				style="width: 654.261px; margin-right: 24px;"><a href="#"><img
 						src="images/Banner-9448JDBVNDSI.webp"></a></div>
-			<div class="swiper-slide swiper-slide-prev" data-swiper-slide-index="3" role="group" aria-label="4 / 8"
+			<div class="swiper-slide me-0 me-md-4 swiper-slide-prev me-0 me-md-4" data-swiper-slide-index="3" role="group" aria-label="4 / 8"
 				style="width: 654.261px; margin-right: 24px;"><a
 					href="#"
 					target="_blank"><img src="images/slider-img-1.jfif" alt=""></a></div>
-			<div class="swiper-slide swiper-slide-active" data-swiper-slide-index="4" role="group" aria-label="5 / 8"
+			<div class="swiper-slide me-0 me-md-4 swiper-slide-active" data-swiper-slide-index="4" role="group" aria-label="5 / 8"
 				style="width: 654.261px; margin-right: 24px;"><a
 					href="#" target="_blank"><img
 						src="images/slider-img-2.jfif" alt=""></a></div>
-			<div class="swiper-slide swiper-slide-next" data-swiper-slide-index="5" role="group" aria-label="6 / 8"
+			<div class="swiper-slide me-0 me-md-4 swiper-slide-next" data-swiper-slide-index="5" role="group" aria-label="6 / 8"
 				style="width: 654.261px; margin-right: 24px;"><a href="#" target="_blank"><img
 						src="images/slider-img-3.jfif" alt=""></a></div>
-			<div class="swiper-slide" data-swiper-slide-index="6" role="group" aria-label="7 / 8"
+			<div class="swiper-slide me-0 me-md-4" data-swiper-slide-index="6" role="group" aria-label="7 / 8"
 				style="width: 654.261px; margin-right: 24px;"><a href="#" target="_blank"><img
 						src="images/slider-img-4.jfif" alt=""></a></div>
-			<div class="swiper-slide" data-swiper-slide-index="7" role="group" aria-label="8 / 8"
+			<div class="swiper-slide me-0 me-md-4" data-swiper-slide-index="7" role="group" aria-label="8 / 8"
 				style="width: 654.261px; margin-right: 24px;"><a
 					href="#"
 					target="_blank"><img src="images/slider-img-5.jfif" alt=""></a></div>
-			<div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="0" role="group" aria-label="1 / 8"
+			<div class="swiper-slide me-0 me-md-4 swiper-slide-duplicate" data-swiper-slide-index="0" role="group" aria-label="1 / 8"
 				style="width: 654.261px; margin-right: 24px;"><a href="#"><img
 						src="images/Banner-9442VNSI.webp"></a></div>
-			<div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="1" role="group" aria-label="2 / 8"
+			<div class="swiper-slide me-0 me-md-4 swiper-slide-duplicate" data-swiper-slide-index="1" role="group" aria-label="2 / 8"
 				style="width: 654.261px; margin-right: 24px;"><a href="#"><img
 						src="images/Banner-9448JILIVNDSI.webp"></a>
 			</div>
-			<div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="2" role="group" aria-label="3 / 8"
+			<div class="swiper-slide me-0 me-md-4 swiper-slide-duplicate" data-swiper-slide-index="2" role="group" aria-label="3 / 8"
 				style="width: 654.261px; margin-right: 24px;"><a href="#"><img
 						src="images/Banner-9448JDBVNDSI.webp"></a></div>
 		</div>
+		<div class="swiper-pagination"></div>
 		<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
 	</div>
 
+	<style>
+		@media (max-width: 767px) {
+			.swiper-slide {
+				width: 100% !important;
+			}
+		}
+	</style>
+
+	<script>
+		// Destroy and reinitialize Swiper
+		document.addEventListener('DOMContentLoaded', function() {
+			setTimeout(function() {
+				const swiperElement = document.querySelector('#swiperBanner');
+				if (swiperElement) {
+					// Destroy existing swiper if it exists
+					if (swiperElement.swiper) {
+						swiperElement.swiper.destroy(true, true);
+					}
+					// Remove all swiper classes
+					swiperElement.className = 'swiper swiper-banner';
+					// Reset wrapper transform
+					const wrapper = swiperElement.querySelector('.swiper-wrapper');
+					if (wrapper) {
+						wrapper.style.transform = '';
+						wrapper.style.transitionDuration = '';
+					}
+					// Reinitialize
+					new Swiper('#swiperBanner', {
+						slidesPerView: 1,
+						spaceBetween: 10,
+						effect: 'slide',
+						speed: 800,
+						autoplay: {
+							delay: 3000,
+							disableOnInteraction: false
+						},
+						loop: true,
+						breakpoints: {
+							720: {
+								slidesPerView: 2.3,
+								spaceBetween: 24,
+								centeredSlides: true
+							},
+							1560: {
+								slidesPerView: 3.2,
+								spaceBetween: 24,
+								centeredSlides: true
+							}
+						}
+					});
+				}
+			}, 500);
+		});
+	</script>
+
 	<!-- Game Hall Banner end-->
 	<!-- GameList start -->
-	<section id="gameHallSection" class="game-wrap">
+	<section id="gameHallSection" class="game-wrap p-0 px-md-4">
 
 		<script type="text/javascript" src="js/gameHall-raceWinEntranceHandler.js"></script>
 		<script type="text/javascript">
@@ -2138,7 +2674,7 @@
 
 
 
-		<div id="rankRecordSection">
+		<div id="rankRecordSection" class="d-none d-md-block">
 			<div id="gameGroup" class="group-content no-tournament ">
 
 
@@ -2292,27 +2828,68 @@
 
 
 
-		<div id="livearenaGame" class="livearena-game">
+		<div id="livearenaGame" class="livearena-game text-center text-md-start">
 			<dl id="livearenaDL">
-				<dt id="livearenaIcon" class="icon-livearena only-cockfight">
-
-					<img src="images/POPULAR-TOPMENU-LIVEARENA.webp" alt="">
-
-					Live Arena
+				<dt id="livearenaIcon" class="icon-livearena only-cockfight mx-auto">
+					<img src="images/POPULAR-TOPMENU-LIVEARENA.webp" alt="">Live Arena
 				</dt>
 			</dl>
-			<ul class="game-icon btn-effect ul-gameList" id="livearenaGameUl"
-				style="display: flex; justify-content: space-between; align-items: end;">
-				<img src="images/live-arena.webp" alt="" style="margin-right: 30px;" id="sv388-vip"
-					onclick=" handlePlayNow(21);">
-				<img src="images/wala-img.png" alt="" style="height: 250px;" onclick=" handlePlayNow(24);">
+			<ul class="game-icon btn-effect ul-gameList flex-column flex-md-row gap-1 g-md-0 align-items-center align-items-md-end justify-content-md-between justify-content-start" id="livearenaGameUl"
+				style="display: flex;">
+				<img src="images/live-arena.webp" alt="" style=" width: 100%; cursor: pointer;" id="sv388-vip" class="banner-1 me-1 me-md-4"
+					onclick="localStorage.getItem('token') ? handlePlayNow(21) : GameHallHandler.openLoginPopup(this)">
+				<img class="banner-2" src="images/wala-img.png" alt="" style="height: 100%; width: 100%;  cursor: pointer;" onclick="localStorage.getItem('token') ? handlePlayNow(24) : GameHallHandler.openLoginPopup(this)">
 			</ul>
 		</div>
 
+		<style>
+
+			.banner-1, .banner-2 {
+				max-width: 50%;
+			}
+			@media (max-width: 767px) {
+				.livearena-game {
+					background: #05060b url("https://www.alo789ho.com/theme/images/src-gamehall/layout/section-LIVEARENA.webp") center top no-repeat !important;
+    background-size: cover !important;
+	padding: 25px 3% 5px 3%;
+}
+.sports-game {
+	background: #07365d url("https://www.alo789ho.com/theme/images/src-gamehall/layout/section-SPORTS.webp") center 0px no-repeat !important;
+    background-size: cover !important;
+	padding: 25px 3% 5px 3%;
+				}
+				.banner-2 {
+					height: auto !important;
+				}
+				.banner-1, .banner-2 {
+					aspect-ratio: 2.4/1 !important;
+					max-width: 100%;
+				}
+				 .swiper-slide {
+					aspect-ratio: 1/0 !important;
+					max-width: 100%;
+				}
+				.swiper-wrapper {
+				}
+				.gameList-bong88 {
+					padding-right: 0px !important;
+				}
+				#livetableGame {
+					background: linear-gradient(45deg, #1c1c1c 0%, #8c3310 48%, #752201 51%, #bf6e4e 100%) !important;
+					padding: 0;
+					border-radius: 20px;
+					.swiper-wrapper {
+						display: grid !important;
+						grid-template-columns: 50% 50% 50% !important;
+					}
+				}
+			}
+		</style>
 
 
 
-		<div id="sportsGame" class="sports-game">
+
+		<div id="sportsGame" class="sports-game text-center text-md-start">
 			<dl id="sportsDL">
 				<dt id="sportsIcon" class="icon-sports ">
 
@@ -2322,21 +2899,19 @@
 				</dt>
 			</dl>
 			<ul class="game-icon btn-effect ul-gameList" id="sportsGameUl">
-				<img src="images/sport-1.webp" alt="" style="padding-right: 20px;" onclick="handlePlayNow(17);">
-				<img src="images/sport-2.webp" alt="" style="padding-right: 20px;" onclick="handlePlayNow(17);">
-				<img src="images/sport-3.webp" alt="" style="padding-right: 20px;" onclick="handlePlayNow(17);">
+				<img src="images/sport-1.webp" class="gameList-bong88" alt="" style="padding-right: 20px;" onclick="localStorage.getItem('token') ? handlePlayNow(17) : GameHallHandler.openLoginPopup(this)">
+				<img class="d-none d-md-block" src="images/sport-2.webp" alt="" style="padding-right: 20px;" onclick="localStorage.getItem('token') ? handlePlayNow(17) : GameHallHandler.openLoginPopup(this)">
+				<img class="d-none d-md-block" src="images/sport-3.webp" alt="" style="padding-right: 20px;" onclick="localStorage.getItem('token') ? handlePlayNow(17) : GameHallHandler.openLoginPopup(this)">
 			</ul>
 		</div>
 
 
 
 
-		<div id="livetableGame" class="LIVETABLE">
+		<div id="livetableGame" class="LIVETABLE text-center text-md-start">
 			<dl>
 				<dt class="icon-fire" style="margin-bottom: 20px;">
-
 					<img src="images/POPULAR-TOPMENU-LIVETABLE.webp" alt="">
-
 					HOT TABLE
 				</dt>
 			</dl>
@@ -2406,7 +2981,7 @@
 
 								</div>
 							</div>
-							<div class="swiper-slide li-SEXYBCRT BACCARAT show-play swiper-slide-visible"
+							<div class="swiper-slide li-SEXYBCRT BACCARAT show-play swiper-slide-visible d-none d-md-block"
 								id="SEXYBCRT_SexyBaccarat"
 								onclick="localStorage.getItem('token') ? handlePlayNow(8) : GameHallHandler.openLoginPopup(this)"
 								platform="SEXYBCRT" tablecode="1_0_C02" game_code="C02" gametype="undefined"
@@ -2421,7 +2996,7 @@
 
 								</div>
 							</div>
-							<div class="swiper-slide li-SEXYBCRT BACCARAT show-play swiper-slide-visible"
+							<div class="swiper-slide li-SEXYBCRT BACCARAT show-play swiper-slide-visible d-none d-md-block"
 								id="SEXYBCRT_SexyBaccarat"
 								onclick="localStorage.getItem('token') ? handlePlayNow(8) : GameHallHandler.openLoginPopup(this)"
 								platform="SEXYBCRT" tablecode="1_0_C03" game_code="C03" gametype="undefined"
@@ -2436,7 +3011,7 @@
 
 								</div>
 							</div>
-							<div class="swiper-slide li-SEXYBCRT BACCARAT show-play swiper-slide-visible"
+							<div class="swiper-slide li-SEXYBCRT BACCARAT show-play swiper-slide-visible d-none d-md-block"
 								id="SEXYBCRT_SexyBaccarat"
 								onclick="localStorage.getItem('token') ? handlePlayNow(8) : GameHallHandler.openLoginPopup(this)"
 								platform="SEXYBCRT" tablecode="1_0_C04" game_code="C04" gametype="undefined"
@@ -2452,7 +3027,7 @@
 
 								</div>
 							</div>
-							<div class="swiper-slide li-SVCASINO BACCARAT show-play swiper-slide-visible"
+							<div class="swiper-slide li-SVCASINO BACCARAT show-play swiper-slide-visible d-none d-md-block"
 								id="SVCASINO_SVCASINO"
 								onclick="localStorage.getItem('token') ? handlePlayNow(19) : GameHallHandler.openLoginPopup(this)"
 								platform="SVCASINO" tablecode="C02" game_code="C02" gametype="undefined"
@@ -2467,7 +3042,7 @@
 
 								</div>
 							</div>
-							<div class="swiper-slide li-SVCASINO BACCARAT show-play swiper-slide-visible"
+							<div class="swiper-slide li-SVCASINO BACCARAT show-play swiper-slide-visible d-none d-md-block"
 								id="SVCASINO_SVCASINO"
 								onclick="localStorage.getItem('token') ? handlePlayNow(19) : GameHallHandler.openLoginPopup(this)"
 								platform="SVCASINO" tablecode="C05" game_code="C05" gametype="undefined"
@@ -2482,7 +3057,7 @@
 
 								</div>
 							</div>
-							<div class="swiper-slide li-SEXYBCRT BACCARAT show-play swiper-slide-visible"
+							<div class="swiper-slide li-SEXYBCRT BACCARAT show-play swiper-slide-visible d-none d-md-block"
 								id="SEXYBCRT_SexyBaccarat"
 								onclick="localStorage.getItem('token') ? handlePlayNow(8) : GameHallHandler.openLoginPopup(this)"
 								platform="SEXYBCRT" tablecode="1_0_C01" game_code="C01" gametype="undefined"
@@ -2498,7 +3073,7 @@
 
 								</div>
 							</div>
-							<div class="swiper-slide li-SEXYBCRT SICBO show-play swiper-slide-visible"
+							<div class="swiper-slide li-SEXYBCRT SICBO show-play swiper-slide-visible d-none d-md-block"
 								id="SEXYBCRT_SexyBaccarat"
 								onclick="localStorage.getItem('token') ? handlePlayNow(8) : GameHallHandler.openLoginPopup(this)"
 								platform="SEXYBCRT" tablecode="1_2_131" game_code="131" gametype="undefined"
@@ -2618,6 +3193,52 @@
 				</li> -->
 			</ul>
 		</div>
+
+		<style>
+			@media (max-width: 767px) {
+				.ul-gameList {
+					display: flex !important;
+					flex-direction: column !important;
+				}
+				.game {
+					padding-left: 0px !important;
+					padding-right: 0px !important;
+				}
+				.swiper-wrapper {
+					width: 100% !important;
+				}
+				.live-game {
+					background: url("https://www.alo789ho.com/theme/images/src-gamehall/layout/section-LIVE.webp") right bottom no-repeat !important;
+					background-size: cover !important;
+					padding: 25px 3% 5px 3% !important;
+					#liveDL {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+					}
+					.ul-gameList {
+						display: grid !important;
+						grid-template-columns: 50% 50% !important;
+						overflow-x: auto;
+						#SEXYBCRT_SexyBaccarat {
+							grid-row-start: unset !important;
+    grid-row-end: unset !important;
+    grid-column-start: unset !important;
+    grid-column-end: unset !important;
+						}
+					}
+				}
+				
+				.new-game {
+					background: #05060b url("https://www.alo789ho.com/theme/images/src-gamehall/layout/section-NEW.webp") center top no-repeat !important;
+					background-size: cover !important;
+					padding: 25px 3% 5px 3% !important;
+					#newDL {
+						text-align: center;
+					}
+				}
+			}
+		</style>
 
 
 
@@ -3509,7 +4130,7 @@
 
 
 
-		<div id="jackpotGame" class="MEGAJACKPOT" style="display: block;">
+		<div id="jackpotGame" class="MEGAJACKPOT" style="display: flex; flex-direction: column;">
 			<dl id="jackpotDL">
 				<dt id="jackpotIcon" class="icon-jackpot">
 
@@ -3519,7 +4140,7 @@
 					Jackpot
 				</dt>
 			</dl>
-			<div class="div-tb" id="jackpotDivTb">
+			<div class="div-tb d-flex flex-column" id="jackpotDivTb">
 				<div class="td" id="jackpotTd">
 					<div class="big-jackpot" id="JILIJackpot" jp-platform="JILI">
 						<div class="JP-promoSticky" id="jpStickyDiv" style="display: none"></div>
@@ -3686,7 +4307,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="div-tb" id="jackpotDivTb">
+			<div class="div-tb d-flex flex-column" id="jackpotDivTb">
 				<div class="td" id="jackpotTd">
 					<div class="big-jackpot" id="FACHAIJackpot" jp-platform="FACHAI">
 						<div class="JP-promoSticky" id="jpStickyDiv" style="display: none"></div>
@@ -7613,7 +8234,7 @@
 				<!-- tab jackpot -->
 			</div>
 
-			<div class="div-tb" id="jackpotDivTb"></div>
+			<div class="div-tb  d-flex flex-column" id="jackpotDivTb"></div>
 			<div class="td" id="jackpotTd">
 				<div class="big-jackpot" id="jackpotTemplate">
 					<div class="JP-promoSticky" id="jpStickyDiv" style="display: none"></div>
@@ -7684,7 +8305,7 @@
 		</div>
 	</div>
 
-	<div class="social-media-Box">
+	<div class="social-media-Box d-none d-md-block">
 		<ul class="contact-menu social-media">
 			<li>
 				<a href="https://t.me/csgasv388" target="_blank" rel="noopener noreferrer">
@@ -7751,7 +8372,6 @@
 	</div>
 	<!-- ============================= -->
 
-	<ul id="ulGameIconTemplate" class="normalGameList game-icon ul-gameList col-7" style="display:none;"></ul>
 	<ul id="casinoTableWrapperTemplate" class="game-icon btn-effect list-gametable ul-gameList"></ul>
 
 	<div class="modal-box modal-loginBox hide" id="modal-loginNew" style="display: none;">
@@ -7962,7 +8582,7 @@
 		</dd>
 	</dl>
 
-	<div id="pageBodyDiv" class="page-schedule" style="">
+	<div id="pageBodyDiv" class="page-schedule p-0 d-none d-md-block" style="">
 		<div class="game-schedule" id="raceDiv" style="">
 			<div class="calendar">
 				<h2 id="todayTitle">2025 <span>Sep</span>&nbsp;<span>Cockfight Calendar</span></h2>
@@ -8590,7 +9210,7 @@
 
 
 
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		PageConfig.showBrandAppLink = false;
 		PageConfig.isShowDownloadApp = true;
 
@@ -8677,7 +9297,7 @@
 				GameHallUtils.showDownloadAppFooter();
 			}
 		});
-	</script>
+	</script> -->
 
 	<!-- download-info -->
 	<div id="downloadAppFooter" class="toast download-info num-1" role="alert" aria-live="assertive" aria-atomic="true"
@@ -8686,7 +9306,7 @@
 			onclick="GameHallUtils.closeDownloadAppFooter()">
 			<i class="icon-close"></i>
 		</a>
-		<div class="app-box" id="downloadAppBox">
+		<div class="app-box d-none d-md-block" id="downloadAppBox">
 
 
 			<div class="app-group VPN1111">
@@ -8718,17 +9338,7 @@
 
 
 
-	<div id="banking-btn" class="page-fix-bt">
-
-
-
-
-		<button class="btn btn-reward" onclick="GameHallHandler.openLoginPopup(this)">
-			<img src="images/REWARD-medal-POPULAR.webp" alt="Reward">
-			<span>Reward</span>
-		</button>
-
-
+	<div id="banking-btn" class="page-fix-bt  d-none d-md-block">
 		<button class="btn btn-deposit" onclick="localStorage.getItem('token') ? window.location.href = '/Deposit.html' : GameHallHandler.openLoginPopup(this)"
 >
 			<i class="icon icon-deposit"></i>
@@ -8741,11 +9351,11 @@
 		</button>
 
 
-		<button class="btn btn-affiliate" path="/page/login/playerReferFriendsProgram.jsp" value="Refer a friend"
+		<a class="btn btn-affiliate" href="/pages/playerReferFriendsProgram.html"  value="Refer a friend"
 			onclick="GameHallHandler.openMenuIframe(this)">
 			<img src="images/affiliate-refer-a-friend.webp" alt="Refer a Friend">
 			<span>Refer a friend</span>
-		</button>
+		</a>
 
 
 

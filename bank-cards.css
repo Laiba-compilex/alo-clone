@@ -1,0 +1,123 @@
+.banks-container {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.banks-container h4 {
+  color: #fff;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.banks-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .banks-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bank-card {
+  position: relative;
+  background: #2b4980;
+  border: 1px solid #4a5568;
+  border-radius: 8px;
+  padding: 1rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.bank-card:hover {
+  border-color: #f7822b;
+  background: #1a365d;
+}
+
+.bank-card.selected {
+  border-color: #f7822b;
+  background: #1a365d;
+}
+
+.bank-info {
+  flex: 1;
+}
+
+.bank-name {
+  color: #f7822b;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.account-number {
+  color: #fff;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.account-holder {
+  color: #ccd2e3;
+  font-size: 0.9rem;
+}
+
+.delete-bank-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: transparent;
+  border: 1px solid #dc3545;
+  color: #dc3545;
+  padding: 0.25rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-bank-btn:hover {
+  background: #dc3545;
+  color: white;
+}
+
+.delete-bank-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.delete-bank-btn i {
+  font-size: 1rem;
+}
+
+.radio-indicator {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #4a5568;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.radio-indicator.selected {
+  border-color: #f7822b;
+}
+
+.radio-indicator.selected::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: #f7822b;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}

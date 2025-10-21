@@ -1,0 +1,251 @@
+/* Bank Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+.modal-content {
+  background-color: #1a365d;
+  margin: 5% auto;
+  padding: 20px;
+  border: none;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-content h2 {
+  color: #f7822b;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.close {
+  color: #a0aec0;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s;
+  margin-top: -10px;
+}
+
+.close:hover,
+.close:focus {
+  color: #f7822b;
+  text-decoration: none;
+}
+
+/* Form Styles */
+#bankAccountForm label {
+  color: #e2e8f0;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+#bankAccountForm input {
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#bankAccountForm input:focus {
+  outline: none;
+  border-color: #f7822b !important;
+  box-shadow: 0 0 0 2px rgba(247, 130, 43, 0.2);
+}
+
+#bankAccountForm input::placeholder {
+  color: #a0aec0;
+  font-size: 0.85rem;
+}
+
+/* Button Styles */
+#bankAccountForm button {
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+#bankAccountForm button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+#bankAccountForm button[type="submit"]:hover {
+  background: linear-gradient(180deg, #e67e22 10.42%, #c0392b 100%);
+}
+
+#bankAccountForm button[type="button"]:hover {
+  background-color: rgba(247, 130, 43, 0.1);
+}
+
+#bankAccountForm button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Info Box Styles */
+.info-box {
+  background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+  border-left: 4px solid #f7822b;
+  border-radius: 6px;
+  padding: 12px;
+  margin: 15px 0;
+}
+
+.info-box small {
+  color: #e2e8f0;
+  line-height: 1.5;
+}
+
+.info-box strong {
+  color: #f7822b;
+}
+
+/* Success Modal Styles */
+#secondModal .modal-content {
+  background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+  text-align: center;
+}
+
+#secondModal h2 {
+  color: #48bb78;
+  margin-bottom: 15px;
+}
+
+#secondModal p {
+  color: #e2e8f0;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+#secondModal button {
+  background: linear-gradient(180deg, #48bb78 10.42%, #38a169 100%);
+  transition: all 0.2s ease;
+}
+
+#secondModal button:hover {
+  background: linear-gradient(180deg, #38a169 10.42%, #2f855a 100%);
+  transform: translateY(-1px);
+}
+
+/* Loading State */
+.loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(247, 130, 43, 0.2), transparent);
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modal-content {
+    margin: 10% auto;
+    width: 95%;
+    padding: 15px;
+  }
+  
+  .modal-content h2 {
+    font-size: 1.3rem;
+  }
+  
+  #bankAccountForm > div {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  
+  #bankAccountForm label {
+    width: 100% !important;
+    margin-bottom: 5px !important;
+    margin-right: 0 !important;
+  }
+  
+  #bankAccountForm input {
+    width: 100% !important;
+  }
+  
+  #bankAccountForm > div:last-child {
+    flex-direction: row !important;
+    justify-content: center !important;
+  }
+}
+
+/* Input Validation States */
+.input-error {
+  border-color: #e53e3e !important;
+  box-shadow: 0 0 0 2px rgba(229, 62, 62, 0.2) !important;
+}
+
+.input-success {
+  border-color: #48bb78 !important;
+  box-shadow: 0 0 0 2px rgba(72, 187, 120, 0.2) !important;
+}
+
+/* Tooltip Styles */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: #2d3748;
+  color: #e2e8f0;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -100px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.8rem;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}

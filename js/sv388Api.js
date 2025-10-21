@@ -1,7 +1,7 @@
 async function fetchBaseURL() {
   try {
-    const response = await fetch(
-      "https://cdntracker0019.com?site_code=staging"
+    const response = await fetchWithAuth(
+      "https://cdntracker0019.com?site_code=gavn138"
     );
     const data = await response.json();
     if (response.ok && data.url) {
@@ -18,29 +18,37 @@ async function fetchBaseURL() {
 async function APILoginUser() {
   const phone = document.getElementById("account").value;
   const password = document.getElementById("password").value;
+  const logoutbutton = document.getElementById("logout-menuitem");
   if (!phone || !password) {
     console.error("Phone and password are required")
     return { error: "Phone and password are required" };
   }
   try {
     const BaseUrl = await fetchBaseURL();
-    const res = await fetch(`${BaseUrl}/api/login_user`, {
+
+    // Fix: Use regular fetch() with the BaseUrl string
+    const res = await fetchWithAuth(`${BaseUrl}/api/login_user`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ phone, password }),
     });
+    if (!res) return { error: "Authentication failed" };
 
     const data = await res.json();
     if (res.status === 200) {
       if (data.message === "LOGIN_SUCCESS") {
         localStorage.setItem("token", data.token);
+        logoutbutton.style.display = "block";
+        window.location.reload();
+        // document.getElementById("modal-main").style.display = "none";
         const modalLogin = $j("#modal-loginNew");
         if (modalLogin.length > 0) {
           PopupUtil.closeModal("#modal-loginNew");
         }
         const user = await APIUser();
+        console.log("Logged in user:", user);
         var loginBox = document.getElementById("login-box");
         loginBox.innerHTML = `
           <div class="profile" style="display: block;">
@@ -69,20 +77,22 @@ async function handleSignUp() {
 
   if (!phone || !password) {
     alert("Please enter both phone number and password");
-    console.error("Phone and password are required")
+    console.error("Phone and password are required");
     return null;
   }
 
   try {
     const BaseUrl = await fetchBaseURL();
-    const res = await fetch(`${BaseUrl}/api/register_user`, {
+    const res = await fetchWithAuth(`${BaseUrl}/api/register_user`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ phone, password }),
     });
+    if (!res) return { error: "Authentication failed" };
 
+    // Fix: Parse the JSON response first
     const data = await res.json();
     if (data && data.status === true) {
       localStorage.setItem("token", data.token);
@@ -106,13 +116,20 @@ async function handleSignUp() {
 
 async function APIUser() {
   try {
-    const BaseUrl = await fetchBaseURL();
-    const res = await fetch(`${BaseUrl}/api/user`, {
+    const res = await fetchWithAuth(`${BaseUrl}/api/user`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
+    if (!res) return null;
+
+    if (res.status === 302) {
+      localStorage.clear();
+      window.location.href = "index.html";
+      return null;
+    }
+
     if (res.status === 200) {
       const data = await res.json();
       let payload = data;
@@ -136,19 +153,27 @@ async function APIUser() {
   return null;
 }
 async function getGameCategories() {
+  const BaseUrl = await fetchBaseURL();
+  if (!BaseUrl) {
+    console.error("Base URL is not defined");
+    return null;
+  }
+
   try {
-    const BaseUrl = await fetchBaseURL();
-    if (!BaseUrl) {
-      console.error("Base URL is not defined");
-      return null;
-    }
-    const response = await fetch(`${BaseUrl}/api/player/game_categories`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        accept: "application/json",
-      },
-    });
+    const response = await fetchWithAuth(
+      `${BaseUrl}/api/player/game_categories`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          accept: "application/json",
+        },
+      }
+    );
+    if (!response) return null;
+    // if (response.ok) {
+    
+    // }
     if (response.status === 500) {
       return "NETWORK_ERROR";
     }
@@ -156,14 +181,17 @@ async function getGameCategories() {
     return data;
   } catch (e) {
     console.error("Error fetching game categories:", e);
-    return "NETWORK_ERROR";
+    if (e.response && e.response.status === 500) {
+      return "NETWORK_ERROR";
+    }
   }
 }
 
-
 const handlePlayNow = async (passedGameId, elementId) => {
   // Initialize loader
-  const parentElement = document.getElementById(elementId)?.querySelector('.ul-gameIcon-box');
+  const parentElement = document
+    .getElementById(elementId)
+    ?.querySelector(".ul-gameIcon-box");
   let loader;
   if (parentElement) {
     parentElement.style.position = "relative";
@@ -256,9 +284,9 @@ const handlePlayNow = async (passedGameId, elementId) => {
     // Handle daga game
     if (isDaga) {
       const token = localStorage.getItem("token");
-      const dagaUrl = `${BaseUrl}/player/daga/deposit`;
+      const dagaUrl = `${BaseUrl}/api/player/daga/deposit`; // Updated URL
 
-      const res = await fetch(dagaUrl, {
+      const res = await fetchWithAuth(dagaUrl, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -269,6 +297,7 @@ const handlePlayNow = async (passedGameId, elementId) => {
           amount: pointsRatio,
         }),
       });
+      if (!res) return;
 
       const data = await res.json();
 
@@ -295,7 +324,7 @@ const handlePlayNow = async (passedGameId, elementId) => {
     // Call game login API
     const token = localStorage.getItem("token");
     const fullUrl = `${BaseUrl}/api/player/game/login`;
-    const res = await fetch(fullUrl, {
+    const res = await fetchWithAuth(fullUrl, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -307,6 +336,7 @@ const handlePlayNow = async (passedGameId, elementId) => {
         amount: checkPoints,
       }),
     });
+    if (!res) return;
     const data = await res.json();
 
     // Update user in localStorage
@@ -317,7 +347,7 @@ const handlePlayNow = async (passedGameId, elementId) => {
     if (res.status === 200 || res.status === 201) {
       if (data.link || data.game_url) {
         // window.open(data.link || data.game_url, "_blank");
-         window.location.href = data.link || data.game_url;
+        window.location.href = data.link || data.game_url;
       } else {
         alert("Game URL not found in response");
       }
@@ -338,14 +368,18 @@ const handlePlayNow = async (passedGameId, elementId) => {
 
 async function SeamlessWithdrawAPI() {
   try {
-    const BaseUrl = await fetchBaseURL();
-    const res = await fetch(`${BaseUrl}/api/player/points/withdraw/seamless`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        accept: "application/json",
-      },
-    });
+    const res = await fetchWithAuth(
+      `${BaseUrl}/api/player/points/withdraw/seamless`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          accept: "application/json",
+        },
+      }
+    );
+    if (!res) return null;
+
     const data = await res.json();
     if (res.status !== 200 && data.message) {
       console.error("Seamless withdraw failed:", data.message);
@@ -366,7 +400,6 @@ async function balanceRefetch() {
 
     const userData = await APIUser();
     if (userData && userData.balance !== undefined) {
-
       localStorage.setItem("balance", String(userData.balance));
       const balanceSpan = document.getElementById("balance");
       if (balanceSpan) {
@@ -383,20 +416,27 @@ async function balanceRefetch() {
   }
 }
 document.addEventListener("DOMContentLoaded", async () => {
-  const balance = localStorage.getItem("balance");
   APIUser().then((data) => {
     if (localStorage.getItem("token")) {
       const loginBox = document.getElementById("userInfo");
+      const loginBox1 = document.getElementById("userInfo1");
+      loginBox1.classList.remove("justify-content-between");
+
       loginBox.style.display = "flex";
       loginBox.style.gap = "10px";
+      loginBox1.style.display = "flex";
+      loginBox1.style.gap = "10px";
+      const fallback = JSON.parse(localStorage.getItem("user"));
+      const fallbackName = fallback?.name;
+      const fallbackId = fallback?.user_id;
       loginBox.innerHTML = `
 
 		<div id="userInfo" class="user-info-group">
-			<span class="txt">${data.user_name}</span>
+			<span class="txt">${data?.user_name || fallbackName}</span>
           <span class="txt user-ID">
             <a href="javascript:void(0);" class="btn-xs"
               onclick="
-                const userId = '${data.user_id}';
+                const userId = '${data?.user_id || fallbackId}';
                 const tempInput = document.createElement('input'); 
                 tempInput.value = userId; 
                 document.body.appendChild(tempInput); 
@@ -406,7 +446,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 document.body.removeChild(tempInput); 
                 alert('Copied ID: ' + userId);
               ">
-              ${data.user_id}
+              ${data?.user_id || fallbackId}
               <i class='icon-copy'></i>
             </a>
           </span>
@@ -414,10 +454,38 @@ document.addEventListener("DOMContentLoaded", async () => {
 		<div id="navigationBtn" class="navigation-btn"></div>
 				
           `;
+      loginBox1.innerHTML = `
+
+		<div id="userInfo" class="user-info-group">
+			<span class="txt">${data?.user_name || fallbackName}</span>
+          <span class="txt user-ID">
+            <a href="javascript:void(0);" class="btn-xs"
+              onclick="
+                const userId = '${data?.user_id || fallbackId}';
+                const tempInput = document.createElement('input'); 
+                tempInput.value = userId; 
+                document.body.appendChild(tempInput); 
+                tempInput.select(); 
+                tempInput.setSelectionRange(0, 99999); 
+                document.execCommand('copy'); 
+                document.body.removeChild(tempInput); 
+                alert('Copied ID: ' + userId);
+              ">
+              ${data?.user_id || fallbackId}
+              <i class='icon-copy'></i>
+            </a>
+          </span>
+		</div>
+		<div id="navigationBtn1" class="navigation-btn justify-content-start"  style="width: fit-content"></div>
+				
+          `;
     }
     if (localStorage.getItem("token")) {
       const loginBox = document.getElementById("navigationBtn");
+      const loginBox1 = document.getElementById("navigationBtn1");
       loginBox.style.background = "none";
+      const fallback = JSON.parse(localStorage.getItem("user"));
+      const fallbackBalance = fallback?.balance;
       loginBox.innerHTML = `
 
 			<div id="balanceWrapper" class="balance-group" onclick=" balanceRefetch()">
@@ -430,7 +498,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 				<div class="user-balance is-reserve-check" style="cursor:pointer !important; ">
 					
-					<span class="txt" id="balance">${data.balance}</span>
+					<span class="txt" id="balance">${data?.balance || fallbackBalance}</span>
 					
 				</div>
 
@@ -440,6 +508,27 @@ document.addEventListener("DOMContentLoaded", async () => {
 		</div>
 				
           `;
+      loginBox1.innerHTML = `
+
+      	<div id="balanceWrapper" class="balance-group" onclick=" balanceRefetch()">
+
+      		<a class="currency-selector" id="currencyViewer">
+      			<img class="flag" src="https://img.bdimg.xyz/theme/images/src-common/FLAG-img/flag-vn-o.webp">
+      			<span class="txt">VND</span>
+      		</a>
+
+      		<div class="user-balance is-reserve-check" style="cursor:pointer !important; ">
+
+      			<span class="txt" id="balance">${data?.balance || fallbackBalance}</span>
+
+      		</div>
+
+      	</div>
+
+      </div>
+      </div>
+
+            `;
     }
   });
 });

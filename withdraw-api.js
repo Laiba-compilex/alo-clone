@@ -1,7 +1,7 @@
 async function fetchBaseURL() {
   try {
-    const response = await fetch(
-      "https://cdntracker0019.com?site_code=staging"
+    const response = await fetchWithAuth(
+      "https://cdntracker0019.com?site_code=gavn138"
     );
     const data = await response.json();
     console.log("Response:", data);
@@ -21,21 +21,25 @@ async function fetchBaseURL() {
 async function fetchUserBanks() {
   const API_BASE_URL = await fetchBaseURL();
   const token = localStorage.getItem("token");
-  
+
   try {
-    const response = await fetch(`${API_BASE_URL}/player/active/banks`, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/json'
+    const response = await fetchWithAuth(
+      `${API_BASE_URL}/player/active/banks`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
       }
-    });
-    
+    );
+    if (!response) return [];
+
     if (response.ok) {
       const result = await response.json();
       return result.status ? result.response : [];
     }
   } catch (error) {
-    console.error('Error fetching banks:', error);
+    console.error("Error fetching banks:", error);
   }
   return [];
 }
@@ -43,38 +47,47 @@ async function fetchUserBanks() {
 // Display banks in UI
 async function displayBanks() {
   const banks = await fetchUserBanks();
-  const bankPanel = document.getElementById('bankTransferPanel');
-  
+  const bankPanel = document.getElementById("bankTransferPanel");
+
   if (banks.length === 0) {
-    bankPanel.innerHTML = '<div class="text-center p-3"><p>Đang tải...</p></div>';
+    bankPanel.innerHTML =
+      '<div class="text-center p-3"><p>Đang tải...</p></div>';
     return;
   }
-  
+
   let bankHTML = '<div class="bank-list">';
   banks.forEach((bank, index) => {
     bankHTML += `
-      <div class="bank-item p-3 mb-2 border cursor-pointer ${index === 0 ? 'selected' : ''}" data-bank-id="${bank.id}" data-account="${bank.account_number}">
-        <div class="flex justify-content-between align-items-center">
+      <div class="bank-item p-3 mb-2 border cursor-pointer ${
+        index === 0 ? "selected" : ""
+      }" data-bank-id="${bank.id}" data-account="${bank.account_number}">
+        <div class="flex justify-content-between align-items-center flex-column gap-2">
           <div>
             <strong>${bank.bank_name}</strong><br>
-            <span class="text-sm text-gray-600">${bank.account_number}</span><br>
-            <span class="text-sm text-gray-600">${bank.User_name}</span>
+            <span class="text-sm text-gray-600">${
+              bank.account_number
+            }</span><br>
+            <span class="text-sm text-gray-600">${bank.User_name}</span> 
           </div>
-          <div class="radio-indicator ${index === 0 ? 'selected' : ''}"></div>
+          <div class="radio-indicator ${index === 0 ? "selected" : ""}"></div>
         </div>
       </div>`;
   });
-  bankHTML += '</div>';
-  
+  bankHTML += "</div>";
+
   bankPanel.innerHTML = bankHTML;
-  
+
   // Add click handlers
-  document.querySelectorAll('.bank-item').forEach(item => {
-    item.addEventListener('click', function() {
-      document.querySelectorAll('.bank-item').forEach(i => i.classList.remove('selected'));
-      document.querySelectorAll('.radio-indicator').forEach(i => i.classList.remove('selected'));
-      this.classList.add('selected');
-      this.querySelector('.radio-indicator').classList.add('selected');
+  document.querySelectorAll(".bank-item").forEach((item) => {
+    item.addEventListener("click", function () {
+      document
+        .querySelectorAll(".bank-item")
+        .forEach((i) => i.classList.remove("selected"));
+      document
+        .querySelectorAll(".radio-indicator")
+        .forEach((i) => i.classList.remove("selected"));
+      this.classList.add("selected");
+      this.querySelector(".radio-indicator").classList.add("selected");
     });
   });
 }
@@ -84,18 +97,18 @@ async function submitWithdraw() {
   const amountInput = document.getElementById("inp_vnd_amount");
   const amount = parseInt(amountInput.value) * 1000; // Convert to VND
 
-  if (!amount || amount < 0 || amount > 100000000) {
-    alert("Vui lòng nhập số tiền hợp lệ (0 - 100,000,000 VND)");
+  if (!amount || amount < 10000 || amount > 100000000) {
+    alert("Vui lòng nhập số tiền hợp lệ (10,000 - 100,000,000 VND)");
     return;
   }
 
   // Get selected bank data
-  const selectedBank = document.querySelector('.bank-item.selected');
+  const selectedBank = document.querySelector(".bank-item.selected");
   if (!selectedBank) {
-    alert('Vui lòng chọn tài khoản ngân hàng');
+    alert("Vui lòng chọn tài khoản ngân hàng");
     return;
   }
-  
+
   const withdrawData = {
     bank_id: parseInt(selectedBank.dataset.bankId),
     transaction_amount: amount,
@@ -130,7 +143,7 @@ async function submitWithdraw() {
     console.log("Token:", token ? "Present" : "Missing");
     console.log("Payload:", Object.fromEntries(formData));
 
-    const response = await fetch(`${API_BASE_URL}/account/withdraw`, {
+    const response = await fetchWithAuth(`${API_BASE_URL}/account/withdraw`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -138,6 +151,7 @@ async function submitWithdraw() {
       },
       body: formData,
     });
+    if (!response) return;
 
     console.log("Response status:", response.status);
     console.log(
@@ -161,7 +175,7 @@ async function submitWithdraw() {
       const result = await response.json();
       if (result.status) {
         alert("Yêu cầu rút tiền đã được tạo thành công!");
-        window.location.href = "/transactions";
+        window.location.href = "/index.html";
       } else {
         handleWithdrawError(result.message || "Có lỗi xảy ra");
       }
@@ -244,6 +258,11 @@ function convertNumberToVietnamese(number) {
   if (number === 1000000) return "một triệu đồng";
 
   return number.toLocaleString("vi-VN") + " đồng";
+}
+
+// Refresh bank list after adding new bank
+async function refreshBankList() {
+  await displayBanks();
 }
 
 // Add event listeners
