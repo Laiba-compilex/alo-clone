@@ -20,8 +20,8 @@ async function APILoginUser() {
   const password = document.getElementById("password").value;
   const logoutbutton = document.getElementById("logout-menuitem");
   if (!phone || !password) {
-    console.error("Phone and password are required");
-    return;
+    console.error("Phone and password are required")
+    return { error: "Phone and password are required" };
   }
   try {
     const BaseUrl = await fetchBaseURL();
@@ -32,10 +32,7 @@ async function APILoginUser() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        phone,
-        password,
-      }),
+      body: JSON.stringify({ phone, password }),
     });
     if (!res) return { error: "Authentication failed" };
 
@@ -66,11 +63,16 @@ async function APILoginUser() {
         return data;
       }
     } else {
-      // Handle non-200 status codes
+      if (data.message) alert(data.message);
+      else if (data.errors) {
+        const errorMsg = Object.values(data.errors).map(arr => arr[0]).join(", ");
+        alert(errorMsg);
+      }
       return data;
     }
   } catch (e) {
     console.error("Login error:", e);
+    onsole.error("Login error:", e);
 
     // Note: fetch() doesn't automatically throw for HTTP error status codes
     // You might need to adjust this error handling based on your actual API response format
@@ -98,7 +100,6 @@ async function handleSignUp() {
   const phone = document.getElementById("phoneNumber")?.value;
   const password = document.getElementById("inputPassword")?.value;
 
-  // Validate inputs
   if (!phone || !password) {
     alert("Please enter both phone number and password");
     console.error("Phone and password are required");
@@ -112,18 +113,12 @@ async function handleSignUp() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        phone,
-        password,
-        // agent_id: agentId
-      }),
+      body: JSON.stringify({ phone, password }),
     });
     if (!res) return { error: "Authentication failed" };
 
     // Fix: Parse the JSON response first
     const data = await res.json();
-
-    // Fix: Check the parsed data, not res.data
     if (data && data.status === true) {
       localStorage.setItem("token", data.token);
       return data.token;
@@ -131,7 +126,11 @@ async function handleSignUp() {
       localStorage.setItem("token", data.token);
       return data.token;
     } else {
-      console.log("Registration failed:", data);
+      if (data.errors) {
+        const errorMsg = Object.values(data.errors).map(arr => arr[0]).join(", ");
+        alert(errorMsg);
+      }
+      else if (data.message) alert(data.message);
       return data;
     }
   } catch (e) {
@@ -159,18 +158,10 @@ async function APIUser() {
 
     if (res.status === 200) {
       const data = await res.json();
-      // Normalize possible response shapes
       let payload = data;
       if (data && data.data) payload = data.data;
-
-      // user object may be payload.user or payload itself
       const user = payload.user || payload;
-
-      // try common balance paths
-      const balance =
-        payload.balance ?? user.balance ?? user.wallet_balance ?? null;
-
-      // store normalized user and balance
+      const balance = payload.balance ?? user.balance ?? user.wallet_balance ?? null;
       try {
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("balance", String(balance));
@@ -180,7 +171,6 @@ async function APIUser() {
       } catch (e) {
         console.warn("Could not persist user/balance to localStorage:", e);
       }
-
       return user;
     }
   } catch (e) {
@@ -208,12 +198,13 @@ async function getGameCategories() {
     );
     if (!response) return null;
     // if (response.ok) {
-    const data = await response.json();
-    return data;
+    
     // }
     if (response.status === 500) {
       return "NETWORK_ERROR";
     }
+    const data = await response.json();
+    return data;
   } catch (e) {
     console.error("Error fetching game categories:", e);
     if (e.response && e.response.status === 500) {
@@ -221,6 +212,7 @@ async function getGameCategories() {
     }
   }
   return null;
+
 }
 
 const handlePlayNow = async (passedGameId, elementId) => {
@@ -418,7 +410,7 @@ async function SeamlessWithdrawAPI() {
     if (!res) return null;
 
     const data = await res.json();
-    if (data) {
+     if (data) {
       return data;
     }
   } catch (e) {
