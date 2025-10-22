@@ -1,3 +1,31 @@
+/**
+ * Fetch with authentication handling
+ * @param {string} url - The URL to fetch
+ * @param {Object} options - Fetch options
+ * @returns {Promise<Response>} - The fetch response
+ */
+async function fetchWithAuth(url, options = {}) {
+  try {
+    // Get token from localStorage if available
+    const token = localStorage.getItem("token");
+    
+    // If token exists, add it to the Authorization header
+    if (token) {
+      options.headers = {
+        ...options.headers,
+        Authorization: `Bearer ${token}`,
+      };
+    }
+    
+    // Perform the fetch with the provided options
+    const response = await fetch(url, options);
+    return response;
+  } catch (error) {
+    console.error("Fetch error:", error);
+    return null;
+  }
+}
+
 async function fetchBaseURL() {
   try {
     const response = await fetchWithAuth(
@@ -55,7 +83,7 @@ async function APILoginUser() {
             <span>User Name:${user?.user_name} </span> &nbsp;
             <span>User Id: ${user?.user_id}</span>
           </div>
-        `;
+       `;
         return data;
       } else if (data.message === "REQUIRE_RESET_PASSWORD") {
         return data;
@@ -96,48 +124,164 @@ async function APILoginUser() {
     return { error: "Network or unexpected error occurred" };
   }
 }
-async function handleSignUp() {
-  const phone = document.getElementById("phoneNumber")?.value;
-  const password = document.getElementById("inputPassword")?.value;
-
-  if (!phone || !password) {
-    alert("Please enter both phone number and password");
-    console.error("Phone and password are required");
-    return null;
-  }
-
-  try {
-    const BaseUrl = await fetchBaseURL();
-    const res = await fetchWithAuth(`${BaseUrl}/api/register_user`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ phone, password }),
-    });
-    if (!res) return { error: "Authentication failed" };
-
-    // Fix: Parse the JSON response first
-    const data = await res.json();
-    if (data && data.status === true) {
-      localStorage.setItem("token", data.token);
-      return data.token;
-    } else if (res.status === 200 && data.token) {
-      localStorage.setItem("token", data.token);
-      return data.token;
-    } else {
-      if (data.errors) {
-        const errorMsg = Object.values(data.errors).map(arr => arr[0]).join(", ");
-        alert(errorMsg);
-      }
-      else if (data.message) alert(data.message);
-      return data;
-    }
-  } catch (e) {
-    console.error("Registration error:", e);
-    return { error: e.message };
-  }
-}
+async function handleSignUp() { 
+   // Clear previous error messages
+   clearValidationErrors();
+   
+   const phone = document.getElementById("phoneNumber")?.value; 
+   const password = document.getElementById("inputPassword")?.value;
+   const passwordConfirm = document.getElementById("passwordConfirm")?.value;
+   const loginName = document.getElementById("inputLoginName")?.value;
+   const fullName = document.getElementById("inputFullName")?.value;
+   const logoutbutton = document.getElementById("logout-menuitem");
+   
+   // Validate inputs
+   let hasErrors = false;
+   
+   if (!loginName) {
+     displayValidationError("inputLoginName", "Tên đăng nhập gồm 4-20 chữ cái, chữ số và viết liền không dấu.");
+     hasErrors = true;
+   }
+   
+   if (!fullName) {
+     displayValidationError("inputFullName", "Họ và tên không được để trống.");
+     hasErrors = true;
+   }
+   
+   if (!password) {
+     displayValidationError("inputPassword", "Mật khẩu sai định dạng.");
+     hasErrors = true;
+   }
+   
+   if (password !== passwordConfirm) {
+     displayValidationError("passwordConfirm", "Mật khẩu xác nhận không khớp.");
+     hasErrors = true;
+   }
+ 
+   if (!phone) { 
+     displayValidationError("phoneNumber", "Số điện thoại không hợp lệ.");
+     hasErrors = true;
+   } 
+   
+   if (hasErrors) {
+     return null;
+   }
+ 
+   try { 
+     const BaseUrl = await fetchBaseURL(); 
+     const res = await fetchWithAuth(`${BaseUrl}/api/register_user`, { 
+       method: "POST", 
+       headers: { 
+         "Content-Type": "application/json", 
+       }, 
+       body: JSON.stringify({ 
+         phone, 
+         password,
+         username: loginName,
+         fullname: fullName
+       }), 
+     }); 
+     if (!res) {
+       displayValidationError("phoneNumber", "Xác thực thất bại");
+       return { error: "Authentication failed" }; 
+     }
+ 
+     // Fix: Parse the JSON response first 
+     const data = await res.json(); 
+     if (data && data.status === true) { 
+       localStorage.setItem("token", data.token);
+       // Update logout button visibility
+       if (logoutbutton) {
+         logoutbutton.style.display = "block";
+       }
+       // Reload page after successful registration
+       window.location.reload();
+       return data.token; 
+     } else if (res.status === 200 && data.token) { 
+       localStorage.setItem("token", data.token);
+       // Update logout button visibility
+       if (logoutbutton) {
+         logoutbutton.style.display = "block";
+       }
+       // Reload page after successful registration
+       window.location.reload();
+       return data.token; 
+     } else { 
+       if (data.errors) { 
+         // Handle validation errors from API
+         for (const field in data.errors) {
+           if (data.errors[field] && data.errors[field].length > 0) {
+             const errorMessage = data.errors[field][0];
+             
+             // Map API field names to form field IDs
+             let fieldId = "";
+             switch (field) {
+               case "phone":
+                 fieldId = "phoneNumber";
+                 break;
+               case "password":
+                 fieldId = "inputPassword";
+                 break;
+               case "username":
+                 fieldId = "inputLoginName";
+                 break;
+               case "fullname":
+                 fieldId = "inputFullName";
+                 break;
+               default:
+                 fieldId = field;
+             }
+             
+             displayValidationError(fieldId, errorMessage);
+           }
+         }
+       }
+       else if (data.message) {
+         // Display general error message under phone field
+         displayValidationError("phoneNumber", data.message);
+       }
+       else {
+         displayValidationError("phoneNumber", "Đăng ký thất bại. Vui lòng thử lại.");
+       }
+       return data; 
+     } 
+   } catch (e) { 
+     console.error("Registration error:", e); 
+     displayValidationError("phoneNumber", e.message || "Đăng ký thất bại. Vui lòng thử lại.");
+     return { error: e.message }; 
+   } 
+ }
+ 
+ // Helper function to display validation errors
+ function displayValidationError(fieldId, message) {
+   const field = document.getElementById(fieldId);
+   if (!field) return;
+   
+   // Create error message element if it doesn't exist
+   let errorElement = field.nextElementSibling;
+   if (!errorElement || !errorElement.classList.contains('validation-error')) {
+     errorElement = document.createElement('div');
+     errorElement.className = 'validation-error';
+     errorElement.style.color = '#ff0000';
+     errorElement.style.fontSize = '12px';
+     errorElement.style.marginTop = '4px';
+     field.parentNode.insertBefore(errorElement, field.nextSibling);
+   }
+   
+   errorElement.textContent = message;
+   field.style.borderColor = '#ff0000';
+ }
+ 
+ // Helper function to clear all validation errors
+ function clearValidationErrors() {
+   const errorElements = document.querySelectorAll('.validation-error');
+   errorElements.forEach(element => element.remove());
+   
+   const formFields = document.querySelectorAll('input');
+   formFields.forEach(field => {
+     field.style.borderColor = '';
+   });
+ }
 
 async function APIUser() {
   const BaseUrl = await fetchBaseURL();
