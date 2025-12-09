@@ -2390,26 +2390,37 @@
 		style="margin-bottom: 30px;">
 		<div class="swiper-wrapper" id="swiper-wrapper-af06b210d492ec726" aria-live="off">
 			<div class="swiper-slide swiper-slide-duplicate me-0 me-md-4 swiper-slide-duplicate-next" data-swiper-slide-index="5"
-				role="group" aria-label="6 / 8" style="width: 654.261px; margin-right: 24px;"><a
-					href="#" target="_blank"><img src="images/slider-img-3.jfif" alt=""></a>
+				role="group" aria-label="6 / 8" style="width: 654.261px; margin-right: 24px;">
+				<!-- <a
+					href="#" target="_blank"><img src="images/slider-img-3.jfif" alt="">
+				</a> -->
+				<img src="images/banner1.jpg" alt="">
+				
 			</div>
 			<div class="swiper-slide swiper-slide-duplicate me-0 me-md-4" data-swiper-slide-index="6" role="group" aria-label="7 / 8"
-				style="width: 654.261px; margin-right: 24px;"><a href="#" target="_blank"><img
-						src="images/slider-img-4.jfif" alt=""></a></div>
+				style="width: 654.261px; margin-right: 24px;">
+				<!-- <a href="#" target="_blank"><img
+						src="images/slider-img-4.jfif" alt=""></a> -->
+						<img
+						src="images/banner2.jpg" alt="">
+					</div>
 			<div class="swiper-slide swiper-slide-duplicate me-0 me-md-4" data-swiper-slide-index="7" role="group" aria-label="8 / 8"
-				style="width: 654.261px; margin-right: 24px;"><a
+				style="width: 654.261px; margin-right: 24px;">
+				<!-- <a
 					href="#"
-					target="_blank"><img src="images/slider-img-5.jfif" alt=""></a></div>
+					target="_blank"><img src="images/slider-img-5.jfif" alt=""></a> -->
+					<img src="images/banner1.jpg" alt="">
+				</div>
 			<div class="swiper-slide me-0 me-md-4" data-swiper-slide-index="0" role="group" aria-label="1 / 8"
-				style="width: 654.261px; margin-right: 24px;"><a href="#"><img
-						src="images/Banner-9442VNSI.webp"></a></div>
+				style="width: 654.261px; margin-right: 24px;"><img
+						src="images/banner2.jpg"></div>
 			<div class="swiper-slide me-0 me-md-4" data-swiper-slide-index="1" role="group" aria-label="2 / 8"
-				style="width: 654.261px; margin-right: 24px;"><a href="#"><img
-						src="images/Banner-9448JILIVNDSI.webp"></a>
+				style="width: 654.261px; margin-right: 24px;"><img
+						src="images/banner1.jpg">
 			</div>
-			<div class="swiper-slide me-0 me-md-4" data-swiper-slide-index="2" role="group" aria-label="3 / 8"
-				style="width: 654.261px; margin-right: 24px;"><a href="#"><img
-						src="images/Banner-9448JDBVNDSI.webp"></a></div>
+			<!-- <div class="swiper-slide me-0 me-md-4" data-swiper-slide-index="2" role="group" aria-label="3 / 8"
+				style="width: 654.261px; margin-right: 24px;"><img
+						src="images/banner2.jpg"></div>
 			<div class="swiper-slide me-0 me-md-4 swiper-slide-prev me-0 me-md-4" data-swiper-slide-index="3" role="group" aria-label="4 / 8"
 				style="width: 654.261px; margin-right: 24px;"><a
 					href="#"
@@ -2422,9 +2433,11 @@
 				style="width: 654.261px; margin-right: 24px;"><a href="#" target="_blank"><img
 						src="images/slider-img-3.jfif" alt=""></a></div>
 			<div class="swiper-slide me-0 me-md-4" data-swiper-slide-index="6" role="group" aria-label="7 / 8"
-				style="width: 654.261px; margin-right: 24px;"><a href="#" target="_blank"><img
-						src="images/slider-img-4.jfif" alt=""></a></div>
-			<div class="swiper-slide me-0 me-md-4" data-swiper-slide-index="7" role="group" aria-label="8 / 8"
+				style="width: 654.261px; margin-right: 24px;">
+				<a href="#" target="_blank">
+					<img src="images/slider-img-4.jfif" alt="">
+					</div> -->
+			<!-- <div class="swiper-slide me-0 me-md-4" data-swiper-slide-index="7" role="group" aria-label="8 / 8"
 				style="width: 654.261px; margin-right: 24px;"><a
 					href="#"
 					target="_blank"><img src="images/slider-img-5.jfif" alt=""></a></div>
@@ -2437,7 +2450,7 @@
 			</div>
 			<div class="swiper-slide me-0 me-md-4 swiper-slide-duplicate" data-swiper-slide-index="2" role="group" aria-label="3 / 8"
 				style="width: 654.261px; margin-right: 24px;"><a href="#"><img
-						src="images/Banner-9448JDBVNDSI.webp"></a></div>
+						src="images/Banner-9448JDBVNDSI.webp"></a></div> -->
 		</div>
 		<div class="swiper-pagination"></div>
 		<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
@@ -9338,28 +9351,34 @@
 
 
 
-	<div id="banking-btn" class="page-fix-bt  d-none d-md-block">
-		<button class="btn btn-deposit" onclick="localStorage.getItem('token') ? window.location.href = '/Deposit.html' : GameHallHandler.openLoginPopup(this)"
->
-			<i class="icon icon-deposit"></i>
-			<span>CASH IN</span>
-		</button>
-		<button class="btn btn-withdraw" onclick="localStorage.getItem('token') ? window.location.href = '/Withdraw.html' : GameHallHandler.openLoginPopup(this)"
->
-			<i class="icon icon-receive"></i>
-			<span>CASH OUT</span>
-		</button>
+	<div id="banking-btn" class="page-fix-bt">
+		
+	<button class="btn btn-bonus" onclick="GameHallHandler.openLoginPopup(this)">
+		<img src="https://land2.mpsimg.com/theme/images/src-common/BRAND-img/ALO789/bonus.webp?v=202512091105" alt="Reward">
+		<span>Reward</span>
+	</button>
 
-
-		<a class="btn btn-affiliate" href="/pages/playerReferFriendsProgram.html"  value="Refer a friend"
-			onclick="GameHallHandler.openMenuIframe(this)">
-			<img src="images/affiliate-refer-a-friend.webp" alt="Refer a Friend">
-			<span>Refer a friend</span>
-		</a>
-
-
-
-	</div>
+	
+	<button class="btn btn-cash-in-out" style="border: 1px solid #F6CA8F;
+    background: linear-gradient(180deg, #E3A43A 0%, #FFE785 50%, #E3A43A 100%); color:black" onclick="GameHallHandler.openLoginPopup(this)">
+		<img src="https://land2.mpsimg.com/theme/images/src-common/BRAND-img/ALO789/cash.webp?v=202512091105" alt="CASH IN - OUT">
+		<span style="color: black;">CASH IN - OUT</span>
+	</button>
+	
+	
+	<button class="btn btn-refer" style="border: 1px solid #F6CA8F;
+    background: linear-gradient(180deg, #E3A43A 0%, #FFE785 50%, #E3A43A 100%); color:black" onclick="GameHallHandler.openLoginPopup(this)">
+		<img src="https://land2.mpsimg.com/theme/images/src-common/BRAND-img/ALO789/refer-a-friend.webp?v=202512091105" alt="Refer a Friend">
+		<span style="color: black;">Refer a friend</span>
+	</button>
+	
+	
+	
+	
+	
+	
+	
+</div>
 
 
 	<script src="./js/sv388Api.js"></script>
