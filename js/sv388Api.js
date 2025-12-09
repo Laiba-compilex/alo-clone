@@ -472,7 +472,158 @@ async function balanceRefetch() {
     throw error;
   }
 }
+async function fetchSv388EventInfo() {
+  try {
+    const response = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent('https://www.sv388.com/homePage/player/getSv388EventInfo'));
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching SV388 event info:', error);
+    return null;
+  }
+}
+
+function populateSv388Calendar(events) {
+  if (!events || !Array.isArray(events)) return;
+  
+  // Group events by date
+  const eventsByDate = {};
+  events.forEach(event => {
+    const dateKey = event.date.split(' ')[0]; // YYYY-MM-DD
+    if (!eventsByDate[dateKey]) eventsByDate[dateKey] = [];
+    eventsByDate[dateKey].push(event);
+  });
+  
+  // Get current week dates (Monday to Sunday)
+  const today = new Date();
+  const dayOfWeek = today.getDay();
+  const monday = new Date(today);
+  monday.setDate(today.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1));
+  
+  // Populate this week
+  const firstWeekTitle = document.getElementById('firstWeekTitle');
+  const thisWeekRow = document.querySelector('#thisWeek tbody.this-week tr:last-child');
+  
+  if (firstWeekTitle && thisWeekRow) {
+    const ths = firstWeekTitle.querySelectorAll('th');
+    const tds = thisWeekRow.querySelectorAll('td');
+    
+    for (let i = 0; i < 7; i++) {
+      const currentDate = new Date(monday);
+      currentDate.setDate(monday.getDate() + i);
+      const year = currentDate.getFullYear();
+      const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+      const day = String(currentDate.getDate()).padStart(2, '0');
+      const dateStr = `${year}-${month}-${day}`;
+      const dayEvents = eventsByDate[dateStr] || [];
+      
+      // Update date header
+      ths[i].textContent = currentDate.getDate();
+      if (currentDate.toDateString() === today.toDateString()) {
+        ths[i].classList.add('today');
+        tds[i].classList.add('today');
+      }
+      
+      // Update events
+      tds[i].setAttribute('eventcount', dayEvents.length);
+      tds[i].innerHTML = '';
+      dayEvents.forEach(event => {
+        const time = event.date.split(' ')[1].substring(0, 5);
+        const dl = document.createElement('dl');
+        const dt = document.createElement('dt');
+        dt.textContent = event.arena;
+        const dd = document.createElement('dd');
+        dd.innerHTML = `${time} &nbsp;F${event.matchcount}`;
+        dl.appendChild(dt);
+        dl.appendChild(dd);
+        tds[i].appendChild(dl);
+      });
+    }
+  }
+  
+  // Populate future weeks
+  const calendarContainer = document.getElementById('calendar_container');
+  if (!calendarContainer) return;
+  calendarContainer.innerHTML = '';
+  
+  const dates = Object.keys(eventsByDate).sort();
+  const nextWeekStart = new Date(monday);
+  nextWeekStart.setDate(monday.getDate() + 7);
+  
+  // Find the last date with events
+  const lastEventDate = dates.length > 0 ? new Date(dates[dates.length - 1]) : nextWeekStart;
+  
+  // Generate complete weeks from nextWeekStart to lastEventDate
+  let currentWeekStart = new Date(nextWeekStart);
+  
+  while (currentWeekStart <= lastEventDate) {
+    const dateRow = document.createElement('tr');
+    const eventRow = document.createElement('tr');
+    
+    for (let i = 0; i < 7; i++) {
+      const currentDate = new Date(currentWeekStart);
+      currentDate.setDate(currentWeekStart.getDate() + i);
+      const year = currentDate.getFullYear();
+      const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+      const day = String(currentDate.getDate()).padStart(2, '0');
+      const dateStr = `${year}-${month}-${day}`;
+      const dayEvents = eventsByDate[dateStr] || [];
+      
+      // Create date header
+      const th = document.createElement('th');
+      th.setAttribute('day', currentDate.getDate());
+      th.setAttribute('month', currentDate.getMonth() + 1);
+      th.textContent = currentDate.getDate();
+      if (currentDate.getDate() === 1) {
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        th.innerHTML = `${currentDate.getDate()}<span class="month-start">${months[currentDate.getMonth()]}</span>`;
+      }
+      dateRow.appendChild(th);
+      
+      // Create event cell
+      const td = document.createElement('td');
+      td.setAttribute('eventcount', dayEvents.length);
+      td.setAttribute('day', currentDate.getDate());
+      td.setAttribute('month', currentDate.getMonth() + 1);
+      
+      dayEvents.forEach(event => {
+        const time = event.date.split(' ')[1].substring(0, 5);
+        const dl = document.createElement('dl');
+        const dt = document.createElement('dt');
+        dt.textContent = event.arena;
+        const dd = document.createElement('dd');
+        dd.innerHTML = `${time} &nbsp;F${event.matchcount}`;
+        dl.appendChild(dt);
+        dl.appendChild(dd);
+        td.appendChild(dl);
+      });
+      
+      eventRow.appendChild(td);
+    }
+    
+    calendarContainer.appendChild(dateRow);
+    calendarContainer.appendChild(eventRow);
+    
+    // Move to next week
+    currentWeekStart.setDate(currentWeekStart.getDate() + 7);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
+  // Fetch and populate SV388 calendar
+  const sv388Data = await fetchSv388EventInfo();
+  if (sv388Data) {
+    populateSv388Calendar(sv388Data);
+    
+    // Update calendar title with current month
+    const now = new Date();
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const titleEl = document.getElementById('todayTitle');
+    if (titleEl) {
+      titleEl.innerHTML = `${now.getFullYear()} <span>${months[now.getMonth()]}</span>&nbsp;<span>Cockfight Calendar</span>`;
+    }
+  }
+  
   APIUser().then((data) => {
     if (localStorage.getItem("token")) {
       const loginBox = document.getElementById("userInfo");
