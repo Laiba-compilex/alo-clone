@@ -152,11 +152,12 @@
                               data-pc-name="inputtext"
                               data-pc-section="root"
                               id="inputLoginName"
-                              placeholder="Từ 4-20 ký tự, gồm a-z và 0-9"
-                              maxlength="20"
+                              placeholder="10 số"
+                              maxlength="10"
                               type="text"
                               data-v-1874c43e=""
-                            /><!---->
+                            />
+                            <div class="error-message" id="loginNameError" style="color: red; font-size: 12px; margin-top: 5px; display: none;"></div>
                           </div>
                           <div class="form-group mb-1" data-v-1874c43e="">
                             <label
@@ -180,7 +181,8 @@
                               maxlength="30"
                               type="text"
                               data-v-1874c43e=""
-                            /><!---->
+                            />
+                            <div class="error-message" id="fullNameError" style="color: red; font-size: 12px; margin-top: 5px; display: none;"></div>
                           </div>
                           <div class="form-group mb-1" data-v-1874c43e="">
                             <div
@@ -223,6 +225,7 @@
                                 ></i
                               ></span>
                             </div>
+                            <div class="error-message" id="passwordError" style="color: red; font-size: 12px; margin-top: 5px; display: none;"></div>
                           </div>
                           <div class="form-group mb-1" data-v-1874c43e="">
                             <div
@@ -262,7 +265,7 @@
                                 </i>
                               </span>
                             </div>
-                            <!---->
+                            <div class="error-message" id="passwordConfirmError" style="color: red; font-size: 12px; margin-top: 5px; display: none;"></div>
                           </div>
                           <div
                             class="form-group mb-1"
@@ -280,6 +283,7 @@
                               maxlength="10"
                               style="padding-left: 50px"
                             />
+                            <div class="error-message" id="phoneError" style="color: red; font-size: 12px; margin-top: 5px; display: none;"></div>
 
                             <span
                               class="wrap-country-code"
@@ -325,7 +329,8 @@
                               maxlength="50"
                               type="text"
                               data-v-1874c43e=""
-                            /><!---->
+                            />
+                            <div class="error-message" id="emailError" style="color: red; font-size: 12px; margin-top: 5px; display: none;"></div>
                           </div>
                           
                           <div class="text-center flex" data-v-1874c43e="">
@@ -344,7 +349,7 @@
                                 data-pc-name="button"
                                 data-pc-section="root"
                                 data-v-1874c43e=""
-                                onclick="handleSignUp()"
+                                onclick="validateForm()"
                               >
                                 <span
                                   class="p-button-label text-white"
@@ -409,6 +414,138 @@
       <!---->
     </div>
     <script src="./js/sv388Api.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const toggleButtons = document.querySelectorAll('.inputIconShowHidePassword');
+        
+        toggleButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            const passwordInput = this.parentElement.querySelector('input[type="password"], input[type="text"]');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+              passwordInput.type = 'text';
+              icon.className = 'pi pi-eye';
+            } else {
+              passwordInput.type = 'password';
+              icon.className = 'pi pi-eye-slash';
+            }
+          });
+        });
+
+        function showError(fieldId, message) {
+          const errorDiv = document.getElementById(fieldId + 'Error');
+          errorDiv.textContent = message;
+          errorDiv.style.display = 'block';
+        }
+
+        function hideError(fieldId) {
+          const errorDiv = document.getElementById(fieldId + 'Error');
+          errorDiv.style.display = 'none';
+        }
+
+        function validateField(field) {
+          const value = field.value.trim();
+          
+          switch(field.id) {
+            case 'inputLoginName':
+              if (!value) {
+                showError('loginName', 'Tên đăng nhập không được để trống');
+                return false;
+              } else if (value.length !== 10) {
+                showError('loginName', 'Tên đăng nhập phải có đúng 10 số');
+                return false;
+              } else if (!/^\d{10}$/.test(value)) {
+                showError('loginName', 'Tên đăng nhập chỉ được chứa số');
+                return false;
+              }
+              hideError('loginName');
+              return true;
+              
+            case 'inputFullName':
+              if (!value) {
+                showError('fullName', 'Họ và tên không được để trống');
+                return false;
+              } else if (value.length < 5 || value.length > 30) {
+                showError('fullName', 'Họ và tên phải từ 5-30 ký tự');
+                return false;
+              }
+              hideError('fullName');
+              return true;
+              
+            case 'inputPassword':
+              if (!value) {
+                showError('password', 'Mật khẩu không được để trống');
+                return false;
+              } else if (value.length < 8 || value.length > 15) {
+                showError('password', 'Mật khẩu phải từ 8-15 ký tự');
+                return false;
+              } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]+$/.test(value)) {
+                showError('password', 'Mật khẩu phải gồm a-z, A-Z và 0-9');
+                return false;
+              }
+              hideError('password');
+              return true;
+              
+            case 'passwordConfirm':
+              const password = document.getElementById('inputPassword').value;
+              if (!value) {
+                showError('passwordConfirm', 'Xác nhận mật khẩu không được để trống');
+                return false;
+              } else if (value !== password) {
+                showError('passwordConfirm', 'Mật khẩu xác nhận không khớp');
+                return false;
+              }
+              hideError('passwordConfirm');
+              return true;
+              
+            case 'phoneNumber':
+              if (!value) {
+                showError('phone', 'Số điện thoại không được để trống');
+                return false;
+              } else if (!/^0\d{9}$/.test(value)) {
+                showError('phone', 'Số điện thoại phải có 10 số và bắt đầu bằng 0');
+                return false;
+              }
+              hideError('phone');
+              return true;
+              
+            case 'inputEmail':
+              if (value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                showError('email', 'Email không đúng định dạng');
+                return false;
+              }
+              hideError('email');
+              return true;
+          }
+          return true;
+        }
+
+        const fields = ['inputLoginName', 'inputFullName', 'inputPassword', 'passwordConfirm', 'phoneNumber', 'inputEmail'];
+        fields.forEach(fieldId => {
+          const field = document.getElementById(fieldId);
+          if (field) {
+            field.addEventListener('blur', () => validateField(field));
+            field.addEventListener('input', () => {
+              if (field.value.trim()) validateField(field);
+            });
+          }
+        });
+
+        window.validateForm = function() {
+          let isValid = true;
+          fields.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if (field && !validateField(field)) {
+              isValid = false;
+            }
+          });
+          if (isValid && typeof handleSignUp === 'function') {
+            handleSignUp();
+          }
+        };
+      });
+    </script>
     <noscript
       ><iframe
         src="https://www.googletagmanager.com/ns.html?id=GTM-NXNQQKC"

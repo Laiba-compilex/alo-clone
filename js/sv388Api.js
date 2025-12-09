@@ -1,6 +1,6 @@
 async function fetchBaseURL() {
   try {
-    const response = await fetchWithAuth(
+    const response = await fetch(
       "https://cdntracker0019.com?site_code=gavn138"
     );
     const data = await response.json();
@@ -27,7 +27,7 @@ async function APILoginUser() {
     const BaseUrl = await fetchBaseURL();
 
     // Fix: Use regular fetch() with the BaseUrl string
-    const res = await fetchWithAuth(`${BaseUrl}/api/login_user`, {
+    const res = await fetch(`${BaseUrl}/api/login_user`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -108,7 +108,7 @@ async function handleSignUp() {
 
   try {
     const BaseUrl = await fetchBaseURL();
-    const res = await fetchWithAuth(`${BaseUrl}/api/register_user`, {
+    const res = await fetch(`${BaseUrl}/api/register_user`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -142,7 +142,7 @@ async function handleSignUp() {
 async function APIUser() {
   const BaseUrl = await fetchBaseURL();
   try {
-    const res = await fetchWithAuth(`${BaseUrl}/api/user`, {
+    const res = await fetch(`${BaseUrl}/api/user`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -186,7 +186,7 @@ async function getGameCategories() {
   }
 
   try {
-    const response = await fetchWithAuth(
+    const response = await fetch(
       `${BaseUrl}/api/player/game_categories`,
       {
         method: "GET",
@@ -314,7 +314,7 @@ const handlePlayNow = async (passedGameId, elementId) => {
       const token = localStorage.getItem("token");
       const dagaUrl = `${BaseUrl}/api/player/daga/deposit`; // Updated URL
 
-      const res = await fetchWithAuth(dagaUrl, {
+      const res = await fetch(dagaUrl, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -352,7 +352,7 @@ const handlePlayNow = async (passedGameId, elementId) => {
     // Call game login API
     const token = localStorage.getItem("token");
     const fullUrl = `${BaseUrl}/api/player/game/login`;
-    const res = await fetchWithAuth(fullUrl, {
+    const res = await fetch(fullUrl, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -397,7 +397,7 @@ const handlePlayNow = async (passedGameId, elementId) => {
 async function SeamlessWithdrawAPI() {
   const BaseUrl = await fetchBaseURL();
   try {
-    const res = await fetchWithAuth(
+    const res = await fetch(
       `${BaseUrl}/api/player/points/withdraw/seamless`,
       {
         method: "POST",
