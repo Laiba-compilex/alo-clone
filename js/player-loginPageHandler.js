@@ -442,14 +442,16 @@
     };
 
     GameHallHandler.switchGamePage = function(gameType) {
-        if (!document.getElementById(gameType + "Tab").classList.contains("select")) {
+        console.log("Switching to game type:", gameType);
+        if (!document.getElementById(gameType + "Tab")?.classList.contains("select")) {
             JCache.get("#gamePageDiv>section").hide();
             
             if (0 == JCache.get("#" + gameType + "Game").length) {
-                loadEntryGameType(gameType, PageConfig.showEntryGameType.includes(gameType.toUpperCase()));
+                loadEntryGameType(gameType, PageConfig.showEntryGameType?.includes(gameType.toUpperCase()));
             }
             
             if ("home" == gameType) {
+                console.log("Showing home page elements");
                 showHomePageElements();
             } else {
                 showGameTypePageElements(gameType);
@@ -542,13 +544,13 @@
             bonusEventHome.style.display = "none";
         }
         
-        for (let i = 0; i < PageConfig.homeHiddenType.length; i++) {
+        for (let i = 0; i < PageConfig.homeHiddenType?.length; i++) {
             JCache.get("#" + PageConfig.homeHiddenType[i] + "Game").hide();
         }
     }
 
     function showGameTypePageElements(gameType) {
-        for (let i = 0; i < PageConfig.homeHiddenType.length; i++) {
+        for (let i = 0; i < PageConfig.homeHiddenType?.length; i++) {
             JCache.get("#" + PageConfig.homeHiddenType[i] + "Game").hide();
         }
         
