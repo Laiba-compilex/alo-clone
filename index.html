@@ -9343,7 +9343,7 @@
 
 	<div id="banking-btn" class="page-fix-bt">
 		
-	<button class="btn btn-bonus" onclick="GameHallHandler.openLoginPopup(this)">
+	<button class="btn btn-bonus" onclick="localStorage.getItem('token') ? window.location.href = '/reward.html' : GameHallHandler.openLoginPopup(this)">
 		<img src="https://land2.mpsimg.com/theme/images/src-common/BRAND-img/ALO789/bonus.webp?v=202512091105" alt="Reward">
 		<span>Reward</span>
 	</button>
@@ -9357,9 +9357,11 @@
 	
 	
 	<button class="btn btn-refer" style="border: 1px solid #F6CA8F;
-    background: linear-gradient(180deg, #E3A43A 0%, #FFE785 50%, #E3A43A 100%); color:black" onclick="GameHallHandler.openLoginPopup(this)">
+    background: linear-gradient(180deg, #E3A43A 0%, #FFE785 50%, #E3A43A 100%); color:black" onclick="GameHallHandler.openMenuIframe(this)">
+	<a href="/pages/playerReferFriendsProgram.html">
 		<img src="https://land2.mpsimg.com/theme/images/src-common/BRAND-img/ALO789/refer-a-friend.webp?v=202512091105" alt="Refer a Friend">
 		<span style="color: black;">Refer a friend</span>
+		</a>
 	</button>
 	
 	
