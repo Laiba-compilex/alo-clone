@@ -9350,7 +9350,7 @@
 
 	
 	<button class="btn btn-cash-in-out" style="border: 1px solid #F6CA8F;
-    background: linear-gradient(180deg, #E3A43A 0%, #FFE785 50%, #E3A43A 100%); color:black" onclick="GameHallHandler.openLoginPopup(this)">
+    background: linear-gradient(180deg, #E3A43A 0%, #FFE785 50%, #E3A43A 100%); color:black" onclick="localStorage.getItem('token') ? window.location.href = '/Withdraw.html' : GameHallHandler.openLoginPopup(this)">
 		<img src="https://land2.mpsimg.com/theme/images/src-common/BRAND-img/ALO789/cash.webp?v=202512091105" alt="CASH IN - OUT">
 		<span style="color: black;">CASH IN - OUT</span>
 	</button>
