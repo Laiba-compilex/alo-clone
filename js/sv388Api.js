@@ -474,7 +474,7 @@ async function balanceRefetch() {
 }
 async function fetchSv388EventInfo() {
   try {
-    const response = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent('https://www.sv388.com/homePage/player/getSv388EventInfo'));
+    const response = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent('https://www.cpcvs388.com/homePage/player/getSv388EventInfo'));
     const data = await response.json();
     return data;
   } catch (error) {
