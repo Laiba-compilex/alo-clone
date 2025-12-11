@@ -4,13 +4,15 @@
 <head>
 	<style>
 		/* Keep login box hidden by default to avoid flash; JS will show it when needed */
-		.page-login-box { display: none !important; }
-		
+		.page-login-box {
+			display: none !important;
+		}
+
 		/* Dropdown Menu Styles */
 		.dropdown {
 			position: relative;
 		}
-		
+
 		.dropdown-menu {
 			display: none;
 			position: absolute;
@@ -24,11 +26,11 @@
 			z-index: 1000;
 			margin-top: 8px;
 		}
-		
+
 		.dropdown-menu.show {
 			display: block;
 		}
-		
+
 		.dropdown-item {
 			display: flex;
 			align-items: center;
@@ -39,21 +41,21 @@
 			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 			position: relative;
 		}
-		
+
 		.dropdown-item:last-child {
 			border-bottom: none;
 		}
-		
+
 		.dropdown-item:hover {
 			background: rgba(255, 255, 255, 0.1);
 		}
-		
+
 		.dropdown-item i {
 			margin-right: 12px;
 			font-size: 16px;
 			width: 20px;
 		}
-		
+
 		.dropdown-item span {
 			font-size: 14px;
 			font-weight: 400;
@@ -107,8 +109,8 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
 		integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" href="css/3rdparty-swiper-bundle.min.css">
-<script type="text/javaScript" src="js/3rdparty-swiper-bundle.min.js"></script>
+	<link rel="stylesheet" href="css/3rdparty-swiper-bundle.min.css">
+	<script type="text/javaScript" src="js/3rdparty-swiper-bundle.min.js"></script>
 
 	<!-- Google Tag Manager -->
 	<script>(function (w, d, s, l, i) {
@@ -247,12 +249,12 @@
 	<script type="text/javascript" src="js/common-InboxUtil.js"></script>
 	<script type="text/javascript" src="js/player-raceHandler.js"></script>
 	<script type="text/javascript" src="js/player-loginPageHandler.js"></script>
-<script>
+	<script>
 		PageConfig = {};
 		PageConfig.isMobile = false;
 		PageConfig.logoImageUrl = '/service/image/cache?type=LOGO&lang=en&isMobile=0&isAgent=0&brand=ALO789&v=1738820193796';
 
-</script>
+	</script>
 	<!-- <script type="text/javascript">
 		PageConfig = {};
 		PageConfig.gameHallType = 'NEW_GAMEHALL';
@@ -1760,7 +1762,7 @@
 		function stopYoutube() {
 			$j('#ytplayer')[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
 		}
-		
+
 		// Dropdown menu functionality
 		function toggleDropdown() {
 			const dropdown = document.getElementById('dropdownMenu');
@@ -1770,9 +1772,9 @@
 			const dropdown = document.getElementById('dropdownMenu1');
 			dropdown.classList.toggle('show');
 		}
-		
+
 		// Close dropdown when clicking outside
-		window.onclick = function(event) {
+		window.onclick = function (event) {
 			if (!event.target.matches('.btn-menu') && !event.target.matches('.icon-hamburger')) {
 				const dropdown = document.getElementById('dropdownMenu');
 				if (dropdown && dropdown.classList.contains('show')) {
@@ -1827,18 +1829,20 @@
 
 			</div>
 
-			
+
 		</div>
 		<div class="navigation-btn">
 			<div id="language" class="btn btn-language" onclick="GameHallHandler.openMenu()">
 				<a href="javascript:void(0)">
-					<img class="img-flag" src="images/FLAG-img-flag-gb.webp" alt="FLAG-img-flag-gb.webp" style="width: 40px; height: unset; object-fit: contain;">
+					<img class="img-flag" src="images/FLAG-img-flag-gb.webp" alt="FLAG-img-flag-gb.webp"
+						style="width: 40px; height: unset; object-fit: contain;">
 					<span>EN</span>
 				</a>
 				<ul id="selectLang" class="lang-dropdown">
 					<li>
 						<a lang="en" onclick="GameHallHandler.changeLang('en');" href="index.html">
-							<img class="img-flag" src="images/FLAG-img-flag-gb.webp" alt="FLAG-img-flag-gb.webp" style="width: 40px; height: unset; object-fit: contain;">
+							<img class="img-flag" src="images/FLAG-img-flag-gb.webp" alt="FLAG-img-flag-gb.webp"
+								style="width: 40px; height: unset; object-fit: contain;">
 							<span>EN</span>
 						</a>
 					</li>
@@ -1876,7 +1880,8 @@
 						<i class="icon-search"></i>
 						<span>Search</span>
 					</div>
-					<div class="dropdown-item logout" id="logout-menuitem" onclick="localStorage.removeItem('token'); location.reload();">
+					<div class="dropdown-item logout" id="logout-menuitem"
+						onclick="localStorage.removeItem('token'); location.reload();">
 						<i class="icon-logout"></i>
 						<span>LOGOUT</span>
 					</div>
@@ -1901,14 +1906,14 @@
 	<div class="d-block d-md-none py-3 px-3 header-navigation h-auto" id="mobileTopBar">
 		<div class="d-flex justify-content-between align-items-center">
 
-		<div id="userInfo1" class="d-flex align-items-center justify-content-between">
-			<!-- Start hidden to avoid flash; will be shown by inline script only if no token is present -->
-			<div class="page-login-box d-flex align-items-center justify-content-start gap-1 d-md-none login-box-mobile" style="
+			<div id="userInfo1" class="d-flex align-items-center justify-content-between">
+				<!-- Start hidden to avoid flash; will be shown by inline script only if no token is present -->
+				<div class="page-login-box d-flex align-items-center justify-content-start gap-1 d-md-none login-box-mobile"
+					style="
 			display: none;
 			">
-				<a class="btn-primary d-flex align-items-center" href="javascript:void(0);"
-					onclick="GameHallHandler.openLoginPopup(this)" 
-					style="
+					<a class="btn-primary d-flex align-items-center" href="javascript:void(0);"
+						onclick="GameHallHandler.openLoginPopup(this)" style="
 					color: #fff;
     text-decoration: none;
     max-height: 40px;
@@ -1944,8 +1949,7 @@
     --bs-btn-disabled-border-color: #0d6efd;
 					">Login</a>
 
-				<a class="btn-secondary d-flex align-items-center" href="signUp.html" 
-				style="
+					<a class="btn-secondary d-flex align-items-center" href="signUp.html" style="
 				color: #fff;
     text-decoration: none;
     max-height: 40px;
@@ -1983,63 +1987,67 @@
     --bs-btn-disabled-bg: #6c757d;
     --bs-btn-disabled-border-color: #6c757d;
 				">Sign Up
-				</a>
-			</div>
-			
+					</a>
+				</div>
 
-			
-		</div>
-		<div class="d-flex align-items-center justify-content-end gap-1">
+
+
+			</div>
+			<div class="d-flex align-items-center justify-content-end gap-1">
 				<div onclick="window.location.href = 'deposit.html'" class="wallet-icon" style="cursor: pointer;"></div>
 				<div class="btn btn-menu dropdown" onclick="toggleDropdown1()">
-				<i class="icon-hamburger" style="color: white;" href="javascript:void(0);">
-					<span id="menu_dot" class="dot" style="display: none;"></span>
-				</i>
-				<div id="dropdownMenu1" class="dropdown-menu">
-					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
-						<i class="icon-user"></i>
-						<span>My Info</span>
-					</div>
-					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
-						<i class="icon-game"></i>
-						<span>Game Partner</span>
-					</div>
-					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
-						<i class="icon-phone"></i>
-						<span>Contact Us</span>
-					</div>
-					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
-						<i class="icon-download"></i>
-						<span>Download APP</span>
-					</div>
-					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
-						<i class="icon-search"></i>
-						<span>Search</span>
-					</div>
-					<div class="dropdown-item logout" id="logout-menuitem1" onclick="localStorage.removeItem('token'); location.reload();">
-						<i class="icon-logout"></i>
-						<span>LOGOUT</span>
+					<i class="icon-hamburger" style="color: white;" href="javascript:void(0);">
+						<span id="menu_dot" class="dot" style="display: none;"></span>
+					</i>
+					<div id="dropdownMenu1" class="dropdown-menu">
+						<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
+							<i class="icon-user"></i>
+							<span>My Info</span>
+						</div>
+						<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
+							<i class="icon-game"></i>
+							<span>Game Partner</span>
+						</div>
+						<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
+							<i class="icon-phone"></i>
+							<span>Contact Us</span>
+						</div>
+						<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
+							<i class="icon-download"></i>
+							<span>Download APP</span>
+						</div>
+						<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
+							<i class="icon-search"></i>
+							<span>Search</span>
+						</div>
+						<div class="dropdown-item logout" id="logout-menuitem1"
+							onclick="localStorage.removeItem('token'); location.reload();">
+							<i class="icon-logout"></i>
+							<span>LOGOUT</span>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<script>
-				document.getElementById("logout-menuitem1").style.display = localStorage.getItem('token') ? 'flex' : 'none';
-			</script>
+				<script>
+					document.getElementById("logout-menuitem1").style.display = localStorage.getItem('token') ? 'flex' : 'none';
+				</script>
 
 
 				<style>
 					.wallet-icon {
 						font-family: 'icomoon' !important;
+
 						&::before {
 							content: "\e9b7";
 						}
 					}
+
 					.menu-hamburger-icon {
 						font-family: 'icomoon' !important;
+
 						&::before {
 							content: "\e923";
-						}	
+						}
 					}
 				</style>
 			</div>
@@ -2047,8 +2055,8 @@
 
 		<div class="d-flex align-items-center justify-content-between flex-row gap-2" style="margin-top: 10px;">
 			<div class="d-flex gap-1 align-items-center
-			." >
-				
+			.">
+
 				<button style="
 				    transform: translateY(6px);
     min-width: 50px;
@@ -2061,12 +2069,12 @@
     -webkit-backdrop-filter: blur(5px);
     background-color: rgba(255, 255, 255, 0.1);
     color: #FFF;
-					" class="btn btn-deposit d-flex justify-content-center align-items-center flex-column" onclick="localStorage.getItem('token') ? window.location.href = '/Deposit.html' : GameHallHandler.openLoginPopup(this)"
-	>
-				<i class="icon icon-deposit" style="font-size: 26px;"></i>
-				<span>CASH IN</span>
-			</button>
-			<button style="
+					" class="btn btn-deposit d-flex justify-content-center align-items-center flex-column"
+					onclick="localStorage.getItem('token') ? window.location.href = '/Deposit.html' : GameHallHandler.openLoginPopup(this)">
+					<i class="icon icon-deposit" style="font-size: 26px;"></i>
+					<span>CASH IN</span>
+				</button>
+				<button style="
 				    transform: translateY(6px);
     min-width: 50px;
     padding: 2px;
@@ -2078,14 +2086,15 @@
     -webkit-backdrop-filter: blur(5px);
     background-color: rgba(255, 255, 255, 0.1);
     color: #FFF;
-					" class="btn btn-deposit d-flex justify-content-center align-items-center flex-column" onclick="localStorage.getItem('token') ? window.location.href = '/Withdraw.html' : GameHallHandler.openLoginPopup(this)"
-	>
-				<i class="icon icon-receive" style="font-size: 26px;"></i>
-				<span>CASH OUT</span>
-			</button>
+					" class="btn btn-deposit d-flex justify-content-center align-items-center flex-column"
+					onclick="localStorage.getItem('token') ? window.location.href = '/Withdraw.html' : GameHallHandler.openLoginPopup(this)">
+					<i class="icon icon-receive" style="font-size: 26px;"></i>
+					<span>CASH OUT</span>
+				</button>
 			</div>
 			<div>
-				<img src="https://www.alo789ho.com/service/image/cache?type=LOGO&lang=en&isMobile=0&isAgent=0&brand=ALO789&v=1738820193796" alt="" style="
+				<img src="https://www.alo789ho.com/service/image/cache?type=LOGO&lang=en&isMobile=0&isAgent=0&brand=ALO789&v=1738820193796"
+					alt="" style="
 				width: auto;
     height: auto;
     max-height: 45px;
@@ -2099,32 +2108,32 @@
 	</div>
 
 	<script>
-			// Run immediately to prevent flash: show login box only when no token
-			(function(){
-				try {
-					var lb = document.getElementById('login-box');
-					if (!lb) return;
-					if (!localStorage.getItem('token')) {
-						// show with !important so head CSS doesn't override
-						lb.style.setProperty('display','flex','important');
-					} else {
-						lb.style.setProperty('display','none','important');
-					}
-				} catch (e) { /* ignore */ }
-			})();
-			(function(){
-				try {
-					var lb = document.getElementById('login-box-mobile');
-					if (!lb) return;
-					if (!localStorage.getItem('token')) {
-						// show with !important so head CSS doesn't override
-						lb.style.setProperty('display','flex','important');
-					} else {
-						lb.style.setProperty('display','none','important');
-					}
-				} catch (e) { /* ignore */ }
-			})();
-			</script>
+		// Run immediately to prevent flash: show login box only when no token
+		(function () {
+			try {
+				var lb = document.getElementById('login-box');
+				if (!lb) return;
+				if (!localStorage.getItem('token')) {
+					// show with !important so head CSS doesn't override
+					lb.style.setProperty('display', 'flex', 'important');
+				} else {
+					lb.style.setProperty('display', 'none', 'important');
+				}
+			} catch (e) { /* ignore */ }
+		})();
+		(function () {
+			try {
+				var lb = document.getElementById('login-box-mobile');
+				if (!lb) return;
+				if (!localStorage.getItem('token')) {
+					// show with !important so head CSS doesn't override
+					lb.style.setProperty('display', 'flex', 'important');
+				} else {
+					lb.style.setProperty('display', 'none', 'important');
+				}
+			} catch (e) { /* ignore */ }
+		})();
+	</script>
 
 
 
@@ -2217,33 +2226,39 @@
 
 	<style>
 		@media (max-width: 767px) {
-			.icon-home {
-			}
+			.icon-home {}
+
 			#gameMenuTabGroup {
 				height: unset !important;
 			}
-			nav > ul > li {
+
+			nav>ul>li {
 				border: none !important;
 			}
-			nav > ul > li > a {
+
+			nav>ul>li>a {
 				min-width: unset !important;
 			}
+
 			.game-icon {
 				aspect-ratio: 1/1 !important;
 				max-width: 100%;
 				width: 99% !important;
 			}
+
 			.new-game {
 				.ul-gameList {
 					display: grid !important;
 					grid-template-columns: 33% 33% 33% !important;
 					overflow-x: auto;
+
 					li {
 						overflow: unset !important;
 					}
 				}
 
 			}
+
 			.show-play {
 				.ul-gameIcon-box {
 					aspect-ratio: 1/1 !important;
@@ -2251,102 +2266,125 @@
 					width: 99% !important;
 				}
 			}
+
 			.slot-game {
-				    background: #441619 url("https://www.alo789ho.com/theme/images/src-gamehall/layout/section-SLOT.webp") center top no-repeat !important;
-    background-size: cover;
-	padding: 25px 3% 5px 3%;
-	#slotDL {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	.ul-gameList {
-		display: grid !important;
-		grid-template-columns: 33% 33% 33% !important;
+				background: #441619 url("https://www.alo789ho.com/theme/images/src-gamehall/layout/section-SLOT.webp") center top no-repeat !important;
+				background-size: cover;
+				padding: 25px 3% 5px 3%;
+
+				#slotDL {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
+
+				.ul-gameList {
+					display: grid !important;
+					grid-template-columns: 33% 33% 33% !important;
 					overflow-x: auto;
+
 					li {
 						overflow: unset !important;
 					}
 				}
-	}
-	.local-game {
-		background: transparent !important;
-    background-size: cover;
-	padding: 25px 3% 5px 3%;
-	#localDL {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	.ul-gameList {
-		display: grid !important;
-		grid-template-columns: 33% 33% 33% !important;
+			}
+
+			.local-game {
+				background: transparent !important;
+				background-size: cover;
+				padding: 25px 3% 5px 3%;
+
+				#localDL {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
+
+				.ul-gameList {
+					display: grid !important;
+					grid-template-columns: 33% 33% 33% !important;
 					overflow-x: auto;
+
 					li {
 						overflow: unset !important;
 					}
 				}
-	}
-	.rngtable-game {
-		background: #441619 url("https://www.alo789ho.com/theme/images/src-gamehall/layout/section-RNGTABLE.webp") center top no-repeat !important;
-    background-size: cover;
-	padding: 25px 3% 5px 3%;
-	#rngtableDL {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	.ul-gameList {
-		display: grid !important;
-		grid-template-columns: 33% 33% 33% !important;
+			}
+
+			.rngtable-game {
+				background: #441619 url("https://www.alo789ho.com/theme/images/src-gamehall/layout/section-RNGTABLE.webp") center top no-repeat !important;
+				background-size: cover;
+				padding: 25px 3% 5px 3%;
+
+				#rngtableDL {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
+
+				.ul-gameList {
+					display: grid !important;
+					grid-template-columns: 33% 33% 33% !important;
 					overflow-x: auto;
+
 					li {
 						overflow: unset !important;
 					}
 				}
-	}
-	.arcade-game {
-		background: #441619 url("https://www.alo789ho.com/theme/images/src-gamehall/layout/section-ARCADE.webp") center top no-repeat !important;
-    background-size: cover;
-	padding: 25px 3% 5px 3%;
-	#arcadeDL {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	.ul-gameList {
-		display: grid !important;
-		grid-template-columns: 33% 33% 33% !important;
+			}
+
+			.arcade-game {
+				background: #441619 url("https://www.alo789ho.com/theme/images/src-gamehall/layout/section-ARCADE.webp") center top no-repeat !important;
+				background-size: cover;
+				padding: 25px 3% 5px 3%;
+
+				#arcadeDL {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
+
+				.ul-gameList {
+					display: grid !important;
+					grid-template-columns: 33% 33% 33% !important;
 					overflow-x: auto;
+
 					li {
 						overflow: unset !important;
 					}
 				}
-	}
-	.MEGAJACKPOT {
-		display: none !important;
-	}
-	.fh-game {
-		background: #441619 url("https://www.alo789ho.com/theme/images/src-gamehall/layout/section-FH.webp") center top no-repeat !important;
-    background-size: cover;
-	padding: 25px 3% 5px 3%;
-	#fhDL {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	.ul-gameList {
-		display: grid !important;
-		grid-template-columns: 33% 33% 33% !important;
+			}
+
+			.MEGAJACKPOT {
+				display: none !important;
+			}
+
+			.fh-game {
+				background: #441619 url("https://www.alo789ho.com/theme/images/src-gamehall/layout/section-FH.webp") center top no-repeat !important;
+				background-size: cover;
+				padding: 25px 3% 5px 3%;
+
+				#fhDL {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
+
+				.ul-gameList {
+					display: grid !important;
+					grid-template-columns: 33% 33% 33% !important;
 					overflow-x: auto;
+
 					li {
 						overflow: unset !important;
 					}
 				}
-	}
+			}
+
 			.div-tb {
 				margin: 0px !important;
 			}
+
 			body {
 				min-width: unset !important;
 				width: 100vw;
@@ -2355,23 +2393,23 @@
 	</style>
 
 	<script>
-  // Function to handle the menu item class removal
-  function updateMenuItems() {
-    if (window.matchMedia("(max-width: 767px)").matches) {
-      const menuItems = document.querySelectorAll('#gameMenuTabWrapper li');
-      menuItems.forEach(item => {
-        item.classList.remove('active');
-        item.classList.remove('select');
-      });
-    }
-  }
+		// Function to handle the menu item class removal
+		function updateMenuItems() {
+			if (window.matchMedia("(max-width: 767px)").matches) {
+				const menuItems = document.querySelectorAll('#gameMenuTabWrapper li');
+				menuItems.forEach(item => {
+					item.classList.remove('active');
+					item.classList.remove('select');
+				});
+			}
+		}
 
-  // Run initially
-  updateMenuItems();
+		// Run initially
+		updateMenuItems();
 
-  // Add event listener for window resize to recheck the screen size
-  window.addEventListener('resize', updateMenuItems);
-</script>
+		// Add event listener for window resize to recheck the screen size
+		window.addEventListener('resize', updateMenuItems);
+	</script>
 
 	<!-- Game Type Select end-->
 	<!-- Game Hall Banner start-->
@@ -2382,37 +2420,34 @@
 
 
 
-	<div id="swiperBanner" class="swiper swiper-banner"
-		style="margin-bottom: 30px;">
+	<div id="swiperBanner" class="swiper swiper-banner" style="margin-bottom: 30px;">
 		<div class="swiper-wrapper" id="swiper-wrapper-af06b210d492ec726" aria-live="off">
-			<div class="swiper-slide swiper-slide-duplicate me-0 me-md-4 swiper-slide-duplicate-next" data-swiper-slide-index="5"
-				role="group" aria-label="6 / 8" style="width: 654.261px; margin-right: 24px;">
+			<div class="swiper-slide swiper-slide-duplicate me-0 me-md-4 swiper-slide-duplicate-next"
+				data-swiper-slide-index="5" role="group" aria-label="6 / 8"
+				style="width: 654.261px; margin-right: 24px;">
 				<!-- <a
 					href="#" target="_blank"><img src="images/slider-img-3.jfif" alt="">
 				</a> -->
 				<img src="images/banner1.jpg" alt="">
-				
+
 			</div>
-			<div class="swiper-slide swiper-slide-duplicate me-0 me-md-4" data-swiper-slide-index="6" role="group" aria-label="7 / 8"
-				style="width: 654.261px; margin-right: 24px;">
+			<div class="swiper-slide swiper-slide-duplicate me-0 me-md-4" data-swiper-slide-index="6" role="group"
+				aria-label="7 / 8" style="width: 654.261px; margin-right: 24px;">
 				<!-- <a href="#" target="_blank"><img
 						src="images/slider-img-4.jfif" alt=""></a> -->
-						<img
-						src="images/banner2.jpg" alt="">
-					</div>
-			<div class="swiper-slide swiper-slide-duplicate me-0 me-md-4" data-swiper-slide-index="7" role="group" aria-label="8 / 8"
-				style="width: 654.261px; margin-right: 24px;">
+				<img src="images/banner2.jpg" alt="">
+			</div>
+			<div class="swiper-slide swiper-slide-duplicate me-0 me-md-4" data-swiper-slide-index="7" role="group"
+				aria-label="8 / 8" style="width: 654.261px; margin-right: 24px;">
 				<!-- <a
 					href="#"
 					target="_blank"><img src="images/slider-img-5.jfif" alt=""></a> -->
-					<img src="images/banner1.jpg" alt="">
-				</div>
+				<img src="images/banner1.jpg" alt="">
+			</div>
 			<div class="swiper-slide me-0 me-md-4" data-swiper-slide-index="0" role="group" aria-label="1 / 8"
-				style="width: 654.261px; margin-right: 24px;"><img
-						src="images/banner2.jpg"></div>
+				style="width: 654.261px; margin-right: 24px;"><img src="images/banner2.jpg"></div>
 			<div class="swiper-slide me-0 me-md-4" data-swiper-slide-index="1" role="group" aria-label="2 / 8"
-				style="width: 654.261px; margin-right: 24px;"><img
-						src="images/banner1.jpg">
+				style="width: 654.261px; margin-right: 24px;"><img src="images/banner1.jpg">
 			</div>
 			<!-- <div class="swiper-slide me-0 me-md-4" data-swiper-slide-index="2" role="group" aria-label="3 / 8"
 				style="width: 654.261px; margin-right: 24px;"><img
@@ -2462,8 +2497,8 @@
 
 	<script>
 		// Destroy and reinitialize Swiper
-		document.addEventListener('DOMContentLoaded', function() {
-			setTimeout(function() {
+		document.addEventListener('DOMContentLoaded', function () {
+			setTimeout(function () {
 				const swiperElement = document.querySelector('#swiperBanner');
 				if (swiperElement) {
 					// Destroy existing swiper if it exists
@@ -2688,49 +2723,49 @@
 
 
 
-				<div id="DICETab" class="item" >
+				<div id="DICETab" class="item">
 					<a class="tab-btn DICE" href="#">
 						<img src="images/POPULAR-DICE.webp" alt="">
 						<p>Dice Game</p>
 					</a>
 				</div>
 
-				<div id="FIRSTPERSONTab" class="item" >
+				<div id="FIRSTPERSONTab" class="item">
 					<a class="tab-btn FIRSTPERSON" href="#">
 						<img src="images/POPULAR-FIRSTPERSON.webp" alt="">
 						<p>First Person</p>
 					</a>
 				</div>
 
-				<div id="BINGOGAMETab" class="item" >
+				<div id="BINGOGAMETab" class="item">
 					<a class="tab-btn BINGOGAME" href="#">
 						<img src="images/POPULAR-BINGOGAME.webp" alt="">
 						<p>Bingo Game</p>
 					</a>
 				</div>
 
-				<div id="MUSTHITBYTab" class="item" >
+				<div id="MUSTHITBYTab" class="item">
 					<a class="tab-btn MUSTHITBY" href="#">
 						<img src="images/POPULAR-MUSTHITBY.webp" alt="">
 						<p>Must Hit By</p>
 					</a>
 				</div>
 
-				<div id="MINETab" class="item" >
+				<div id="MINETab" class="item">
 					<a class="tab-btn MINE" href="#">
 						<img src="images/POPULAR-MINE.webp" alt="">
 						<p>Mine Game</p>
 					</a>
 				</div>
 
-				<div id="CRASHTab" class="item" >
+				<div id="CRASHTab" class="item">
 					<a class="tab-btn CRASH" href="#">
 						<img src="images/POPULAR-CRASH.webp" alt="">
 						<p>Crash Game</p>
 					</a>
 				</div>
 
-				<div id="SCRATCHCARDTab" class="item" >
+				<div id="SCRATCHCARDTab" class="item">
 					<a class="tab-btn SCRATCHCARD" href="#">
 						<img src="images/POPULAR-SCRATCHCARD.webp" alt="">
 						<p>Scratchcard Game</p>
@@ -2836,51 +2871,62 @@
 					<img src="images/POPULAR-TOPMENU-LIVEARENA.webp" alt="">Live Arena
 				</dt>
 			</dl>
-			<ul class="game-icon btn-effect ul-gameList flex-column flex-md-row gap-1 g-md-0 align-items-center align-items-md-end justify-content-md-between justify-content-start" id="livearenaGameUl"
-				style="display: flex;">
-				<img src="images/live-arena.webp" alt="" style=" width: 100%; cursor: pointer; height: 250px;" id="sv388-vip" class="banner-1 me-1 me-md-4"
+			<ul class="game-icon btn-effect ul-gameList flex-column flex-md-row gap-1 g-md-0 align-items-center align-items-md-end justify-content-md-between justify-content-start"
+				id="livearenaGameUl" style="display: flex;">
+				<img src="images/live-arena.webp" alt="" style=" width: 100%; cursor: pointer; height: 250px;"
+					id="sv388-vip" class="banner-1 me-1 me-md-4"
 					onclick="localStorage.getItem('token') ? handlePlayNow(21) : GameHallHandler.openLoginPopup(this)">
-				<img class="banner-2" src="images/wala-img.png" alt="" style="height: 100%; width: 100%;  cursor: pointer; height: 250px;" 
-				onclick="localStorage.getItem('token') ? handlePlayNow(24) : GameHallHandler.openLoginPopup(this)">
+				<img class="banner-2" src="images/wala-img.png" alt=""
+					style="height: 100%; width: 100%;  cursor: pointer; height: 250px;"
+					onclick="localStorage.getItem('token') ? handlePlayNow(24) : GameHallHandler.openLoginPopup(this)">
 			</ul>
 		</div>
 
 		<style>
-
-			.banner-1, .banner-2 {
+			.banner-1,
+			.banner-2 {
 				max-width: 50%;
 			}
+
 			@media (max-width: 767px) {
 				.livearena-game {
 					background: #05060b url("https://www.alo789ho.com/theme/images/src-gamehall/layout/section-LIVEARENA.webp") center top no-repeat !important;
-    background-size: cover !important;
-	padding: 25px 3% 5px 3%;
-}
-.sports-game {
-	background: #07365d url("https://www.alo789ho.com/theme/images/src-gamehall/layout/section-SPORTS.webp") center 0px no-repeat !important;
-    background-size: cover !important;
-	padding: 25px 3% 5px 3%;
+					background-size: cover !important;
+					padding: 25px 3% 5px 3%;
 				}
+
+				.sports-game {
+					background: #07365d url("https://www.alo789ho.com/theme/images/src-gamehall/layout/section-SPORTS.webp") center 0px no-repeat !important;
+					background-size: cover !important;
+					padding: 25px 3% 5px 3%;
+				}
+
 				.banner-2 {
 					height: auto !important;
 				}
-				.banner-1, .banner-2 {
+
+				.banner-1,
+				.banner-2 {
 					aspect-ratio: 2.4/1 !important;
 					max-width: 100%;
 				}
-				 .swiper-slide {
+
+				.swiper-slide {
 					aspect-ratio: 1/0 !important;
 					max-width: 100%;
 				}
-				.swiper-wrapper {
-				}
+
+				.swiper-wrapper {}
+
 				.gameList-bong88 {
 					padding-right: 0px !important;
 				}
+
 				#livetableGame {
 					background: linear-gradient(45deg, #1c1c1c 0%, #8c3310 48%, #752201 51%, #bf6e4e 100%) !important;
 					padding: 0;
 					border-radius: 20px;
+
 					.swiper-wrapper {
 						display: grid !important;
 						grid-template-columns: 50% 50% 50% !important;
@@ -2902,7 +2948,8 @@
 				</dt>
 			</dl>
 			<ul class="game-icon btn-effect ul-gameList" id="sportsGameUl">
-				<img src="images/sport-1.webp" class="gameList-bong88" alt="" style="padding-right: 20px;" onclick="localStorage.getItem('token') ? handlePlayNow(17) : GameHallHandler.openLoginPopup(this)">
+				<img src="images/sport-1.webp" class="gameList-bong88" alt="" style="padding-right: 20px;"
+					onclick="localStorage.getItem('token') ? handlePlayNow(17) : GameHallHandler.openLoginPopup(this)">
 				<!-- <img class="d-none d-md-block" src="images/sport-2.webp" alt="" style="padding-right: 20px;" onclick="localStorage.getItem('token') ? handlePlayNow(17) : GameHallHandler.openLoginPopup(this)"> -->
 				<!-- <img class="d-none d-md-block" src="images/sport-3.webp" alt="" style="padding-right: 20px;" onclick="localStorage.getItem('token') ? handlePlayNow(17) : GameHallHandler.openLoginPopup(this)"> -->
 			</ul>
@@ -3136,30 +3183,32 @@
 			</dl>
 			<ul class="game-icon btn-effect ul-gameList" id="liveGameUl">
 
-				<li id="SEXYBCRT_SexyBaccarat" onclick="localStorage.getItem('token') ? handlePlayNow(8, this.id) : GameHallHandler.openLoginPopup(this)" platform="SEXYBCRT"
-					game_code="SEXYBCRT" gametype="live" class="show-play promote">
+				<li id="SEXYBCRT_SexyBaccarat"
+					onclick="localStorage.getItem('token') ? handlePlayNow(8, this.id) : GameHallHandler.openLoginPopup(this)"
+					platform="SEXYBCRT" game_code="SEXYBCRT" gametype="live" class="show-play promote">
 					<div class="ul-gameIcon-box" id="gameTagArea">
-						<img id="liImg" class="game-icon" src="images/casino1.webp" >
+						<img id="liImg" class="game-icon" src="images/casino1.webp">
 					</div>
 				</li>
-				<li id="SVCASINO_SVCASINO" onclick="localStorage.getItem('token') ? handlePlayNow(19) : GameHallHandler.openLoginPopup(this)" platform="SVCASINO"
-					game_code="SVCASINO" gametype="live" class="show-play">
-					<div class="ul-gameIcon-box" id="gameTagArea">
-						<img id="liImg" class="game-icon"
-							src="https://img.bdimg.xyz/theme/images/gameIcon/SVCASINO/SVCASINO-PC.webp?t=1737453305013"
-							>
-					</div>
-				</li>
-				<li id="DG_DG" onclick="localStorage.getItem('token') ? handlePlayNow(22) : GameHallHandler.openLoginPopup(this)" platform="DG" game_code="1"
-					gametype="live" class="show-play">
+				<li id="SVCASINO_SVCASINO"
+					onclick="localStorage.getItem('token') ? handlePlayNow(19) : GameHallHandler.openLoginPopup(this)"
+					platform="SVCASINO" game_code="SVCASINO" gametype="live" class="show-play">
 					<div class="ul-gameIcon-box" id="gameTagArea">
 						<img id="liImg" class="game-icon"
-							src="https://img.bdimg.xyz/theme/images/gameIcon/DG/DG-PC.webp?t=1667862397528"
-							>
+							src="https://img.bdimg.xyz/theme/images/gameIcon/SVCASINO/SVCASINO-PC.webp?t=1737453305013">
 					</div>
 				</li>
-				<li id="SA_SA" onclick="localStorage.getItem('token') ? handlePlayNow(19) : GameHallHandler.openLoginPopup(this)" platform="SA" game_code="1"
-					gametype="live" class="show-play">
+				<li id="DG_DG"
+					onclick="localStorage.getItem('token') ? handlePlayNow(22) : GameHallHandler.openLoginPopup(this)"
+					platform="DG" game_code="1" gametype="live" class="show-play">
+					<div class="ul-gameIcon-box" id="gameTagArea">
+						<img id="liImg" class="game-icon"
+							src="https://img.bdimg.xyz/theme/images/gameIcon/DG/DG-PC.webp?t=1667862397528">
+					</div>
+				</li>
+				<li id="SA_SA"
+					onclick="localStorage.getItem('token') ? handlePlayNow(19) : GameHallHandler.openLoginPopup(this)"
+					platform="SA" game_code="1" gametype="live" class="show-play">
 					<div class="ul-gameIcon-box" id="gameTagArea">
 						<img id="liImg" class="game-icon"
 							src="https://img.bdimg.xyz/theme/images/gameIcon/SA/SA-PC.webp?t=1749723115870">
@@ -3203,39 +3252,46 @@
 					display: flex !important;
 					flex-direction: column !important;
 				}
+
 				.game {
 					padding-left: 0px !important;
 					padding-right: 0px !important;
 				}
+
 				.swiper-wrapper {
 					width: 100% !important;
 				}
+
 				.live-game {
 					background: url("https://www.alo789ho.com/theme/images/src-gamehall/layout/section-LIVE.webp") right bottom no-repeat !important;
 					background-size: cover !important;
 					padding: 25px 3% 5px 3% !important;
+
 					#liveDL {
 						display: flex;
 						justify-content: center;
 						align-items: center;
 					}
+
 					.ul-gameList {
 						display: grid !important;
 						grid-template-columns: 50% 50% !important;
 						overflow-x: auto;
+
 						#SEXYBCRT_SexyBaccarat {
 							grid-row-start: unset !important;
-    grid-row-end: unset !important;
-    grid-column-start: unset !important;
-    grid-column-end: unset !important;
+							grid-row-end: unset !important;
+							grid-column-start: unset !important;
+							grid-column-end: unset !important;
 						}
 					}
 				}
-				
+
 				.new-game {
 					background: #05060b url("https://www.alo789ho.com/theme/images/src-gamehall/layout/section-NEW.webp") center top no-repeat !important;
 					background-size: cover !important;
 					padding: 25px 3% 5px 3% !important;
+
 					#newDL {
 						text-align: center;
 					}
@@ -3447,11 +3503,11 @@
 					<div class="ul-gameIcon-box 1" id="gameTagArea">
 						<!-- <img id="liImg" class="game-icon"
 							src="https://img.bdimg.xyz/theme/images/gameIcon/POCKET/Wild-Bounty-Showdown.webp?t=1749631450054"> -->
-							<img id="liImg" class="game-icon" src="images/slot-game.png" alt="">
+						<img id="liImg" class="game-icon" src="images/slot-game.png" alt="">
 					</div>
 					<div class="ul-gameIcon-txt 1" id="gameTxtArea">
-						<p id="platformName" class="txt-platform-name">PG Soft</p>
-						<p id="gameNameP" class="txt-gameName">Wild Bounty Showdown</p>
+						<!-- <p id="platformName" class="txt-platform-name">PG Soft</p> -->
+						<p id="gameNameP" class="txt-gameName">Victory Ark</p>
 					</div>
 				</li>
 				<!-- <li id="POCKET_mahjong-ways2" class="game show-play"
@@ -4704,7 +4760,8 @@
 
 						<li id="slot_logo_JILI">
 							<a class="img-platform-logo" data-value="JILI" gametype-value="SLOT"
-								href="javascript:void(0)" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)">
+								href="javascript:void(0)"
+								onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)">
 								<img class="img-platform icon-JILI" src="images/100x100-JILI-logo.webp">
 								<p>JILI</p>
 							</a>
@@ -4721,7 +4778,8 @@
 
 						<li id="slot_logo_JDB">
 							<a class="img-platform-logo" data-value="JDB" gametype-value="SLOT"
-								href="javascript:void(0)" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)">
+								href="javascript:void(0)"
+								onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)">
 								<img class="img-platform icon-JDB" src="images/100x100-JDB-logo.webp">
 								<p>JDB</p>
 							</a>
@@ -4745,7 +4803,8 @@
 
 						<li id="slot_logo_BNG">
 							<a class="img-platform-logo" data-value="BNG" gametype-value="SLOT"
-								href="javascript:void(0)" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)">
+								href="javascript:void(0)"
+								onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)">
 								<img class="img-platform icon-BNG" src="images/100x100-BNG-logo.webp">
 								<p>BNG</p>
 							</a>
@@ -4875,8 +4934,26 @@
 
 
 
+
 				</div>
+
 				<ul id="ul_slot_POCKET" class="normalGameList game-icon ul-gameList col-7" style="" platform="POCKET"
+					gametype="slot">
+					<li id="POCKET_Wild-Bounty-Showdown" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+						platform="POCKET" game_code="135" gametype="SLOT">
+						<div class="ul-gameIcon-box 1" id="gameTagArea">
+							<!-- <img id="liImg" class="game-icon"
+							src="https://img.bdimg.xyz/theme/images/gameIcon/POCKET/Wild-Bounty-Showdown.webp?t=1749631450054"> -->
+							<img id="liImg" class="game-icon" src="images/slot-game.png" alt="">
+						</div>
+						<div class="ul-gameIcon-txt 1" id="gameTxtArea">
+							<!-- <p id="platformName" class="txt-platform-name">PG Soft</p> -->
+							<p id="gameNameP" class="txt-gameName">Victory Ark</p>
+						</div>
+					</li>
+				</ul>
+				<!-- <ul id="ul_slot_POCKET" class="normalGameList game-icon ul-gameList col-7" style="" platform="POCKET"
 					gametype="slot">
 					<li id="POCKET_Wild-Bounty-Showdown" class="game show-play"
 						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
@@ -6533,7 +6610,7 @@
 							<p id="gameNameP" class="txt-gameName">Majestic Empire</p>
 						</div>
 					</li>
-				</ul>
+				</ul> -->
 			</div>
 		</section>
 
@@ -6627,7 +6704,8 @@
 				</div>
 				<ul id="ul_rngtable_KINGMIDAS" class="normalGameList game-icon ul-gameList col-7" style=""
 					platform="KINGMIDAS" gametype="rngtable">
-					<li id="KINGMIDAS_tai-xiu" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_tai-xiu" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="22" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6639,7 +6717,8 @@
 							<p id="gameNameP" class="txt-gameName">Tai Xiu</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_sic-bo" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_sic-bo" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="20" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6651,7 +6730,8 @@
 							<p id="gameNameP" class="txt-gameName">Sic Bo</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_XoaDiaLightning" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_XoaDiaLightning" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="25" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6664,7 +6744,8 @@
 						</div>
 					</li>
 					<li id="KINGMIDAS_vietnam-fish-prawn-crab" class="game show-play"
-						onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)" platform="KINGMIDAS" game_code="19" gametype="RNGTABLE">
+						onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
+						platform="KINGMIDAS" game_code="19" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
 								src="https://img.bdimg.xyz/theme/images/gameIcon/KINGMIDAS/vietnam-fish-prawn-crab.webp?t=1752489106587">
@@ -6675,7 +6756,8 @@
 							<p id="gameNameP" class="txt-gameName">Vietnam Fish Prawn Crab</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_Baccarat" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_Baccarat" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="10" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6687,7 +6769,8 @@
 							<p id="gameNameP" class="txt-gameName">Baccarat</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_blackjack" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_blackjack" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="9" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6699,7 +6782,8 @@
 							<p id="gameNameP" class="txt-gameName">Blackjack</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_thai-hi-lo2" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_thai-hi-lo2" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="14" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6711,7 +6795,8 @@
 							<p id="gameNameP" class="txt-gameName">Thai Hi Lo 2</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_ThaiFishPrawnCrab" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_ThaiFishPrawnCrab" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="24" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6723,7 +6808,8 @@
 							<p id="gameNameP" class="txt-gameName">Thai Fish Prawn Crab</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_dragon-tiger2" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_dragon-tiger2" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="16" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6735,7 +6821,8 @@
 							<p id="gameNameP" class="txt-gameName">Dragon Tiger 2</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_7Up7DownRush" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_7Up7DownRush" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="139" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6747,7 +6834,8 @@
 							<p id="gameNameP" class="txt-gameName">7 Up 7 Down Rush</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_FanTanClassic" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_FanTanClassic" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="29" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6758,7 +6846,8 @@
 							<p id="gameNameP" class="txt-gameName">Fan Tan Classic</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_BaiCao" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_BaiCao" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="23" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6769,7 +6858,8 @@
 							<p id="gameNameP" class="txt-gameName">Bai Cao</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_DiceDuet" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_DiceDuet" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="114" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6780,7 +6870,8 @@
 							<p id="gameNameP" class="txt-gameName">Dice Duet</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_fish-prawn-crab2" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_fish-prawn-crab2" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="18" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6791,7 +6882,8 @@
 							<p id="gameNameP" class="txt-gameName">Fish Prawn Crab 2</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_belangkai2" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_belangkai2" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="15" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6802,7 +6894,8 @@
 							<p id="gameNameP" class="txt-gameName">Belangkai2</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_Pusoy" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_Pusoy" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="91" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6813,7 +6906,8 @@
 							<p id="gameNameP" class="txt-gameName">Pusoy</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_32-Cards" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_32-Cards" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="46" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6824,7 +6918,8 @@
 							<p id="gameNameP" class="txt-gameName">32 Cards</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_BaiBuu" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_BaiBuu" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="27" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6835,7 +6930,8 @@
 							<p id="gameNameP" class="txt-gameName">Bai Buu</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_7Up7Down" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_7Up7Down" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="35" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6846,7 +6942,8 @@
 							<p id="gameNameP" class="txt-gameName">7 Up 7 Down</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_Burmese6Animals" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_Burmese6Animals" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="133" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6857,7 +6954,8 @@
 							<p id="gameNameP" class="txt-gameName">Burmese 6 Animals</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_JogodeBozo" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_JogodeBozo" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="119" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6869,7 +6967,8 @@
 							<p id="gameNameP" class="txt-gameName">Jogo de Bozo</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_5CardPoker" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_5CardPoker" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="50" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6880,7 +6979,8 @@
 							<p id="gameNameP" class="txt-gameName">5 Card Poker</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_KingmakerPokDeng" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_KingmakerPokDeng" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="34" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6891,7 +6991,8 @@
 							<p id="gameNameP" class="txt-gameName">KM Pok Deng</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_BolaTangkas" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_BolaTangkas" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="54" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6902,7 +7003,8 @@
 							<p id="gameNameP" class="txt-gameName">Bola Tangkas</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_BonusDice" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_BonusDice" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="41" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6913,7 +7015,8 @@
 							<p id="gameNameP" class="txt-gameName">Bonus Dice</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_CoinToss" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_CoinToss" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="42" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6924,7 +7027,8 @@
 							<p id="gameNameP" class="txt-gameName">Coin Toss</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_EuropeanRoulette" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_EuropeanRoulette" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="12" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6935,7 +7039,8 @@
 							<p id="gameNameP" class="txt-gameName">European Roulette</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_ThaiFishPrawnCrabGO" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_ThaiFishPrawnCrabGO" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="146" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6947,7 +7052,8 @@
 							<p id="gameNameP" class="txt-gameName">Thai Fish Prawn Crab GO!</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_DotaHiLo" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_DotaHiLo" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="39" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6958,7 +7064,8 @@
 							<p id="gameNameP" class="txt-gameName">Dota Hi-Lo</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_Numbermatka" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_Numbermatka" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="7" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6969,7 +7076,8 @@
 							<p id="gameNameP" class="txt-gameName">Number Matka</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_Tongits" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_Tongits" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="56" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6980,7 +7088,8 @@
 							<p id="gameNameP" class="txt-gameName">Tongits</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_Cardmatka" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_Cardmatka" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="28" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -6991,7 +7100,8 @@
 							<p id="gameNameP" class="txt-gameName">Card Matka</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_PaiKang" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_PaiKang" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="33" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7002,7 +7112,8 @@
 							<p id="gameNameP" class="txt-gameName">Pai Kang</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_JhandiMunda" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_JhandiMunda" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="36" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7013,7 +7124,8 @@
 							<p id="gameNameP" class="txt-gameName">Jhandi Munda</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_cards-hi-lo" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_cards-hi-lo" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="43" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7024,7 +7136,8 @@
 							<p id="gameNameP" class="txt-gameName">Cards Hi Lo</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_VideoPoker" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_VideoPoker" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="92" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7035,7 +7148,8 @@
 							<p id="gameNameP" class="txt-gameName">Video Poker</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_ColorGameMegaBonus" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_ColorGameMegaBonus" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="123" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7047,7 +7161,8 @@
 							<p id="gameNameP" class="txt-gameName">Color Game Mega Bonus</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_SpeedyAndarBahar" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_SpeedyAndarBahar" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="135" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7058,7 +7173,8 @@
 							<p id="gameNameP" class="txt-gameName">Speedy Andar Bahar</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_TeenPattiBlitz" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_TeenPattiBlitz" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="140" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7070,7 +7186,8 @@
 							<p id="gameNameP" class="txt-gameName">Teen Patti Blitz</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_Ludo" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_Ludo" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="80" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7081,7 +7198,8 @@
 							<p id="gameNameP" class="txt-gameName">Ludo</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_MonkeyKingRoulette" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_MonkeyKingRoulette" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="30" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7092,7 +7210,8 @@
 							<p id="gameNameP" class="txt-gameName">Monkey King Roulette</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_BolaGolek" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_BolaGolek" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="38" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7103,7 +7222,8 @@
 							<p id="gameNameP" class="txt-gameName">Bola Golek</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_TeenPatti" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_TeenPatti" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(18) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="48" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7114,7 +7234,8 @@
 							<p id="gameNameP" class="txt-gameName">Teen Patti</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_FruitRoulette" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_FruitRoulette" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(11) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="26" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7125,7 +7246,8 @@
 							<p id="gameNameP" class="txt-gameName">Fruit Roulette</p>
 						</div>
 					</li>
-					<li id="KINGMIDAS_AndarBahar" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
+					<li id="KINGMIDAS_AndarBahar" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(12) : GameHallHandler.openLoginPopup(this)"
 						platform="KINGMIDAS" game_code="37" gametype="RNGTABLE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7264,8 +7386,9 @@
 				</div>
 				<ul id="ul_arcade_JILI" class="normalGameList game-icon ul-gameList col-7" style="" platform="JILI"
 					gametype="arcade">
-					<li id="JILI_BigSmall" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)" platform="JILI"
-						game_code="118" gametype="ARCADE">
+					<li id="JILI_BigSmall" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+						platform="JILI" game_code="118" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
 								src="https://img.bdimg.xyz/theme/images/gameIcon/JILI/BigSmall.webp?t=1752753739200">
@@ -7276,7 +7399,8 @@
 							<p id="gameNameP" class="txt-gameName">Big Small</p>
 						</div>
 					</li>
-					<li id="JILI_SuperESabong" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_SuperESabong" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="305" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7288,7 +7412,8 @@
 							<p id="gameNameP" class="txt-gameName">Super E-Sabong</p>
 						</div>
 					</li>
-					<li id="JILI_CrazyHunter" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_CrazyHunter" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="92" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7300,8 +7425,9 @@
 							<p id="gameNameP" class="txt-gameName">Crazy Hunter</p>
 						</div>
 					</li>
-					<li id="JILI_HILO" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)" platform="JILI"
-						game_code="233" gametype="ARCADE">
+					<li id="JILI_HILO" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+						platform="JILI" game_code="233" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
 								src="https://img.bdimg.xyz/theme/images/gameIcon/JILI/HILO.webp?t=1752753747498">
@@ -7312,8 +7438,9 @@
 							<p id="gameNameP" class="txt-gameName">HILO</p>
 						</div>
 					</li>
-					<li id="JILI_Mines" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)" platform="JILI"
-						game_code="229" gametype="ARCADE">
+					<li id="JILI_Mines" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+						platform="JILI" game_code="229" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
 								src="https://img.bdimg.xyz/theme/images/gameIcon/JILI/Mines.webp?t=1754969749032">
@@ -7324,8 +7451,9 @@
 							<p id="gameNameP" class="txt-gameName">Mines</p>
 						</div>
 					</li>
-					<li id="JILI_DropBall" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)" platform="JILI"
-						game_code="604" gametype="ARCADE">
+					<li id="JILI_DropBall" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+						platform="JILI" game_code="604" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
 								src="https://img.bdimg.xyz/theme/images/gameIcon/JILI/DropBall.webp?t=1753930425590">
@@ -7336,7 +7464,8 @@
 							<p id="gameNameP" class="txt-gameName">Drop Ball</p>
 						</div>
 					</li>
-					<li id="JILI_CrazyHunter2" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_CrazyHunter2" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="420" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7348,8 +7477,9 @@
 							<p id="gameNameP" class="txt-gameName">Crazy Hunter 2</p>
 						</div>
 					</li>
-					<li id="JILI_GoRush" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)" platform="JILI"
-						game_code="224" gametype="ARCADE">
+					<li id="JILI_GoRush" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+						platform="JILI" game_code="224" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
 								src="https://img.bdimg.xyz/theme/images/gameIcon/JILI/GoRush.webp?t=1752753842495">
@@ -7360,8 +7490,9 @@
 							<p id="gameNameP" class="txt-gameName">Go Rush</p>
 						</div>
 					</li>
-					<li id="JILI_LuckyBingo" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)" platform="JILI"
-						game_code="150" gametype="ARCADE">
+					<li id="JILI_LuckyBingo" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+						platform="JILI" game_code="150" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
 								src="https://img.bdimg.xyz/theme/images/gameIcon/JILI/LuckyBingo.webp?t=1749623054518">
@@ -7372,7 +7503,8 @@
 							<p id="gameNameP" class="txt-gameName">Lucky Bingo</p>
 						</div>
 					</li>
-					<li id="JILI_DragonTreasure" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_DragonTreasure" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="46" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7384,7 +7516,8 @@
 							<p id="gameNameP" class="txt-gameName">Dragon Treasure</p>
 						</div>
 					</li>
-					<li id="JILI_BingoCarnaval" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_BingoCarnaval" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="148" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7395,7 +7528,8 @@
 							<p id="gameNameP" class="txt-gameName">Bingo Carnaval</p>
 						</div>
 					</li>
-					<li id="JILI_ChickenDash" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_ChickenDash" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="690" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7407,7 +7541,8 @@
 							<p id="gameNameP" class="txt-gameName">Chicken Dash</p>
 						</div>
 					</li>
-					<li id="JILI_SecretTreasure" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_SecretTreasure" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="78" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7418,7 +7553,8 @@
 							<p id="gameNameP" class="txt-gameName">Secret Treasure</p>
 						</div>
 					</li>
-					<li id="JILI_PlinkoofMine" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_PlinkoofMine" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="551" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7430,7 +7566,8 @@
 							<p id="gameNameP" class="txt-gameName">Plinko of Mine</p>
 						</div>
 					</li>
-					<li id="JILI_BoxingExtravaganza" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_BoxingExtravaganza" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="440" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7441,8 +7578,9 @@
 							<p id="gameNameP" class="txt-gameName">Boxing Extravaganza</p>
 						</div>
 					</li>
-					<li id="JILI_MinesGold" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)" platform="JILI"
-						game_code="254" gametype="ARCADE">
+					<li id="JILI_MinesGold" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+						platform="JILI" game_code="254" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
 								src="https://img.bdimg.xyz/theme/images/gameIcon/JILI/MinesGold.webp?t=1752753801805">
@@ -7452,8 +7590,9 @@
 							<p id="gameNameP" class="txt-gameName">Mines Gold</p>
 						</div>
 					</li>
-					<li id="JILI_Plinko" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)" platform="JILI"
-						game_code="242" gametype="ARCADE">
+					<li id="JILI_Plinko" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+						platform="JILI" game_code="242" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
 								src="https://img.bdimg.xyz/theme/images/gameIcon/JILI/Plinko.webp?t=1740438678890">
@@ -7463,8 +7602,9 @@
 							<p id="gameNameP" class="txt-gameName">Plinko</p>
 						</div>
 					</li>
-					<li id="JILI_CrashGoal" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)" platform="JILI"
-						game_code="407" gametype="ARCADE">
+					<li id="JILI_CrashGoal" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+						platform="JILI" game_code="407" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
 								src="https://img.bdimg.xyz/theme/images/gameIcon/JILI/CrashGoal.webp?t=1752753901669">
@@ -7474,8 +7614,9 @@
 							<p id="gameNameP" class="txt-gameName">Crash Goal</p>
 						</div>
 					</li>
-					<li id="JILI_BonusBingo" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)" platform="JILI"
-						game_code="143" gametype="ARCADE">
+					<li id="JILI_BonusBingo" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+						platform="JILI" game_code="143" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
 								src="https://img.bdimg.xyz/theme/images/gameIcon/JILI/BonusBingo.webp?t=1740438678890">
@@ -7485,8 +7626,9 @@
 							<p id="gameNameP" class="txt-gameName">Bonus Bingo</p>
 						</div>
 					</li>
-					<li id="JILI_WinDrop" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)" platform="JILI"
-						game_code="179" gametype="ARCADE">
+					<li id="JILI_WinDrop" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+						platform="JILI" game_code="179" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
 								src="https://img.bdimg.xyz/theme/images/gameIcon/JILI/WinDrop.webp?t=1750931076955">
@@ -7496,7 +7638,8 @@
 							<p id="gameNameP" class="txt-gameName">Win Drop</p>
 						</div>
 					</li>
-					<li id="JILI_CrashCricket" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_CrashCricket" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="469" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7507,7 +7650,8 @@
 							<p id="gameNameP" class="txt-gameName">Crash Cricket</p>
 						</div>
 					</li>
-					<li id="JILI_FortuneGemsScratch" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_FortuneGemsScratch" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="441" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7518,8 +7662,9 @@
 							<p id="gameNameP" class="txt-gameName">Fortune Gems Scratch</p>
 						</div>
 					</li>
-					<li id="JILI_Limbo" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)" platform="JILI"
-						game_code="235" gametype="ARCADE">
+					<li id="JILI_Limbo" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+						platform="JILI" game_code="235" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
 								src="https://img.bdimg.xyz/theme/images/gameIcon/JILI/Limbo.webp?t=1752753832506">
@@ -7529,8 +7674,9 @@
 							<p id="gameNameP" class="txt-gameName">Limbo</p>
 						</div>
 					</li>
-					<li id="JILI_CrashBonus" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)" platform="JILI"
-						game_code="261" gametype="ARCADE">
+					<li id="JILI_CrashBonus" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+						platform="JILI" game_code="261" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
 								src="https://img.bdimg.xyz/theme/images/gameIcon/JILI/CrashBonus.webp?t=1752753850037">
@@ -7540,7 +7686,8 @@
 							<p id="gameNameP" class="txt-gameName">Crash Bonus</p>
 						</div>
 					</li>
-					<li id="JILI_GoGoalBingo" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_GoGoalBingo" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="178" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7551,7 +7698,8 @@
 							<p id="gameNameP" class="txt-gameName">Go Goal Bingo</p>
 						</div>
 					</li>
-					<li id="JILI_GoForChampion" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_GoForChampion" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="442" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7562,7 +7710,8 @@
 							<p id="gameNameP" class="txt-gameName">Go For Champion</p>
 						</div>
 					</li>
-					<li id="JILI_MagicLampBingo" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_MagicLampBingo" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="217" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7573,7 +7722,8 @@
 							<p id="gameNameP" class="txt-gameName">Magic Lamp Bingo</p>
 						</div>
 					</li>
-					<li id="JILI_CrashTouchdown" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_CrashTouchdown" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="459" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7584,7 +7734,8 @@
 							<p id="gameNameP" class="txt-gameName">Crash Touchdown</p>
 						</div>
 					</li>
-					<li id="JILI_CalacaBingo" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_CalacaBingo" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="149" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7595,7 +7746,8 @@
 							<p id="gameNameP" class="txt-gameName">Calaca Bingo</p>
 						</div>
 					</li>
-					<li id="JILI_SuperAceScratch" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_SuperAceScratch" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="439" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7606,8 +7758,9 @@
 							<p id="gameNameP" class="txt-gameName">Super Ace Scratch</p>
 						</div>
 					</li>
-					<li id="JILI_iRichBingo" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)" platform="JILI"
-						game_code="122" gametype="ARCADE">
+					<li id="JILI_iRichBingo" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+						platform="JILI" game_code="122" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
 								src="https://img.bdimg.xyz/theme/images/gameIcon/JILI/iRichBingo.webp?t=1740438678890">
@@ -7617,7 +7770,8 @@
 							<p id="gameNameP" class="txt-gameName">iRich Bingo</p>
 						</div>
 					</li>
-					<li id="JILI_WestHunterBingo" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_WestHunterBingo" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="173" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7628,8 +7782,9 @@
 							<p id="gameNameP" class="txt-gameName">West Hunter Bingo</p>
 						</div>
 					</li>
-					<li id="JILI_Wheel" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)" platform="JILI"
-						game_code="236" gametype="ARCADE">
+					<li id="JILI_Wheel" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+						platform="JILI" game_code="236" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
 								src="https://img.bdimg.xyz/theme/images/gameIcon/JILI/Wheel.webp?t=1749610434284">
@@ -7639,8 +7794,9 @@
 							<p id="gameNameP" class="txt-gameName">Wheel</p>
 						</div>
 					</li>
-					<li id="JILI_CricketWar" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)" platform="JILI"
-						game_code="473" gametype="ARCADE">
+					<li id="JILI_CricketWar" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+						platform="JILI" game_code="473" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
 								src="https://img.bdimg.xyz/theme/images/gameIcon/JILI/CricketWar.webp?t=1743051448193">
@@ -7650,8 +7806,9 @@
 							<p id="gameNameP" class="txt-gameName">Cricket War</p>
 						</div>
 					</li>
-					<li id="JILI_SuperBingo" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)" platform="JILI"
-						game_code="151" gametype="ARCADE">
+					<li id="JILI_SuperBingo" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+						platform="JILI" game_code="151" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
 								src="https://img.bdimg.xyz/theme/images/gameIcon/JILI/SuperBingo.webp?t=1751943249953">
@@ -7661,7 +7818,8 @@
 							<p id="gameNameP" class="txt-gameName">Super Bingo</p>
 						</div>
 					</li>
-					<li id="JILI_JackpotBingo" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_JackpotBingo" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="174" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7672,7 +7830,8 @@
 							<p id="gameNameP" class="txt-gameName">Jackpot Bingo</p>
 						</div>
 					</li>
-					<li id="JILI_BingoEmpire" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_BingoEmpire" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="147" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7683,7 +7842,8 @@
 							<p id="gameNameP" class="txt-gameName">Bingo Empire</p>
 						</div>
 					</li>
-					<li id="JILI_JogodoBicho" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_JogodoBicho" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="297" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7694,7 +7854,8 @@
 							<p id="gameNameP" class="txt-gameName">Jogo do Bicho</p>
 						</div>
 					</li>
-					<li id="JILI_CricketRoulette" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_CricketRoulette" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="462" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7705,7 +7866,8 @@
 							<p id="gameNameP" class="txt-gameName">Cricket Roulette</p>
 						</div>
 					</li>
-					<li id="JILI_KenoSuperChance" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_KenoSuperChance" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="273" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7716,7 +7878,8 @@
 							<p id="gameNameP" class="txt-gameName">Keno Super Chance</p>
 						</div>
 					</li>
-					<li id="JILI_FortuneBingo" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_FortuneBingo" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="139" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7727,8 +7890,9 @@
 							<p id="gameNameP" class="txt-gameName">Fortune Bingo</p>
 						</div>
 					</li>
-					<li id="JILI_PAPPU" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)" platform="JILI"
-						game_code="200" gametype="ARCADE">
+					<li id="JILI_PAPPU" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+						platform="JILI" game_code="200" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
 								src="https://img.bdimg.xyz/theme/images/gameIcon/JILI/PAPPU.webp?t=1740438678890">
@@ -7738,8 +7902,9 @@
 							<p id="gameNameP" class="txt-gameName">PAPPU</p>
 						</div>
 					</li>
-					<li id="JILI_Tower" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)" platform="JILI"
-						game_code="232" gametype="ARCADE">
+					<li id="JILI_Tower" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+						platform="JILI" game_code="232" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
 								src="https://img.bdimg.xyz/theme/images/gameIcon/JILI/Tower.webp?t=1740438678890">
@@ -7749,7 +7914,8 @@
 							<p id="gameNameP" class="txt-gameName">Tower</p>
 						</div>
 					</li>
-					<li id="JILI_PearlsofBingo" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_PearlsofBingo" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="195" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7760,8 +7926,9 @@
 							<p id="gameNameP" class="txt-gameName">Pearls of Bingo</p>
 						</div>
 					</li>
-					<li id="JILI_CrashPuck" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)" platform="JILI"
-						game_code="512" gametype="ARCADE">
+					<li id="JILI_CrashPuck" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+						platform="JILI" game_code="512" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
 								src="https://img.bdimg.xyz/theme/images/gameIcon/JILI/CrashPuck.webp?t=1746533585448">
@@ -7771,7 +7938,8 @@
 							<p id="gameNameP" class="txt-gameName">Crash Puck</p>
 						</div>
 					</li>
-					<li id="JILI_BingoAdventure" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_BingoAdventure" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="177" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7782,8 +7950,9 @@
 							<p id="gameNameP" class="txt-gameName">Bingo Adventure</p>
 						</div>
 					</li>
-					<li id="JILI_RoyalQuest" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)" platform="JILI"
-						game_code="571" gametype="ARCADE">
+					<li id="JILI_RoyalQuest" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+						platform="JILI" game_code="571" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
 								src="https://img.bdimg.xyz/theme/images/gameIcon/JILI/RoyalQuest.webp?t=1759061989338">
@@ -7794,7 +7963,8 @@
 							<p id="gameNameP" class="txt-gameName">Royal Quest</p>
 						</div>
 					</li>
-					<li id="JILI_CrazyPusher" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_CrazyPusher" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="153" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7805,7 +7975,8 @@
 							<p id="gameNameP" class="txt-gameName">Crazy Pusher</p>
 						</div>
 					</li>
-					<li id="JILI_CandylandBingo" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_CandylandBingo" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="216" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7816,7 +7987,8 @@
 							<p id="gameNameP" class="txt-gameName">Candyland Bingo</p>
 						</div>
 					</li>
-					<li id="JILI_KenoExtraBet" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_KenoExtraBet" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="274" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7827,7 +7999,8 @@
 							<p id="gameNameP" class="txt-gameName">Keno Extra Bet</p>
 						</div>
 					</li>
-					<li id="JILI_KenoBonusNumber" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_KenoBonusNumber" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="272" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7838,7 +8011,8 @@
 							<p id="gameNameP" class="txt-gameName">Keno Bonus Number</p>
 						</div>
 					</li>
-					<li id="JILI_ColorPrediction" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_ColorPrediction" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="204" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7849,8 +8023,9 @@
 							<p id="gameNameP" class="txt-gameName">Color Prediction</p>
 						</div>
 					</li>
-					<li id="JILI_Keno" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)" platform="JILI"
-						game_code="241" gametype="ARCADE">
+					<li id="JILI_Keno" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+						platform="JILI" game_code="241" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
 								src="https://img.bdimg.xyz/theme/images/gameIcon/JILI/Keno.webp?t=1740438678890">
@@ -7860,8 +8035,9 @@
 							<p id="gameNameP" class="txt-gameName">Keno</p>
 						</div>
 					</li>
-					<li id="JILI_ColorGame" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)" platform="JILI"
-						game_code="197" gametype="ARCADE">
+					<li id="JILI_ColorGame" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+						platform="JILI" game_code="197" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
 								src="https://img.bdimg.xyz/theme/images/gameIcon/JILI/ColorGame.webp?t=1749609794066">
@@ -7871,7 +8047,8 @@
 							<p id="gameNameP" class="txt-gameName">Color Game</p>
 						</div>
 					</li>
-					<li id="JILI_ColorGameExtreme" class="game show-play" onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+					<li id="JILI_ColorGameExtreme" class="game show-play"
+						onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 						platform="JILI" game_code="479" gametype="ARCADE">
 						<div class="ul-gameIcon-box" id="gameTagArea">
 							<img id="liImg" class="game-icon"
@@ -7997,7 +8174,8 @@
 						<div class="ticket-id" id="challenge_ticket-id"></div>
 					</div>
 				</div>
-				<ul id="ul_fh_JILI" class="normalGameList game-icon ul-gameList col-7" style="" platform="JILI"onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
+				<ul id="ul_fh_JILI" class="normalGameList game-icon ul-gameList col-7" style="" platform="JILI"
+					onclick="localStorage.getItem('token') ? handlePlayNow(23) : GameHallHandler.openLoginPopup(this)"
 					gametype="fh">
 					<li id="JILI_FortuneKingJackpot" class="game show-play" onclick="GameHallHandler.play(this)"
 						platform="JILI" game_code="464" gametype="FH">
@@ -9343,35 +9521,41 @@
 
 
 	<div id="banking-btn" class="page-fix-bt">
-		
-	<button class="btn btn-bonus" onclick="localStorage.getItem('token') ? window.location.href = '/reward.html' : GameHallHandler.openLoginPopup(this)">
-		<img src="https://land2.mpsimg.com/theme/images/src-common/BRAND-img/ALO789/bonus.webp?v=202512091105" alt="Reward">
-		<span>Reward</span>
-	</button>
 
-	
-	<button class="btn btn-cash-in-out" style="border: 1px solid #F6CA8F;
-    background: linear-gradient(180deg, #E3A43A 0%, #FFE785 50%, #E3A43A 100%); color:black" onclick="localStorage.getItem('token') ? window.location.href = '/Withdraw.html' : GameHallHandler.openLoginPopup(this)">
-		<img src="https://land2.mpsimg.com/theme/images/src-common/BRAND-img/ALO789/cash.webp?v=202512091105" alt="CASH IN - OUT">
-		<span style="color: black;">CASH IN - OUT</span>
-	</button>
-	
-	
-	<button class="btn btn-refer" style="border: 1px solid #F6CA8F;
-    background: linear-gradient(180deg, #E3A43A 0%, #FFE785 50%, #E3A43A 100%); color:black" onclick="GameHallHandler.openMenuIframe(this)">
-	<a href="/pages/playerReferFriendsProgram.html">
-		<img src="https://land2.mpsimg.com/theme/images/src-common/BRAND-img/ALO789/refer-a-friend.webp?v=202512091105" alt="Refer a Friend">
-		<span style="color: black;">Refer a friend</span>
-		</a>
-	</button>
-	
-	
-	
-	
-	
-	
-	
-</div>
+		<button class="btn btn-bonus"
+			onclick="localStorage.getItem('token') ? window.location.href = '/reward.html' : GameHallHandler.openLoginPopup(this)">
+			<img src="https://land2.mpsimg.com/theme/images/src-common/BRAND-img/ALO789/bonus.webp?v=202512091105"
+				alt="Reward">
+			<span>Reward</span>
+		</button>
+
+
+		<button class="btn btn-cash-in-out" style="border: 1px solid #F6CA8F;
+    background: linear-gradient(180deg, #E3A43A 0%, #FFE785 50%, #E3A43A 100%); color:black"
+			onclick="localStorage.getItem('token') ? window.location.href = '/Withdraw.html' : GameHallHandler.openLoginPopup(this)">
+			<img src="https://land2.mpsimg.com/theme/images/src-common/BRAND-img/ALO789/cash.webp?v=202512091105"
+				alt="CASH IN - OUT">
+			<span style="color: black;">CASH IN - OUT</span>
+		</button>
+
+
+		<button class="btn btn-refer" style="border: 1px solid #F6CA8F;
+    background: linear-gradient(180deg, #E3A43A 0%, #FFE785 50%, #E3A43A 100%); color:black"
+			onclick="GameHallHandler.openMenuIframe(this)">
+			<a href="/pages/playerReferFriendsProgram.html">
+				<img src="https://land2.mpsimg.com/theme/images/src-common/BRAND-img/ALO789/refer-a-friend.webp?v=202512091105"
+					alt="Refer a Friend">
+				<span style="color: black;">Refer a friend</span>
+			</a>
+		</button>
+
+
+
+
+
+
+
+	</div>
 
 
 	<script src="./js/sv388Api.js"></script>
