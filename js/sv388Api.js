@@ -495,7 +495,7 @@ async function showLinksModal() {
 
     modal.innerHTML = `
       <div style="
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(-180deg, #0c1117 0%, #162c3f 100%);
         margin: 10% auto;
         padding: 30px;
         border: none;
