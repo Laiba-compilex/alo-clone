@@ -21,10 +21,12 @@
 			background: rgba(45, 55, 72, 0.95);
 			backdrop-filter: blur(10px);
 			border-radius: 0;
-			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 			min-width: 220px;
 			z-index: 1000;
 			margin-top: 8px;
+			border: none;
+			padding: 5px;
+			box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.2) !important;
 		}
 
 		.dropdown-menu.show {
@@ -37,7 +39,7 @@
 			padding: 15px 20px;
 			color: #ffffff;
 			cursor: pointer;
-			transition: background 0.2s ease;
+			/* transition: background 0.2s ease; */
 			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 			position: relative;
 		}
@@ -57,8 +59,9 @@
 		}
 
 		.dropdown-item span {
-			font-size: 14px;
-			font-weight: 400;
+			font-size: 16px;
+			font-weight: 500;
+			color: #ffedb9 !important;
 		}
 	</style>
 	<script>
@@ -1855,31 +1858,31 @@
 				</a>
 				<span id="inboxUnreadCount" class="dot" style="display: none;"></span>
 			</div>
-			<div class="btn btn-menu dropdown" onclick="toggleDropdown()">
+			<div class="btn btn-menu dropdown"  onclick="toggleDropdown()">
 				<i class="icon-hamburger" style="color: white;" href="javascript:void(0);">
 					<span id="menu_dot" class="dot" style="display: none;"></span>
 				</i>
-				<div id="dropdownMenu" class="dropdown-menu">
+				<div id="dropdownMenu" class="dropdown-menu" style="background-color: #212121;">
 					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
-						<i class="icon-user"></i>
+						<i class="icon-user" style="color: #ffedb9;"></i>
 						<span>My Info</span>
 					</div>
 					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
-						<i class="icon-game"></i>
+						<i class="icon-game" style="color: #ffedb9;"></i>
 						<span>Game Partner</span>
 					</div>
 					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
-						<i class="icon-phone"></i>
+						<i class="icon-phone" style="color: #ffedb9;"></i>
 						<span>Contact Us</span>
 					</div>
-					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
+					<!-- <div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
 						<i class="icon-download"></i>
 						<span>Download APP</span>
 					</div>
 					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
 						<i class="icon-search"></i>
 						<span>Search</span>
-					</div>
+					</div> -->
 					<div class="dropdown-item logout" id="logout-menuitem"
 						onclick="localStorage.removeItem('token'); location.reload();">
 						<i class="icon-logout"></i>
