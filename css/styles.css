@@ -28991,6 +28991,48 @@ body {
     overflow-y: auto;
 }
 
+/* Options inside dropdown: hide by default; show with flex (2 columns) */
+.dropdown-menu .options {
+  display: none;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.dropdown-menu .options.open {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.dropdown-menu .options li {
+  box-sizing: border-box;
+  width: calc(50% - 5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropdown-menu .options li a {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dropdown-menu .options li img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Responsive: single column on small screens */
+@media (max-width: 480px) {
+  .dropdown-menu .options li {
+    width: 100%;
+  }
+}
+
 .dropdown-item {
     padding: 12px 16px;
     color: #e2e8f0;
