@@ -198,7 +198,7 @@ async function getGameCategories() {
     );
     if (!response) return null;
     // if (response.ok) {
-    
+
     // }
     if (response.status === 500) {
       return "NETWORK_ERROR";
@@ -216,27 +216,10 @@ async function getGameCategories() {
 }
 
 const handlePlayNow = async (passedGameId, elementId) => {
-  // Initialize loader
-  const parentElement = document
-    .getElementById(elementId)
-    ?.querySelector(".ul-gameIcon-box");
-  let loader;
-  if (parentElement) {
-    parentElement.style.position = "relative";
-    loader = document.createElement("div");
-    loader.classList.add("loader");
-    loader.style.position = "absolute";
-    loader.style.top = "0";
-    loader.style.left = "0";
-    loader.style.width = "100%";
-    loader.style.height = "100%";
-    loader.style.backgroundColor = "rgba(255, 255, 255, 0.7)";
-    loader.style.display = "flex";
-    loader.style.justifyContent = "center";
-    loader.style.alignItems = "center";
-    loader.style.zIndex = "10";
-    loader.innerHTML = '<div class="spinner"></div>';
-    parentElement.appendChild(loader); // Append loader immediately
+  // Show full-screen loader
+  const gameLoader = document.getElementById('gameLoader');
+  if (gameLoader) {
+    gameLoader.style.display = 'flex';
   }
 
   try {
@@ -278,6 +261,11 @@ const handlePlayNow = async (passedGameId, elementId) => {
     // Determine gameId
     if (!passedGameId) {
       alert("Game ID not found.");
+      // Hide loader before returning
+      const gameLoader = document.getElementById('gameLoader');
+      if (gameLoader) {
+        gameLoader.style.display = 'none';
+      }
       return;
     }
     const gameId = passedGameId;
@@ -299,6 +287,11 @@ const handlePlayNow = async (passedGameId, elementId) => {
     if (isDaga && pointsRatio === 0) {
       showLinksModal();
       alert("Insufficient balance to play the game.");
+      // Hide loader before returning
+      const gameLoader = document.getElementById('gameLoader');
+      if (gameLoader) {
+        gameLoader.style.display = 'none';
+      }
       return;
     }
 
@@ -306,6 +299,11 @@ const handlePlayNow = async (passedGameId, elementId) => {
     const BaseUrl = await fetchBaseURL();
     if (!BaseUrl) {
       alert("Failed to fetch base URL");
+      // Hide loader before returning
+      const gameLoader = document.getElementById('gameLoader');
+      if (gameLoader) {
+        gameLoader.style.display = 'none';
+      }
       return;
     }
 
@@ -387,9 +385,10 @@ const handlePlayNow = async (passedGameId, elementId) => {
     console.error("Game login error:", e);
     alert(`Failed to connect to game: ${e.message}`);
   } finally {
-    // Remove loader
-    if (loader && loader.parentNode) {
-      loader.parentNode.removeChild(loader);
+    // Hide full-screen loader
+    const gameLoader = document.getElementById('gameLoader');
+    if (gameLoader) {
+      gameLoader.style.display = 'none';
     }
   }
 };
@@ -410,7 +409,7 @@ async function SeamlessWithdrawAPI() {
     if (!res) return null;
 
     const data = await res.json();
-     if (data) {
+    if (data) {
       return data;
     }
   } catch (e) {
@@ -450,11 +449,261 @@ async function SeamlessWithdrawAPI() {
 // Remove this line:
 // var balanceRefetch = ""
 
+// Function to show links modal for daga game
+async function showLinksModal() {
+  try {
+    const response = await fetch('https://bo.gagavn138.com/api/website/links');
+    const data = await response.json();
+
+    let modal = document.getElementById('linksModal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'linksModal';
+      modal.style.cssText = `
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+      `;
+      document.body.appendChild(modal);
+    }
+
+    let linksHtml = '';
+    if (data.status && data.data) {
+      data.data.forEach((link, index) => {
+        linksHtml += `
+          <a href="${link.value}" target="_blank" style="
+            display: block;
+            margin: 12px 0;
+            padding: 15px 20px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            text-decoration: none;
+            border-radius: 15px;
+            border: 2px solid rgba(255,255,255,0.2);
+            font-weight: 500;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+          " onmouseover="this.style.background='rgba(255,255,255,0.25)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'; this.style.transform='translateY(0)'">🔗 Website Link ${index + 1}</a>
+        `;
+      });
+    }
+
+    modal.innerHTML = `
+      <div style="
+        background: linear-gradient(-180deg, #0c1117 0%, #162c3f 100%);
+        margin: 10% auto;
+        padding: 30px;
+        border: none;
+        width: 90%;
+        max-width: 450px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        color: white;
+      ">
+        <span onclick="closeLinksModal()" style="
+          color: rgba(255,255,255,0.8);
+          float: right;
+          font-size: 24px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: color 0.3s;
+        " onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">&times;</span>
+        <h3 style="margin: 0 0 15px 0; font-size: 24px; font-weight: 600;">🎮 Daga Game Links</h3>
+        <p style="margin: 0 0 25px 0; opacity: 0.9; font-size: 16px;">Choose your preferred access link:</p>
+        <div style="margin: 0;">
+          ${linksHtml}
+          <button onclick="closeLinksModal()" style="
+            padding: 12px 30px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+          " onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">Close</button>
+        </div>
+      </div>
+    `;
+
+    modal.style.display = 'block';
+  } catch (error) {
+    console.error('Error fetching links:', error);
+    // Fallback to show modal without API links
+    let modal = document.getElementById('linksModal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'linksModal';
+      modal.style.cssText = `
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+      `;
+      document.body.appendChild(modal);
+    }
+
+    modal.innerHTML = `
+      <div style="
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        margin: 10% auto;
+        padding: 30px;
+        border: none;
+        width: 90%;
+        max-width: 450px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        color: white;
+      ">
+        <span onclick="closeLinksModal()" style="
+          color: rgba(255,255,255,0.8);
+          float: right;
+          font-size: 24px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: color 0.3s;
+        " onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">&times;</span>
+        <h3 style="margin: 0 0 15px 0; font-size: 24px; font-weight: 600;">⚠️ Connection Error</h3>
+        <p style="margin: 0 0 25px 0; opacity: 0.9; font-size: 16px;">Unable to load links. Please try again later.</p>
+        <div style="margin: 0;">
+          <button onclick="closeLinksModal()" style="
+            padding: 12px 30px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+          " onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">Close</button>
+        </div>
+      </div>
+    `;
+
+    modal.style.display = 'block';
+  }
+}
+
+// Function to close links modal
+function closeLinksModal() {
+  const modal = document.getElementById('linksModal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+// Fetch SV388 balance
+async function fetchSV388Balance() {
+  try {
+    const response = await fetch('https://bo.gagavn138.com/api/player/daga/balance', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    const data = await response.json();
+    return data.status ? data.result : null;
+  } catch (error) {
+    console.error('Error fetching SV388 balance:', error);
+    return null;
+  }
+}
+
+// Withdraw from SV388
+async function withdrawFromSV388(amount) {
+  try {
+    const response = await fetch('https://bo.gagavn138.com/api/player/points/withdraw/daga', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ amount })
+    });
+    const data = await response.json();
+    if (data.status) {
+      // Update user data after successful withdrawal
+      const userData = await APIUser();
+      if (userData) {
+        localStorage.setItem('user', JSON.stringify(userData));
+        const balanceSpan = document.getElementById('balance');
+        if (balanceSpan) balanceSpan.textContent = userData.balance;
+      }
+    }
+    return data;
+  } catch (error) {
+    console.error('Error withdrawing from SV388:', error);
+    return null;
+  }
+}
+
+// Show SV388 balance dropdown
+async function showSV388Dropdown() {
+  const balance = await fetchSV388Balance();
+  const dropdown = document.getElementById('sv388Dropdown');
+
+  if (balance !== null) {
+    dropdown.innerHTML = `
+      <div style="display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.1); border-radius: 8px; font-size:14px">
+        <div>|</div> 
+        <span> SV388: ${balance} VND</span>
+          <button onclick="handleSV388Withdraw(${balance})" style="
+            background: #28a745; color: white; border: none; padding: 4px 8px; 
+            border-radius: 4px; cursor: pointer; font-size: 12px;
+          ">Get Balance</button>
+          <button onclick="refreshSV388Balance()" style="
+            background: #17a2b8; color: white; border: none; padding: 4px; 
+            border-radius: 4px; cursor: pointer; font-size: 12px;
+          ">🔄</button>
+      </div>
+    `;
+  } else {
+    dropdown.innerHTML = `
+      <div style="display: flex; align-items: center; gap: 10px; background: rgba(220,53,69,0.1); border-radius: 8px; font-size:14px">
+      <div>|</div>   
+      <span>SV388: Error</span>
+        <button onclick="refreshSV388Balance()" style="
+          background: #dc3545; color: white; border: none; padding: 4px; 
+          border-radius: 4px; cursor: pointer; font-size: 12px;
+        ">🔄 Retry</button>
+      </div>
+    `;
+  }
+}
+
+// Handle SV388 withdrawal
+async function handleSV388Withdraw(amount) {
+  const result = await withdrawFromSV388(amount);
+  if (result && result.status) {
+    alert('Points transferred successfully!');
+    window.location.reload();
+  } else {
+    alert('Failed to transfer points. Please try again.');
+  }
+}
+
+// Refresh SV388 balance
+async function refreshSV388Balance() {
+  showSV388Dropdown();
+}
+
 async function balanceRefetch() {
   try {
-    // Optionally call SeamlessWithdrawAPI if you want to trigger a withdraw before fetching balance
     await SeamlessWithdrawAPI();
-
     const userData = await APIUser();
     if (userData && userData.balance !== undefined) {
       localStorage.setItem("balance", String(userData.balance));
@@ -474,7 +723,7 @@ async function balanceRefetch() {
 }
 async function fetchSv388EventInfo() {
   try {
-    const response = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent('https://www.sv388.com/homePage/player/getSv388EventInfo'));
+    const response = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent('https://www.cpcvs388.com/homePage/player/getSv388EventInfo'));
     const data = await response.json();
     return data;
   } catch (error) {
@@ -485,7 +734,7 @@ async function fetchSv388EventInfo() {
 
 function populateSv388Calendar(events) {
   if (!events || !Array.isArray(events)) return;
-  
+
   // Group events by date
   const eventsByDate = {};
   events.forEach(event => {
@@ -493,21 +742,21 @@ function populateSv388Calendar(events) {
     if (!eventsByDate[dateKey]) eventsByDate[dateKey] = [];
     eventsByDate[dateKey].push(event);
   });
-  
+
   // Get current week dates (Monday to Sunday)
   const today = new Date();
   const dayOfWeek = today.getDay();
   const monday = new Date(today);
   monday.setDate(today.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1));
-  
+
   // Populate this week
   const firstWeekTitle = document.getElementById('firstWeekTitle');
   const thisWeekRow = document.querySelector('#thisWeek tbody.this-week tr:last-child');
-  
+
   if (firstWeekTitle && thisWeekRow) {
     const ths = firstWeekTitle.querySelectorAll('th');
     const tds = thisWeekRow.querySelectorAll('td');
-    
+
     for (let i = 0; i < 7; i++) {
       const currentDate = new Date(monday);
       currentDate.setDate(monday.getDate() + i);
@@ -516,14 +765,14 @@ function populateSv388Calendar(events) {
       const day = String(currentDate.getDate()).padStart(2, '0');
       const dateStr = `${year}-${month}-${day}`;
       const dayEvents = eventsByDate[dateStr] || [];
-      
+
       // Update date header
       ths[i].textContent = currentDate.getDate();
       if (currentDate.toDateString() === today.toDateString()) {
         ths[i].classList.add('today');
         tds[i].classList.add('today');
       }
-      
+
       // Update events
       tds[i].setAttribute('eventcount', dayEvents.length);
       tds[i].innerHTML = '';
@@ -540,26 +789,26 @@ function populateSv388Calendar(events) {
       });
     }
   }
-  
+
   // Populate future weeks
   const calendarContainer = document.getElementById('calendar_container');
   if (!calendarContainer) return;
   calendarContainer.innerHTML = '';
-  
+
   const dates = Object.keys(eventsByDate).sort();
   const nextWeekStart = new Date(monday);
   nextWeekStart.setDate(monday.getDate() + 7);
-  
+
   // Find the last date with events
   const lastEventDate = dates.length > 0 ? new Date(dates[dates.length - 1]) : nextWeekStart;
-  
+
   // Generate complete weeks from nextWeekStart to lastEventDate
   let currentWeekStart = new Date(nextWeekStart);
-  
+
   while (currentWeekStart <= lastEventDate) {
     const dateRow = document.createElement('tr');
     const eventRow = document.createElement('tr');
-    
+
     for (let i = 0; i < 7; i++) {
       const currentDate = new Date(currentWeekStart);
       currentDate.setDate(currentWeekStart.getDate() + i);
@@ -568,7 +817,7 @@ function populateSv388Calendar(events) {
       const day = String(currentDate.getDate()).padStart(2, '0');
       const dateStr = `${year}-${month}-${day}`;
       const dayEvents = eventsByDate[dateStr] || [];
-      
+
       // Create date header
       const th = document.createElement('th');
       th.setAttribute('day', currentDate.getDate());
@@ -579,13 +828,13 @@ function populateSv388Calendar(events) {
         th.innerHTML = `${currentDate.getDate()}<span class="month-start">${months[currentDate.getMonth()]}</span>`;
       }
       dateRow.appendChild(th);
-      
+
       // Create event cell
       const td = document.createElement('td');
       td.setAttribute('eventcount', dayEvents.length);
       td.setAttribute('day', currentDate.getDate());
       td.setAttribute('month', currentDate.getMonth() + 1);
-      
+
       dayEvents.forEach(event => {
         const time = event.date.split(' ')[1].substring(0, 5);
         const dl = document.createElement('dl');
@@ -597,13 +846,13 @@ function populateSv388Calendar(events) {
         dl.appendChild(dd);
         td.appendChild(dl);
       });
-      
+
       eventRow.appendChild(td);
     }
-    
+
     calendarContainer.appendChild(dateRow);
     calendarContainer.appendChild(eventRow);
-    
+
     // Move to next week
     currentWeekStart.setDate(currentWeekStart.getDate() + 7);
   }
@@ -614,7 +863,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const sv388Data = await fetchSv388EventInfo();
   if (sv388Data) {
     populateSv388Calendar(sv388Data);
-    
+
     // Update calendar title with current month
     const now = new Date();
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -623,8 +872,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       titleEl.innerHTML = `${now.getFullYear()} <span>${months[now.getMonth()]}</span>&nbsp;<span>Cockfight Calendar</span>`;
     }
   }
-  
+
   APIUser().then((data) => {
+    // Check if user has SV388 transfer enabled
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const shouldShowSV388 = user.seamless?.isTransfer && user.seamless?.game_id === 21;
     if (localStorage.getItem("token")) {
       const loginBox = document.getElementById("userInfo");
       const loginBox1 = document.getElementById("userInfo1");
@@ -696,7 +948,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const fallbackBalance = fallback?.balance;
       loginBox.innerHTML = `
 
-			<div id="balanceWrapper" class="balance-group" onclick=" balanceRefetch()">
+			<div id="balanceWrapper" class="balance-group" onclick=" balanceRefetch()" style="width:max-content">
 				
 				<a class="currency-selector" id="currencyViewer">
 					<img class="flag" src="https://img.bdimg.xyz/theme/images/src-common/FLAG-img/flag-vn-o.webp">
@@ -709,6 +961,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 					<span class="txt" id="balance">${data?.balance || fallbackBalance}</span>
 					
 				</div>
+				
+				${shouldShowSV388 ? '<div id="sv388Dropdown"></div>' : ''}
 
 			</div>
 
@@ -730,6 +984,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       			<span class="txt" id="balance">${data?.balance || fallbackBalance}</span>
 
       		</div>
+      		
+      		${shouldShowSV388 ? '<div id="sv388Dropdown"></div>' : ''}
 
       	</div>
 
@@ -737,6 +993,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>
 
             `;
+
+      // Show SV388 dropdown if conditions are met
+      if (shouldShowSV388) {
+        setTimeout(() => showSV388Dropdown(), 100);
+      }
     }
   });
 });

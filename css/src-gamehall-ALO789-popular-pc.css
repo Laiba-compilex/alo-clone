@@ -132,7 +132,7 @@ nav {
   overflow-x: auto;
   overflow-y: hidden;
   display: flex;
-  justify-content: left;
+  justify-content: center;
   align-items: center;
 }
 nav::-webkit-scrollbar {
