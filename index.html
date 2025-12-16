@@ -1848,8 +1848,8 @@
 		}
 	</script>
 
-
-
+	<!-- i18n Translation Script -->
+	<script src="js/i18n.js"></script>
 
 	<style type="text/css">
 		body .site-background {
@@ -1874,7 +1874,7 @@
 		<div class="loader-overlay"></div>
 		<div class="loader-content">
 			<div class="loader-spinner"></div>
-			<div class="loader-text">Loading Game...</div>
+			<div class="loader-text" data-i18n="loadingGame">Loading Game...</div>
 		</div>
 	</div>
 	<!-- Second important function -->
@@ -1889,13 +1889,11 @@
 			<!-- Start hidden to avoid flash; will be shown by inline script only if no token is present -->
 			<div class="page-login-box" id="login-box" style="display: none;">
 				<a class="btn-primary " href="javascript:void(0);"
-					onclick="GameHallHandler.openLoginPopup(this)">Login</a>
+					onclick="GameHallHandler.openLoginPopup(this)" data-i18n="login">Login</a>
 
-				<a class="btn-secondary" href="signUp.html">Sign
-					Up
-
-					<div class="signUp-bonus-btn size-s">Free Bonus</div>
-
+				<a class="btn-secondary" href="signUp.html">
+					<span data-i18n="signUp">Sign Up</span>
+					<div class="signUp-bonus-btn size-s" data-i18n="freeBonus">Free Bonus</div>
 				</a>
 
 			</div>
@@ -1905,53 +1903,420 @@
 		<div class="navigation-btn">
 			<div id="language" class="btn btn-language" onclick="GameHallHandler.openMenu()">
 				<a href="javascript:void(0)">
-					<img class="img-flag" src="images/FLAG-img-flag-gb.webp" alt="FLAG-img-flag-gb.webp"
-						style="width: 40px; height: unset; object-fit: contain;">
+					<img class="img-flag me-2" src="images/FLAG-img-flag-gb.webp" alt="FLAG-img-flag-gb.webp">
 					<span>EN</span>
 				</a>
 				<ul id="selectLang" class="lang-dropdown">
 					<li>
-						<a lang="en" onclick="GameHallHandler.changeLang('en');" href="index.html">
-							<img class="img-flag" src="images/FLAG-img-flag-gb.webp" alt="FLAG-img-flag-gb.webp"
-								style="width: 40px; height: unset; object-fit: contain;">
+						<a lang="vn" onclick="i18n.switchLanguage('vn')" href="javascript:void(0)">
+							<img class="img-flag me-2"
+								src="https://land2.mpsimg.com/theme/images/src-common/FLAG-img/flag-vn.webp" alt="">
+							<span>VN</span>
+						</a>
+					</li>
+					<li>
+						<a lang="en" onclick="i18n.switchLanguage('en')" href="javascript:void(0)">
+							<img class="img-flag me-2" src="images/FLAG-img-flag-gb.webp" alt="FLAG-img-flag-gb.webp">
 							<span>EN</span>
 						</a>
 					</li>
-
-
 				</ul>
 			</div>
-			<div id="player_inbox" class="btn btn-mail" onclick="GameHallHandler.openLoginPopup(this)">
+			<!-- <div id="player_inbox" class="btn btn-mail" onclick="GameHallHandler.openLoginPopup(this)">
 				<a class="icon-mail" href="javascript:void(0)">
 				</a>
 				<span id="inboxUnreadCount" class="dot" style="display: none;"></span>
-			</div>
+			</div> -->
 			<div class="btn btn-menu dropdown" onclick="toggleDropdown()">
 				<i class="icon-hamburger" style="color: white;" href="javascript:void(0);">
 					<span id="menu_dot" class="dot" style="display: none;"></span>
 				</i>
-				<div id="dropdownMenu" class="dropdown-menu">
-					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
-						<i class="icon-user"></i>
-						<span>My Info</span>
+				<div id="dropdownMenu" class="dropdown-menu" style="background-color: #212121;">
+					<div class="dropdown-item"
+						style="padding-top: 15px !important; padding-bottom: 15px; margin-bottom: 7px; background-color: rgba(0, 0, 0, 0.3); border-radius: 12px;">
+						<i class="icon-user" style="color: #ffedb9;"></i>
+						<span data-i18n="myInfo">My Info</span>
 					</div>
-					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
-						<i class="icon-game"></i>
-						<span>Game Partner</span>
+					<div class="dropdown-item"
+						style="padding-top: 15px !important; padding-bottom: 15px; margin-bottom: 7px; background-color: rgba(0, 0, 0, 0.3); border-radius: 12px;">
+						<li class="game_partner" id="gamePartner" style="width: 100%;">
+							<div class="menu-item menu_list">
+								<div style="display: flex; justify-content: space-evenly !important;"
+									onclick="toggleOptions(event, this)">
+									<i class="icon icon-game" style="color: #ffedb9 !important;"></i>
+									<span data-i18n="gameProvider">Nhà cung cấp</span>
+									<span class="options-toggle" title="Show" aria-hidden="false"
+										style="margin-left: auto;">▾</span>
+								</div>
+								<ul class="options" aria-hidden="true" style="display: none; flex-direction: column;">
+									<div style="display: flex;">
+										<li id="gamePartner-SV388" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="LIVEARENA" platform="SV388"
+												pfdisplayname="CockFight" isshowjackpot="false">
+												<img alt="CockFight"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/SV388-logo.webp">
+											</a>
+										</li>
+
+										<li id="gamePartner-SEXYBCRT" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="LIVE" platform="SEXYBCRT"
+												pfdisplayname="Sexy" isshowjackpot="false">
+
+												<img alt="Sexy"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/SEXYBCRT-logo.webp">
+											</a>
+										</li>
+									</div>
+									<div style="display: flex; gap: 10px;">
+										<li id="gamePartner-POCKET" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="SLOT,RNGTABLE,ARCADE"
+												platform="POCKET" pfdisplayname="PGSoft" isshowjackpot="false">
+
+												<img alt="PGSoft"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/POCKET-logo.webp">
+											</a>
+										</li>
+
+										<li id="gamePartner-SVCASINO" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="LIVE" platform="SVCASINO"
+												pfdisplayname="SV Casino" isshowjackpot="false">
+
+												<img alt="SV Casino"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/SVCASINO-logo.webp">
+											</a>
+										</li>
+									</div>
+									<div style="display: flex; gap: 10px;">
+										<li id="gamePartner-JILI" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="SLOT,RNGTABLE,ARCADE,FH"
+												platform="JILI" pfdisplayname="JILI" isshowjackpot="true">
+
+												<img alt="JILI"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/JILI-logo.webp">
+											</a>
+										</li>
+
+										<li id="gamePartner-KINGMIDAS" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="SLOT,RNGTABLE,ARCADE"
+												platform="KINGMIDAS" pfdisplayname="King Midas" isshowjackpot="false">
+
+												<img alt="King Midas"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/KINGMIDAS-logo.webp">
+											</a>
+										</li>
+									</div>
+									<div style="display: flex; gap: 10px;">
+										<li id="gamePartner-DG" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="LIVE" platform="DG"
+												pfdisplayname="Dream Gaming" isshowjackpot="false">
+
+												<img alt="Dream Gaming"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/DG-logo.webp">
+											</a>
+										</li>
+
+										<li id="gamePartner-SABASPORTS" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="SPORTS" platform="SABASPORTS"
+												pfdisplayname="Saba Sports" isshowjackpot="false">
+
+												<img alt="Saba Sports"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/SABASPORTS-logo.webp">
+											</a>
+										</li>
+									</div>
+									<div style="display: flex; gap: 10px;">
+										<li id="gamePartner-SBOBET" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="SPORTS" platform="SBOBET"
+												pfdisplayname="SBOBET" isshowjackpot="false"
+												onclick="GameHallHandler.openLoginPopup(this);">
+
+												<img alt="SBOBET"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/SBOBET-logo.webp">
+											</a>
+										</li>
+
+										<li id="gamePartner-FACHAI" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="SLOT,RNGTABLE,ARCADE,FH"
+												platform="FACHAI" pfdisplayname="FACHAI" isshowjackpot="true"
+												onclick="GameHallHandler.openLoginPopup(this);">
+
+												<img alt="FACHAI"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/FACHAI-logo.webp">
+											</a>
+										</li>
+									</div>
+									<div style="display: flex; gap: 10px;">
+										<li id="gamePartner-JDB" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="SLOT,RNGTABLE,ARCADE,FH"
+												platform="JDB" pfdisplayname="JDB" isshowjackpot="true"
+												onclick="GameHallHandler.openLoginPopup(this);">
+
+												<img alt="JDB"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/JDB-logo.webp">
+											</a>
+										</li>
+
+										<li id="gamePartner-WOS" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="SPORTS" platform="WOS"
+												pfdisplayname="WOS" isshowjackpot="false"
+												onclick="GameHallHandler.openLoginPopup(this);">
+
+												<img alt="WOS"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/WOS-logo.webp">
+											</a>
+										</li>
+									</div>
+									<div style="display: flex; gap: 10px;">
+										<li id="gamePartner-SA" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="LIVE" platform="SA"
+												pfdisplayname="SA" isshowjackpot="false">
+
+												<img alt="SA"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/SA-logo.webp">
+											</a>
+										</li>
+
+										<li id="gamePartner-EVOLUTION" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="LIVE" platform="EVOLUTION"
+												pfdisplayname="Evolution" isshowjackpot="false">
+
+												<img alt="Evolution"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/EVOLUTION-logo.webp">
+											</a>
+										</li>
+									</div>
+									<div style="display: flex; gap: 10px;">
+										<li id="gamePartner-YB" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="SLOT,ARCADE" platform="YB"
+												pfdisplayname="YB" isshowjackpot="false">
+
+												<img alt="YB"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/YB-logo.webp">
+											</a>
+										</li>
+
+										<li id="gamePartner-PP" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="SLOT,RNGTABLE,ARCADE" platform="PP"
+												pfdisplayname="PP" isshowjackpot="false">
+
+												<img alt="PP"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/PP-logo.webp">
+											</a>
+										</li>
+									</div>
+									<div style="display: flex; gap: 10px;">
+										<li id="gamePartner-HACKSAW" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="SLOT,ARCADE" platform="HACKSAW"
+												pfdisplayname="Hacksaw" isshowjackpot="false"
+												onclick="GameHallHandler.openLoginPopup(this);">
+
+												<img alt="Hacksaw"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/HACKSAW-logo.webp">
+											</a>
+										</li>
+
+										<li id="gamePartner-BNG" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="SLOT" platform="BNG"
+												pfdisplayname="BNG" isshowjackpot="false">
+
+												<img alt="BNG"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/BNG-logo.webp">
+											</a>
+										</li>
+									</div>
+									<div style="display: flex; gap: 10px;">
+										<li id="gamePartner-BGCASINO" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="LIVE" platform="BGCASINO"
+												pfdisplayname="BG Casino" isshowjackpot="false"
+												onclick="GameHallHandler.openLoginPopup(this);">
+
+												<img alt="BG Casino"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/BGCASINO-logo.webp">
+											</a>
+										</li>
+
+										<li id="gamePartner-BTI" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="SPORTS" platform="BTI"
+												pfdisplayname="BTI" isshowjackpot="false"
+												onclick="GameHallHandler.openLoginPopup(this);">
+
+												<img alt="BTI"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/BTI-logo.webp">
+											</a>
+										</li>
+									</div>
+									<div style="display: flex; gap: 10px;">
+										<li id="gamePartner-REDTIGER" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="SLOT,RNGTABLE,ARCADE"
+												platform="REDTIGER" pfdisplayname="RedTiger" isshowjackpot="false"
+												onclick="GameHallHandler.openLoginPopup(this);">
+
+												<img alt="RedTiger"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/REDTIGER-logo.webp">
+											</a>
+										</li>
+
+										<li id="gamePartner-HRG" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="LIVE" platform="HRG"
+												pfdisplayname="HRG" isshowjackpot="false"
+												onclick="GameHallHandler.openLoginPopup(this);">
+
+												<img alt="HRG"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/HRG-logo.webp">
+											</a>
+										</li>
+									</div>
+									<div style="display: flex;">
+										<li id="gamePartner-OCTOPLAY" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="SLOT" platform="OCTOPLAY"
+												pfdisplayname="OCTOPLAY" isshowjackpot="false"
+												onclick="GameHallHandler.openLoginPopup(this);">
+
+												<img alt="OCTOPLAY"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/OCTOPLAY-logo.webp">
+											</a>
+										</li>
+
+										<li id="gamePartner-MGGAMING" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="SLOT,ARCADE" platform="MGGAMING"
+												pfdisplayname="MG Gaming" isshowjackpot="false"
+												onclick="GameHallHandler.openLoginPopup(this);">
+
+												<img alt="MG Gaming"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/MGGAMING-logo.webp">
+											</a>
+										</li>
+									</div>
+									<div style="display: flex; gap: 10px;">
+										<li id="gamePartner-WMSLOT" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="SLOT,ARCADE,FH" platform="WMSLOT"
+												pfdisplayname="WM Slot" isshowjackpot="false"
+												onclick="GameHallHandler.openLoginPopup(this);">
+
+												<img alt="WM Slot"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/WMSLOT-logo.webp">
+											</a>
+										</li>
+
+										<li id="gamePartner-SPADE" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="SLOT,FH" platform="SPADE"
+												pfdisplayname="SPADE" isshowjackpot="false">
+
+												<img alt="SPADE"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/SPADE-logo.webp">
+											</a>
+										</li>
+									</div>
+									<div style="display: flex; gap: 10px;">
+										<li id="gamePartner-ADVANTPLAY" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="SLOT" platform="ADVANTPLAY"
+												pfdisplayname="ADVANTPLAY" isshowjackpot="false">
+
+												<img alt="ADVANTPLAY"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/ADVANTPLAY-logo.webp">
+											</a>
+										</li>
+
+										<li id="gamePartner-ACEWIN" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="SLOT,RNGTABLE,ARCADE"
+												platform="ACEWIN" pfdisplayname="Ace Win" isshowjackpot="false">
+
+												<img alt="Ace Win"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/ACEWIN-logo.webp">
+											</a>
+										</li>
+									</div>
+									<div style="display: flex; gap: 10px;">
+										<li id="gamePartner-OG" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="SLOT" platform="OG"
+												pfdisplayname="One Game" isshowjackpot="false">
+
+												<img alt="One Game"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/OG-logo.webp">
+											</a>
+										</li>
+
+										<li id="gamePartner-NOLIMITCITY" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="SLOT" platform="NOLIMITCITY"
+												pfdisplayname="Nolimit City" isshowjackpot="false">
+
+												<img alt="Nolimit City"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/NOLIMITCITY-logo.webp">
+											</a>
+										</li>
+									</div>
+									<div style="display: flex; gap: 10px;">
+										<li id="gamePartner-NETENT" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="SLOT,RNGTABLE" platform="NETENT"
+												pfdisplayname="NETENT" isshowjackpot="false">
+
+												<img alt="NETENT"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/NETENT-logo.webp">
+											</a>
+										</li>
+
+										<li id="gamePartner-WINFINITY" class="gamePartner">
+											<a class="menu-item-option needToUpdateStatusClass show-play"
+												href="javascript:void(0);" gametype="LIVE" platform="WINFINITY"
+												pfdisplayname="Winfinity Casino" isshowjackpot="false">
+
+												<img alt="Winfinity Casino"
+													src="https://land2.mpsimg.com/theme/images/src-common/PLATFORM-img/120x80-fullname/WINFINITY-logo.webp">
+											</a>
+										</li>
+									</div>
+								</ul>
+							</div>
+						</li>
 					</div>
-					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
-						<i class="icon-phone"></i>
-						<span>Contact Us</span>
+					<div class="dropdown-item hover-border"
+						style="padding-top: 15px !important; padding-bottom: 15px; margin-bottom: 7px; background-color: rgba(0, 0, 0, 0.3); border-radius: 12px;">
+						<a href="https://t.me/csgasv388" target="_blank" rel="noopener noreferrer">
+							<i class="icon-phone" style="color: #ffedb9;"></i>
+							<span data-i18n="contactUs">Contact Us</span>
+						</a>
 					</div>
-					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
+					<!-- <div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
 						<i class="icon-download"></i>
 						<span>Download APP</span>
 					</div>
 					<div class="dropdown-item" onclick="GameHallHandler.openLoginPopup(this)">
 						<i class="icon-search"></i>
 						<span>Search</span>
-					</div>
-					<div class="dropdown-item logout" id="logout-menuitem"
+					</div> -->
+					<div class="dropdown-item logout hover-border" id="logout-menuitem"
+						style="padding-top: 15px !important; padding-bottom: 15px; margin-bottom: 7px; background-color: rgba(0, 0, 0, 0.3); border-radius: 12px;"
 						onclick="localStorage.removeItem('token'); location.reload();">
 						<i class="icon-logout"></i>
 						<span>LOGOUT</span>
@@ -1967,7 +2332,7 @@
 				<h1 style="font-size: 16px;">
 					<a href="javascript:void(0)">
 
-						Welcome to ALO789
+						<span data-i18n="welcomeMessage">Welcome to ALO789</span>
 					</a>
 				</h1>
 			</ul>
@@ -2094,7 +2459,7 @@
 						<div class="dropdown-item logout" id="logout-menuitem1"
 							onclick="localStorage.removeItem('token'); location.reload();">
 							<i class="icon-logout"></i>
-							<span>LOGOUT</span>
+							<span data-i18n="logout">LOGOUT</span>
 						</div>
 					</div>
 				</div>
@@ -2143,7 +2508,7 @@
 					" class="btn btn-deposit d-flex justify-content-center align-items-center flex-column"
 					onclick="localStorage.getItem('token') ? window.location.href = '/Deposit.html' : GameHallHandler.openLoginPopup(this)">
 					<i class="icon icon-deposit" style="font-size: 26px;"></i>
-					<span>CASH IN</span>
+					<span data-i18n="cashIn">CASH IN</span>
 				</button>
 				<button style="
 				    transform: translateY(6px);
@@ -2160,7 +2525,7 @@
 					" class="btn btn-deposit d-flex justify-content-center align-items-center flex-column"
 					onclick="localStorage.getItem('token') ? window.location.href = '/Withdraw.html' : GameHallHandler.openLoginPopup(this)">
 					<i class="icon icon-receive" style="font-size: 26px;"></i>
-					<span>CASH OUT</span>
+					<span data-i18n="cashOut">CASH OUT</span>
 				</button>
 			</div>
 			<div>
@@ -2217,7 +2582,7 @@
 			<li id="homeTab menu-item" class="backHome select">
 				<a class="icon-home" href="javascript:void(0)" onclick="GameHallHandler.switchGamePage('home')">
 					<img class="HOME tab" src="images/POPULAR-HOME.webp">
-					<span class="d-none d-md-block">Home</span>
+					<span class="d-none d-md-block" data-i18n="home">Home</span>
 				</a>
 			</li>
 
@@ -2227,7 +2592,7 @@
 					onclick="GameHallHandler.switchGamePage('livearena')">
 
 					<img alt="" class="LIVEARENA tab" src="images/POPULAR-COCKFIGHT.webp">
-					<span class="d-none d-md-block">Live Arena</span>
+					<span class="d-none d-md-block" data-i18n="liveArena">Live Arena</span>
 				</a>
 			</li>
 
@@ -2236,7 +2601,7 @@
 				<a class="icon-sports " href="javascript:void(0)" onclick="GameHallHandler.switchGamePage('sports')">
 
 					<img alt="" class="SPORTS tab" src="images/POPULAR-SPORTS.webp">
-					<span class="d-none d-md-block">Sports</span>
+					<span class="d-none d-md-block" data-i18n="sports">Sports</span>
 				</a>
 			</li>
 
@@ -2245,7 +2610,7 @@
 				<a class="icon-slot" href="javascript:void(0)" onclick="GameHallHandler.openGamePage('POCKET','slot')">
 
 					<img alt="" class="SLOT tab" src="images/POPULAR-SLOT.webp">
-					<span class="d-none d-md-block">Slots</span>
+					<span class="d-none d-md-block" data-i18n="slots">Slots</span>
 				</a>
 			</li>
 
@@ -2255,7 +2620,7 @@
 					onclick="GameHallHandler.openGamePage('KINGMIDAS','rngtable')">
 
 					<img alt="" class="RNGTABLE tab" src="images/POPULAR-RNGTABLE.webp">
-					<span class="d-none d-md-block">Table</span>
+					<span class="d-none d-md-block" data-i18n="table">Table</span>
 				</a>
 			</li>
 
@@ -2264,7 +2629,7 @@
 				<a class="icon-live " href="javascript:void(0)" onclick="GameHallHandler.switchGamePage('live')">
 
 					<img alt="" class="LIVE tab" src="images/POPULAR-LIVE.webp">
-					<span class="d-none d-md-block">Casino</span>
+					<span class="d-none d-md-block" data-i18n="casino">Casino</span>
 				</a>
 			</li>
 
@@ -2274,7 +2639,7 @@
 					onclick="GameHallHandler.openGamePage('JILI','arcade')">
 
 					<img alt="" class="ARCADE tab" src="images/POPULAR-ARCADE.webp">
-					<span class="d-none d-md-block">Arcade</span>
+					<span class="d-none d-md-block" data-i18n="arcade">Arcade</span>
 				</a>
 			</li>
 
@@ -2283,15 +2648,15 @@
 				<a class="icon-fh" href="javascript:void(0)" onclick="GameHallHandler.openGamePage('JILI','fh')">
 
 					<img alt="" class="FH tab" src="images/POPULAR-FH.webp">
-					<span class="d-none d-md-block">Fishing</span>
+					<span class="d-none d-md-block" data-i18n="fishing">Fishing</span>
 				</a>
 			</li>
 
 
 			<li id="searchTab menu-item" onclick="GameHallHandler.openLoginPopup(this)">
-				<a class="icon-SAERCH" href="javascript:void(0);">
+				<a class="icon-SAERCH" href="/gameSearch.html">
 					<img src="images/POPULAR-SEARCH.webp">
-					<span class="d-none d-md-block">Search</span>
+					<span class="d-none d-md-block" data-i18n="search">Search</span>
 				</a>
 			</li>
 
@@ -2494,8 +2859,71 @@
 
 
 
-
-	<div id="swiperBanner" class="swiper swiper-banner" style="margin-bottom: 30px;">
+	<div id="swiperBanner" class="swiper swiper-banner swiper-initialized swiper-horizontal swiper-pointer-events">
+		<div class="swiper-wrapper" id="swiper-wrapper-1102307c61827aad9" aria-live="off"
+			style="cursor: grab; transition-duration: 0ms; transform: translate3d(-5031.78px, 0px, 0px);">
+			<div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="3" role="group" aria-label="4 / 6"
+				style="width: 578.609px; margin-right: 24px;">
+				<img src="https://www.alo789dola.com/service/image/cache?type=GAMEHALL_CAROUSEL_4&amp;lang=en&amp;isMobile=0&amp;isAgent=0&amp;brand=ALO789&amp;v=1763613329226"
+					alt="">
+			</div>
+			<div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="4" role="group" aria-label="5 / 6"
+				style="width: 578.609px; margin-right: 24px;">
+				<img src="https://www.alo789dola.com/service/image/cache?type=GAMEHALL_CAROUSEL_5&amp;lang=en&amp;isMobile=0&amp;isAgent=0&amp;brand=ALO789&amp;v=1760358209446"
+					alt="">
+			</div>
+			<div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-prev" data-swiper-slide-index="5"
+				role="group" aria-label="6 / 6" style="width: 578.609px; margin-right: 24px;"><img
+					src="https://www.alo789dola.com/service/image/cache?type=GAMEHALL_CAROUSEL_6&amp;lang=en&amp;isMobile=0&amp;isAgent=0&amp;brand=ALO789&amp;v=1765290228253"
+					alt=""></div>
+			<div class="swiper-slide swiper-slide-duplicate-active" data-swiper-slide-index="0" role="group"
+				aria-label="1 / 6" style="width: 578.609px; margin-right: 24px;">
+				<img src="https://www.alo789dola.com/service/image/cache?type=GAMEHALL_CAROUSEL_1&amp;lang=en&amp;isMobile=0&amp;isAgent=0&amp;brand=ALO789&amp;v=1764163524419"
+					alt="">
+			</div>
+			<div class="swiper-slide swiper-slide-duplicate-next" data-swiper-slide-index="1" role="group"
+				aria-label="2 / 6" style="width: 578.609px; margin-right: 24px;">
+				<img src="https://www.alo789dola.com/service/image/cache?type=GAMEHALL_CAROUSEL_2&amp;lang=en&amp;isMobile=0&amp;isAgent=0&amp;brand=ALO789&amp;v=1763613789623"
+					alt="">
+			</div>
+			<div class="swiper-slide" data-swiper-slide-index="2" role="group" aria-label="3 / 6"
+				style="width: 578.609px; margin-right: 24px;">
+				<img src="https://www.alo789dola.com/service/image/cache?type=GAMEHALL_CAROUSEL_3&amp;lang=en&amp;isMobile=0&amp;isAgent=0&amp;brand=ALO789&amp;v=1763613182716"
+					alt="">
+			</div>
+			<div class="swiper-slide" data-swiper-slide-index="3" role="group" aria-label="4 / 6"
+				style="width: 578.609px; margin-right: 24px;">
+				<img src="https://www.alo789dola.com/service/image/cache?type=GAMEHALL_CAROUSEL_4&amp;lang=en&amp;isMobile=0&amp;isAgent=0&amp;brand=ALO789&amp;v=1763613329226"
+					alt="">
+			</div>
+			<div class="swiper-slide" data-swiper-slide-index="4" role="group" aria-label="5 / 6"
+				style="width: 578.609px; margin-right: 24px;">
+				<img src="https://www.alo789dola.com/service/image/cache?type=GAMEHALL_CAROUSEL_5&amp;lang=en&amp;isMobile=0&amp;isAgent=0&amp;brand=ALO789&amp;v=1760358209446"
+					alt="">
+			</div>
+			<div class="swiper-slide swiper-slide-prev" data-swiper-slide-index="5" role="group" aria-label="6 / 6"
+				style="width: 578.609px; margin-right: 24px;"><img
+					src="https://www.alo789dola.com/service/image/cache?type=GAMEHALL_CAROUSEL_6&amp;lang=en&amp;isMobile=0&amp;isAgent=0&amp;brand=ALO789&amp;v=1765290228253"
+					alt=""></div>
+			<div class="swiper-slide swiper-slide-duplicate swiper-slide-active" data-swiper-slide-index="0"
+				role="group" aria-label="1 / 6" style="width: 578.609px; margin-right: 24px;">
+				<img src="https://www.alo789dola.com/service/image/cache?type=GAMEHALL_CAROUSEL_1&amp;lang=en&amp;isMobile=0&amp;isAgent=0&amp;brand=ALO789&amp;v=1764163524419"
+					alt="">
+			</div>
+			<div class="swiper-slide swiper-slide-duplicate swiper-slide-next" data-swiper-slide-index="1" role="group"
+				aria-label="2 / 6" style="width: 578.609px; margin-right: 24px;">
+				<img src="https://www.alo789dola.com/service/image/cache?type=GAMEHALL_CAROUSEL_2&amp;lang=en&amp;isMobile=0&amp;isAgent=0&amp;brand=ALO789&amp;v=1763613789623"
+					alt="">
+			</div>
+			<div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="2" role="group" aria-label="3 / 6"
+				style="width: 578.609px; margin-right: 24px;">
+				<img src="/service/image/cache?type=GAMEHALL_CAROUSEL_3&amp;lang=en&amp;isMobile=0&amp;isAgent=0&amp;brand=ALO789&amp;v=1763613182716"
+					alt="">
+			</div>
+		</div>
+		<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+	</div>
+	<!-- <div id="swiperBanner" class="swiper swiper-banner" style="margin-bottom: 30px;">
 		<div class="swiper-wrapper" id="swiper-wrapper-af06b210d492ec726" aria-live="off">
 			<div class="swiper-slide swiper-slide-duplicate me-0 me-md-4 swiper-slide-duplicate-next"
 				data-swiper-slide-index="5" role="group" aria-label="6 / 8"
@@ -2546,7 +2974,7 @@
 		</div>
 		<div class="swiper-pagination"></div>
 		<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
-	</div>
+	</div> -->
 
 	<style>
 		@media (max-width: 767px) {
@@ -3032,7 +3460,7 @@
 			<dl>
 				<dt class="icon-fire" style="margin-bottom: 20px;">
 					<img src="images/POPULAR-TOPMENU-LIVETABLE.webp" alt="">
-					HOT TABLE
+					<span data-i18n="hotTable">HOT TABLE</span>
 				</dt>
 			</dl>
 			<div class="table-group" id="hotTableList">
@@ -3248,7 +3676,7 @@
 
 					<img src="images/POPULAR-TOPMENU-LIVE.webp" alt="">
 
-					Casino
+					<span data-i18n="casino">Casino</span>
 				</dt>
 			</dl>
 			<ul class="game-icon btn-effect ul-gameList" id="liveGameUl">
@@ -3378,7 +3806,7 @@
 
 					<img src="images/POPULAR-TOPMENU-NEW.webp" alt="">
 
-					New Games
+					<span data-i18n="newGames">New Games</span>
 				</dt>
 			</dl>
 			<ul class="game-icon btn-effect ul-gameList" id="newGameUl">
@@ -3562,7 +3990,7 @@
 
 					<img src="images/POPULAR-TOPMENU-SLOT.webp" alt="">
 
-					Slots
+					<span data-i18n="slots">Slots</span>
 				</dt>
 			</dl>
 			<ul class="game-icon btn-effect ul-gameList" id="slotGameUl">
@@ -3756,7 +4184,7 @@
 
 					<img src="images/FLAG-img-flag-vn-o.webp" alt="">
 
-					Local Game
+					<span data-i18n="localGame">Local Game</span>
 				</dt>
 			</dl>
 			<ul class="game-icon btn-effect ul-gameList" id="localGameUl">
@@ -3892,7 +4320,7 @@
 
 					<img src="images/POPULAR-TOPMENU-RNGTABLE.webp" alt="">
 
-					Table
+					<span data-i18n="table">Table</span>
 				</dt>
 			</dl>
 			<ul class="game-icon btn-effect ul-gameList" id="rngtableGameUl">
@@ -4078,7 +4506,7 @@
 
 					<img src="images/POPULAR-TOPMENU-ARCADE.webp" alt="">
 
-					Arcade
+					<span data-i18n="arcade">Arcade</span>
 				</dt>
 			</dl>
 			<ul class="game-icon btn-effect ul-gameList" id="arcadeGameUl">
@@ -4266,10 +4694,10 @@
 					<img src="https://img.bdimg.xyz/theme/images/src-common/GAMETYPE-img/POPULAR-TOPMENU/JACKPOT.webp"
 						alt="">
 
-					Jackpot
+					<span data-i18n="jackpot">Jackpot</span>
 				</dt>
 			</dl>
-			<div class="div-tb d-flex flex-column" id="jackpotDivTb">
+			<div class="div-tb d-flex gap-3 mb-3" id="jackpotDivTb">
 				<div class="td" id="jackpotTd">
 					<div class="big-jackpot" id="JILIJackpot" jp-platform="JILI">
 						<div class="JP-promoSticky" id="jpStickyDiv" style="display: none"></div>
@@ -4436,7 +4864,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="div-tb d-flex flex-column" id="jackpotDivTb">
+			<div class="div-tb d-flex gap-3 mb-3" id="jackpotDivTb">
 				<div class="td" id="jackpotTd">
 					<div class="big-jackpot" id="FACHAIJackpot" jp-platform="FACHAI">
 						<div class="JP-promoSticky" id="jpStickyDiv" style="display: none"></div>
@@ -9776,6 +10204,29 @@
 				$j('.pop_up-wrap, .pop-overlay').fadeOut();
 			});
 		});
+	</script>
+	<script>
+		function toggleOptions(e, el) {
+			// stop parent dropdown from closing and stop other handlers
+			e.stopPropagation();
+			const parentLi = el.closest('li');
+			if (!parentLi) return;
+			const options = parentLi.querySelector('.options');
+			if (!options) return;
+			const isOpen = options.classList.toggle('open');
+			options.setAttribute('aria-hidden', !isOpen);
+			options.style.display = isOpen ? 'flex' : 'none';
+			el.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+			// close other open options in the same dropdown
+			const siblings = parentLi.parentElement.querySelectorAll('.options.open');
+			siblings.forEach(function (s) {
+				if (s !== options) {
+					s.classList.remove('open');
+					s.setAttribute('aria-hidden', 'true');
+					s.style.display = 'none';
+				}
+			});
+		}
 	</script>
 
 	<!-- Start of LiveChat (https://www.livechat.com) code -->

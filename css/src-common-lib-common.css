@@ -900,8 +900,8 @@ ul li {
 }
 .img-flag {
   display: block;
-  width: 5vmin;
-  height: 5vmin;
+  width: 30px;
+  height: 30px;
 }
 .device-PC .img-flag {
   width: 25px;

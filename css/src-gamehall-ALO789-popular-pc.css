@@ -271,7 +271,7 @@ p {
 }
 body {
   height: auto;
-  background: #000;
+  background: #0F1F2D;
   min-width: 1024px;
   padding-bottom: 80px;
   overflow-x: auto;
@@ -1884,7 +1884,7 @@ body.device-PC.PC-POPUP.body-iframe.type-P .page-user-info {
 }
 .header-navigation .btn.btn-language {
   position: absolute;
-  right: 100px;
+  right: 40px;
   width: 100px;
 }
 .header-navigation .btn.btn-language::before {
